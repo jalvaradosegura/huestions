@@ -1,9 +1,9 @@
-from django.test import LiveServerTestCase
+import unittest
 
 from selenium import webdriver
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -14,7 +14,7 @@ class NewVisitorTest(LiveServerTestCase):
     def test_can_visit_home_page(self):
         # Javi heard about a fun page, where you have to answer hard questions
         # She visits it
-        self.browser.get(self.live_server_url)
+        self.browser.get('http://localhost:8000')
 
         # She notices the page title mention Huestion
         self.assertIn('Huestion', self.browser.title)
@@ -22,3 +22,7 @@ class NewVisitorTest(LiveServerTestCase):
         # She is received with a question
         question = self.browser.find_element_by_tag_name('h1').text
         self.assertEqual('None', question)
+
+
+if __name__ == '__main__':
+    unittest.main()
