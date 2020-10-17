@@ -9,7 +9,7 @@ class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.question = QuestionFactory(question='Who is better?')
+        self.question = QuestionFactory()
 
     def tearDown(self):
         self.browser.quit()
@@ -24,4 +24,4 @@ class NewVisitorTest(LiveServerTestCase):
 
         # She is received with the latest question
         question = self.browser.find_element_by_tag_name('h1').text
-        self.assertEqual(self.question, question)
+        self.assertEqual(self.question.__str__(), question)
