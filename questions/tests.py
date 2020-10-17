@@ -1,15 +1,14 @@
 from django.test import TestCase
 from django.urls import resolve
 
+from questions.factory import QuestionFactory
 from .views import home
 from .models import Question
 
 
 class HomePageTests(TestCase):
     def setUp(self):
-        self.question = Question.objects.create(
-                question='Who is better?'
-        )
+        self.question = QuestionFactory()
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
@@ -19,7 +18,7 @@ class HomePageTests(TestCase):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_home_page_contains_last_question(self):
+    def test_home_page_contains_latest_question(self):
         last_question = Question.objects.last()
         response = self.client.get('/')
         html = response.content.decode('utf8')

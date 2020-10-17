@@ -2,11 +2,14 @@ from django.test import LiveServerTestCase
 
 from selenium import webdriver
 
+from questions.factory import QuestionFactory
+
 
 class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
+        self.question = QuestionFactory(question='Who is better?')
 
     def tearDown(self):
         self.browser.quit()
@@ -19,6 +22,6 @@ class NewVisitorTest(LiveServerTestCase):
         # She notices the page title mention Huestion
         self.assertIn('Huestion', self.browser.title)
 
-        # She is received with a question
+        # She is received with the latest question
         question = self.browser.find_element_by_tag_name('h1').text
-        self.assertEqual('None', question)
+        self.assertEqual(self.question, question)
