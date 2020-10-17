@@ -19,6 +19,10 @@ class NewVisitorTest(unittest.TestCase):
         # She notices the page title mention Huestion
         self.assertIn('Huestion', self.browser.title)
 
+        # She is received with a question
+        question = self.browser.find_element_by_tag_name('h1').text
+        self.assertEqual('None', question)
+
 
 if __name__ == '__main__':
     unittest.main()
