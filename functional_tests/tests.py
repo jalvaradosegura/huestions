@@ -1,3 +1,5 @@
+import datetime
+
 from django.test import LiveServerTestCase
 
 from selenium import webdriver
@@ -6,7 +8,6 @@ from questions.factory import QuestionFactory
 
 
 class NewVisitorTest(LiveServerTestCase):
-
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.question = QuestionFactory()
@@ -25,3 +26,14 @@ class NewVisitorTest(LiveServerTestCase):
         # She is received with the latest question
         question = self.browser.find_element_by_tag_name('h1').text
         self.assertEqual(self.question.__str__(), question)
+
+        # She realized that the question was created recently by looking at the
+        # publication date
+        publication_date = self.browser.find_element_by_id(
+            'creation_date'
+        ).text
+        current_date = datetime.datetime.now().strftime('%d-%m-%Y')
+        self.assertIn(current_date, publication_date)
+
+        # The question contains 2 options
+        # self.browser.find_element_by_id('alternative1')

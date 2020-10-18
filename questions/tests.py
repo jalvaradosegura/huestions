@@ -27,9 +27,10 @@ class HomePageTests(TestCase):
 
 class QuestionModelTest(TestCase):
     def setUp(self):
-        self.question = Question.objects.create(
-                question='Who is better?'
-        )
+        self.question = QuestionFactory()
 
     def test_model_str(self):
         self.assertEqual(self.question.__str__(), self.question.question)
+
+    def test_was_created_recently(self):
+        self.assertTrue(self.question.was_created_recently())
