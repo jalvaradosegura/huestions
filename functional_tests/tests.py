@@ -4,13 +4,14 @@ from django.test import LiveServerTestCase
 
 from selenium import webdriver
 
-from questions.factory import QuestionFactory
+from questions.factory import QuestionFactory, AlternativeFactory
 
 
 class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.question = QuestionFactory()
+        AlternativeFactory.create_batch(2, question=self.question)
 
     def tearDown(self):
         self.browser.quit()
@@ -36,4 +37,11 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn(current_date, publication_date)
 
         # The question contains 2 options
-        # self.browser.find_element_by_id('alternative1')
+        alternative_1 = self.browser.find_element_by_id(
+            'alternative_1'
+        ).text
+        self.assertEqual(alternative_1, 'Roger Federer')
+        alternative_2 = self.browser.find_element_by_id(
+            'alternative_2'
+        ).text
+        self.assertEqual(alternative_2, 'Rafael Nadal')
