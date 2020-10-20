@@ -9,7 +9,8 @@ from .models import Question
 class HomePageTests(TestCase):
     def setUp(self):
         self.question = QuestionFactory()
-        self.alternative = AlternativeFactory(question=self.question)
+        self.alternative_1 = AlternativeFactory(question=self.question)
+        self.alternative_2 = AlternativeFactory(question=self.question)
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
@@ -28,7 +29,25 @@ class HomePageTests(TestCase):
     def test_home_page_contains_alternatives(self):
         response = self.client.get('/')
         html = response.content.decode('utf8')
-        self.assertIn(self.alternative.alternative, html)
+        self.assertIn(self.alternative_1.alternative, html)
+        self.assertIn(self.alternative_2.alternative, html)
+
+    def test_home_page_contains_form(self):
+        response = self.client.get('/')
+        html = response.content.decode('utf8')
+        self.assertRegex(html, '<form.*>')
+        self.assertRegex(html, '</form>')
+
+    def test_home_page_contains_button_to_vote(self):
+        response = self.client.get('/')
+        html = response.content.decode('utf8')
+        self.assertRegex(html, '<button.* id="button_to_vote">Vote.*</button>')
+
+    def test_home_page_contains_radio_buttons_for_the_alternatives(self):
+        response = self.client.get('/')
+        html = response.content.decode('utf8')
+        self.assertRegex(html, '<input.*type="radio".*id="alternative_1".*>')
+        self.assertRegex(html, '<input.*type="radio".*id="alternative_2".*>')
 
 
 class QuestionModelTest(TestCase):

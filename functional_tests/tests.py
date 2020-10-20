@@ -1,4 +1,5 @@
 import datetime
+import time
 
 from django.test import LiveServerTestCase
 
@@ -36,12 +37,21 @@ class NewVisitorTest(LiveServerTestCase):
         current_date = datetime.datetime.now().strftime('%d-%m-%Y')
         self.assertIn(current_date, publication_date)
 
-        # The question contains 2 options
+        # The question contains 2 alternatives
         alternative_1 = self.browser.find_element_by_id(
-            'alternative_1'
+            'label_alternative_1'
         ).text
         self.assertEqual(alternative_1, 'Roger Federer')
         alternative_2 = self.browser.find_element_by_id(
-            'alternative_2'
+            'label_alternative_2'
         ).text
         self.assertEqual(alternative_2, 'Rafael Nadal')
+
+        # She selects one alternative of the form
+        selected_alternative = self.browser.find_element_by_id('alternative_1')
+        selected_alternative.click()
+        time.sleep(4)
+
+        # Finally she votes for it by clicking the button
+        button_to_vote = self.browser.find_element_by_id('button_to_vote')
+        button_to_vote.click()
