@@ -4,7 +4,7 @@
 
 <form>
 {% for alternative in last_question.alternatives.all %}
-	<input type="radio" id="alternative_{{ forloop.counter }}" value={{ alternative }}>
+	<input type="radio" id="alternative_{{ forloop.counter }}" value="{{ alternative.alternative }}">
 	<label id="label_alternative_{{ forloop.counter }}" for="alternative_{{ forloop.counter }}">{{ alternative.alternative }}</label>
 {% endfor %}
 <button id="button_to_vote">Vote</button>

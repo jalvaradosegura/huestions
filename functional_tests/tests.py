@@ -49,9 +49,14 @@ class NewVisitorTest(LiveServerTestCase):
 
         # She selects one alternative of the form
         selected_alternative = self.browser.find_element_by_id('alternative_1')
-        selected_alternative.click()
         time.sleep(4)
+        self.assertEqual(
+            'Roger Federer', selected_alternative.get_attribute('value')
+        )
+        selected_alternative.click()
 
-        # Finally she votes for it by clicking the button
+        # She votes for it by clicking the button
         button_to_vote = self.browser.find_element_by_id('button_to_vote')
         button_to_vote.click()
+
+        # Finally she is redirected to the question details
