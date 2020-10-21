@@ -2,8 +2,10 @@
 <h1>{{ last_question }}</h1>
 <p id="creation_date">Publication date: {{ last_question.creation_date|date:"d-m-Y" }}</p>
 
-<form>
+<form method="POST">
+{% csrf_token %}
 {% for alternative in last_question.alternatives.all %}
+	<input type="hidden" name="question_id" value="{{ last_question.id }}">
 	<input type="radio" id="alternative_{{ forloop.counter }}" value="{{ alternative.alternative }}">
 	<label id="label_alternative_{{ forloop.counter }}" for="alternative_{{ forloop.counter }}">{{ alternative.alternative }}</label>
 {% endfor %}

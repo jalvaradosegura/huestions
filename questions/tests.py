@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve
 
 from questions.factory import QuestionFactory, AlternativeFactory
-from .views import home
+from .views import home, details
 from .models import Question
 
 
@@ -48,6 +48,24 @@ class HomePageTests(TestCase):
         html = response.content.decode('utf8')
         self.assertRegex(html, '<input.*type="radio".*id="alternative_1".*>')
         self.assertRegex(html, '<input.*type="radio".*id="alternative_2".*>')
+
+    def test_home_page_redirect_after_post_request(self):
+        question = Question.objects.last()
+        response = self.client.post(
+            '',
+            data={'question_id': question.id}
+        )
+        self.assertRedirects(response, f'/{question.id}/')
+
+
+class DetailsPageTests(TestCase):
+    def test_root_url_resolves_to_details_page_view(self):
+        found = resolve('/1/')
+        self.assertEqual(found.func, details)
+
+    def test_root_url_returns_correct_html(self):
+        response = self.client.get('/1/')
+        self.assertTemplateUsed(response, 'details.html')
 
 
 class QuestionModelTest(TestCase):
