@@ -64,11 +64,11 @@ class DetailsPageTests(TestCase):
         self.alternative_1 = AlternativeFactory(question=self.question)
         self.alternative_2 = AlternativeFactory(question=self.question)
 
-    def test_root_url_resolves_to_details_page_view(self):
+    def test_details_url_resolves_to_details_page_view(self):
         found = resolve('/1/')
         self.assertEqual(found.func, details)
 
-    def test_root_url_returns_correct_html(self):
+    def test_details_url_returns_correct_html(self):
         response = self.client.get('/1/')
         self.assertTemplateUsed(response, 'details.html')
 
