@@ -54,9 +54,19 @@ class NewVisitorTest(LiveServerTestCase):
         )
         selected_alternative.click()
 
-        # She votes for it by clicking the button
+        # She votes for it by clicking the vote button
         button_to_vote = self.browser.find_element_by_id('button_to_vote')
         button_to_vote.click()
 
         # Finally she is redirected to the question details
         self.assertIn('Question details', self.browser.title)
+
+        # Javi can see now the details of the question she answered
+        question = self.browser.find_element_by_tag_name('h1').text
+        self.assertEqual(self.question.__str__(), question)
+
+        # She sees what alternatives people have chosen in terms of percentage
+        alternative_1_percentage = self.browser.find_element_by_id(
+            'alternative_1_percentage'
+        ).text
+        self.assertEqual(alternative_1_percentage, '100%')

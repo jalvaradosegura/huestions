@@ -13,4 +13,5 @@ def home(request):
 
 
 def details(request, question_id):
-    return render(request, 'details.html')
+    question = Question.objects.get(id=question_id)
+    return render(request, 'details.html', {'question': question})

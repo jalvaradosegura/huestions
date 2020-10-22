@@ -59,6 +59,11 @@ class HomePageTests(TestCase):
 
 
 class DetailsPageTests(TestCase):
+    def setUp(self):
+        self.question = QuestionFactory()
+        self.alternative_1 = AlternativeFactory(question=self.question)
+        self.alternative_2 = AlternativeFactory(question=self.question)
+
     def test_root_url_resolves_to_details_page_view(self):
         found = resolve('/1/')
         self.assertEqual(found.func, details)
@@ -66,6 +71,11 @@ class DetailsPageTests(TestCase):
     def test_root_url_returns_correct_html(self):
         response = self.client.get('/1/')
         self.assertTemplateUsed(response, 'details.html')
+
+    def test_details_page_contains_question_title(self):
+        response = self.client.get('/1/')
+        html = response.content.decode('utf8')
+        self.assertIn(self.question.question, html)
 
 
 class QuestionModelTest(TestCase):
