@@ -16,6 +16,10 @@ class Question(models.Model):
             days=1
         )
 
+    def get_vote_percentage_for_each_alternative(self):
+        return [alternative.users.all().count() for alternative
+                in self.alternatives]
+
 
 class Alternative(models.Model):
     question = models.ForeignKey(

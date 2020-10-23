@@ -51,10 +51,7 @@ class HomePageTests(TestCase):
 
     def test_home_page_redirect_after_post_request(self):
         question = Question.objects.last()
-        response = self.client.post(
-            '',
-            data={'question_id': question.id}
-        )
+        response = self.client.post('', data={'question_id': question.id})
         self.assertRedirects(response, f'/{question.id}/')
 
 
@@ -93,6 +90,11 @@ class QuestionModelTest(TestCase):
         AlternativeFactory.create_batch(2, question=question)
         self.assertEqual(question.alternatives.count(), 2)
 
+    def test_get_the_vote_percentage_for_each_alternative(self):
+        percentages = self.question.get_vote_percentage_for_each_alternative()
+        for percentage in percentages:
+            self.assertEqual(percentages, 0)
+
 
 class AlternativeModelTest(TestCase):
     def setUp(self):
@@ -100,6 +102,5 @@ class AlternativeModelTest(TestCase):
 
     def test_model_str(self):
         self.assertEqual(
-            self.alternative.__str__(),
-            self.alternative.alternative
+            self.alternative.__str__(), self.alternative.alternative
         )
