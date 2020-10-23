@@ -78,6 +78,7 @@ class DetailsPageTests(TestCase):
 class QuestionModelTest(TestCase):
     def setUp(self):
         self.question = QuestionFactory()
+        self.alternatives = AlternativeFactory.create_batch(2)
 
     def test_model_str(self):
         self.assertEqual(self.question.__str__(), self.question.question)
@@ -87,13 +88,15 @@ class QuestionModelTest(TestCase):
 
     def test_question_contains_two_alternatives(self):
         question = Question.objects.last()
-        AlternativeFactory.create_batch(2, question=question)
         self.assertEqual(question.alternatives.count(), 2)
 
-    def test_get_the_vote_percentage_for_each_alternative(self):
-        percentages = self.question.get_vote_percentage_for_each_alternative()
-        for percentage in percentages:
-            self.assertEqual(percentages, 0)
+    def test_get_amount_of_users_that_have_voted(self):
+        votes = self.question.get_amount_of_users_that_have_voted()
+        self.assertEqual(votes, 0)
+
+    def test_get_vote_percentage_for_each_alternative(self):
+        percentages = self.question.get_votes_amount_for_each_alternative()
+        self.assertEqual(percentages, [0, 0])
 
 
 class AlternativeModelTest(TestCase):

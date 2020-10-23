@@ -16,9 +16,12 @@ class Question(models.Model):
             days=1
         )
 
-    def get_vote_percentage_for_each_alternative(self):
+    def get_amount_of_users_that_have_voted(self):
+        return sum(self.get_votes_amount_for_each_alternative())
+
+    def get_votes_amount_for_each_alternative(self):
         return [alternative.users.all().count() for alternative
-                in self.alternatives]
+                in self.alternatives.all()]
 
 
 class Alternative(models.Model):
