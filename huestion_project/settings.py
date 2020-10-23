@@ -44,9 +44,12 @@ THIRD_PARTY_APPS = [
     'allauth.account',
 ]
 LOCAL_APPS = [
-        'questions.apps.QuestionsConfig',
+    'questions.apps.QuestionsConfig',
+    'users.apps.UsersConfig',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 # django-allauth config
 LOGIN_REDIRECT_URL = 'home'
