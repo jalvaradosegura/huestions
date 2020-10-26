@@ -69,4 +69,5 @@ class NewVisitorTest(LiveServerTestCase):
         alternative_1_percentage = self.browser.find_element_by_id(
             'alternative_1_percentage'
         ).text
+        time.sleep(5)
         self.assertEqual(alternative_1_percentage, '100%')

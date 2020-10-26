@@ -20,8 +20,16 @@ class Question(models.Model):
         return sum(self.get_votes_amount_for_each_alternative())
 
     def get_votes_amount_for_each_alternative(self):
-        return [alternative.users.all().count() for alternative
-                in self.alternatives.all()]
+        return [
+            alternative.get_votes_amount()
+            for alternative in self.alternatives.all()
+        ]
+
+    def get_votes_percentage_for_each_alternative(self):
+        return [
+            alternative.get_votes_percentage()
+            for alternative in self.alternatives.all()
+        ]
 
 
 class Alternative(models.Model):
@@ -32,3 +40,13 @@ class Alternative(models.Model):
 
     def __str__(self):
         return self.alternative
+
+    def get_votes_amount(self):
+        return self.users.all().count()
+
+    def get_votes_percentage(self):
+        return (
+            self.get_votes_amount()
+            / self.question.get_amount_of_users_that_have_voted()
+            * 100
+        )
