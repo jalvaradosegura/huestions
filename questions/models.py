@@ -45,6 +45,8 @@ class Alternative(models.Model):
         return self.users.all().count()
 
     def get_votes_percentage(self):
+        if self.question.get_amount_of_users_that_have_voted() == 0:
+            return 0
         return (
             self.get_votes_amount()
             / self.question.get_amount_of_users_that_have_voted()

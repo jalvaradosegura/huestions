@@ -2,6 +2,7 @@ import datetime
 import time
 
 from django.test import LiveServerTestCase
+from django.contrib.auth import get_user_model
 
 from selenium import webdriver
 
@@ -13,6 +14,11 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser = webdriver.Firefox()
         self.question = QuestionFactory()
         AlternativeFactory.create_batch(2, question=self.question)
+        self.user = get_user_model().objects.create_user(
+            email='javi@email.com',
+            username='javi',
+            password='password123'
+        )
 
     def tearDown(self):
         self.browser.quit()
@@ -50,7 +56,7 @@ class NewVisitorTest(LiveServerTestCase):
         # She selects one alternative of the form
         selected_alternative = self.browser.find_element_by_id('alternative_1')
         self.assertEqual(
-            'Roger Federer', selected_alternative.get_attribute('value')
+            '1', selected_alternative.get_attribute('value')
         )
         selected_alternative.click()
 
@@ -69,5 +75,4 @@ class NewVisitorTest(LiveServerTestCase):
         alternative_1_percentage = self.browser.find_element_by_id(
             'alternative_1_percentage'
         ).text
-        time.sleep(5)
-        self.assertEqual(alternative_1_percentage, '100%')
+        self.assertIn('100.0%', alternative_1_percentage)
