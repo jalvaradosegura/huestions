@@ -3,8 +3,8 @@ from django.urls import resolve
 from django.contrib.auth import get_user_model
 
 from questions.factory import QuestionFactory, AlternativeFactory
-from .views import home, details
-from .models import Question, Alternative
+from ..views import home, details
+from ..models import Question, Alternative
 
 
 class HomePageTests(TestCase):
