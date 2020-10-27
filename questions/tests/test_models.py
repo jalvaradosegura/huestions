@@ -5,7 +5,7 @@ from questions.models import Question, Alternative
 from questions.factory import QuestionFactory, AlternativeFactory
 
 
-class QuestionModelTest(TestCase):
+class QuestionModelTests(TestCase):
     def setUp(self):
         self.question = QuestionFactory()
         AlternativeFactory.create_batch(2)
@@ -54,7 +54,7 @@ class QuestionModelTest(TestCase):
         self.assertEqual(percentages, [50, 50])
 
 
-class AlternativeModelTest(TestCase):
+class AlternativeModelTests(TestCase):
     def setUp(self):
         self.alternative = AlternativeFactory()
         self.user = get_user_model().objects.create_user(

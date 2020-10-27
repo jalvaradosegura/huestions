@@ -5,7 +5,7 @@ from questions.factory import QuestionFactory, AlternativeFactory, UserFactory
 from questions.models import Question, Alternative
 
 
-class TestQuestionfactory(TestCase):
+class QuestionFactoryTests(TestCase):
     def setUp(self):
         QuestionFactory()
 
@@ -18,7 +18,7 @@ class TestQuestionfactory(TestCase):
         self.assertEqual(amount_of_questions, 1)
 
 
-class TestAlternativeFactory(TestCase):
+class AlternativeFactoryTests(TestCase):
     def setUp(self):
         AlternativeFactory()
 
@@ -31,7 +31,7 @@ class TestAlternativeFactory(TestCase):
         self.assertEqual(amount_of_alternatives, 1)
 
 
-class TestUserFactory(TestCase):
+class UserFactoryTests(TestCase):
     def setUp(self):
         UserFactory()
 
