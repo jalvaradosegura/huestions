@@ -13,7 +13,9 @@ class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.question = QuestionFactory()
-        AlternativeFactory.create_batch(2, question=self.question)
+        # AlternativeFactory.create_batch(2, question=self.question)
+        self.alternative_1 = AlternativeFactory()
+        self.alternative_2 = AlternativeFactory()
         self.user = get_user_model().objects.create_user(
             email='javi@email.com',
             username='javi',
@@ -47,11 +49,11 @@ class NewVisitorTest(LiveServerTestCase):
         alternative_1 = self.browser.find_element_by_id(
             'label_alternative_1'
         ).text
-        self.assertEqual(alternative_1, 'Roger Federer')
+        self.assertEqual(alternative_1, self.alternative_1.alternative)
         alternative_2 = self.browser.find_element_by_id(
             'label_alternative_2'
         ).text
-        self.assertEqual(alternative_2, 'Rafael Nadal')
+        self.assertEqual(alternative_2, self.alternative_2.alternative)
 
         # She selects one alternative of the form
         selected_alternative = self.browser.find_element_by_id('alternative_1')

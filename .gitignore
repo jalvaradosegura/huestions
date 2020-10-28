@@ -1,3 +1,8 @@
 db.sqlite3
 *.swp
 *.log
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
