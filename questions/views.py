@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 from .models import Question, Alternative
 
 
+@login_required
 def home(request):
     if request.method == 'POST':
         question_id = request.POST['question_id']
