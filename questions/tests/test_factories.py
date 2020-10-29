@@ -30,6 +30,11 @@ class AlternativeFactoryTests(TestCase):
         amount_of_alternatives = Alternative.objects.all().count()
         self.assertEqual(amount_of_alternatives, 1)
 
+    def test_create_another_alternative(self):
+        AlternativeFactory()
+        alternative = Alternative.objects.last()
+        self.assertEqual(alternative.alternative, 'Rafael Nadal')
+
 
 class UserFactoryTests(TestCase):
     def setUp(self):
