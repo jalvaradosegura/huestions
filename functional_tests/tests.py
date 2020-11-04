@@ -78,3 +78,26 @@ class NewVisitorTest(LiveServerTestCase):
             'alternative_1_percentage'
         ).text
         self.assertIn('100.0%', alternative_1_percentage)
+
+
+class VisitorSignUp(LiveServerTestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_can_signup_with_email_and_password_only(self):
+        # Javi wants to signup on this cool website, so she goes to for it
+        self.browser.get(f'{self.live_server_url}/accounts/signup/')
+
+        # She enter her email and password
+        email_input = self.browser.find_element_by_id('id_email')
+        email_input.send_keys('javi@email.com')
+        password_input = self.browser.find_element_by_id('id_password1')
+        password_input.send_keys('super_password_123')
+
+        # She press the signup button
+        self.browser.find_element_by_tag_name('button').click()
+        javi = get_user_model().objects.last()
+        self.assertEqual(javi.email, 'javi@email.com')
