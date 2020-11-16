@@ -80,7 +80,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('100.0%', alternative_1_percentage)
 
 
-class VisitorSignUp(LiveServerTestCase):
+class VisitorSignUpLogIn(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
@@ -101,3 +101,43 @@ class VisitorSignUp(LiveServerTestCase):
         self.browser.find_element_by_tag_name('button').click()
         javi = get_user_model().objects.last()
         self.assertEqual(javi.email, 'javi@email.com')
+
+    def test_signup_logout_login(self):
+        # Javi is asked by the website owner to test the workflow:
+        # signup -> logout -> login
+        self.browser.get(f'{self.live_server_url}/accounts/signup/')
+
+        # She enter her email and password for sign up
+        email_input = self.browser.find_element_by_id('id_email')
+        email_input.send_keys('javi@email.com')
+        password_input = self.browser.find_element_by_id('id_password1')
+        password_input.send_keys('super_password_123')
+
+        # She press the signup button
+        self.browser.find_element_by_tag_name('button').click()
+
+        # She is signed up
+        javi = get_user_model().objects.last()
+        self.assertEqual(javi.email, 'javi@email.com')
+
+        # She goes to the logout page
+        go_to_logout_button = self.browser.find_element_by_id('logout_button')
+        response = go_to_logout_button.click()
+        self.assertTemplateUsed(response, 'account/logout.html')
+
+        # She press the logout button
+        logout_button = self.browser.find_element_by_tag_name('button')
+        logout_button.click()
+
+        # She goes to the login page
+        go_to_login_button = self.browser.find_element_by_id('login_button')
+        response = go_to_login_button.click()
+        self.assertTemplateUsed(response, 'account/login.html')
+
+        # She logs in
+        email_input = self.browser.find_element_by_id('id_login')
+        email_input.send_keys('javi@email.com')
+        password_input = self.browser.find_element_by_id('id_password')
+        password_input.send_keys('super_password_123')
+        login_button = self.browser.find_element_by_tag_name('button')
+        login_button.click()

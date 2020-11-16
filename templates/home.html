@@ -1,3 +1,9 @@
+{% if user.is_authenticated %}
+	<p>Welcome {{ user }}</p>
+	<a href="{% url 'account_logout' %}" id="logout_button">Log out</a>
+{% else %}
+	<a href="{% url 'account_login' %}" id="login_button">Login</a>
+{% endif %}
 <title>Huestion</title>
 <h1>{{ last_question }}</h1>
 <p id="creation_date">Publication date: {{ last_question.creation_date|date:"d-m-Y" }}</p>
