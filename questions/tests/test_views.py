@@ -2,8 +2,6 @@ from django.test import TestCase
 from django.urls import resolve
 from django.contrib.auth import get_user_model
 
-from allauth.account.views import signup as allauth_signup
-
 from questions.factory import QuestionFactory, AlternativeFactory
 from questions.views import home, details
 from questions.models import Question
@@ -88,7 +86,25 @@ class DetailsPageTests(TestCase):
         self.assertIn(self.question.question, html)
 
 
-class SignUpTests(TestCase):
+class SignUpPageTests(TestCase):
     def test_signup_url_returns_correct_html(self):
         response = self.client.get('/accounts/signup/')
         self.assertTemplateUsed(response, 'account/signup.html')
+
+
+class LoginPageTests(TestCase):
+    def test_login_url_returns_correct_html(self):
+        response = self.client.get('/accounts/login/')
+        self.assertTemplateUsed(response, 'account/login.html')
+
+
+class LogoutPageTests(TestCase):
+    def test_logout_url_returns_correct_html(self):
+        get_user_model().objects.create_user(
+            email='javi@email.com',
+            username='javi',
+            password='password123'
+        )
+        self.client.login(email='javi@email.com', password='password123')
+        response = self.client.get('/accounts/logout/')
+        self.assertTemplateUsed(response, 'account/logout.html')
