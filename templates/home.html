@@ -8,13 +8,17 @@
 <h1>{{ last_question }}</h1>
 <p id="creation_date">Publication date: {{ last_question.creation_date|date:"d-m-Y" }}</p>
 
-<form method="POST">
-{% csrf_token %}
-{% for alternative in last_question.alternatives.all %}
-	<input type="hidden" name="question_id" value="{{ last_question.id }}">
-	<input name="alternative" type="radio" id="alternative_{{ forloop.counter }}" value="{{ alternative.id }}">
-	<label id="label_alternative_{{ forloop.counter }}" for="alternative_{{ forloop.counter }}">{{ alternative.alternative }}</label>
-{% endfor %}
-<input hidden name="username" value={{ user }}/>
-<button id="button_to_vote">Vote</button>
+{% if alread_voted %}
+    <p id="you_already_voted">You have already voted for this question</p>
+{% else %}
+    <form method="POST">
+    {% csrf_token %}
+    {% for alternative in last_question.alternatives.all %}
+	    <input type="hidden" name="question_id" value="{{ last_question.id }}">
+	    <input name="alternative" type="radio" id="alternative_{{ forloop.counter }}" value="{{ alternative.id }}">
+	    <label id="label_alternative_{{ forloop.counter }}" for="alternative_{{ forloop.counter }}">{{ alternative.alternative }}</label>
+    {% endfor %}
+    <input hidden name="username" value="{{ user }}"/>
+    <button id="button_to_vote">Vote</button>
+{% endif %}
 </form>

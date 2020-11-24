@@ -31,6 +31,12 @@ class Question(models.Model):
             for alternative in self.alternatives.all()
         ]
 
+    def has_the_user_already_voted(self, user):
+        for alternative in self.alternatives.all():
+            if user in alternative.users.all():
+                return True
+        return False
+
 
 class Alternative(models.Model):
     question = models.ForeignKey(

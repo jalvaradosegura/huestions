@@ -12,6 +12,12 @@ class HomePageTests(TestCase):
         self.question = QuestionFactory()
         self.alternative_1 = AlternativeFactory(question=self.question)
         self.alternative_2 = AlternativeFactory(question=self.question)
+        get_user_model().objects.create_user(
+            email='javi@email.com',
+            username='javi',
+            password='password123'
+        )
+        self.client.login(email='javi@email.com', password='password123')
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')

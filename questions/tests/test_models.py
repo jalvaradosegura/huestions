@@ -53,6 +53,10 @@ class QuestionModelTests(TestCase):
         percentages = self.question.get_votes_percentage_for_each_alternative()
         self.assertEqual(percentages, [50, 50])
 
+    def test_has_the_user_already_voted(self):
+        response = self.question.has_the_user_already_voted(self.javi_user)
+        self.assertTrue(response)
+
 
 class AlternativeModelTests(TestCase):
     def setUp(self):

@@ -9,18 +9,34 @@ from selenium import webdriver
 from questions.factory import QuestionFactory, AlternativeFactory
 
 
+def sign_up(browser, email, password):
+    # She enter her email and password for sign up
+    email_input = browser.find_element_by_id('id_email')
+    email_input.send_keys(email)
+    password_input = browser.find_element_by_id('id_password1')
+    password_input.send_keys(password)
+
+    # She press the signup button
+    time.sleep(2)
+    browser.find_element_by_tag_name('button').click()
+
+
+def vote_for_an_alternative(browser, selected_alternative):
+    # She selects one alternative of the form
+    selected_alternative = browser.find_element_by_id(selected_alternative)
+    selected_alternative.click()
+
+    # She votes for it by clicking the vote button
+    button_to_vote = browser.find_element_by_id('button_to_vote')
+    button_to_vote.click()
+
+
 class NewVisitorTest(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.question = QuestionFactory()
-        # AlternativeFactory.create_batch(2, question=self.question)
         self.alternative_1 = AlternativeFactory()
         self.alternative_2 = AlternativeFactory()
-        self.user = get_user_model().objects.create_user(
-            email='javi@email.com',
-            username='javi',
-            password='password123'
-        )
 
     def tearDown(self):
         self.browser.quit()
@@ -30,7 +46,17 @@ class NewVisitorTest(LiveServerTestCase):
         # She visits it
         self.browser.get(self.live_server_url)
 
-        # She notices the page title mention Huestion
+        # She is asked to login to continue
+        # She does not have an account so she click to create one
+        dont_have_an_account = self.browser.find_element_by_id(
+            'dont_have_an_account'
+        )
+        dont_have_an_account.click()
+
+        # She creates her account
+        sign_up(self.browser, 'javi@email.com', 'super_password_123')
+
+        # She notices the page title  Huestion
         self.assertIn('Huestion', self.browser.title)
 
         # She is received with the latest question
@@ -56,15 +82,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertEqual(alternative_2, self.alternative_2.alternative)
 
         # She selects one alternative of the form
-        selected_alternative = self.browser.find_element_by_id('alternative_1')
-        self.assertEqual(
-            '1', selected_alternative.get_attribute('value')
-        )
-        selected_alternative.click()
-
-        # She votes for it by clicking the vote button
-        button_to_vote = self.browser.find_element_by_id('button_to_vote')
-        button_to_vote.click()
+        vote_for_an_alternative(self.browser, 'alternative_1')
 
         # Finally she is redirected to the question details
         self.assertIn('Question details', self.browser.title)
@@ -79,48 +97,64 @@ class NewVisitorTest(LiveServerTestCase):
         ).text
         self.assertIn('100.0%', alternative_1_percentage)
 
+        # She tries to vote again
+        self.browser.get(self.live_server_url)
+        message = self.browser.find_element_by_id('you_already_voted').text
+        self.assertEqual(message, 'You have already voted for this question')
+        time.sleep(3)
+
 
 class VisitorSignUpLogIn(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
+        time.sleep(1)
 
     def tearDown(self):
         self.browser.quit()
 
     def test_can_signup_with_email_and_password_only(self):
-        # Javi wants to signup on this cool website, so she goes to for it
-        self.browser.get(f'{self.live_server_url}/accounts/signup/')
+        # Javi heard about a fun page, where you have to answer hard questions
+        # She visits it
+        self.browser.get(self.live_server_url)
 
-        # She enter her email and password
-        email_input = self.browser.find_element_by_id('id_email')
-        email_input.send_keys('javi@email.com')
-        password_input = self.browser.find_element_by_id('id_password1')
-        password_input.send_keys('super_password_123')
+        # She is asked to login to continue
+        # She does not have an account so she click to create one
+        dont_have_an_account = self.browser.find_element_by_id(
+            'dont_have_an_account'
+        )
+        dont_have_an_account.click()
 
-        # She press the signup button
-        self.browser.find_element_by_tag_name('button').click()
+        # She creates her account by just entering her email and a password
+        sign_up(self.browser, 'javi@email.com', 'super_password_123')
+
+        # She exists now on the database
         javi = get_user_model().objects.last()
         self.assertEqual(javi.email, 'javi@email.com')
 
     def test_signup_logout_login(self):
         # Javi is asked by the website owner to test the workflow:
         # signup -> logout -> login
-        self.browser.get(f'{self.live_server_url}/accounts/signup/')
 
-        # She enter her email and password for sign up
-        email_input = self.browser.find_element_by_id('id_email')
-        email_input.send_keys('javi@email.com')
-        password_input = self.browser.find_element_by_id('id_password1')
-        password_input.send_keys('super_password_123')
+        self.browser.get(self.live_server_url)
 
-        # She press the signup button
-        self.browser.find_element_by_tag_name('button').click()
+        # She visists the main url
+        # She is asked to login to continue
+        # She does not have an account so she click to create one
+        dont_have_an_account = self.browser.find_element_by_id(
+            'dont_have_an_account'
+        )
+        dont_have_an_account.click()
+
+        # She signup
+        sign_up(self.browser, 'javi@email.com', 'super_password_123')
+        time.sleep(3)
 
         # She is signed up
         javi = get_user_model().objects.last()
         self.assertEqual(javi.email, 'javi@email.com')
 
         # She goes to the logout page
+        time.sleep(5)
         go_to_logout_button = self.browser.find_element_by_id('logout_button')
         response = go_to_logout_button.click()
         self.assertTemplateUsed(response, 'account/logout.html')
