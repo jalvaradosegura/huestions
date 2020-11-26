@@ -2,7 +2,6 @@ import datetime
 import time
 
 from django.test import LiveServerTestCase
-from django.contrib.auth import get_user_model
 
 from selenium import webdriver
 
@@ -102,76 +101,3 @@ class NewVisitorTest(LiveServerTestCase):
         message = self.browser.find_element_by_id('you_already_voted').text
         self.assertEqual(message, 'You have already voted for this question')
         time.sleep(3)
-
-
-class VisitorSignUpLogIn(LiveServerTestCase):
-    def setUp(self):
-        self.browser = webdriver.Firefox()
-        time.sleep(1)
-
-    def tearDown(self):
-        self.browser.quit()
-
-    def test_can_signup_with_email_and_password_only(self):
-        # Javi heard about a fun page, where you have to answer hard questions
-        # She visits it
-        self.browser.get(self.live_server_url)
-
-        # She is asked to login to continue
-        # She does not have an account so she click to create one
-        dont_have_an_account = self.browser.find_element_by_id(
-            'dont_have_an_account'
-        )
-        dont_have_an_account.click()
-
-        # She creates her account by just entering her email and a password
-        sign_up(self.browser, 'javi@email.com', 'super_password_123')
-
-        # She exists now on the database
-        javi = get_user_model().objects.last()
-        self.assertEqual(javi.email, 'javi@email.com')
-
-    def test_signup_logout_login(self):
-        # Javi is asked by the website owner to test the workflow:
-        # signup -> logout -> login
-
-        self.browser.get(self.live_server_url)
-
-        # She visists the main url
-        # She is asked to login to continue
-        # She does not have an account so she click to create one
-        dont_have_an_account = self.browser.find_element_by_id(
-            'dont_have_an_account'
-        )
-        dont_have_an_account.click()
-
-        # She signup
-        sign_up(self.browser, 'javi@email.com', 'super_password_123')
-        time.sleep(3)
-
-        # She is signed up
-        javi = get_user_model().objects.last()
-        self.assertEqual(javi.email, 'javi@email.com')
-
-        # She goes to the logout page
-        time.sleep(5)
-        go_to_logout_button = self.browser.find_element_by_id('logout_button')
-        response = go_to_logout_button.click()
-        self.assertTemplateUsed(response, 'account/logout.html')
-
-        # She press the logout button
-        logout_button = self.browser.find_element_by_tag_name('button')
-        logout_button.click()
-
-        # She goes to the login page
-        go_to_login_button = self.browser.find_element_by_id('login_button')
-        response = go_to_login_button.click()
-        self.assertTemplateUsed(response, 'account/login.html')
-
-        # She logs in
-        email_input = self.browser.find_element_by_id('id_login')
-        email_input.send_keys('javi@email.com')
-        password_input = self.browser.find_element_by_id('id_password')
-        password_input.send_keys('super_password_123')
-        login_button = self.browser.find_element_by_tag_name('button')
-        login_button.click()

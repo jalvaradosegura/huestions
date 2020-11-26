@@ -78,3 +78,7 @@ class AlternativeModelTests(TestCase):
 
     def test_get_votes_percentage(self):
         self.assertEqual(self.alternative.get_votes_percentage(), 100)
+
+    def test_get_votes_percentage_with_no_votes(self):
+        self.user.delete()
+        self.assertEqual(self.alternative.get_votes_percentage(), 0)
