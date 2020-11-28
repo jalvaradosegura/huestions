@@ -8,14 +8,20 @@ from questions.models import Question, Alternative
 class QuestionFactoryTests(TestCase):
     def setUp(self):
         QuestionFactory()
+        AlternativeFactory.create_batch(2)
+        question = QuestionFactory(question='Who is stronger?')
+        AlternativeFactory(alternative='Iron Man', question=question)
+        AlternativeFactory(alternative='Dr. Strange', question=question)
 
     def test_question_got_created(self):
-        question = Question.objects.last()
-        self.assertEqual(question.question, 'Who is better?')
+        first_question = Question.objects.first()
+        last_question = Question.objects.last()
+        self.assertEqual(first_question.question, 'Who is better?')
+        self.assertEqual(last_question.question, 'Who is stronger?')
 
     def test_amount_of_questions(self):
         amount_of_questions = Question.objects.all().count()
-        self.assertEqual(amount_of_questions, 1)
+        self.assertEqual(amount_of_questions, 2)
 
 
 class AlternativeFactoryTests(TestCase):
