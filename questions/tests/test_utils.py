@@ -31,3 +31,10 @@ class UtilsTests(TestCase):
         possible_questions = get_possible_questions_for_user(self.user)
         all_questions = list(Question.objects.all())
         self.assertEqual(possible_questions, all_questions)
+
+    def test_get_possible_questions_for_user_returns_empty(self):
+        for question in Question.objects.all():
+            first_alternative = question.alternatives.all()[0]
+            first_alternative.users.add(self.user)
+        possible_questions = get_possible_questions_for_user(self.user)
+        self.assertEqual(possible_questions, [])
