@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
 
 from .models import Question, Alternative
+from .utils import get_random_question_for_user
 
 
 @login_required
@@ -22,10 +22,23 @@ def home(request):
     return render(
         request,
         'home.html',
-        {'last_question': last_question, 'alread_voted': already_voted},
+        {
+            'question': last_question,
+            'alread_voted': already_voted,
+            'title': 'Huestion'
+        },
     )
 
 
 def details(request, question_id):
     question = Question.objects.get(id=question_id)
     return render(request, 'details.html', {'question': question})
+
+
+def random_question(request):
+    question = get_random_question_for_user(request.user)
+    return render(
+        request,
+        'home.html',
+        {'question': question, 'title': 'Random Huestion'},
+    )
