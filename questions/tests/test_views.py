@@ -66,6 +66,12 @@ class HomePageTests(TestCase):
         self.assertRedirects(response, f'/{question.id}/')
 
 
+class RandomPageTests(TestCase):
+    def test_root_url_returns_correct_html(self):
+        response = self.client.get('/random/')
+        self.assertTemplateUsed(response, 'home.html')
+
+
 class DetailsPageTests(TestCase):
     def setUp(self):
         self.question = QuestionFactory()
