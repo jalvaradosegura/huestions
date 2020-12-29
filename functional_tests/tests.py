@@ -8,7 +8,9 @@ from selenium import webdriver
 from questions.factory import QuestionFactory, AlternativeFactory
 
 
-def sign_up(browser, email, password):
+def sign_up(browser, email, password, server_url):
+    browser.get(f'{server_url}/accounts/signup/')
+
     # She enter her email and password for sign up
     email_input = browser.find_element_by_id('id_email')
     email_input.send_keys(email)
@@ -16,7 +18,7 @@ def sign_up(browser, email, password):
     password_input.send_keys(password)
 
     # She press the signup button
-    time.sleep(2)
+    time.sleep(3)
     browser.find_element_by_tag_name('button').click()
 
 
@@ -30,31 +32,30 @@ def vote_for_an_alternative(browser, selected_alternative):
     button_to_vote.click()
 
 
-class NewVisitorTest(LiveServerTestCase):
+class FunctionalTest(LiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.question = QuestionFactory()
         self.alternative_1 = AlternativeFactory()
         self.alternative_2 = AlternativeFactory()
+        sign_up(
+            self.browser,
+            'javi@email.com',
+            'super_password_123',
+            self.live_server_url
+        )
 
     def tearDown(self):
         self.browser.quit()
 
+
+class NewVisitorTest(FunctionalTest):
+    def setUp(self):
+        super().setUp()
+
     def test_can_visit_home_page(self):
         # Javi heard about a fun page, where you have to answer hard questions
         # She visits it
-        self.browser.get(self.live_server_url)
-
-        # She is asked to login to continue
-        # She does not have an account so she click to create one
-        dont_have_an_account = self.browser.find_element_by_id(
-            'dont_have_an_account'
-        )
-        dont_have_an_account.click()
-
-        # She creates her account
-        sign_up(self.browser, 'javi@email.com', 'super_password_123')
-
         # She notices the page title  Huestion
         self.assertIn('Huestion', self.browser.title)
 
@@ -104,14 +105,6 @@ class NewVisitorTest(LiveServerTestCase):
 
     def test_can_visit_random_page(self):
         # Javi visits a section of the page that shows a random question
-        self.browser.get(f'{self.live_server_url}/random/')
-        # She is asked to login to continue
-        # She does not have an account so she click to create one
-        dont_have_an_account = self.browser.find_element_by_id(
-            'dont_have_an_account'
-        )
-        dont_have_an_account.click()
-        sign_up(self.browser, 'javi@email.com', 'super_password_123')
         self.browser.get(f'{self.live_server_url}/random/')
 
         self.assertIn('Random Huestion', self.browser.title)
