@@ -105,4 +105,13 @@ class NewVisitorTest(LiveServerTestCase):
     def test_can_visit_random_page(self):
         # Javi visits a section of the page that shows a random question
         self.browser.get(f'{self.live_server_url}/random/')
+        # She is asked to login to continue
+        # She does not have an account so she click to create one
+        dont_have_an_account = self.browser.find_element_by_id(
+            'dont_have_an_account'
+        )
+        dont_have_an_account.click()
+        sign_up(self.browser, 'javi@email.com', 'super_password_123')
+        self.browser.get(f'{self.live_server_url}/random/')
+
         self.assertIn('Random Huestion', self.browser.title)
