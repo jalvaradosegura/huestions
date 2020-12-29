@@ -30,11 +30,13 @@ def home(request):
     )
 
 
+@login_required
 def details(request, question_id):
     question = Question.objects.get(id=question_id)
     return render(request, 'details.html', {'question': question})
 
 
+@login_required
 def random_question(request):
     question = get_random_question_for_user(request.user)
     return render(

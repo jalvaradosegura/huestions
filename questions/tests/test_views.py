@@ -7,17 +7,22 @@ from questions.views import home, details
 from questions.models import Question
 
 
-class HomePageTests(TestCase):
+class BaseForViews(TestCase):
     def setUp(self):
-        self.question = QuestionFactory()
-        self.alternative_1 = AlternativeFactory(question=self.question)
-        self.alternative_2 = AlternativeFactory(question=self.question)
-        get_user_model().objects.create_user(
+        self.user = get_user_model().objects.create_user(
             email='javi@email.com',
             username='javi',
             password='password123'
         )
         self.client.login(email='javi@email.com', password='password123')
+
+
+class HomePageTests(BaseForViews):
+    def setUp(self):
+        super().setUp()
+        self.question = QuestionFactory()
+        self.alternative_1 = AlternativeFactory(question=self.question)
+        self.alternative_2 = AlternativeFactory(question=self.question)
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
@@ -66,22 +71,21 @@ class HomePageTests(TestCase):
         self.assertRedirects(response, f'/{question.id}/')
 
 
-class RandomPageTests(TestCase):
+class RandomPageTests(BaseForViews):
+    def setUp(self):
+        super().setUp()
+
     def test_root_url_returns_correct_html(self):
         response = self.client.get('/random/')
         self.assertTemplateUsed(response, 'home.html')
 
 
-class DetailsPageTests(TestCase):
+class DetailsPageTests(BaseForViews):
     def setUp(self):
+        super().setUp()
         self.question = QuestionFactory()
         self.alternative_1 = AlternativeFactory(question=self.question)
         self.alternative_2 = AlternativeFactory(question=self.question)
-        self.user = get_user_model().objects.create_user(
-            email='javi@email.com',
-            username='javi',
-            password='password123'
-        )
         self.alternative_1.users.add(self.user)
 
     def test_details_url_resolves_to_details_page_view(self):
@@ -110,13 +114,10 @@ class LoginPageTests(TestCase):
         self.assertTemplateUsed(response, 'account/login.html')
 
 
-class LogoutPageTests(TestCase):
+class LogoutPageTests(BaseForViews):
+    def setUp(self):
+        super().setUp()
+
     def test_logout_url_returns_correct_html(self):
-        get_user_model().objects.create_user(
-            email='javi@email.com',
-            username='javi',
-            password='password123'
-        )
-        self.client.login(email='javi@email.com', password='password123')
         response = self.client.get('/accounts/logout/')
         self.assertTemplateUsed(response, 'account/logout.html')
