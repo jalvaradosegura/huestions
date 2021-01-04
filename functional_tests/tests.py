@@ -6,6 +6,7 @@ from django.test import LiveServerTestCase
 from selenium import webdriver
 
 from questions.factory import QuestionFactory, AlternativeFactory
+from questions.models import Question
 
 
 def sign_up(browser, email, password, server_url):
@@ -106,5 +107,15 @@ class NewVisitorTest(FunctionalTest):
     def test_can_visit_random_page(self):
         # Javi visits a section of the page that shows a random question
         self.browser.get(f'{self.live_server_url}/random/')
-
         self.assertIn('Random Huestion', self.browser.title)
+
+    def test_get_a_different_question_on_each_refresh(self):
+        QuestionFactory(question='Question 2')
+        QuestionFactory(question='Question 3')
+        all_questions = [
+            question.question for question in Question.objects.all()
+        ]
+        for refresh_iteration in range(2):
+            self.browser.get(f'{self.live_server_url}/random/')
+            question = self.browser.find_element_by_tag_name('h1').text
+            self.assertIn(question, all_questions)
