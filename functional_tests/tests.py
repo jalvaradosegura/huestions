@@ -110,12 +110,27 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn('Random Huestion', self.browser.title)
 
     def test_get_a_different_question_on_each_refresh(self):
+        # The system creates some dummy questions
         QuestionFactory(question='Question 2')
         QuestionFactory(question='Question 3')
         all_questions = [
             question.question for question in Question.objects.all()
         ]
+
+        # Now Javi visits the random section, getting a random question each
+        # time
         for refresh_iteration in range(2):
             self.browser.get(f'{self.live_server_url}/random/')
             question = self.browser.find_element_by_tag_name('h1').text
             self.assertIn(question, all_questions)
+
+    def test_can_vote_on_random_page(self):
+        # Javi visits the random section
+        self.browser.get(f'{self.live_server_url}/random/')
+
+        # She votes for an alternativate
+        vote_for_an_alternative(self.browser, 'alternative_1')
+
+        # She is redirected to the question details
+        time.sleep(3)
+        self.assertIn('Question details', self.browser.title)
