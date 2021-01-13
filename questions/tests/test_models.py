@@ -39,22 +39,27 @@ class QuestionModelTests(TestCase):
 
     def test_question_contains_two_alternatives(self):
         question = Question.objects.last()
+
         self.assertEqual(question.alternatives.count(), 2)
 
     def test_get_amount_of_users_that_have_voted_this_question(self):
         votes = self.question.get_amount_of_users_that_have_voted()
+
         self.assertEqual(votes, 2)
 
     def test_get_vote_amount_for_each_alternative(self):
         votes_amount = self.question.get_votes_amount_for_each_alternative()
+
         self.assertEqual(votes_amount, [1, 1])
 
     def test_get_vote_percentage_for_each_alternative(self):
         percentages = self.question.get_votes_percentage_for_each_alternative()
+
         self.assertEqual(percentages, [50, 50])
 
     def test_has_the_user_already_voted(self):
         response = self.question.has_the_user_already_voted(self.javi_user)
+
         self.assertTrue(response)
 
 
@@ -81,4 +86,5 @@ class AlternativeModelTests(TestCase):
 
     def test_get_votes_percentage_with_no_votes(self):
         self.user.delete()
+
         self.assertEqual(self.alternative.get_votes_percentage(), 0)
