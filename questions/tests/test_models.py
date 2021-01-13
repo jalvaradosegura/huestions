@@ -1,8 +1,8 @@
-from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.test import TestCase
 
-from questions.models import Question, Alternative
-from questions.factories import QuestionFactory, AlternativeFactory
+from questions.factories import AlternativeFactory, QuestionFactory
+from questions.models import Alternative, Question
 
 
 class QuestionModelTests(TestCase):

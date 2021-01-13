@@ -1,13 +1,15 @@
 from django.test import TestCase
 
-from questions.utils import (
-    get_random_question_for_user,
-    get_possible_questions_for_user
-)
 from questions.factories import (
-    QuestionFactory, AlternativeFactory, UserFactory
+    AlternativeFactory,
+    QuestionFactory,
+    UserFactory
 )
 from questions.models import Question
+from questions.utils import (
+    get_possible_questions_for_user,
+    get_random_question_for_user
+)
 
 
 class UtilsTests(TestCase):

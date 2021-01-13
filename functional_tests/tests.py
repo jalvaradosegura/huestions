@@ -2,10 +2,9 @@ import datetime
 import time
 
 from django.test import LiveServerTestCase
-
 from selenium import webdriver
 
-from questions.factories import QuestionFactory, AlternativeFactory
+from questions.factories import AlternativeFactory, QuestionFactory
 from questions.models import Question
 
 

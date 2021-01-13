@@ -32,6 +32,8 @@ help:
 	@echo "==Reminders==="
 	@echo "How to use black in this project"
 	@echo "    black . -l 79 --diff --color -S"
+	@echo "How to use isort with Black. Eg:"
+	@echo "    isort questions/tests/test_factories.py --diff -m 3 --color"
 	@echo "Parallel testing doesn't work on python 3.8 and Django 3.1"
 	@echo "    it will be fixed on Django 3.2."
 	@echo "    You have to export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES"

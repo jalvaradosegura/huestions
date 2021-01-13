@@ -1,12 +1,12 @@
 from http import HTTPStatus
 
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import resolve
-from django.contrib.auth import get_user_model
 
-from questions.factories import QuestionFactory, AlternativeFactory
-from questions.views import home, details
+from questions.factories import AlternativeFactory, QuestionFactory
 from questions.models import Question
+from questions.views import details, home
 
 
 class BaseForViews(TestCase):
