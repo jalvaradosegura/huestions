@@ -1,7 +1,9 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-from questions.factory import QuestionFactory, AlternativeFactory, UserFactory
+from questions.factories import (
+    QuestionFactory, AlternativeFactory, UserFactory
+)
 from questions.models import Question, Alternative
 
 
@@ -9,9 +11,12 @@ class QuestionFactoryTests(TestCase):
     def setUp(self):
         QuestionFactory()
         AlternativeFactory.create_batch(2)
-        question = QuestionFactory(question='Who is stronger?')
-        AlternativeFactory(alternative='Iron Man', question=question)
-        AlternativeFactory(alternative='Dr. Strange', question=question)
+        AlternativeFactory(
+            alternative='Iron Man', question__question='Who is stronger?'
+        )
+        AlternativeFactory(
+            alternative='Dr. Strange', question__question='Who is stronger?'
+        )
 
     def test_question_got_created(self):
         first_question = Question.objects.first()

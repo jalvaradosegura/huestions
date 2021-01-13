@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import resolve
 from django.contrib.auth import get_user_model
 
-from questions.factory import QuestionFactory, AlternativeFactory
+from questions.factories import QuestionFactory, AlternativeFactory
 from questions.views import home, details
 from questions.models import Question
 

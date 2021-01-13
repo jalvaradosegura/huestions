@@ -4,7 +4,9 @@ from questions.utils import (
     get_random_question_for_user,
     get_possible_questions_for_user
 )
-from questions.factory import QuestionFactory, AlternativeFactory, UserFactory
+from questions.factories import (
+    QuestionFactory, AlternativeFactory, UserFactory
+)
 from questions.models import Question
 
 
@@ -12,9 +14,12 @@ class UtilsTests(TestCase):
     def setUp(self):
         QuestionFactory()
         AlternativeFactory.create_batch(2)
-        question = QuestionFactory(question='Who is stronger?')
-        AlternativeFactory(alternative='Iron Man', question=question)
-        AlternativeFactory(alternative='Dr. Strange', question=question)
+        AlternativeFactory(
+            alternative='Iron Man', question__question='Who is stronger?'
+        )
+        AlternativeFactory(
+            alternative='Dr. Strange', question__question='Who is stronger?'
+        )
         self.user = UserFactory()
 
     def test_get_random_question_for_user(self):

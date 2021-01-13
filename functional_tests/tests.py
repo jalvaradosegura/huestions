@@ -5,7 +5,7 @@ from django.test import LiveServerTestCase
 
 from selenium import webdriver
 
-from questions.factory import QuestionFactory, AlternativeFactory
+from questions.factories import QuestionFactory, AlternativeFactory
 from questions.models import Question
 
 

@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 
 from questions.models import Question, Alternative
-from questions.factory import QuestionFactory, AlternativeFactory
+from questions.factories import QuestionFactory, AlternativeFactory
 
 
 class QuestionModelTests(TestCase):
