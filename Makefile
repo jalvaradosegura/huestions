@@ -1,19 +1,22 @@
 .DEFAULT_GOAL = help
 
 run:
-	python manage.py runserver
+	python manage.py runserver --settings=huestion_project.settings.local
 
 tests:
-	python manage.py test
+	python manage.py test --settings=huestion_project.settings.local
 
 unit-tests:
-	python manage.py test questions
+	python manage.py test questions --settings=huestion_project.settings.local
 
 parallel-tests:
-	python manage.py test questions --parallel
+	python manage.py test questions --parallel --settings=huestion_project.settings.local
+
+reverse-tests:
+	python manage.py test questions --reverse --settings=huestion_project.settings.local
 
 coverage:
-	coverage run manage.py test
+	coverage run manage.py test --settings=huestion_project.settings.local
 	coverage report
 
 help:
@@ -28,6 +31,8 @@ help:
 	@echo "    Run only the unit tests"
 	@echo "parallel-tests"
 	@echo "    Run unit tests with parallelization"
+	@echo "reverse-tests"
+	@echo "    Run test in reverse order"
 	@echo ""
 	@echo "==Reminders==="
 	@echo "How to use black in this project"
