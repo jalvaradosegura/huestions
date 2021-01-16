@@ -6,7 +6,7 @@
 {% endif %}
 <title>{{ title }}</title>
 <h1>{{ question }}</h1>
-<p id="creation_date">Publication date: {{ question.creation_date|date:"d-m-Y" }}</p>
+<p id="creation_date">Publication date: {{ question.created|date:"d-m-Y" }}</p>
 
 {% if alread_voted %}
     <p id="you_already_voted">You have already voted for this question</p>

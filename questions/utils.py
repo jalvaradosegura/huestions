@@ -3,6 +3,7 @@ import random
 from .models import Question
 
 
+# TODO: check if this functions can be moved to the users model
 def get_random_question_for_user(user):
     possible_questions = get_possible_questions_for_user(user)
     try:

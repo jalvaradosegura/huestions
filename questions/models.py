@@ -4,15 +4,30 @@ from django.db import models
 from django.utils import timezone
 
 
-class Question(models.Model):
+class TimeStampedModel(models.Model):
+    """
+    An abstract base class model that provides selfupdating
+    ``created`` and ``modified`` fields.
+    """
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        """
+        When we define a new class that inherits from it, Django doesn’t
+        create a core_timestampedmodel table when migrate is run.
+        """
+        abstract = True
+
+
+class Question(TimeStampedModel):
     question = models.CharField(max_length=100)
-    creation_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.question
 
     def was_created_recently(self):
-        return self.creation_date >= timezone.now() - datetime.timedelta(
+        return self.created >= timezone.now() - datetime.timedelta(
             days=1
         )
 
@@ -38,7 +53,7 @@ class Question(models.Model):
         return False
 
 
-class Alternative(models.Model):
+class Alternative(TimeStampedModel):
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name='alternatives'
     )
