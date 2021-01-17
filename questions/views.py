@@ -38,17 +38,23 @@ def details(request, question_id):
 @login_required
 def random_question(request):
     if request.method == 'POST':
-        question_id = request.POST['question_id']
         chosen_alternative = Alternative.objects.get(
             id=request.POST['alternative']
         )
         user = request.user
         chosen_alternative.users.add(user)
-        return redirect('details', question_id=question_id)
+        question = Question.objects.get(id=request.POST['question_id'])
+        return redirect(question)
 
     question = get_random_question_for_user(request.user)
+    already_voted = True if question is None else False
+
     return render(
         request,
         'home.html',
-        {'question': question, 'title': 'Random Huestion'},
+        {
+            'question': question,
+            'alread_voted': already_voted,
+            'title': 'Random Huestion'
+        },
     )

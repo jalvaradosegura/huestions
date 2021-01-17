@@ -42,7 +42,7 @@ class FunctionalTest(LiveServerTestCase):
             self.browser,
             'javi@email.com',
             'super_password_123',
-            self.live_server_url
+            self.live_server_url,
         )
 
     def tearDown(self):
@@ -100,7 +100,10 @@ class NewVisitorTest(FunctionalTest):
         # She tries to vote again
         self.browser.get(self.live_server_url)
         message = self.browser.find_element_by_id('you_already_voted').text
-        self.assertEqual(message, 'You have already voted for this question')
+        self.assertEqual(
+            message,
+            'You have already voted for this question or you have answered all the questions.',
+        )
         time.sleep(3)
 
     def test_can_visit_random_page(self):
@@ -131,5 +134,4 @@ class NewVisitorTest(FunctionalTest):
         vote_for_an_alternative(self.browser, 'alternative_1')
 
         # She is redirected to the question details
-        time.sleep(3)
         self.assertIn('Question details', self.browser.title)
