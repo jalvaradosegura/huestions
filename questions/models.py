@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -25,6 +26,9 @@ class Question(TimeStampedModel):
 
     def __str__(self):
         return self.question
+
+    def get_absolute_url(self):
+        return reverse('question_details', args=[str(self.id)])
 
     def was_created_recently(self):
         return self.created >= timezone.now() - datetime.timedelta(
