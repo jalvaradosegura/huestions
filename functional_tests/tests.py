@@ -1,5 +1,6 @@
 import datetime
 import time
+from unittest import skip
 
 from django.test import LiveServerTestCase
 from selenium import webdriver
@@ -104,7 +105,6 @@ class NewVisitorTest(FunctionalTest):
             message,
             'You have already voted for this question or you have answered all the questions.',
         )
-        time.sleep(3)
 
     def test_can_visit_random_page(self):
         # Javi visits a section of the page that shows a random question
@@ -135,3 +135,20 @@ class NewVisitorTest(FunctionalTest):
 
         # She is redirected to the question details
         self.assertIn('Question details', self.browser.title)
+
+    @skip("Currently don't want to test")
+    def test_can_visit_a_list_of_question_page(self):
+        # Javi visits a page that show a list of list questions
+        self.browser.get(f'{self.live_server_url}/lists/')
+
+        # She sees a big title that says something abouth the lists
+        title = self.browser.find_element_by_tag_name('h1').text
+        self.assertEqual(title, 'These are the question lists')
+
+        # She selects the first list
+        button_to_select = self.browser.find_element_by_id('button_to_select')
+        button_to_select.click()
+
+        # She now sees the first question of the list
+        current_page = self.browser.find_element_by_tag_name('span').text
+        self.assertIn('1 of ', current_page)
