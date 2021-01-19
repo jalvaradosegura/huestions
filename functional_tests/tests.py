@@ -136,7 +136,15 @@ class NewVisitorTest(FunctionalTest):
         # She is redirected to the question details
         self.assertIn('Question details', self.browser.title)
 
-    @skip("Currently don't want to test")
+
+class QuestionListsTest(LiveServerTestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+
+    def tearDown(self):
+        self.browser.quit()
+
+    # @skip("Currently don't want to test")
     def test_can_visit_a_list_of_question_page(self):
         # Javi visits a page that show a list of list questions
         self.browser.get(f'{self.live_server_url}/lists/')

@@ -1,12 +1,20 @@
 import factory
 
 
+class QuestionListFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = 'questions.QuestionList'
+
+    title = 'default title'
+
+
 class QuestionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'questions.Question'
-        django_get_or_create = ('question',)
+        django_get_or_create = ('title',)
 
-    question = 'Who is better?'
+    title = 'Who is better?'
+    child_of = factory.SubFactory(QuestionListFactory)
 
 
 class AlternativeFactory(factory.django.DjangoModelFactory):
@@ -14,7 +22,7 @@ class AlternativeFactory(factory.django.DjangoModelFactory):
         model = 'questions.Alternative'
 
     # alternative = 'Roger Federer'
-    alternative = factory.Iterator(['Roger Federer', 'Rafael Nadal'])
+    title = factory.Iterator(['Roger Federer', 'Rafael Nadal'])
     question = factory.SubFactory(QuestionFactory)
 
 

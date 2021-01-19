@@ -8,4 +8,9 @@ urlpatterns = [
     path(
         route='<int:question_id>/', view=views.details, name='question_details'
     ),
+    path(
+        route='lists/',
+        view=views.QuestionsListListView.as_view(),
+        name='questions_list'
+    ),
 ]

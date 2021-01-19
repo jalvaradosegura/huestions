@@ -3,12 +3,12 @@ from django.test import TestCase
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
-    UserFactory
+    UserFactory,
 )
 from questions.models import Question
 from questions.utils import (
     get_possible_questions_for_user,
-    get_random_question_for_user
+    get_random_question_for_user,
 )
 
 
@@ -35,9 +35,7 @@ class UtilsTests(TestCase):
         self.make_the_test_user_answer_all_the_questions()
         question = get_random_question_for_user(self.user)
 
-        self.assertEqual(
-            question, None
-        )
+        self.assertEqual(question, None)
 
     def test_get_possible_questions_for_user_amount(self):
         questions_amount = len(get_possible_questions_for_user(self.user))

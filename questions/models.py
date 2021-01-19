@@ -10,6 +10,7 @@ class TimeStampedModel(models.Model):
     An abstract base class model that provides selfupdating
     ``created`` and ``modified`` fields.
     """
+    title = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -20,12 +21,18 @@ class TimeStampedModel(models.Model):
         """
         abstract = True
 
+    def __str__(self):
+        return self.title
+
+
+class QuestionList(TimeStampedModel):
+    pass
+
 
 class Question(TimeStampedModel):
-    question = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.question
+    child_of = models.ForeignKey(
+        QuestionList, on_delete=models.CASCADE, related_name='questions'
+    )
 
     def get_absolute_url(self):
         return reverse('question_details', args=[str(self.id)])
@@ -61,10 +68,6 @@ class Alternative(TimeStampedModel):
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name='alternatives'
     )
-    alternative = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.alternative
 
     def get_votes_amount(self):
         return self.users.all().count()

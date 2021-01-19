@@ -6,7 +6,7 @@ from django.urls import resolve
 
 from questions.factories import AlternativeFactory, QuestionFactory
 from questions.models import Question
-from questions.views import details, home
+from questions.views import QuestionsListListView, details, home
 
 
 class BaseForViews(TestCase):
@@ -145,3 +145,11 @@ class LogoutPageTests(BaseForViews):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'account/logout.html')
+
+
+class QuestionsListView(TestCase):
+    def test_question_list_url_resolves_to_view(self):
+        found = resolve('/lists/')
+        self.assertEqual(
+            found.func.__name__, QuestionsListListView.as_view().__name__
+        )
