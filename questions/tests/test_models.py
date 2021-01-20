@@ -94,7 +94,6 @@ class AlternativeModelTests(TestStrMixin, TestCase):
 
         self.assertEqual(self.alternative.get_votes_percentage(), 0)
 
-'''
+
 class QuestionListModelTests(TestStrMixin, TestCase):
-    model_instance = QuestionListFactory()
-    '''
+    model_factory = QuestionListFactory

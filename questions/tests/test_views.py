@@ -43,14 +43,14 @@ class HomePageTests(BaseForViews):
         response = self.client.get('/')
         html = response.content.decode('utf8')
 
-        self.assertIn(last_question.question, html)
+        self.assertIn(last_question.title, html)
 
     def test_home_page_contains_alternatives(self):
         response = self.client.get('/')
         html = response.content.decode('utf8')
 
-        self.assertIn(self.alternative_1.alternative, html)
-        self.assertIn(self.alternative_2.alternative, html)
+        self.assertIn(self.alternative_1.title, html)
+        self.assertIn(self.alternative_2.title, html)
 
     def test_home_page_contains_form(self):
         response = self.client.get('/')
@@ -117,7 +117,7 @@ class DetailsPageTests(BaseForViews):
         response = self.client.get('/1/')
         html = response.content.decode('utf8')
 
-        self.assertIn(self.question.question, html)
+        self.assertIn(self.question.title, html)
 
 
 class SignUpPageTests(TestCase):

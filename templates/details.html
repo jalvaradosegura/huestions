@@ -1,5 +1,5 @@
 <title>Question details</title>
-<h1>{{ question.question }}</h1>
+<h1>{{ question.title }}</h1>
 {% for alternative in question.alternatives.all %}
 <p id="alternative_{{ forloop.counter }}_percentage">{{ alternative }} {{ alternative.get_votes_percentage }}%</p>
 {% endfor %}

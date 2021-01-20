@@ -14,13 +14,12 @@ from questions.utils import (
 
 class UtilsTests(TestCase):
     def setUp(self):
-        QuestionFactory()
-        AlternativeFactory.create_batch(2)
+        QuestionFactory(title='Who is stronger?')
         AlternativeFactory(
-            alternative='Iron Man', question__question='Who is stronger?'
+            title='Iron Man', question__title='Who is stronger?'
         )
         AlternativeFactory(
-            alternative='Dr. Strange', question__question='Who is stronger?'
+            title='Dr. Strange', question__title='Who is stronger?'
         )
         self.user = UserFactory()
 
@@ -28,7 +27,7 @@ class UtilsTests(TestCase):
         question = get_random_question_for_user(self.user)
 
         self.assertIn(
-            question.question, ['Who is stronger?', 'Who is better?']
+            question.title, ['Who is stronger?', 'Who is better?']
         )
 
     def test_get_random_question_for_user_but_he_already_answered_all(self):
@@ -38,6 +37,7 @@ class UtilsTests(TestCase):
         self.assertEqual(question, None)
 
     def test_get_possible_questions_for_user_amount(self):
+        QuestionFactory(title='another question')
         questions_amount = len(get_possible_questions_for_user(self.user))
 
         self.assertEqual(questions_amount, 2)
