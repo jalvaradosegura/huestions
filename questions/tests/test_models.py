@@ -5,46 +5,41 @@ from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
+    UserFactory,
 )
-from questions.models import Alternative, Question
+from questions.models import Question
 
 
 class TestStrMixin:
     @property
-    def model_instance(self):
+    def model_factory(self):
         return NotImplemented
 
     def test_model_str(self):
+        model_instance = self.model_factory()
         self.assertEqual(
-            self.model_instance.__str__(), self.model_instance.title
+            model_instance.__str__(), model_instance.title
         )
 
 
 class QuestionModelTests(TestStrMixin, TestCase):
-    model_instance = QuestionFactory()
+    model_factory = QuestionFactory
 
     def setUp(self):
-        AlternativeFactory.create_batch(2)
-
-        self.alternative_rafa = Alternative.objects.filter(
-            title='Rafael Nadal'
-        ).first()
-        self.alternative_roger = Alternative.objects.filter(
-            title='Roger Federer'
-        ).first()
-
-        self.javi_user = get_user_model().objects.create_user(
-            email='javi@email.com', username='javi', password='password123'
+        self.question = self.model_factory(title='super question')
+        self.alternative_1 = AlternativeFactory(
+            title='alternative 1', question=self.question
         )
-        self.jorge_user = get_user_model().objects.create_user(
-            email='jorge@email.com', username='jorge', password='password123'
+        self.alternative_2 = AlternativeFactory(
+            title='alternative 2', question=self.question
         )
-
-        self.javi_user.alternatives_chosen.add(self.alternative_roger)
-        self.jorge_user.alternatives_chosen.add(self.alternative_rafa)
+        self.user_1 = UserFactory(username='Javi')
+        self.user_2 = UserFactory(username='Jorge')
+        self.alternative_1.users.add(self.user_1)
+        self.alternative_2.users.add(self.user_2)
 
     def test_was_created_recently(self):
-        self.assertTrue(self.model_instance.was_created_recently())
+        self.assertTrue(self.question.was_created_recently())
 
     def test_question_contains_two_alternatives(self):
         question = Question.objects.last()
@@ -52,34 +47,34 @@ class QuestionModelTests(TestStrMixin, TestCase):
         self.assertEqual(question.alternatives.count(), 2)
 
     def test_get_amount_of_users_that_have_voted_this_question(self):
-        votes = self.model_instance.get_amount_of_users_that_have_voted()
+        votes = self.question.get_amount_of_users_that_have_voted()
 
         self.assertEqual(votes, 2)
 
     def test_get_vote_amount_for_each_alternative(self):
         votes_amount = (
-            self.model_instance.get_votes_amount_for_each_alternative()
+            self.question.get_votes_amount_for_each_alternative()
         )
 
         self.assertEqual(votes_amount, [1, 1])
 
     def test_get_vote_percentage_for_each_alternative(self):
         percentages = (
-            self.model_instance.get_votes_percentage_for_each_alternative()
+            self.question.get_votes_percentage_for_each_alternative()
         )
 
         self.assertEqual(percentages, [50, 50])
 
     def test_has_the_user_already_voted(self):
-        response = self.model_instance.has_the_user_already_voted(
-            self.javi_user
+        response = self.question.has_the_user_already_voted(
+            self.user_1
         )
 
         self.assertTrue(response)
 
 
 class AlternativeModelTests(TestStrMixin, TestCase):
-    model_instance = AlternativeFactory()
+    model_factory = AlternativeFactory
 
     def setUp(self):
         self.alternative = AlternativeFactory()
@@ -99,6 +94,7 @@ class AlternativeModelTests(TestStrMixin, TestCase):
 
         self.assertEqual(self.alternative.get_votes_percentage(), 0)
 
-
+'''
 class QuestionListModelTests(TestStrMixin, TestCase):
     model_instance = QuestionListFactory()
+    '''

@@ -5,7 +5,7 @@ class QuestionListFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'questions.QuestionList'
 
-    title = 'default title'
+    title = 'some title'
 
 
 class QuestionFactory(factory.django.DjangoModelFactory):
