@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class TimeStampedModel(models.Model):
@@ -26,7 +27,19 @@ class TimeStampedModel(models.Model):
 
 
 class QuestionList(TimeStampedModel):
-    pass
+    slug = models.SlugField(unique=True, null=False)
+
+    def _generate_unique_slug_if_needed(self):
+        slug = slugify(self.title)
+        num = 1
+        while QuestionList.objects.filter(slug=slug).exists():
+            slug = slugify(self.title) + f'-{num}'
+            num += 1
+        return slug
+
+    def save(self, *args, **kwargs):
+        self.slug = self._generate_unique_slug_if_needed()
+        super().save(*args, **kwargs)
 
 
 class Question(TimeStampedModel):

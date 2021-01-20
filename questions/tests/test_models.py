@@ -97,3 +97,12 @@ class AlternativeModelTests(TestStrMixin, TestCase):
 
 class QuestionListModelTests(TestStrMixin, TestCase):
     model_factory = QuestionListFactory
+
+    def test_generate_unique_slug_if_needed(self):
+        question_list_1 = self.model_factory(title='This is something awesome')
+        question_list_2 = self.model_factory(title='This is something awesome')
+        question_list_3 = self.model_factory(title='This is something awesome')
+
+        self.assertEqual(question_list_1.slug, 'this-is-something-awesome')
+        self.assertEqual(question_list_2.slug, 'this-is-something-awesome-1')
+        self.assertEqual(question_list_3.slug, 'this-is-something-awesome-2')
