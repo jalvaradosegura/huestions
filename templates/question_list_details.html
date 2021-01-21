@@ -1,1 +1,7 @@
 Question List Details
+<h1>{{ questionlist.title }}</h1>
+<ul>
+{% for question in questionlist.questions.all %}
+	<li>{{ question.title }}</li>	
+{% endfor %}
+</ul>

@@ -3,12 +3,12 @@ from django.test import TestCase
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
-    UserFactory,
+    UserFactory
 )
 from questions.models import Question
 from questions.utils import (
     get_possible_questions_for_user,
-    get_random_question_for_user,
+    get_random_question_for_user
 )
 
 

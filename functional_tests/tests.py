@@ -5,7 +5,11 @@ from unittest import skip
 from django.test import LiveServerTestCase
 from selenium import webdriver
 
-from questions.factories import AlternativeFactory, QuestionFactory, QuestionListFactory
+from questions.factories import (
+    AlternativeFactory,
+    QuestionFactory,
+    QuestionListFactory
+)
 from questions.models import Question
 
 
@@ -163,10 +167,12 @@ class QuestionListsTest(LiveServerTestCase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/some-cool-title/'
         )
-        '''
+
+        # She now sees the list title and a question below it
+        list_title = self.browser.find_element_by_tag_name('h1').text
+        self.assertEqual(list_title, 'some cool title')
         self.fail('Finish our test')
 
         # She now sees the first question of the list
         current_page = self.browser.find_element_by_tag_name('span').text
         self.assertIn('1 of ', current_page)
-        '''

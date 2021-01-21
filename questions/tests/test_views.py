@@ -11,10 +11,10 @@ from ..factories import (
 )
 from ..models import Question
 from ..views import (
+    QuestionsListDetailView,
     QuestionsListListView,
     details,
-    home,
-    QuestionsListDetailView
+    home
 )
 
 

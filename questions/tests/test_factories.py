@@ -4,8 +4,8 @@ from django.test import TestCase
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
-    UserFactory,
-    QuestionListFactory
+    QuestionListFactory,
+    UserFactory
 )
 from questions.models import Alternative, Question
 
