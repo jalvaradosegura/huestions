@@ -1,6 +1,6 @@
 <h1>These are the question lists</h1>
 <ul>
 {% for question_list in object_list %}
-	<li>{{ question_list.title }} <a href="" id="button_to_select">View</a></li>
+	<li>{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a></li>
 {% endfor %}
 </ul>

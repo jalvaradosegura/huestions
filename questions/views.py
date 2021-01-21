@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Alternative, Question, QuestionList
 from .utils import get_random_question_for_user
@@ -64,3 +64,8 @@ def random_question(request):
 class QuestionsListListView(ListView):
     model = QuestionList
     template_name = 'question_list.html'
+
+
+class QuestionsListDetailView(DetailView):
+    model = QuestionList
+    template_name = 'question_list_details.html'

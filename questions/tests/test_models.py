@@ -1,25 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from questions.factories import (
+from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
     UserFactory,
 )
-from questions.models import Question
-
-
-class TestStrMixin:
-    @property
-    def model_factory(self):
-        return NotImplemented
-
-    def test_model_str(self):
-        model_instance = self.model_factory()
-        self.assertEqual(
-            model_instance.__str__(), model_instance.title
-        )
+from ..models import Question
+from .mixins import TestStrMixin
 
 
 class QuestionModelTests(TestStrMixin, TestCase):
@@ -106,3 +95,11 @@ class QuestionListModelTests(TestStrMixin, TestCase):
         self.assertEqual(question_list_1.slug, 'this-is-something-awesome')
         self.assertEqual(question_list_2.slug, 'this-is-something-awesome-1')
         self.assertEqual(question_list_3.slug, 'this-is-something-awesome-2')
+
+    def test_get_absolute_url(self):
+        question_list_1 = self.model_factory(title='This is something awesome')
+
+        self.assertEqual(
+            question_list_1.get_absolute_url(),
+            '/lists/this-is-something-awesome/'
+        )

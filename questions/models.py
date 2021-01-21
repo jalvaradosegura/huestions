@@ -29,6 +29,9 @@ class TimeStampedModel(models.Model):
 class QuestionList(TimeStampedModel):
     slug = models.SlugField(unique=True, null=False)
 
+    def get_absolute_url(self):
+        return reverse('questions_list_details', args=[str(self.slug)])
+
     def _generate_unique_slug_if_needed(self):
         slug = slugify(self.title)
         num = 1

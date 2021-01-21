@@ -4,9 +4,18 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import resolve
 
-from questions.factories import AlternativeFactory, QuestionFactory
-from questions.models import Question
-from questions.views import QuestionsListListView, details, home
+from ..factories import (
+    AlternativeFactory,
+    QuestionFactory,
+    QuestionListFactory
+)
+from ..models import Question
+from ..views import (
+    QuestionsListListView,
+    details,
+    home,
+    QuestionsListDetailView
+)
 
 
 class BaseForViews(TestCase):
@@ -157,3 +166,21 @@ class QuestionsListViewTests(TestCase):
     def test_returns_correct_html(self):
         response = self.client.get('/lists/')
         self.assertTemplateUsed(response, 'question_list.html')
+
+
+class QuestionsListDetailViewTests(TestCase):
+    def setUp(self):
+        QuestionListFactory(title='an awesome list')
+
+    def test_resolves_to_view(self):
+        found = resolve('/lists/an-awesome-list/')
+
+        self.assertEqual(
+            found.func.__name__, QuestionsListDetailView.as_view().__name__
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get('/lists/an-awesome-list/')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'question_list_details.html')
