@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 
@@ -69,3 +70,15 @@ class QuestionsListListView(ListView):
 class QuestionsListDetailView(DetailView):
     model = QuestionList
     template_name = 'question_list_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        questions_list = self.get_object().questions.all()
+        paginator = Paginator(questions_list, 1)
+
+        page = self.request.GET.get('page')
+
+        context["questions"] = paginator.get_page(page)
+
+        return context

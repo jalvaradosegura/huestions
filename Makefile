@@ -8,6 +8,9 @@ tests:
 
 unit-tests:
 	python manage.py test questions --settings=huestion_project.settings.local
+	
+functional-tests:
+	python manage.py test functional_tests --settings=huestion_project.settings.local
 
 parallel-tests:
 	python manage.py test questions --parallel --settings=huestion_project.settings.local
@@ -29,6 +32,8 @@ help:
 	@echo "    Run coverage + report"
 	@echo "unit-tests"
 	@echo "    Run only the unit tests"
+	@echo "functional-tests"
+	@echo "    Run only the functional tests"
 	@echo "parallel-tests"
 	@echo "    Run unit tests with parallelization"
 	@echo "reverse-tests"
