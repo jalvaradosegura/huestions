@@ -74,7 +74,7 @@ class QuestionsListDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        questions_list = self.get_object().questions.all()
+        questions_list = self.get_object().questions.all().order_by('id')
         paginator = Paginator(questions_list, 1)
 
         page = self.request.GET.get('page')

@@ -61,6 +61,12 @@ class QuestionModelTests(TestStrMixin, TestCase):
 
         self.assertTrue(response)
 
+    def test_get_absolute_url(self):
+        self.assertEqual(
+            self.question.get_absolute_url(),
+            '/1/'
+        )
+
 
 class AlternativeModelTests(TestStrMixin, TestCase):
     model_factory = AlternativeFactory

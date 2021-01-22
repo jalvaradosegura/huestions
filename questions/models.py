@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 
 
-class TimeStampedModel(models.Model):
+class BaseAbstractModel(models.Model):
     """
     An abstract base class model that provides selfupdating
     ``created`` and ``modified`` fields.
@@ -26,7 +26,7 @@ class TimeStampedModel(models.Model):
         return self.title
 
 
-class QuestionList(TimeStampedModel):
+class QuestionList(BaseAbstractModel):
     slug = models.SlugField(unique=True, null=False)
 
     def get_absolute_url(self):
@@ -45,7 +45,7 @@ class QuestionList(TimeStampedModel):
         super().save(*args, **kwargs)
 
 
-class Question(TimeStampedModel):
+class Question(BaseAbstractModel):
     child_of = models.ForeignKey(
         QuestionList, on_delete=models.CASCADE, related_name='questions'
     )
@@ -80,7 +80,7 @@ class Question(TimeStampedModel):
         return False
 
 
-class Alternative(TimeStampedModel):
+class Alternative(BaseAbstractModel):
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name='alternatives'
     )
