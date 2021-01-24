@@ -5,6 +5,7 @@ from django.views.generic import DetailView, ListView
 
 from .models import Alternative, Question, QuestionList
 from .utils import get_random_question_for_user
+from .forms import AnswerQuestionForm
 
 
 @login_required
@@ -79,6 +80,12 @@ class QuestionsListDetailView(DetailView):
 
         page = self.request.GET.get('page')
 
-        context["questions"] = paginator.get_page(page)
+        context['questions'] = paginator.get_page(page)
+
+        question_id = [question.id for question in context['questions']][0]
+        context['form'] = AnswerQuestionForm(question_id)
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        return redirect('home')

@@ -2,23 +2,28 @@ Question List Details
 <h1>{{ questionlist.title }}</h1>
 
 {% for question in questions %}
-	{{ question.title }}
+  {{ question.title }}
+  <form action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="answer">
+  </form>
 {% endfor %}
 
 <div class="pagination">
-    <span class="step-links">
-        {% if questions.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ questions.previous_page_number }}">previous</a>
-        {% endif %}
+  <span class="step-links">
+    {% if questions.has_previous %}
+      <a href="?page=1">&laquo; first</a>
+      <a href="?page={{ questions.previous_page_number }}">previous</a>
+    {% endif %}
 
-        <span class="current">
-            Page {{ questions.number }} of {{ questions.paginator.num_pages }}.
-        </span>
-
-        {% if questions.has_next %}
-            <a href="?page={{ questions.next_page_number }}">next</a>
-            <a href="?page={{ questions.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
+    <span class="current">
+      Page {{ questions.number }} of {{ questions.paginator.num_pages }}.
     </span>
+
+    {% if questions.has_next %}
+      <a href="?page={{ questions.next_page_number }}">next</a>
+      <a href="?page={{ questions.paginator.num_pages }}">last &raquo;</a>
+    {% endif %}
+  </span>
 </div>

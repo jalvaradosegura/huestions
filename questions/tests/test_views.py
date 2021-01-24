@@ -170,7 +170,7 @@ class QuestionsListViewTests(TestCase):
 
 class QuestionsListDetailViewTests(TestCase):
     def setUp(self):
-        QuestionListFactory(title='an awesome list')
+        self.question_list = QuestionListFactory(title='an awesome list')
 
     def test_resolves_to_view(self):
         found = resolve('/lists/an-awesome-list/')
@@ -180,6 +180,8 @@ class QuestionsListDetailViewTests(TestCase):
         )
 
     def test_returns_correct_html(self):
+        QuestionFactory(title='some question', child_of=self.question_list)
+
         response = self.client.get('/lists/an-awesome-list/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)

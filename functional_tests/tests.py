@@ -175,3 +175,7 @@ class QuestionListsTest(LiveServerTestCase):
         # She now sees the first question of the list
         current_page = self.browser.find_element_by_tag_name('span').text
         self.assertIn('1 of ', current_page)
+
+        # She tries to answer the first question
+        vote_for_an_alternative(self.browser, 'alternative_1')
+        self.fail("Finish the test!")
