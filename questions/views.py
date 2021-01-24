@@ -28,8 +28,7 @@ def home(request):
             'question': last_question,
             'alread_voted': already_voted,
             'title': 'Huestion'
-        },
-    )
+        },)
 
 
 @login_required

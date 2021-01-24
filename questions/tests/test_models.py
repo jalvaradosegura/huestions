@@ -5,7 +5,7 @@ from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
-    UserFactory
+    UserFactory,
 )
 from ..models import Question
 from .mixins import TestStrMixin
@@ -41,31 +41,22 @@ class QuestionModelTests(TestStrMixin, TestCase):
         self.assertEqual(votes, 2)
 
     def test_get_vote_amount_for_each_alternative(self):
-        votes_amount = (
-            self.question.get_votes_amount_for_each_alternative()
-        )
+        votes_amount = self.question.get_votes_amount_for_each_alternative()
 
         self.assertEqual(votes_amount, [1, 1])
 
     def test_get_vote_percentage_for_each_alternative(self):
-        percentages = (
-            self.question.get_votes_percentage_for_each_alternative()
-        )
+        percentages = self.question.get_votes_percentage_for_each_alternative()
 
         self.assertEqual(percentages, [50, 50])
 
     def test_has_the_user_already_voted(self):
-        response = self.question.has_the_user_already_voted(
-            self.user_1
-        )
+        response = self.question.has_the_user_already_voted(self.user_1)
 
         self.assertTrue(response)
 
     def test_get_absolute_url(self):
-        self.assertEqual(
-            self.question.get_absolute_url(),
-            '/1/'
-        )
+        self.assertEqual(self.question.get_absolute_url(), '/1/')
 
 
 class AlternativeModelTests(TestStrMixin, TestCase):
@@ -89,6 +80,19 @@ class AlternativeModelTests(TestStrMixin, TestCase):
 
         self.assertEqual(self.alternative.get_votes_percentage(), 0)
 
+    def test_vote_for_this_alternative(self):
+        alternative = AlternativeFactory(title='awesome alternative')
+
+        alternative.vote_for_this_alternative(self.user)
+
+        self.assertIn(
+            alternative,
+            [
+                alternative
+                for alternative in self.user.alternatives_chosen.all()
+            ]
+        )
+
 
 class QuestionListModelTests(TestStrMixin, TestCase):
     model_factory = QuestionListFactory
@@ -107,5 +111,5 @@ class QuestionListModelTests(TestStrMixin, TestCase):
 
         self.assertEqual(
             question_list_1.get_absolute_url(),
-            '/lists/this-is-something-awesome/'
+            '/lists/this-is-something-awesome/',
         )
