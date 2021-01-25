@@ -1,7 +1,14 @@
-from django.test import TestCase
+from http import HTTPStatus
 
+from django.test import TestCase
+from django.contrib.auth import get_user_model
+
+from ..factories import (
+    AlternativeFactory,
+    QuestionFactory,
+    QuestionListFactory
+)
 from ..forms import AnswerQuestionForm
-from ..factories import QuestionFactory, AlternativeFactory
 
 
 class AnswerQuestionFormTests(TestCase):
@@ -15,3 +22,41 @@ class AnswerQuestionFormTests(TestCase):
 
         for alternative in form.fields['alternatives'].choices:
             self.assertEqual(only_alternative.__str__(), alternative[1])
+
+    def test_get_success(self):
+        question_list = QuestionListFactory(title='awesome list')
+        question = QuestionFactory(
+            title='awesome question', child_of=question_list
+        )
+        AlternativeFactory(title='awesome alternative', question=question)
+        self.sign_up()
+
+        response = self.client.get('/lists/awesome-list/')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(
+            response, '<label for="id_alternatives_0">Alternatives:', html=True
+        )
+
+    def test_post_success(self):
+        question_list = QuestionListFactory(title='awesome list')
+        question = QuestionFactory(
+            title='awesome question', child_of=question_list
+        )
+        AlternativeFactory(title='awesome alternative', question=question)
+        self.sign_up()
+
+        response = self.client.post(
+            '/lists/awesome-list/', data={'alternatives': [1]}
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response['Location'], '/')
+
+    def sign_up(self):
+        self.user = get_user_model().objects.create_user(
+            email='javi@email.com',
+            username='javi',
+            password='password123'
+        )
+        self.client.login(email='javi@email.com', password='password123')
