@@ -156,7 +156,10 @@ class LogoutPageTests(BaseForViews):
         self.assertTemplateUsed(response, 'account/logout.html')
 
 
-class QuestionsListViewTests(TestCase):
+class QuestionsListViewTests(BaseForViews):
+    def setUp(self):
+        super().setUp()
+
     def test_question_list_url_resolves_to_view(self):
         found = resolve('/lists/')
         self.assertEqual(
@@ -168,8 +171,9 @@ class QuestionsListViewTests(TestCase):
         self.assertTemplateUsed(response, 'question_list.html')
 
 
-class QuestionsListDetailViewTests(TestCase):
+class QuestionsListDetailViewTests(BaseForViews):
     def setUp(self):
+        super().setUp()
         self.question_list = QuestionListFactory(title='an awesome list')
 
     def test_resolves_to_view(self):

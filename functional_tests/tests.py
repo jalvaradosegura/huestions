@@ -1,6 +1,5 @@
 import datetime
 import time
-from unittest import skip
 
 from django.test import LiveServerTestCase
 from selenium import webdriver
@@ -13,20 +12,6 @@ from questions.factories import (
 from questions.models import Question
 
 
-def sign_up(browser, email, password, server_url):
-    browser.get(f'{server_url}/accounts/signup/')
-
-    # She enter her email and password for sign up
-    email_input = browser.find_element_by_id('id_email')
-    email_input.send_keys(email)
-    password_input = browser.find_element_by_id('id_password1')
-    password_input.send_keys(password)
-
-    # She press the signup button
-    time.sleep(3)
-    browser.find_element_by_tag_name('button').click()
-
-
 def vote_for_an_alternative(browser, selected_alternative):
     # She selects one alternative of the form
     selected_alternative = browser.find_element_by_id(selected_alternative)
@@ -37,30 +22,44 @@ def vote_for_an_alternative(browser, selected_alternative):
     button_to_vote.click()
 
 
-class FunctionalTest(LiveServerTestCase):
-    def setUp(self):
-        self.browser = webdriver.Firefox()
-        self.question = QuestionFactory()
-        self.alternative_1 = AlternativeFactory()
-        self.alternative_2 = AlternativeFactory()
-        sign_up(
-            self.browser,
-            'javi@email.com',
-            'super_password_123',
-            self.live_server_url,
-        )
-
+class FunctionalTestsBase(LiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
 
+    def sign_up(self, email, password):
+        self.browser.get(f'{self.live_server_url}/accounts/signup/')
 
-class NewVisitorTest(FunctionalTest):
+        # She enter her email and password for sign up
+        email_input = self.browser.find_element_by_id('id_email')
+        email_input.send_keys(email)
+        password_input = self.browser.find_element_by_id('id_password1')
+        password_input.send_keys(password)
+
+        # She press the signup button
+        time.sleep(3)
+        self.browser.find_element_by_tag_name('button').click()
+
+
+class NewVisitorTest(FunctionalTestsBase):
     def setUp(self):
-        super().setUp()
+        self.browser = webdriver.Firefox()
+        self.sign_up(
+            'javi@email.com',
+            'super_password_123'
+        )
+        self.question = QuestionFactory(title='some question')
+        self.alternative_1 = AlternativeFactory(
+            title='alternative 1', question=self.question
+        )
+        self.alternative_2 = AlternativeFactory(
+            title='alternative 2', question=self.question
+        )
 
     def test_can_visit_home_page(self):
         # Javi heard about a fun page, where you have to answer hard questions
         # She visits it
+        self.browser.get(f'{self.live_server_url}/')
+
         # She notices the page title  Huestion
         self.assertIn('Huestion', self.browser.title)
 
@@ -117,8 +116,8 @@ class NewVisitorTest(FunctionalTest):
 
     def test_get_a_different_question_on_each_refresh(self):
         # The system creates some dummy questions
-        QuestionFactory(question='Question 2')
-        QuestionFactory(question='Question 3')
+        QuestionFactory(title='Question 2')
+        QuestionFactory(title='Question 3')
         all_questions = [
             question.title for question in Question.objects.all()
         ]
@@ -141,19 +140,24 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn('Question details', self.browser.title)
 
 
-class QuestionListsTest(LiveServerTestCase):
+class QuestionListsTest(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
+        self.sign_up(
+            'javi@email.com',
+            'super_password_123'
+        )
         self.question_list = QuestionListFactory(title='some cool title')
+        self.question = QuestionFactory(
+            title='some question', child_of=self.question_list
+        )
+        AlternativeFactory(title='some alternative', question=self.question)
 
-    def tearDown(self):
-        self.browser.quit()
-
-    # @skip("Currently don't want to test")
     def test_can_visit_a_list_of_question_page(self):
         # Javi visits a page that show a list of list questions
         self.browser.get(f'{self.live_server_url}/lists/')
 
+        time.sleep(3)
         # She sees a big title that says something abouth the lists
         title = self.browser.find_element_by_tag_name('h1').text
         self.assertEqual(title, 'These are the question lists')
@@ -177,5 +181,5 @@ class QuestionListsTest(LiveServerTestCase):
         self.assertIn('1 of ', current_page)
 
         # She tries to answer the first question
-        vote_for_an_alternative(self.browser, 'alternative_1')
-        self.fail("Finish the test!")
+        vote_for_an_alternative(self.browser, 'id_alternatives_0')
+        # self.fail("Finish the test!")
