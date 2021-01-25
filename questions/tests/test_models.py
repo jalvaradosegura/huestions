@@ -5,7 +5,7 @@ from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
-    UserFactory,
+    UserFactory
 )
 from ..models import Question
 from .mixins import TestStrMixin

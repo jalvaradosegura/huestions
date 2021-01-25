@@ -4,9 +4,9 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 
+from .forms import AnswerQuestionForm
 from .models import Alternative, Question, QuestionList
 from .utils import get_random_question_for_user
-from .forms import AnswerQuestionForm
 
 
 @login_required
