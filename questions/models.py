@@ -11,6 +11,7 @@ class BaseAbstractModel(models.Model):
     An abstract base class model that provides selfupdating
     ``created`` and ``modified`` fields.
     """
+
     title = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -20,6 +21,7 @@ class BaseAbstractModel(models.Model):
         When we define a new class that inherits from it, Django doesn’t
         create a core_timestampedmodel table when migrate is run.
         """
+
         abstract = True
 
     def __str__(self):
@@ -54,9 +56,7 @@ class Question(BaseAbstractModel):
         return reverse('question_details', args=[str(self.id)])
 
     def was_created_recently(self):
-        return self.created >= timezone.now() - datetime.timedelta(
-            days=1
-        )
+        return self.created >= timezone.now() - datetime.timedelta(days=1)
 
     def get_amount_of_users_that_have_voted(self):
         return sum(self.get_votes_amount_for_each_alternative())

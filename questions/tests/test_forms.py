@@ -6,7 +6,7 @@ from django.test import TestCase
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
-    QuestionListFactory
+    QuestionListFactory,
 )
 from ..forms import AnswerQuestionForm
 
@@ -57,8 +57,6 @@ class AnswerQuestionFormViewTests(TestCase):
 
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
-            email='javi@email.com',
-            username='javi',
-            password='password123'
+            email='javi@email.com', username='javi', password='password123'
         )
         self.client.login(email='javi@email.com', password='password123')

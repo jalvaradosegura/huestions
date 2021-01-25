@@ -28,8 +28,9 @@ def home(request):
         {
             'question': last_question,
             'alread_voted': already_voted,
-            'title': 'Huestion'
-        },)
+            'title': 'Huestion',
+        },
+    )
 
 
 @login_required
@@ -58,7 +59,7 @@ def random_question(request):
         {
             'question': question,
             'alread_voted': already_voted,
-            'title': 'Random Huestion'
+            'title': 'Random Huestion',
         },
     )
 

@@ -11,11 +11,11 @@ urlpatterns = [
     path(
         route='lists/',
         view=views.QuestionsListListView.as_view(),
-        name='questions_list'
+        name='questions_list',
     ),
     path(
         route='lists/<slug:slug>/',
         view=views.QuestionsListDetailView.as_view(),
-        name='questions_list_details'
+        name='questions_list_details',
     ),
 ]

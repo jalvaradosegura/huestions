@@ -3,12 +3,12 @@ from django.test import TestCase
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
-    UserFactory
+    UserFactory,
 )
 from questions.models import Question
 from questions.utils import (
     get_possible_questions_for_user,
-    get_random_question_for_user
+    get_random_question_for_user,
 )
 
 
@@ -26,9 +26,7 @@ class UtilsTests(TestCase):
     def test_get_random_question_for_user(self):
         question = get_random_question_for_user(self.user)
 
-        self.assertIn(
-            question.title, ['Who is stronger?', 'Who is better?']
-        )
+        self.assertIn(question.title, ['Who is stronger?', 'Who is better?'])
 
     def test_get_random_question_for_user_but_he_already_answered_all(self):
         self.make_the_test_user_answer_all_the_questions()

@@ -7,7 +7,7 @@ from selenium import webdriver
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
-    QuestionListFactory
+    QuestionListFactory,
 )
 from questions.models import Question
 
@@ -43,10 +43,7 @@ class FunctionalTestsBase(LiveServerTestCase):
 class NewVisitorTest(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.sign_up(
-            'javi@email.com',
-            'super_password_123'
-        )
+        self.sign_up('javi@email.com', 'super_password_123')
         self.question = QuestionFactory(title='some question')
         self.alternative_1 = AlternativeFactory(
             title='alternative 1', question=self.question
@@ -118,9 +115,7 @@ class NewVisitorTest(FunctionalTestsBase):
         # The system creates some dummy questions
         QuestionFactory(title='Question 2')
         QuestionFactory(title='Question 3')
-        all_questions = [
-            question.title for question in Question.objects.all()
-        ]
+        all_questions = [question.title for question in Question.objects.all()]
 
         # Now Javi visits the random section, getting a random question each
         # time
@@ -143,10 +138,7 @@ class NewVisitorTest(FunctionalTestsBase):
 class QuestionListsTest(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.sign_up(
-            'javi@email.com',
-            'super_password_123'
-        )
+        self.sign_up('javi@email.com', 'super_password_123')
         self.question_list = QuestionListFactory(title='some cool title')
         self.question = QuestionFactory(
             title='some question', child_of=self.question_list
@@ -169,7 +161,7 @@ class QuestionListsTest(FunctionalTestsBase):
         # She sees the question title in the new url
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/lists/some-cool-title/'
+            f'{self.live_server_url}/lists/some-cool-title/',
         )
 
         # She now sees the list title and a question below it

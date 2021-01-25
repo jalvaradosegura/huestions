@@ -5,7 +5,7 @@ from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
-    UserFactory
+    UserFactory,
 )
 from questions.models import Alternative, Question
 

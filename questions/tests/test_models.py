@@ -5,7 +5,7 @@ from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
-    UserFactory
+    UserFactory,
 )
 from ..models import Question
 from .mixins import TestStrMixin
@@ -90,7 +90,7 @@ class AlternativeModelTests(TestStrMixin, TestCase):
             [
                 alternative
                 for alternative in self.user.alternatives_chosen.all()
-            ]
+            ],
         )
 
 

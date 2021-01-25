@@ -7,23 +7,21 @@ from django.urls import resolve
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
-    QuestionListFactory
+    QuestionListFactory,
 )
 from ..models import Question
 from ..views import (
     QuestionsListDetailView,
     QuestionsListListView,
     details,
-    home
+    home,
 )
 
 
 class BaseForViews(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            email='javi@email.com',
-            username='javi',
-            password='password123'
+            email='javi@email.com', username='javi', password='password123'
         )
         self.client.login(email='javi@email.com', password='password123')
 
@@ -86,8 +84,7 @@ class HomePageTests(BaseForViews):
         alternative = self.alternative_1.id
 
         response = self.client.post(
-                '',
-                data={'question_id': question.id, 'alternative': alternative}
+            '', data={'question_id': question.id, 'alternative': alternative}
         )
 
         self.assertRedirects(response, f'/{question.id}/')

@@ -6,7 +6,5 @@ from questions.models import Alternative
 
 class CustomUser(AbstractUser):
     alternatives_chosen = models.ManyToManyField(
-            Alternative,
-            related_name='users',
-            blank=True
+        Alternative, related_name='users', blank=True
     )
