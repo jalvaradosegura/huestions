@@ -23,6 +23,8 @@ class AnswerQuestionFormTests(TestCase):
         for alternative in form.fields['alternatives'].choices:
             self.assertEqual(only_alternative.__str__(), alternative[1])
 
+
+class AnswerQuestionFormViewTests(TestCase):
     def test_get_success(self):
         question_list = QuestionListFactory(title='awesome list')
         question = QuestionFactory(
