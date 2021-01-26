@@ -65,6 +65,7 @@ class AnswerQuestionFormViewTests(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response['Location'], '/lists/awesome-list/?page=2')
+        self.assertEqual(self.user.alternatives_chosen.count(), 1)
 
     def sign_up(self):
         self.user = get_user_model().objects.create_user(

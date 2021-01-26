@@ -89,11 +89,18 @@ class QuestionsListDetailView(LoginRequiredMixin, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        question_list = QuestionList.objects.get(
-            id=request.POST['question_list_id']
+        selected_alternative = Alternative.objects.get(
+            id=request.POST['alternatives']
         )
+        if not selected_alternative.question.has_the_user_already_voted(
+            self.request.user
+        ):
+            selected_alternative.vote_for_this_alternative(self.request.user)
 
         if 'next_page' in request.POST:
+            question_list = QuestionList.objects.get(
+                id=request.POST['question_list_id']
+            )
             next_page = request.POST['next_page']
             return redirect(
                 reverse(
