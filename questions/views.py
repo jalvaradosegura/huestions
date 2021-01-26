@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, reverse
 from django.views.generic import DetailView, ListView
 
 from .forms import AnswerQuestionForm
@@ -89,4 +89,17 @@ class QuestionsListDetailView(LoginRequiredMixin, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        return redirect('home')
+        question_list = QuestionList.objects.get(
+            id=request.POST['question_list_id']
+        )
+
+        if 'next_page' in request.POST:
+            next_page = request.POST['next_page']
+            return redirect(
+                reverse(
+                    'questions_list_details',
+                    kwargs={'slug': question_list.slug},
+                )
+                + f'?page={next_page}'
+            )
+        return redirect('/')

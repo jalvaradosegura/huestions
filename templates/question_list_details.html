@@ -1,11 +1,14 @@
-Question List Details
-<h1>{{ questionlist.title }}</h1>
+{{ questionlist.title }}
 
 {% for question in questions %}
-  {{ question.title }}
-  <form action="" method="POST">
+  <h1>{{ question.title }}</h1>
+  <form action="" method="post">
     {% csrf_token %}
     {{ form }}
+    <input type="hidden" name="question_list_id" value="{{ questionlist.id }}">
+    {% if questions.has_next %}
+      <input type="hidden" name="next_page" value="{{ questions.next_page_number }}">
+    {% endif %}
     <input id="button_to_vote" type="submit" value="answer">
   </form>
 {% endfor %}

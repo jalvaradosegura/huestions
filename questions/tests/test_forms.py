@@ -45,15 +45,26 @@ class AnswerQuestionFormViewTests(TestCase):
         question = QuestionFactory(
             title='awesome question', child_of=question_list
         )
+        another_question = QuestionFactory(
+            title='another awesome question', child_of=question_list
+        )
         AlternativeFactory(title='awesome alternative', question=question)
+        AlternativeFactory(
+            title='another alternative', question=another_question
+        )
         self.sign_up()
 
         response = self.client.post(
-            '/lists/awesome-list/', data={'alternatives': [1]}
+            '/lists/awesome-list/',
+            data={
+                'alternatives': [1],
+                'question_list_id': '1',
+                'next_page': '2',
+            }
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(response['Location'], '/')
+        self.assertEqual(response['Location'], '/lists/awesome-list/?page=2')
 
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
