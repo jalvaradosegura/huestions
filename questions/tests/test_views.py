@@ -1,6 +1,5 @@
 from http import HTTPStatus
 
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import resolve
 
@@ -9,6 +8,7 @@ from ..factories import (
     QuestionFactory,
     QuestionListFactory,
 )
+from .mixins import ViewsMixin
 from ..models import Question
 from ..views import (
     QuestionsListDetailView,
@@ -19,33 +19,32 @@ from ..views import (
 )
 
 
-class BaseForViews(TestCase):
-    def setUp(self):
-        self.user = get_user_model().objects.create_user(
-            email='javi@email.com', username='javi', password='password123'
-        )
-        self.client.login(email='javi@email.com', password='password123')
+class HomePageTests(ViewsMixin, TestCase):
+    base_url = '/'
 
-
-class HomePageTests(BaseForViews):
     def setUp(self):
-        super().setUp()
         self.question = QuestionFactory()
         self.alternative_1 = AlternativeFactory(question=self.question)
         self.alternative_2 = AlternativeFactory(question=self.question)
 
     def test_root_url_resolves_to_home_page_view(self):
+        self.create_and_login_a_user()
+
         found = resolve('/')
 
         self.assertEqual(found.func, home)
 
     def test_root_url_returns_correct_html(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'home.html')
 
     def test_home_page_contains_latest_question(self):
+        self.create_and_login_a_user()
+
         last_question = Question.objects.last()
 
         response = self.client.get('/')
@@ -54,6 +53,8 @@ class HomePageTests(BaseForViews):
         self.assertIn(last_question.title, html)
 
     def test_home_page_contains_alternatives(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/')
         html = response.content.decode('utf8')
 
@@ -61,6 +62,8 @@ class HomePageTests(BaseForViews):
         self.assertIn(self.alternative_2.title, html)
 
     def test_home_page_contains_form(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/')
         html = response.content.decode('utf8')
 
@@ -68,12 +71,16 @@ class HomePageTests(BaseForViews):
         self.assertRegex(html, '</form>')
 
     def test_home_page_contains_button_to_vote(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/')
         html = response.content.decode('utf8')
 
         self.assertRegex(html, '<button.* id="button_to_vote">Vote.*</button>')
 
     def test_home_page_contains_radio_buttons_for_the_alternatives(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/')
         html = response.content.decode('utf8')
 
@@ -81,6 +88,8 @@ class HomePageTests(BaseForViews):
         self.assertRegex(html, '<input.*type="radio".*id="alternative_2".*>')
 
     def test_home_page_redirect_after_post_request(self):
+        self.create_and_login_a_user()
+
         question = Question.objects.last()
         alternative = self.alternative_1.id
 
@@ -91,36 +100,46 @@ class HomePageTests(BaseForViews):
         self.assertRedirects(response, f'/{question.id}/')
 
 
-class RandomPageTests(BaseForViews):
-    def setUp(self):
-        super().setUp()
+class RandomPageTests(ViewsMixin, TestCase):
+    base_url = '/random/'
 
     def test_root_url_returns_correct_html(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/random/')
 
         self.assertTemplateUsed(response, 'home.html')
 
 
-class DetailsPageTests(BaseForViews):
+class DetailsPageTests(ViewsMixin, TestCase):
+    base_url = '/1/'
+
     def setUp(self):
-        super().setUp()
         self.question = QuestionFactory()
         self.alternative_1 = AlternativeFactory(question=self.question)
         self.alternative_2 = AlternativeFactory(question=self.question)
-        self.alternative_1.users.add(self.user)
 
     def test_details_url_resolves_to_details_page_view(self):
+        self.create_and_login_a_user()
+        self.alternative_1.users.add(self.user)
+
         found = resolve('/1/')
 
         self.assertEqual(found.func, details)
 
     def test_details_url_returns_correct_html(self):
+        self.create_and_login_a_user()
+        self.alternative_1.users.add(self.user)
+
         response = self.client.get('/1/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'details.html')
 
     def test_details_page_contains_question_title(self):
+        self.create_and_login_a_user()
+        self.alternative_1.users.add(self.user)
+
         response = self.client.get('/1/')
         html = response.content.decode('utf8')
 
@@ -143,38 +162,46 @@ class LoginPageTests(TestCase):
         self.assertTemplateUsed(response, 'account/login.html')
 
 
-class LogoutPageTests(BaseForViews):
-    def setUp(self):
-        super().setUp()
+class LogoutPageTests(ViewsMixin, TestCase):
+    base_url = '/accounts/logout/'
 
     def test_logout_url_returns_correct_html(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/accounts/logout/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'account/logout.html')
 
 
-class QuestionsListViewTests(BaseForViews):
-    def setUp(self):
-        super().setUp()
+class QuestionsListViewTests(ViewsMixin, TestCase):
+    base_url = '/lists/'
 
     def test_question_list_url_resolves_to_view(self):
+        self.create_and_login_a_user()
+
         found = resolve('/lists/')
         self.assertEqual(
             found.func.__name__, QuestionsListListView.as_view().__name__
         )
 
     def test_returns_correct_html(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/lists/')
+
         self.assertTemplateUsed(response, 'question_list.html')
 
 
-class QuestionsListDetailViewTests(BaseForViews):
+class QuestionsListDetailViewTests(ViewsMixin, TestCase):
+    base_url = '/lists/an-awesome-list/'
+
     def setUp(self):
-        super().setUp()
         self.question_list = QuestionListFactory(title='an awesome list')
 
     def test_resolves_to_view(self):
+        self.create_and_login_a_user()
+
         found = resolve('/lists/an-awesome-list/')
 
         self.assertEqual(
@@ -182,6 +209,8 @@ class QuestionsListDetailViewTests(BaseForViews):
         )
 
     def test_returns_correct_html(self):
+        self.create_and_login_a_user()
+
         QuestionFactory(title='some question', child_of=self.question_list)
 
         response = self.client.get('/lists/an-awesome-list/')
@@ -190,18 +219,23 @@ class QuestionsListDetailViewTests(BaseForViews):
         self.assertTemplateUsed(response, 'question_list_details.html')
 
 
-class QuestionsListDetailViewResultsTests(BaseForViews):
+class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
+    base_url = '/lists/an-awesome-list/results/'
+
     def setUp(self):
-        super().setUp()
         self.question_list = QuestionListFactory(title='an awesome list')
 
     def test_returns_correct_html(self):
+        self.create_and_login_a_user()
+
         response = self.client.get('/lists/an-awesome-list/results/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'question_list_details_results.html')
 
     def test_resolves_to_view(self):
+        self.create_and_login_a_user()
+
         found = resolve('/lists/an-awesome-list/results/')
 
         self.assertEqual(
