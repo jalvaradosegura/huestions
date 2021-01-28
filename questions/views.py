@@ -97,10 +97,11 @@ class QuestionsListDetailView(LoginRequiredMixin, DetailView):
         ):
             selected_alternative.vote_for_this_alternative(self.request.user)
 
-        if 'next_page' in request.POST:
-            question_list = QuestionList.objects.get(
+        question_list = QuestionList.objects.get(
                 id=request.POST['question_list_id']
             )
+
+        if 'next_page' in request.POST:
             next_page = request.POST['next_page']
             return redirect(
                 reverse(
@@ -109,4 +110,11 @@ class QuestionsListDetailView(LoginRequiredMixin, DetailView):
                 )
                 + f'?page={next_page}'
             )
-        return redirect('/')
+        return redirect(
+            'questions_list_details_results', slug=question_list.slug
+        )
+
+
+class QuestionsListDetailViewResults(LoginRequiredMixin, DetailView):
+    model = QuestionList
+    template_name = 'question_list_details_results.html'

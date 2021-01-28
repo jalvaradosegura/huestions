@@ -143,6 +143,9 @@ class QuestionListsTest(FunctionalTestsBase):
         self.question = QuestionFactory(
             title='some question', child_of=self.question_list
         )
+        self.another_question = QuestionFactory(
+            title='another question', child_of=self.question_list
+        )
         AlternativeFactory(title='some alternative', question=self.question)
 
     def test_can_visit_a_list_of_question_page(self):
@@ -174,4 +177,8 @@ class QuestionListsTest(FunctionalTestsBase):
 
         # She tries to answer the first question
         vote_for_an_alternative(self.browser, 'id_alternatives_0')
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/some-cool-title/?page=2',
+        )
         # self.fail("Finish the test!")

@@ -13,6 +13,7 @@ from ..models import Question
 from ..views import (
     QuestionsListDetailView,
     QuestionsListListView,
+    QuestionsListDetailViewResults,
     details,
     home,
 )
@@ -187,3 +188,23 @@ class QuestionsListDetailViewTests(BaseForViews):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'question_list_details.html')
+
+
+class QuestionsListDetailViewResultsTests(BaseForViews):
+    def setUp(self):
+        super().setUp()
+        self.question_list = QuestionListFactory(title='an awesome list')
+
+    def test_returns_correct_html(self):
+        response = self.client.get('/lists/an-awesome-list/results/')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'question_list_details_results.html')
+
+    def test_resolves_to_view(self):
+        found = resolve('/lists/an-awesome-list/results/')
+
+        self.assertEqual(
+            found.func.__name__,
+            QuestionsListDetailViewResults.as_view().__name__
+        )

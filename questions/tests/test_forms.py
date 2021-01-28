@@ -40,7 +40,7 @@ class AnswerQuestionFormViewTests(TestCase):
             response, '<label for="id_alternatives_0">Alternatives:', html=True
         )
 
-    def test_post_success(self):
+    def test_post_success_and_adds_user_to_alternative(self):
         question_list = QuestionListFactory(title='awesome list')
         question = QuestionFactory(
             title='awesome question', child_of=question_list
@@ -65,6 +65,26 @@ class AnswerQuestionFormViewTests(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response['Location'], '/lists/awesome-list/?page=2')
+        self.assertEqual(self.user.alternatives_chosen.count(), 1)
+
+    def test_post_and_go_to_results(self):
+        question_list = QuestionListFactory(title='awesome list')
+        question = QuestionFactory(
+            title='awesome question', child_of=question_list
+        )
+        AlternativeFactory(title='awesome alternative', question=question)
+        self.sign_up()
+
+        response = self.client.post(
+            '/lists/awesome-list/',
+            data={
+                'alternatives': [1],
+                'question_list_id': '1'
+            }
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response['Location'], '/lists/awesome-list/results/')
         self.assertEqual(self.user.alternatives_chosen.count(), 1)
 
     def sign_up(self):
