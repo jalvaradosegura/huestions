@@ -1,0 +1,12 @@
+These are the results for {{ questionlist }}!
+<ul>
+  {% for question in questionlist.questions.all %}
+    <li>{{ question }} | {{  question.get_amount_of_users_that_have_voted }} vote{{ question.get_amount_of_users_that_have_voted|pluralize }}</li>
+    <ul>
+      {% for alternative in question.alternatives.all %}
+      	<li>{{ alternative }} | {{ alternative.get_votes_percentage }}%</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</ul>
+<a href="{% url 'questions_list' %}">Back to lists</a>

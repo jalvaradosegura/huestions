@@ -22,6 +22,9 @@ coverage:
 	coverage run manage.py test --settings=huestion_project.settings.local
 	coverage report
 
+shell:
+	python manage.py shell_plus --settings=huestion_project.settings.local
+
 help:
 	@echo "==Commands==="
 	@echo "run"
@@ -38,6 +41,8 @@ help:
 	@echo "    Run unit tests with parallelization"
 	@echo "reverse-tests"
 	@echo "    Run test in reverse order"
+	@echo "shell"
+	@echo "    Run shell_plus"
 	@echo ""
 	@echo "==Reminders==="
 	@echo "How to use black in this project"

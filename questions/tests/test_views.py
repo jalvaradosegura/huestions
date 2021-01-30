@@ -242,3 +242,13 @@ class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
             found.func.__name__,
             QuestionsListDetailViewResults.as_view().__name__
         )
+
+    def test_page_contains_html(self):
+        self.create_and_login_a_user()
+
+        response = self.client.get(self.base_url)
+        html = response.content.decode('utf8')
+
+        self.assertRegex(
+            html, f'These are the results for {self.question_list}!'
+        )
