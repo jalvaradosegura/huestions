@@ -210,13 +210,57 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
 
     def test_returns_correct_html(self):
         self.create_and_login_a_user()
-
         QuestionFactory(title='some question', child_of=self.question_list)
 
         response = self.client.get('/lists/an-awesome-list/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'question_list_details.html')
+
+    def test_pagination_works(self):
+        self.create_and_login_a_user()
+        QuestionFactory(title='some question', child_of=self.question_list)
+        QuestionFactory(title='another question', child_of=self.question_list)
+
+        response = self.client.get('/lists/an-awesome-list/?page=1')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'question_list_details.html')
+
+        response = self.client.get('/lists/an-awesome-list/?page=1')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'question_list_details.html')
+
+    def test_message_that_you_already_answered_the_question(self):
+        self.create_and_login_a_user()
+        question = QuestionFactory(
+            title='some question', child_of=self.question_list
+        )
+        AlternativeFactory(question=question).users.add(self.user)
+
+        response = self.client.get('/lists/an-awesome-list/?page=1')
+        html = response.content.decode('utf8')
+
+        self.assertRegex(
+            html,
+            "Question already answered. Your vote won't count this time."
+        )
+
+    def test_no_message_that_you_already_answered_the_question(self):
+        self.create_and_login_a_user()
+        question = QuestionFactory(
+            title='some question', child_of=self.question_list
+        )
+        AlternativeFactory(question=question)
+
+        response = self.client.get('/lists/an-awesome-list/?page=1')
+        html = response.content.decode('utf8')
+
+        self.assertNotRegex(
+            html,
+            "Question already answered. Your vote won't count this time."
+        )
 
 
 class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):

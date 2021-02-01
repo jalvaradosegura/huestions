@@ -86,6 +86,10 @@ class QuestionsListDetailView(LoginRequiredMixin, DetailView):
         question_id = [question.id for question in context['questions']][0]
         context['form'] = AnswerQuestionForm(question_id)
 
+        context['already_voted'] = Question.objects.get(
+            id=question_id
+        ).has_the_user_already_voted(self.request.user)
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -98,8 +102,8 @@ class QuestionsListDetailView(LoginRequiredMixin, DetailView):
             selected_alternative.vote_for_this_alternative(self.request.user)
 
         question_list = QuestionList.objects.get(
-                id=request.POST['question_list_id']
-            )
+            id=request.POST['question_list_id']
+        )
 
         if 'next_page' in request.POST:
             next_page = request.POST['next_page']
