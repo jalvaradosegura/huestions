@@ -1,4 +1,4 @@
-These are the results for {{ questionlist }}!
+<h1>These are the results for {{ questionlist }}!</h1>
 <ul>
   {% for question in questionlist.questions.all %}
     <li>{{ question }} | {{  question.get_amount_of_users_that_have_voted }} vote{{ question.get_amount_of_users_that_have_voted|pluralize }}</li>

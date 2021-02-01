@@ -138,15 +138,23 @@ class NewVisitorTest(FunctionalTestsBase):
 class QuestionListsTest(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
+
         self.sign_up('javi@email.com', 'super_password_123')
+
         self.question_list = QuestionListFactory(title='some cool title')
+
         self.question = QuestionFactory(
             title='some question', child_of=self.question_list
         )
+        AlternativeFactory(title='some alternative', question=self.question)
+        AlternativeFactory(title='some alternative', question=self.question)
+
         self.another_question = QuestionFactory(
             title='another question', child_of=self.question_list
         )
-        AlternativeFactory(title='some alternative', question=self.question)
+        AlternativeFactory(
+            title='some alternative', question=self.another_question
+        )
 
     def test_can_visit_a_list_of_question_page(self):
         # Javi visits a page that show a list of list questions
@@ -175,10 +183,15 @@ class QuestionListsTest(FunctionalTestsBase):
         current_page = self.browser.find_element_by_tag_name('span').text
         self.assertIn('1 of ', current_page)
 
-        # She tries to answer the first question
+        # She answer the first question
         vote_for_an_alternative(self.browser, 'id_alternatives_0')
         self.assertEqual(
             self.browser.current_url,
             f'{self.live_server_url}/lists/some-cool-title/?page=2',
         )
+
+        # She answer the next question
+        vote_for_an_alternative(self.browser, 'id_alternatives_0')
+        results_title = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('These are the results for', results_title)
         # self.fail("Finish the test!")
