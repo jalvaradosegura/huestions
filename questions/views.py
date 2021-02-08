@@ -122,3 +122,8 @@ class QuestionsListDetailView(LoginRequiredMixin, DetailView):
 class QuestionsListDetailViewResults(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'question_list_details_results.html'
+
+
+@login_required
+def create_question_list(request):
+    return render(request, 'create_question_list.html')

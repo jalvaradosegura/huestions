@@ -194,4 +194,17 @@ class QuestionListsTest(FunctionalTestsBase):
         vote_for_an_alternative(self.browser, 'id_alternatives_0')
         results_title = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('These are the results for', results_title)
-        # self.fail("Finish the test!")
+
+
+class CreateQuestionListTest(FunctionalTestsBase):
+    def test_can_create_a_question_list(self):
+        # Javi goes the the section where she can create a question list
+        self.browser = webdriver.Firefox()
+        self.sign_up('javi@email.com', 'super_password_123')
+        self.browser.get(f'{self.live_server_url}/lists/create/')
+
+        # There is a title that invites her to create a question list
+        title = self.browser.find_element_by_tag_name('h1').text
+        self.assertEqual(title, 'Create a question list')
+
+        # She fill the form and create a question list

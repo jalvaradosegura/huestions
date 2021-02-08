@@ -16,6 +16,7 @@ from ..views import (
     QuestionsListDetailViewResults,
     details,
     home,
+    create_question_list
 )
 
 
@@ -296,3 +297,41 @@ class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
         self.assertRegex(
             html, f'These are the results for {self.question_list}!'
         )
+
+
+class CreateQuestionList(ViewsMixin, TestCase):
+    base_url = '/lists/create/'
+
+    def test_returns_correct_html(self):
+        self.create_and_login_a_user()
+
+        response = self.client.get('/lists/create/')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'create_question_list.html')
+
+    def test_resolves_to_view(self):
+        self.create_and_login_a_user()
+
+        found = resolve('/lists/create/')
+
+        self.assertEqual(
+            found.func.__name__,
+            create_question_list.__name__
+        )
+
+    def test_page_contains_title_within_html(self):
+        self.create_and_login_a_user()
+
+        response = self.client.get(self.base_url)
+
+        self.assertContains(response, 'Create a question')
+
+    def test_page_contains_form_within_html(self):
+        self.create_and_login_a_user()
+
+        response = self.client.get(self.base_url)
+        html = response.content.decode('utf8')
+
+        self.assertRegex(html, '<form>')
+        self.assertRegex(html, '</form>')
