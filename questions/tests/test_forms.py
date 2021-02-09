@@ -8,7 +8,8 @@ from ..factories import (
     QuestionFactory,
     QuestionListFactory,
 )
-from ..forms import AnswerQuestionForm
+from ..forms import AnswerQuestionForm, CreateQuestionListForm
+from ..models import QuestionList
 
 
 class AnswerQuestionFormTests(TestCase):
@@ -37,7 +38,7 @@ class AnswerQuestionFormViewTests(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(
-            response, '<label for="id_alternatives_0">Alternatives:', html=True
+            response, '<label for="id_alternatives_0">Alternatives:'
         )
 
     def test_post_success_and_adds_user_to_alternative(self):
@@ -86,6 +87,42 @@ class AnswerQuestionFormViewTests(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response['Location'], '/lists/awesome-list/results/')
         self.assertEqual(self.user.alternatives_chosen.count(), 1)
+
+    def sign_up(self):
+        self.user = get_user_model().objects.create_user(
+            email='javi@email.com', username='javi', password='password123'
+        )
+        self.client.login(email='javi@email.com', password='password123')
+
+
+class CreateQuestionListFormTests(TestCase):
+    def test_get_form_success(self):
+        self.sign_up()
+
+        response = self.client.get('/lists/create/')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(
+            response, '<label for="id_title">Title:'
+        )
+
+    def test_create_question_list_with_form(self):
+        self.sign_up()
+        form = CreateQuestionListForm(data={'title': 'Super List'})
+        form.save()
+
+        question_list = QuestionList.objects.last()
+
+        self.assertEqual(question_list.__str__(), 'Super List')
+
+    def test_create_two_question_lists(self):
+        self.sign_up()
+        form = CreateQuestionListForm(data={'title': 'Super List 1'})
+        form.save()
+        form = CreateQuestionListForm(data={'title': 'Super List 2'})
+        form.save()
+
+        self.assertEqual(QuestionList.objects.count(), 2)
 
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
