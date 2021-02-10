@@ -9,7 +9,7 @@ from questions.factories import (
     QuestionFactory,
     QuestionListFactory,
 )
-from questions.models import Question
+from questions.models import Question, QuestionList
 
 
 def vote_for_an_alternative(browser, selected_alternative):
@@ -205,6 +205,12 @@ class CreateQuestionListTest(FunctionalTestsBase):
 
         # There is a title that invites her to create a question list
         title = self.browser.find_element_by_tag_name('h1').text
-        self.assertEqual(title, 'Create a question list')
+        self.assertIn('Create a question', title)
 
         # She fill the form and create a question list
+        title_input = self.browser.find_element_by_id('id_title')
+        title_input.send_keys('An amazing list')
+        self.browser.find_element_by_tag_name('button').click()
+
+        last_list = QuestionList.objects.last()
+        self.assertEqual(last_list.__str__(), 'An amazing list')
