@@ -22,3 +22,9 @@ class CreateQuestionListForm(forms.ModelForm):
     class Meta:
         model = QuestionList
         fields = ['title']
+
+
+class CreateQuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ['title']

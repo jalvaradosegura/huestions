@@ -129,3 +129,24 @@ class CreateQuestionListFormTests(TestCase):
             email='javi@email.com', username='javi', password='password123'
         )
         self.client.login(email='javi@email.com', password='password123')
+
+
+class CreateQuestionFormTests(TestCase):
+    def test_get_form_success(self):
+        self.sign_up()
+        question_list = QuestionListFactory(title='an awesome list')
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/add_question/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(
+            response, '<label for="id_title">Title:'
+        )
+
+    def sign_up(self):
+        self.user = get_user_model().objects.create_user(
+            email='javi@email.com', username='javi', password='password123'
+        )
+        self.client.login(email='javi@email.com', password='password123')

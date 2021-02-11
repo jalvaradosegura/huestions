@@ -224,3 +224,8 @@ class CreateQuestionListTest(FunctionalTestsBase):
         # There is a title that invites her to create a question
         title = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Create a question', title)
+
+        # She fill the form and create a question
+        title_input = self.browser.find_element_by_id('id_title')
+        title_input.send_keys('Is this actually working?')
+        self.browser.find_element_by_tag_name('button').click()

@@ -4,7 +4,11 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
 from django.views.generic import DetailView, ListView
 
-from .forms import AnswerQuestionForm, CreateQuestionListForm
+from .forms import (
+    AnswerQuestionForm,
+    CreateQuestionForm,
+    CreateQuestionListForm
+)
 from .models import Alternative, Question, QuestionList
 from .utils import get_random_question_for_user
 
@@ -140,4 +144,5 @@ def create_question_list(request):
 
 @login_required
 def create_question(request, slug):
-    return render(request, 'create_question.html')
+    form = CreateQuestionForm()
+    return render(request, 'create_question.html', {'form': form})
