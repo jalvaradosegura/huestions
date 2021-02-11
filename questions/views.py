@@ -134,3 +134,7 @@ def create_question_list(request):
 
     form = CreateQuestionListForm()
     return render(request, 'create_question_list.html', {'form': form})
+
+
+def create_question(request, slug):
+    return render(request, 'create_question.html')

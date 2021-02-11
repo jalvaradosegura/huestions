@@ -212,5 +212,11 @@ class CreateQuestionListTest(FunctionalTestsBase):
         title_input.send_keys('An amazing list')
         self.browser.find_element_by_tag_name('button').click()
 
+        # Check that the question list got created
         last_list = QuestionList.objects.last()
         self.assertEqual(last_list.__str__(), 'An amazing list')
+        # Check that the url changed, to something related to add a question
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/an-amazing-list/add_question/',
+        )

@@ -299,7 +299,7 @@ class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
         )
 
 
-class CreateQuestionList(ViewsMixin, TestCase):
+class CreateQuestionListViewTests(ViewsMixin, TestCase):
     base_url = '/lists/create/'
 
     def test_returns_correct_html(self):
@@ -333,5 +333,18 @@ class CreateQuestionList(ViewsMixin, TestCase):
         response = self.client.get(self.base_url)
         html = response.content.decode('utf8')
 
-        self.assertRegex(html, '<form>')
+        self.assertRegex(html, '<form.*>')
         self.assertRegex(html, '</form>')
+
+
+class CreateQuestionViewTests(TestCase):
+    def test_returns_correct_html(self):
+        # self.create_and_login_a_user()
+        question_list = QuestionListFactory(title='An amazing list')
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/add_question/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'create_question.html')

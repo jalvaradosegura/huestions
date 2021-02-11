@@ -28,4 +28,9 @@ urlpatterns = [
         view=views.QuestionsListDetailViewResults.as_view(),
         name='questions_list_details_results',
     ),
+    path(
+        route='lists/<slug:slug>/add_question/',
+        view=views.create_question,
+        name='create_question',
+    ),
 ]
