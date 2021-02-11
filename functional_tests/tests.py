@@ -205,7 +205,7 @@ class CreateQuestionListTest(FunctionalTestsBase):
 
         # There is a title that invites her to create a question list
         title = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('Create a question', title)
+        self.assertIn('Create a question list', title)
 
         # She fill the form and create a question list
         title_input = self.browser.find_element_by_id('id_title')
@@ -220,3 +220,7 @@ class CreateQuestionListTest(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/an-amazing-list/add_question/',
         )
+
+        # There is a title that invites her to create a question
+        title = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('Create a question', title)
