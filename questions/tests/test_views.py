@@ -336,6 +336,18 @@ class CreateQuestionListViewTests(ViewsMixin, TestCase):
         self.assertRegex(html, '<form.*>')
         self.assertRegex(html, '</form>')
 
+    def test_post_success(self):
+        self.create_and_login_a_user()
+
+        response = self.client.post(
+            self.base_url, data={'title': 'super list'}
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'], '/lists/super-list/add_question/'
+        )
+
 
 class CreateQuestionViewTests(ViewsMixin, TestCase):
     base_url = '/lists/{}/add_question/'

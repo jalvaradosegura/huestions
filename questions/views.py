@@ -130,7 +130,9 @@ def create_question_list(request):
         form = CreateQuestionListForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            question_list = form.save(commit=False)
+            question_list.save()
+            return redirect('create_question', question_list.slug)
 
     form = CreateQuestionListForm()
     return render(request, 'create_question_list.html', {'form': form})
