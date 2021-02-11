@@ -337,13 +337,18 @@ class CreateQuestionListViewTests(ViewsMixin, TestCase):
         self.assertRegex(html, '</form>')
 
 
-class CreateQuestionViewTests(TestCase):
+class CreateQuestionViewTests(ViewsMixin, TestCase):
+    base_url = '/lists/{}/add_question/'
+
+    def setUp(self):
+        self.question_list = QuestionListFactory(title='An amazing list')
+        self.base_url = self.base_url.format(self.question_list.slug)
+
     def test_returns_correct_html(self):
-        # self.create_and_login_a_user()
-        question_list = QuestionListFactory(title='An amazing list')
+        self.create_and_login_a_user()
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/add_question/'
+            f'/lists/{self.question_list.slug}/add_question/'
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
