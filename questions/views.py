@@ -145,7 +145,22 @@ def create_question_list(request):
 @login_required
 def create_question(request, list_slug):
     question_list = QuestionList.objects.get(slug=list_slug)
-
     form = CreateQuestionForm(question_list=question_list)
 
+    if request.method == 'POST':
+        form = CreateQuestionForm(request.POST, question_list=question_list)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.save()
+            return redirect(
+                'add_alternatives',
+                question_list.slug,
+                question.slug,
+                question.id
+            )
+
     return render(request, 'create_question.html', {'form': form})
+
+
+def add_alternatives(request, list_slug, question_slug, question_id):
+    return render(request, 'add_alternatives.html')

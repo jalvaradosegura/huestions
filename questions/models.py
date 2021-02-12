@@ -48,9 +48,14 @@ class QuestionList(BaseAbstractModel):
 
 
 class Question(BaseAbstractModel):
+    slug = models.SlugField(null=False)
     child_of = models.ForeignKey(
         QuestionList, on_delete=models.CASCADE, related_name='questions'
     )
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('question_details', args=[str(self.id)])

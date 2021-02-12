@@ -365,3 +365,16 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'create_question.html')
+
+    def test_post_success(self):
+        self.create_and_login_a_user()
+
+        response = self.client.post(
+            self.base_url, data={'title': 'Is this hard to answer?'}
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            '/lists/an-amazing-list/is-this-hard-to-answer/1/add_alternatives/'
+        )

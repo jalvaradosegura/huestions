@@ -33,4 +33,12 @@ urlpatterns = [
         view=views.create_question,
         name='create_question',
     ),
+    path(
+        route=(
+            'lists/<slug:list_slug>/<slug:question_slug>/'
+            '<int:question_id>/add_alternatives/'
+        ),
+        view=views.add_alternatives,
+        name='add_alternatives',
+    ),
 ]
