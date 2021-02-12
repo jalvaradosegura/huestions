@@ -233,3 +233,10 @@ class CreateQuestionListTest(FunctionalTestsBase):
         # There is a title that invites her to add alternatives to the question
         title = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('Add alternatives', title)
+
+        # She fill the form and create a two alternatives
+        title_input = self.browser.find_element_by_id('id_title_1')
+        title_input.send_keys('Yes, is working')
+        title_input = self.browser.find_element_by_id('id_title_2')
+        title_input.send_keys('No, is not working')
+        self.browser.find_element_by_tag_name('button').click()

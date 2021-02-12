@@ -167,3 +167,26 @@ class CreateQuestionFormTests(TestCase):
             email='javi@email.com', username='javi', password='password123'
         )
         self.client.login(email='javi@email.com', password='password123')
+
+
+class AddAlternativesFormTests(TestCase):
+    def test_get_form_success(self):
+        question_list = QuestionListFactory(title='an awesome list')
+        question = QuestionFactory(
+            title='Is this hard?', child_of=question_list
+        )
+
+        response = self.client.get(
+            (
+                f'/lists/{question_list.slug}/{question.slug}/'
+                f'{question.id}/add_alternatives/'
+            )
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(
+            response, '<label for="id_alternative_1">Alternative 1:'
+        )
+        self.assertContains(
+            response, '<label for="id_alternative_2">Alternative 2:'
+        )
