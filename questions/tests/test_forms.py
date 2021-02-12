@@ -9,11 +9,12 @@ from ..factories import (
     QuestionListFactory,
 )
 from ..forms import (
+    AddAlternativesForm,
     AnswerQuestionForm,
     CreateQuestionForm,
     CreateQuestionListForm
 )
-from ..models import Question, QuestionList
+from ..models import Alternative, Question, QuestionList
 
 
 class AnswerQuestionFormTests(TestCase):
@@ -170,16 +171,18 @@ class CreateQuestionFormTests(TestCase):
 
 
 class AddAlternativesFormTests(TestCase):
-    def test_get_form_success(self):
-        question_list = QuestionListFactory(title='an awesome list')
-        question = QuestionFactory(
-            title='Is this hard?', child_of=question_list
+    def setUp(self):
+        self.question_list = QuestionListFactory(title='an awesome list')
+        self.question = QuestionFactory(
+            title='Is this hard?', child_of=self.question_list
         )
+
+    def test_get_form_success(self):
 
         response = self.client.get(
             (
-                f'/lists/{question_list.slug}/{question.slug}/'
-                f'{question.id}/add_alternatives/'
+                f'/lists/{self.question_list.slug}/{self.question.slug}/'
+                f'{self.question.id}/add_alternatives/'
             )
         )
 
@@ -190,3 +193,23 @@ class AddAlternativesFormTests(TestCase):
         self.assertContains(
             response, '<label for="id_alternative_2">Alternative 2:'
         )
+
+    def test_add_alternatives_with_form(self):
+        form = AddAlternativesForm(
+                data={
+                    'alternative_1': 'Yes it is',
+                    'alternative_2': 'No it is not'
+                },
+                question=self.question
+        )
+
+        if form.is_valid():
+            form.save()
+        firt_alternative = Alternative.objects.first()
+        last_alternative = Alternative.objects.last()
+
+        self.assertEqual(firt_alternative.__str__(), 'Yes it is')
+        self.assertEqual(last_alternative.__str__(), 'No it is not')
+        self.assertEqual(firt_alternative.question.__str__(), 'Is this hard?')
+        self.assertEqual(last_alternative.question.__str__(), 'Is this hard?')
+        self.assertEqual(Alternative.objects.all().count(), 2)

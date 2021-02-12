@@ -164,5 +164,6 @@ def create_question(request, list_slug):
 
 
 def add_alternatives(request, list_slug, question_slug, question_id):
-    form = AddAlternativesForm()
+    question = Question.objects.get(id=question_id)
+    form = AddAlternativesForm(question=question)
     return render(request, 'add_alternatives.html', {'form': form})

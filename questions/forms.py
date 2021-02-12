@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Question, QuestionList
+from .factories import AlternativeFactory
 
 
 class AnswerQuestionForm(forms.Form):
@@ -42,3 +43,16 @@ class CreateQuestionForm(forms.ModelForm):
 class AddAlternativesForm(forms.Form):
     alternative_1 = forms.CharField()
     alternative_2 = forms.CharField()
+
+    def __init__(self, *args, **kwargs):
+        self.question = kwargs.pop('question')
+        super().__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        cleaned_data = super().clean()
+        AlternativeFactory(
+            title=cleaned_data.get('alternative_1'), question=self.question
+        )
+        AlternativeFactory(
+            title=cleaned_data.get('alternative_2'), question=self.question
+        )
