@@ -143,6 +143,9 @@ def create_question_list(request):
 
 
 @login_required
-def create_question(request, slug):
-    form = CreateQuestionForm()
+def create_question(request, list_slug):
+    question_list = QuestionList.objects.get(slug=list_slug)
+
+    form = CreateQuestionForm(question_list=question_list)
+
     return render(request, 'create_question.html', {'form': form})

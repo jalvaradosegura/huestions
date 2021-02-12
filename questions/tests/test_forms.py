@@ -8,8 +8,12 @@ from ..factories import (
     QuestionFactory,
     QuestionListFactory,
 )
-from ..forms import AnswerQuestionForm, CreateQuestionListForm
-from ..models import QuestionList
+from ..forms import (
+    AnswerQuestionForm,
+    CreateQuestionForm,
+    CreateQuestionListForm
+)
+from ..models import Question, QuestionList
 
 
 class AnswerQuestionFormTests(TestCase):
@@ -144,6 +148,19 @@ class CreateQuestionFormTests(TestCase):
         self.assertContains(
             response, '<label for="id_title">Title:'
         )
+
+    def test_create_question_with_form(self):
+        self.sign_up()
+        question_list = QuestionListFactory(title='an awesome list')
+
+        form = CreateQuestionForm(
+            data={'title': 'Is this working?'}, question_list=question_list
+        )
+        form.save()
+        question = Question.objects.last()
+
+        self.assertEqual(question.__str__(), 'Is this working?')
+        self.assertEqual(Question.objects.all().count(), 1)
 
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
