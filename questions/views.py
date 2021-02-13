@@ -167,4 +167,13 @@ def create_question(request, list_slug):
 def add_alternatives(request, list_slug, question_slug, question_id):
     question = Question.objects.get(id=question_id)
     form = AddAlternativesForm(question=question)
+
+    if request.method == 'POST':
+        form = AddAlternativesForm(request.POST, question=question)
+
+        if form.is_valid():
+            form.save()
+            question_list = question.child_of
+            return redirect('create_question', question_list.slug)
+
     return render(request, 'add_alternatives.html', {'form': form})
