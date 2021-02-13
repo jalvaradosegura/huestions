@@ -178,6 +178,7 @@ class AddAlternativesFormTests(TestCase):
         )
 
     def test_get_form_success(self):
+        self.sign_up()
 
         response = self.client.get(
             (
@@ -213,3 +214,9 @@ class AddAlternativesFormTests(TestCase):
         self.assertEqual(firt_alternative.question.__str__(), 'Is this hard?')
         self.assertEqual(last_alternative.question.__str__(), 'Is this hard?')
         self.assertEqual(Alternative.objects.all().count(), 2)
+
+    def sign_up(self):
+        self.user = get_user_model().objects.create_user(
+            email='javi@email.com', username='javi', password='password123'
+        )
+        self.client.login(email='javi@email.com', password='password123')
