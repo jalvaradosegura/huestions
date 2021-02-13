@@ -163,6 +163,7 @@ def create_question(request, list_slug):
     return render(request, 'create_question.html', {'form': form})
 
 
+@login_required
 def add_alternatives(request, list_slug, question_slug, question_id):
     question = Question.objects.get(id=question_id)
     form = AddAlternativesForm(question=question)

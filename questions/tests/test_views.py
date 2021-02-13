@@ -378,3 +378,22 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
             response['Location'],
             '/lists/an-amazing-list/is-this-hard-to-answer/1/add_alternatives/'
         )
+
+
+class AddAlternativesViewTests(ViewsMixin, TestCase):
+    base_url = '/lists/{}/{}/{}/add_alternatives/'
+
+    def setUp(self):
+        question_list = QuestionListFactory()
+        question = QuestionFactory()
+        self.base_url = self.base_url.format(
+            question_list.slug, question.slug, question.id
+        )
+
+    def test_returns_correct_html(self):
+        self.create_and_login_a_user()
+
+        response = self.client.get(self.base_url)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'add_alternatives.html')
