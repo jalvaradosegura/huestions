@@ -1,5 +1,6 @@
 import datetime
 
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -30,6 +31,12 @@ class BaseAbstractModel(models.Model):
 
 class QuestionList(BaseAbstractModel):
     slug = models.SlugField(unique=True, null=False)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='lists'
+    )
 
     def get_absolute_url(self):
         return reverse('questions_list_details', args=[str(self.slug)])

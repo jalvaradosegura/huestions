@@ -24,6 +24,15 @@ class CreateQuestionListForm(forms.ModelForm):
         model = QuestionList
         fields = ['title']
 
+    def __init__(self, *args, **kwargs):
+        self.owner = kwargs.pop('owner')
+        super().__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.instance.owner = self.owner
+        question_list = super().save(*args, **kwargs)
+        return question_list
+
 
 class CreateQuestionForm(forms.ModelForm):
     class Meta:

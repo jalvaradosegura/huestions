@@ -15,6 +15,7 @@ from ..forms import (
     CreateQuestionListForm
 )
 from ..models import Alternative, Question, QuestionList
+from users.models import CustomUser
 
 
 class AnswerQuestionFormTests(TestCase):
@@ -113,7 +114,9 @@ class CreateQuestionListFormTests(TestCase):
 
     def test_create_question_list_with_form(self):
         self.sign_up()
-        form = CreateQuestionListForm(data={'title': 'Super List'})
+        form = CreateQuestionListForm(
+            data={'title': 'Super List'}, owner=self.user
+        )
         form.save()
 
         question_list = QuestionList.objects.last()
@@ -122,12 +125,27 @@ class CreateQuestionListFormTests(TestCase):
 
     def test_create_two_question_lists(self):
         self.sign_up()
-        form = CreateQuestionListForm(data={'title': 'Super List 1'})
+        form = CreateQuestionListForm(
+            data={'title': 'Super List 1'}, owner=self.user
+        )
         form.save()
-        form = CreateQuestionListForm(data={'title': 'Super List 2'})
+        form = CreateQuestionListForm(
+            data={'title': 'Super List 2'}, owner=self.user
+        )
         form.save()
 
         self.assertEqual(QuestionList.objects.count(), 2)
+
+    def test_user_gets_added_to_list_after_creating_one(self):
+        self.sign_up()
+        form = CreateQuestionListForm(
+            data={'title': 'Super List 1'}, owner=self.user
+        )
+        form.save()
+
+        question_list = QuestionList.objects.last()
+
+        self.assertEqual(question_list.owner.username, 'javi')
 
     def sign_up(self):
         self.user = get_user_model().objects.create_user(

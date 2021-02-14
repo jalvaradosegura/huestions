@@ -132,14 +132,14 @@ class QuestionsListDetailViewResults(LoginRequiredMixin, DetailView):
 @login_required
 def create_question_list(request):
     if request.method == 'POST':
-        form = CreateQuestionListForm(request.POST)
+        form = CreateQuestionListForm(request.POST, owner=request.user)
 
         if form.is_valid():
             question_list = form.save(commit=False)
             question_list.save()
             return redirect('create_question', question_list.slug)
 
-    form = CreateQuestionListForm()
+    form = CreateQuestionListForm(owner=request.user)
     return render(request, 'create_question_list.html', {'form': form})
 
 

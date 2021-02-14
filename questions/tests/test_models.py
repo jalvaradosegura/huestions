@@ -113,3 +113,9 @@ class QuestionListModelTests(TestStrMixin, TestCase):
             question_list_1.get_absolute_url(),
             '/lists/this-is-something-awesome/',
         )
+
+    def test_set_owner_of_question_list(self):
+        user = UserFactory()
+        question_list = self.model_factory(title='awesome list', owner=user)
+
+        self.assertEqual(question_list.owner.username, 'testuser')

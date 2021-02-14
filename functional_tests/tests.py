@@ -10,6 +10,7 @@ from questions.factories import (
     QuestionListFactory,
 )
 from questions.models import Question, QuestionList
+from users.models import CustomUser
 
 
 def vote_for_an_alternative(browser, selected_alternative):
@@ -246,3 +247,6 @@ class CreateQuestionListTest(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/an-amazing-list/add_question/',
         )
+
+        # Check that she is the owner of the question list
+        self.assertEqual('javi', last_list.owner.username)
