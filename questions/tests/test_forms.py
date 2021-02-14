@@ -228,6 +228,24 @@ class AddAlternativesFormTests(TestCase):
         self.assertEqual(last_alternative.question.__str__(), 'Is this hard?')
         self.assertEqual(Alternative.objects.all().count(), 2)
 
+    def test_alternatives_all_in_lower_case(self):
+        self.sign_up()
+        form = AddAlternativesForm(
+                data={
+                    'alternative_1': 'yes',
+                    'alternative_2': 'no'
+                },
+                question=self.question
+        )
+
+        if form.is_valid():
+            form.save()
+        firt_alternative = Alternative.objects.first()
+        last_alternative = Alternative.objects.last()
+
+        self.assertEqual(firt_alternative.__str__(), 'Yes')
+        self.assertEqual(last_alternative.__str__(), 'No')
+
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
             email='javi@email.com', username='javi', password='password123'
