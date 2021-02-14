@@ -15,7 +15,6 @@ from ..forms import (
     CreateQuestionListForm
 )
 from ..models import Alternative, Question, QuestionList
-from users.models import CustomUser
 
 
 class AnswerQuestionFormTests(TestCase):

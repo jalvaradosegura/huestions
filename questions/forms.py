@@ -50,8 +50,6 @@ class CreateQuestionForm(forms.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data['title']
-        if not title:
-            return title
 
         title_question_marks_removed = title.replace('?', '')
         title_question_mark_appended = title_question_marks_removed + '?'
@@ -78,8 +76,6 @@ class AddAlternativesForm(forms.Form):
 
     def clean_alternative_1(self):
         alternative_1 = self.cleaned_data['alternative_1']
-        if not alternative_1:
-            return alternative_1
 
         first_char = alternative_1[0]
         first_char_upper = first_char.upper()
@@ -89,8 +85,6 @@ class AddAlternativesForm(forms.Form):
 
     def clean_alternative_2(self):
         alternative_2 = self.cleaned_data['alternative_2']
-        if not alternative_2:
-            return alternative_2
 
         first_char = alternative_2[0]
         first_char_upper = first_char.upper()
