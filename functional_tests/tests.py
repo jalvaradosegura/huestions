@@ -10,7 +10,6 @@ from questions.factories import (
     QuestionListFactory,
 )
 from questions.models import Question, QuestionList
-from users.models import CustomUser
 
 
 def vote_for_an_alternative(browser, selected_alternative):
@@ -104,7 +103,10 @@ class NewVisitorTest(FunctionalTestsBase):
         message = self.browser.find_element_by_id('you_already_voted').text
         self.assertEqual(
             message,
-            'You have already voted for this question or you have answered all the questions.',
+            (
+                'You have already voted for this question or you have '
+                'answered all the questions.'
+            ),
         )
 
     def test_can_visit_random_page(self):
