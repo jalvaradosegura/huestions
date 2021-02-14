@@ -163,6 +163,19 @@ class CreateQuestionFormTests(TestCase):
         self.assertEqual(question.__str__(), 'Is this working?')
         self.assertEqual(Question.objects.all().count(), 1)
 
+    def test_create_question_without_question_mark(self):
+        self.sign_up()
+        question_list = QuestionListFactory(title='an awesome list')
+
+        form = CreateQuestionForm(
+            data={'title': 'Who is better'}, question_list=question_list
+        )
+        form.save()
+        question = Question.objects.last()
+
+        self.assertEqual(question.__str__(), 'Who is better?')
+        self.assertEqual(Question.objects.all().count(), 1)
+
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
             email='javi@email.com', username='javi', password='password123'

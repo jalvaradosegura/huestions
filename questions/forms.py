@@ -39,6 +39,16 @@ class CreateQuestionForm(forms.ModelForm):
         question = super(CreateQuestionForm, self).save(*args, **kwargs)
         return question
 
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if not title:
+            return title
+
+        title_question_marks_removed = title.replace('?', '')
+        title_question_mark_appended = title_question_marks_removed + '?'
+
+        return title_question_mark_appended
+
 
 class AddAlternativesForm(forms.Form):
     alternative_1 = forms.CharField()
