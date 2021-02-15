@@ -69,12 +69,12 @@ def random_question(request):
     )
 
 
-class QuestionsListListView(LoginRequiredMixin, ListView):
+class QuestionsListView(LoginRequiredMixin, ListView):
     model = QuestionList
     template_name = 'question_list.html'
 
 
-class QuestionsListDetailView(LoginRequiredMixin, DetailView):
+class AnswerQuestionListView(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'question_list_details.html'
 
@@ -124,7 +124,7 @@ class QuestionsListDetailView(LoginRequiredMixin, DetailView):
         )
 
 
-class QuestionsListDetailViewResults(LoginRequiredMixin, DetailView):
+class QuestionListResultsView(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'question_list_details_results.html'
 

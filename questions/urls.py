@@ -10,7 +10,7 @@ urlpatterns = [
     ),
     path(
         route='lists/',
-        view=views.QuestionsListListView.as_view(),
+        view=views.QuestionsListView.as_view(),
         name='questions_list',
     ),
     path(
@@ -20,12 +20,12 @@ urlpatterns = [
     ),
     path(
         route='lists/<slug:slug>/',
-        view=views.QuestionsListDetailView.as_view(),
+        view=views.AnswerQuestionListView.as_view(),
         name='questions_list_details',
     ),
     path(
         route='lists/<slug:slug>/results/',
-        view=views.QuestionsListDetailViewResults.as_view(),
+        view=views.QuestionListResultsView.as_view(),
         name='questions_list_details_results',
     ),
     path(

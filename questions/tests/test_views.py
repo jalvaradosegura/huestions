@@ -11,9 +11,9 @@ from ..factories import (
 from .mixins import ViewsMixin
 from ..models import Question
 from ..views import (
-    QuestionsListDetailView,
-    QuestionsListListView,
-    QuestionsListDetailViewResults,
+    AnswerQuestionListView,
+    QuestionsListView,
+    QuestionListResultsView,
     details,
     home,
     create_question_list
@@ -183,7 +183,7 @@ class QuestionsListViewTests(ViewsMixin, TestCase):
 
         found = resolve('/lists/')
         self.assertEqual(
-            found.func.__name__, QuestionsListListView.as_view().__name__
+            found.func.__name__, QuestionsListView.as_view().__name__
         )
 
     def test_returns_correct_html(self):
@@ -206,7 +206,7 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
         found = resolve('/lists/an-awesome-list/')
 
         self.assertEqual(
-            found.func.__name__, QuestionsListDetailView.as_view().__name__
+            found.func.__name__, AnswerQuestionListView.as_view().__name__
         )
 
     def test_returns_correct_html(self):
@@ -285,7 +285,7 @@ class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
 
         self.assertEqual(
             found.func.__name__,
-            QuestionsListDetailViewResults.as_view().__name__
+            QuestionListResultsView.as_view().__name__
         )
 
     def test_page_contains_html(self):
