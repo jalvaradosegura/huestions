@@ -168,7 +168,6 @@ class CreateQuestionFormTests(TestCase):
         )
 
     def test_create_question_with_form(self):
-        self.sign_up()
         question_list = QuestionListFactory(title='an awesome list')
 
         form = CreateQuestionForm(
@@ -181,7 +180,6 @@ class CreateQuestionFormTests(TestCase):
         self.assertEqual(Question.objects.all().count(), 1)
 
     def test_create_question_without_question_mark(self):
-        self.sign_up()
         question_list = QuestionListFactory(title='an awesome list')
 
         form = CreateQuestionForm(

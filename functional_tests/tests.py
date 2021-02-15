@@ -252,3 +252,5 @@ class CreateQuestionListTest(FunctionalTestsBase):
 
         # Check that she is the owner of the question list
         self.assertEqual('javi', last_list.owner.username)
+        # Check that the list is not activated yet
+        self.assertFalse(last_list.active)

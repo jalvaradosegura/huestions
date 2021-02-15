@@ -37,6 +37,7 @@ class QuestionList(BaseAbstractModel):
         null=True,
         related_name='lists'
     )
+    active = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('questions_list_details', args=[str(self.slug)])
