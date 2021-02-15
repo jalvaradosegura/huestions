@@ -254,3 +254,10 @@ class CreateQuestionListTest(FunctionalTestsBase):
         self.assertEqual('javi', last_list.owner.username)
         # Check that the list is not activated yet
         self.assertFalse(last_list.active)
+
+        # She presses the "complete list" button
+        complete_button = self.browser.find_element_by_id('complete_button')
+        complete_button.click()
+        # Check that the list activated
+        last_list = QuestionList.objects.get(id=last_list.id)
+        self.assertTrue(last_list.active)

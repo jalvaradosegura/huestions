@@ -54,6 +54,9 @@ class QuestionList(BaseAbstractModel):
         self.slug = self._generate_unique_slug_if_needed()
         super().save(*args, **kwargs)
 
+    def activate(self):
+        self.active = True
+
 
 class Question(BaseAbstractModel):
     slug = models.SlugField(null=False)

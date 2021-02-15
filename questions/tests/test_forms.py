@@ -11,6 +11,7 @@ from ..factories import (
 from ..forms import (
     AddAlternativesForm,
     AnswerQuestionForm,
+    CompleteListForm,
     CreateQuestionForm,
     CreateQuestionListForm
 )
@@ -151,6 +152,16 @@ class CreateQuestionListFormTests(TestCase):
             email='javi@email.com', username='javi', password='password123'
         )
         self.client.login(email='javi@email.com', password='password123')
+
+
+class CompleteListFormTest(TestCase):
+    def test_complete_list_with_form(self):
+        question_list = QuestionListFactory(title='an awesome list')
+
+        form = CompleteListForm(question_list=question_list)
+        question_list = form.save()
+
+        self.assertTrue(question_list.active)
 
 
 class CreateQuestionFormTests(TestCase):

@@ -7,6 +7,7 @@ from django.views.generic import DetailView, ListView
 from .forms import (
     AddAlternativesForm,
     AnswerQuestionForm,
+    CompleteListForm,
     CreateQuestionForm,
     CreateQuestionListForm
 )
@@ -147,8 +148,12 @@ def create_question_list(request):
 def create_question(request, list_slug):
     question_list = QuestionList.objects.get(slug=list_slug)
     form = CreateQuestionForm(question_list=question_list)
+    complete_list_form = CompleteListForm(question_list=question_list)
 
     if request.method == 'POST':
+        if 'title' not in request.POST:
+            complete_list_form.save()
+            return redirect('questions_list')
         form = CreateQuestionForm(request.POST, question_list=question_list)
         if form.is_valid():
             question = form.save(commit=False)
@@ -160,7 +165,11 @@ def create_question(request, list_slug):
                 question.id
             )
 
-    return render(request, 'create_question.html', {'form': form})
+    return render(
+        request,
+        'create_question.html',
+        {'form': form, 'complete_list_form': complete_list_form}
+    )
 
 
 @login_required

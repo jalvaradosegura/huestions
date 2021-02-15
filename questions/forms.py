@@ -34,6 +34,17 @@ class CreateQuestionListForm(forms.ModelForm):
         return question_list
 
 
+class CompleteListForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.question_list = kwargs.pop('question_list')
+        super().__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.question_list.activate()
+        self.question_list.save()
+        return self.question_list
+
+
 class CreateQuestionForm(forms.ModelForm):
     class Meta:
         model = Question

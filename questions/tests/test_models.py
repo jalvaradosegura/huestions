@@ -119,3 +119,13 @@ class QuestionListModelTests(TestStrMixin, TestCase):
         question_list = self.model_factory(title='awesome list', owner=user)
 
         self.assertEqual(question_list.owner.username, 'testuser')
+
+    def test_activate_a_list(self):
+        user = UserFactory()
+        question_list = self.model_factory(title='awesome list', owner=user)
+
+        self.assertFalse(question_list.active)
+
+        question_list.activate()
+
+        self.assertTrue(question_list.active)
