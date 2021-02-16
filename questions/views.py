@@ -71,7 +71,7 @@ def random_question(request):
 
 
 class QuestionsListView(LoginRequiredMixin, ListView):
-    model = QuestionList
+    queryset = QuestionList.activated_lists.all()
     template_name = 'question_list.html'
 
 

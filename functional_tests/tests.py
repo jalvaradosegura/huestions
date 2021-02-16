@@ -144,7 +144,9 @@ class QuestionListsTest(FunctionalTestsBase):
 
         self.sign_up('javi@email.com', 'super_password_123')
 
-        self.question_list = QuestionListFactory(title='some cool title')
+        self.question_list = QuestionListFactory(
+            title='some cool title', active=True
+        )
 
         self.question = QuestionFactory(
             title='some question', child_of=self.question_list
@@ -200,9 +202,11 @@ class QuestionListsTest(FunctionalTestsBase):
 
 
 class CreateQuestionListTest(FunctionalTestsBase):
-    def test_can_create_a_question_list(self):
-        # Javi goes the the section where she can create a question list
+    def setUp(self):
         self.browser = webdriver.Firefox()
+
+    def test_can_create_a_question_list(self):
+        # javi goes the the section where she can create a question list
         self.sign_up('javi@email.com', 'super_password_123')
         self.browser.get(f'{self.live_server_url}/lists/create/')
 
@@ -262,3 +266,20 @@ class CreateQuestionListTest(FunctionalTestsBase):
         last_list = QuestionList.objects.get(id=last_list.id)
         last_list = QuestionList.activated_lists.last()
         self.assertTrue(last_list.active)
+
+    def test_only_active_list_are_shown(self):
+        # 2 question lists are created
+        question_list = QuestionListFactory(title='awesome list')
+        QuestionListFactory(title='normal list')
+        # 1 of them is activated
+        question_list.activate()
+        question_list.save()
+
+        # Javi goes to the lists view
+        self.sign_up('javi@email.com', 'super_password_123')
+        self.browser.get(f'{self.live_server_url}/lists/')
+
+        # She only sees one of the lists (the activated one)
+        html_ul_list = self.browser.find_element_by_tag_name('ul').text
+        self.assertIn('awesome list', html_ul_list)
+        self.assertNotIn('normal list', html_ul_list)
