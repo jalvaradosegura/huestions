@@ -7,7 +7,7 @@ from ..factories import (
     QuestionListFactory,
     UserFactory,
 )
-from ..models import Question
+from ..models import Question, QuestionList
 from .mixins import TestStrMixin
 
 
@@ -129,3 +129,11 @@ class QuestionListModelTests(TestStrMixin, TestCase):
         question_list.activate()
 
         self.assertTrue(question_list.active)
+
+    def test_activate_a_list_and_check_it_using_the_manager(self):
+        user = UserFactory()
+        question_list = self.model_factory(title='awesome list', owner=user)
+        question_list.activate()
+        question_list.save()
+
+        self.assertTrue(QuestionList.activated_lists.last())

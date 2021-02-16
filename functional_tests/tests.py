@@ -260,4 +260,5 @@ class CreateQuestionListTest(FunctionalTestsBase):
         complete_button.click()
         # Check that the list activated
         last_list = QuestionList.objects.get(id=last_list.id)
+        last_list = QuestionList.activated_lists.last()
         self.assertTrue(last_list.active)

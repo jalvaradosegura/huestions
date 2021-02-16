@@ -6,6 +6,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 
+from .managers import ActivatedListManager
+
 
 class BaseAbstractModel(models.Model):
     """
@@ -38,6 +40,9 @@ class QuestionList(BaseAbstractModel):
         related_name='lists'
     )
     active = models.BooleanField(default=False)
+
+    objects = models.Manager()
+    activated_lists = ActivatedListManager()
 
     def get_absolute_url(self):
         return reverse('questions_list_details', args=[str(self.slug)])
