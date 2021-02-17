@@ -58,6 +58,13 @@ class QuestionModelTests(TestStrMixin, TestCase):
     def test_get_absolute_url(self):
         self.assertEqual(self.question.get_absolute_url(), '/1/')
 
+    def test_is_completed_true(self):
+        self.assertTrue(self.question.is_completed())
+
+    def test_is_completed_false(self):
+        question = QuestionFactory(title='cool?')
+        self.assertFalse(question.is_completed())
+
 
 class AlternativeModelTests(TestStrMixin, TestCase):
     model_factory = AlternativeFactory
@@ -135,3 +142,14 @@ class QuestionListModelTests(TestStrMixin, TestCase):
         question_list.save()
 
         self.assertTrue(QuestionList.activated_lists.last())
+
+    def test_has_at_least_one_full_question_true(self):
+        question_list = self.model_factory(title='awesome list')
+        QuestionFactory(title='cool?', child_of=question_list)
+
+        self.assertTrue(question_list.has_at_least_one_full_question())
+
+    def test_has_at_least_one_full_question_false(self):
+        question_list = self.model_factory(title='awesome list')
+
+        self.assertFalse(question_list.has_at_least_one_full_question())

@@ -63,7 +63,11 @@ class QuestionList(BaseAbstractModel):
         self.active = True
 
     def has_at_least_one_full_question(self):
-        return True
+        if self.questions.exists():
+            for question in self.questions.all():
+                if question.is_completed():
+                    return True
+        return False
 
 
 class Question(BaseAbstractModel):
@@ -101,6 +105,11 @@ class Question(BaseAbstractModel):
         for alternative in self.alternatives.all():
             if user in alternative.users.all():
                 return True
+        return False
+
+    def is_completed(self):
+        if self.alternatives.count() == 2:
+            return True
         return False
 
 
