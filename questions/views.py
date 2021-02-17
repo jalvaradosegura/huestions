@@ -158,7 +158,9 @@ def create_question(request, list_slug):
                 complete_list_form.save()
                 return redirect('questions_list')
             messages.add_message(
-                request, messages.ERROR, LIST_COMPLETION_ERROR_MESSAGE
+                request,
+                messages.ERROR,
+                complete_list_form.custom_error_message
             )
         form = CreateQuestionForm(request.POST, question_list=question_list)
         if form.is_valid():

@@ -3,6 +3,7 @@ from http import HTTPStatus
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+from ..constants import LIST_COMPLETION_ERROR_MESSAGE
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
@@ -159,10 +160,11 @@ class CompleteListFormTest(TestCase):
         question_list = QuestionListFactory(title='an awesome list')
 
         form = CompleteListForm(question_list=question_list)
-        if not form.is_valid():
-            pass
-        else:
-            self.fail('the form should be invalid')
+        form.is_valid()
+
+        self.assertEqual(
+            form.custom_error_message, LIST_COMPLETION_ERROR_MESSAGE
+        )
 
     def test_complete_list_with_form_success(self):
         question_list = QuestionListFactory(title='an awesome list')
@@ -171,10 +173,8 @@ class CompleteListFormTest(TestCase):
         AlternativeFactory(title='no', question=question)
 
         form = CompleteListForm(question_list=question_list)
-        if form.is_valid():
-            pass
-        else:
-            self.fail('the form should be valid')
+
+        self.assertEqual(form.custom_error_message, '')
 
 
 class CreateQuestionFormTests(TestCase):

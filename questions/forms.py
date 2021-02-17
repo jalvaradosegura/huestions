@@ -1,7 +1,8 @@
 from django import forms
 
-from .models import Question, QuestionList
+from .constants import LIST_COMPLETION_ERROR_MESSAGE
 from .factories import AlternativeFactory
+from .models import Question, QuestionList
 
 
 class AnswerQuestionForm(forms.Form):
@@ -35,6 +36,8 @@ class CreateQuestionListForm(forms.ModelForm):
 
 
 class CompleteListForm(forms.Form):
+    custom_error_message = ''
+
     def __init__(self, *args, **kwargs):
         self.question_list = kwargs.pop('question_list')
         super().__init__(*args, **kwargs)
@@ -42,6 +45,7 @@ class CompleteListForm(forms.Form):
     def is_valid(self):
         if self.question_list.has_at_least_one_full_question():
             return True
+        self.custom_error_message = LIST_COMPLETION_ERROR_MESSAGE
         return False
 
     def save(self, *args, **kwargs):
