@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
 from django.views.generic import DetailView, ListView
 
+from .constants import LIST_COMPLETION_ERROR_MESSAGE
 from .forms import (
     AddAlternativesForm,
     AnswerQuestionForm,
@@ -155,6 +157,9 @@ def create_question(request, list_slug):
             if complete_list_form.is_valid():
                 complete_list_form.save()
                 return redirect('questions_list')
+            messages.add_message(
+                request, messages.ERROR, LIST_COMPLETION_ERROR_MESSAGE
+            )
         form = CreateQuestionForm(request.POST, question_list=question_list)
         if form.is_valid():
             question = form.save(commit=False)

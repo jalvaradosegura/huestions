@@ -3,6 +3,7 @@ from http import HTTPStatus
 from django.test import TestCase
 from django.urls import resolve
 
+from ..constants import LIST_COMPLETION_ERROR_MESSAGE
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
@@ -369,9 +370,14 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
     def test_post_complete_list_fail(self):
         self.create_and_login_a_user()
 
-        self.client.post(self.base_url, data={})
+        response = self.client.post(self.base_url, data={})
+        messages_list = list(response.context['messages'])
+
+        message = messages_list[0].message
 
         self.assertFalse(self.question_list.active)
+        self.assertEqual(len(messages_list), 1)
+        self.assertEqual(message, LIST_COMPLETION_ERROR_MESSAGE)
 
     def test_post_complete_list_success(self):
         self.create_and_login_a_user()

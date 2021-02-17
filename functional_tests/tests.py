@@ -4,6 +4,7 @@ import time
 from django.test import LiveServerTestCase
 from selenium import webdriver
 
+from questions.constants import LIST_COMPLETION_ERROR_MESSAGE
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
@@ -301,11 +302,6 @@ class CreateQuestionListTest(FunctionalTestsBase):
             f'{self.live_server_url}/lists/awesome-list/add_question/',
         )
 
-        error_message = self.browser.find_element_by_id('messages')
-        self.assertIn(
-            (
-                'The list needs at least 1 question with 2 alterantives to be '
-                'completed.'
-            ),
-            error_message
-        )
+        error_message = self.browser.find_element_by_id('messages').text
+
+        self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)

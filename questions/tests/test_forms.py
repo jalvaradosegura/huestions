@@ -188,7 +188,7 @@ class CreateQuestionFormTests(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(
-            response, '<label for="id_title">Title:'
+            response, '<input type="text" name="title"'
         )
 
     def test_create_question_with_form(self):
