@@ -9,7 +9,7 @@ from ..factories import (
     QuestionListFactory,
 )
 from .mixins import ViewsMixin
-from ..models import Question
+from ..models import Question, QuestionList
 from ..views import (
     AnswerQuestionListView,
     QuestionsListView,
@@ -366,20 +366,30 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'create_question.html')
 
-    def test_post_fail(self):
+    def test_post_complete_list_fail(self):
         self.create_and_login_a_user()
 
-        response = self.client.post(
-            self.base_url, data={'title': 'Is this hard to answer?'}
-        )
+        self.client.post(self.base_url, data={})
 
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(
-            response['Location'],
-            self.base_url
-        )
+        self.assertFalse(self.question_list.active)
 
-    def test_post_success(self):
+    def test_post_complete_list_success(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(title='An amazing list')
+        question = QuestionFactory(title='cool?', child_of=question_list)
+        AlternativeFactory(title='yes', question=question)
+        AlternativeFactory(title='no', question=question)
+        url = f'/lists/{question_list.slug}/add_question/'
+
+        self.client.post(
+            url,
+            data={}
+        )
+        modified_list = QuestionList.objects.get(slug=question_list.slug)
+
+        self.assertTrue(modified_list.active)
+
+    def test_post_create_question_success(self):
         self.create_and_login_a_user()
 
         response = self.client.post(

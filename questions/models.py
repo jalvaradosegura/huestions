@@ -56,7 +56,8 @@ class QuestionList(BaseAbstractModel):
         return slug
 
     def save(self, *args, **kwargs):
-        self.slug = self._generate_unique_slug_if_needed()
+        if not self.slug:
+            self.slug = self._generate_unique_slug_if_needed()
         super().save(*args, **kwargs)
 
     def activate(self):

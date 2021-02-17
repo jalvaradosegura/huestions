@@ -152,8 +152,9 @@ def create_question(request, list_slug):
 
     if request.method == 'POST':
         if 'title' not in request.POST:
-            complete_list_form.save()
-            return redirect('questions_list')
+            if complete_list_form.is_valid():
+                complete_list_form.save()
+                return redirect('questions_list')
         form = CreateQuestionForm(request.POST, question_list=question_list)
         if form.is_valid():
             question = form.save(commit=False)
