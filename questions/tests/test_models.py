@@ -145,7 +145,9 @@ class QuestionListModelTests(TestStrMixin, TestCase):
 
     def test_has_at_least_one_full_question_true(self):
         question_list = self.model_factory(title='awesome list')
-        QuestionFactory(title='cool?', child_of=question_list)
+        question = QuestionFactory(title='cool?', child_of=question_list)
+        AlternativeFactory(title='yes', question=question)
+        AlternativeFactory(title='no', question=question)
 
         self.assertTrue(question_list.has_at_least_one_full_question())
 
