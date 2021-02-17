@@ -163,6 +163,16 @@ class CompleteListFormTest(TestCase):
 
         self.assertTrue(question_list.active)
 
+    def test_complete_list_with_form_fail(self):
+        question_list = QuestionListFactory(title='an awesome list')
+
+        form = CompleteListForm(question_list=question_list)
+        if form.is_valid():
+            question_list = form.save()
+            self.assertTrue(question_list.active)
+        else:
+            self.fail('invalid form')
+
 
 class CreateQuestionFormTests(TestCase):
     def test_get_form_success(self):

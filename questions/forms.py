@@ -39,6 +39,11 @@ class CompleteListForm(forms.Form):
         self.question_list = kwargs.pop('question_list')
         super().__init__(*args, **kwargs)
 
+    def is_valid(self):
+        if self.question_list.has_at_least_one_full_question():
+            return True
+        return False
+
     def save(self, *args, **kwargs):
         self.question_list.activate()
         self.question_list.save()

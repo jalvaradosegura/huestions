@@ -263,7 +263,6 @@ class CreateQuestionListTest(FunctionalTestsBase):
         complete_button = self.browser.find_element_by_id('complete_button')
         complete_button.click()
         # Check that the list activated
-        last_list = QuestionList.objects.get(id=last_list.id)
         last_list = QuestionList.activated_lists.last()
         self.assertTrue(last_list.active)
 
@@ -283,3 +282,30 @@ class CreateQuestionListTest(FunctionalTestsBase):
         html_ul_list = self.browser.find_element_by_tag_name('ul').text
         self.assertIn('awesome list', html_ul_list)
         self.assertNotIn('normal list', html_ul_list)
+
+    def test_attempt_to_complete_a_list_with_no_full_question(self):
+        # javi goes the the section where she can add questions to a list
+        self.sign_up('javi@email.com', 'super_password_123')
+        QuestionListFactory(title='awesome list')
+        self.browser.get(
+            f'{self.live_server_url}/lists/awesome-list/add_question/'
+        )
+
+        # She presses the "complete list" button
+        complete_button = self.browser.find_element_by_id('complete_button')
+        complete_button.click()
+
+        # She is redirected to the same url but with an error message
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/awesome-list/add_question/',
+        )
+
+        error_message = self.browser.find_element_by_id('messages')
+        self.assertIn(
+            (
+                'The list needs at least 1 question with 2 alterantives to be '
+                'completed.'
+            ),
+            error_message
+        )

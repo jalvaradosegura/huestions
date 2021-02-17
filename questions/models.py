@@ -62,6 +62,9 @@ class QuestionList(BaseAbstractModel):
     def activate(self):
         self.active = True
 
+    def has_at_least_one_full_question(self):
+        return True
+
 
 class Question(BaseAbstractModel):
     slug = models.SlugField(null=False)
