@@ -305,3 +305,19 @@ class CreateQuestionListTest(FunctionalTestsBase):
         error_message = self.browser.find_element_by_id('messages').text
 
         self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
+
+
+class UserProfileTests(FunctionalTestsBase):
+    def setUp(self):
+        self.browser = webdriver.Firefox()
+
+    def test_user_activate_a_list(self):
+        # Javi goes the the section where she can all her lists
+        self.sign_up('javi@email.com', 'super_password_123')
+        self.browser.get(
+            f'{self.live_server_url}/users/javi/lists/'
+        )
+
+        # There is a message welcoming her to her lists
+        title = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('These are your lists', title)
