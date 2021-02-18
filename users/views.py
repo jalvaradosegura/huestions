@@ -1,5 +1,8 @@
 from django.views.generic import ListView
 
+from .models import CustomUser
+
 
 class UserListsView(ListView):
-    pass
+    model = CustomUser
+    template_name = 'user_lists.html'

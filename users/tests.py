@@ -11,3 +11,8 @@ class QuestionsListViewTests(TestCase):
         self.assertEqual(
             found.func.__name__, UserListsView.as_view().__name__
         )
+
+    def test_returns_correct_html(self):
+        response = self.client.get('/users/javi/lists/')
+
+        self.assertTemplateUsed(response, 'user_lists.html')
