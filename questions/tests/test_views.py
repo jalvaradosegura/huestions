@@ -1,9 +1,13 @@
 from http import HTTPStatus
 
+from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import resolve
 
-from ..constants import LIST_COMPLETION_ERROR_MESSAGE
+from ..constants import (
+    ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
+    LIST_COMPLETION_ERROR_MESSAGE
+)
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
@@ -275,8 +279,12 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
         QuestionListFactory(title='cool list')
 
         response = self.client.get('/lists/cool-list/?page=1')
+        request = response.wsgi_request
+        storage = get_messages(request)
+        message = [message.message for message in storage][0]
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(message, ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE)
 
 
 class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
@@ -386,7 +394,6 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
 
         response = self.client.post(self.base_url, data={})
         messages_list = list(response.context['messages'])
-
         message = messages_list[0].message
 
         self.assertFalse(self.question_list.active)

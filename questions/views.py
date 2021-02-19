@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
 from django.views.generic import DetailView, ListView
 
+from .constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
 from .forms import (
     AddAlternativesForm,
     AnswerQuestionForm,
@@ -86,6 +87,12 @@ class AnswerQuestionListView(LoginRequiredMixin, DetailView):
 
         if question_list.has_at_least_one_full_question():
             return super().get(request, *args, **kwargs)
+
+        messages.add_message(
+            request,
+            messages.WARNING,
+            ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
+        )
         return redirect('questions_list')
 
     def get_context_data(self, **kwargs):

@@ -4,7 +4,10 @@ import time
 from django.test import LiveServerTestCase
 from selenium import webdriver
 
-from questions.constants import LIST_COMPLETION_ERROR_MESSAGE
+from questions.constants import (
+    ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
+    LIST_COMPLETION_ERROR_MESSAGE
+)
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
@@ -280,7 +283,7 @@ class CreateQuestionListTest(FunctionalTestsBase):
         self.browser.get(f'{self.live_server_url}/lists/')
 
         # She only sees one of the lists (the activated one)
-        html_ul_list = self.browser.find_element_by_tag_name('ul').text
+        html_ul_list = self.browser.find_element_by_id('list').text
         self.assertIn('awesome list', html_ul_list)
         self.assertNotIn('normal list', html_ul_list)
 
@@ -319,6 +322,12 @@ class CreateQuestionListTest(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/',
         )
+
+        # She sees a message, it says she is attempting to see an incomplete
+        # view
+        error_message = self.browser.find_element_by_id('messages').text
+
+        self.assertIn(ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE, error_message)
 
 
 class UserProfileTests(FunctionalTestsBase):
