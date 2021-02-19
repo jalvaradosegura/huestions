@@ -241,7 +241,7 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
         self.create_and_login_a_user()
         question_list = QuestionListFactory(title='cool list', owner=self.user)
         question = QuestionFactory(
-            title='alternative 1',
+            title='This is a title for a question',
             child_of=question_list
         )
         AlternativeFactory(title='a1', question=question).users.add(self.user)
