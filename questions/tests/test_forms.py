@@ -38,7 +38,8 @@ class AnswerQuestionFormViewTests(TestCase):
         question = QuestionFactory(
             title='awesome question', child_of=question_list
         )
-        AlternativeFactory(title='awesome alternative', question=question)
+        AlternativeFactory(title='awesome alternative 1', question=question)
+        AlternativeFactory(title='awesome alternative 2', question=question)
         self.sign_up()
 
         response = self.client.get('/lists/awesome-list/')

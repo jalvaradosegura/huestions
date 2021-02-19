@@ -200,6 +200,9 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
 
     def setUp(self):
         self.question_list = QuestionListFactory(title='an awesome list')
+        question = QuestionFactory(title='cool?', child_of=self.question_list)
+        AlternativeFactory(title='yes', question=question)
+        AlternativeFactory(title='no', question=question)
 
     def test_resolves_to_view(self):
         self.create_and_login_a_user()
@@ -236,12 +239,15 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
 
     def test_message_that_you_already_answered_the_question(self):
         self.create_and_login_a_user()
+        question_list = QuestionListFactory(title='cool list', owner=self.user)
         question = QuestionFactory(
-            title='some question', child_of=self.question_list
+            title='alternative 1',
+            child_of=question_list
         )
-        AlternativeFactory(question=question).users.add(self.user)
+        AlternativeFactory(title='a1', question=question).users.add(self.user)
+        AlternativeFactory(title='a2', question=question).users.add(self.user)
 
-        response = self.client.get('/lists/an-awesome-list/?page=1')
+        response = self.client.get('/lists/cool-list/?page=1')
         html = response.content.decode('utf8')
 
         self.assertRegex(
@@ -263,6 +269,14 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
             html,
             "Question already answered. Your vote won't count this time."
         )
+
+    def test_attempt_to_access_an_incomplete_list(self):
+        self.create_and_login_a_user()
+        QuestionListFactory(title='cool list')
+
+        response = self.client.get('/lists/cool-list/?page=1')
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
 
 class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):

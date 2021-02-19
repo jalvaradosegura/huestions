@@ -306,6 +306,20 @@ class CreateQuestionListTest(FunctionalTestsBase):
 
         self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
 
+    def test_attempt_to_access_an_incomplete_list(self):
+        # Javi attemps to visits an incomplete list view
+        self.sign_up('javi@email.com', 'super_password_123')
+        QuestionListFactory(title='incomplete list')
+        self.browser.get(
+            f'{self.live_server_url}/lists/incomplete-list/'
+            )
+
+        # She is redirected to the lists view
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/',
+        )
+
 
 class UserProfileTests(FunctionalTestsBase):
     def setUp(self):

@@ -5,7 +5,6 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
 from django.views.generic import DetailView, ListView
 
-from .constants import LIST_COMPLETION_ERROR_MESSAGE
 from .forms import (
     AddAlternativesForm,
     AnswerQuestionForm,
@@ -80,6 +79,14 @@ class QuestionsListView(LoginRequiredMixin, ListView):
 class AnswerQuestionListView(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'question_list_details.html'
+
+    def get(self, request, *args, **kwargs):
+        slug = kwargs.get('slug')
+        question_list = QuestionList.objects.get(slug=slug)
+
+        if question_list.has_at_least_one_full_question():
+            return super().get(request, *args, **kwargs)
+        return redirect('questions_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
