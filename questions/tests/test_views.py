@@ -373,15 +373,16 @@ class CreateQuestionListViewTests(ViewsMixin, TestCase):
 
 
 class EditQuestionListViewTests(ViewsMixin, TestCase):
-    base_url = '/lists/awesome-list/edit/'
+    base_url = '/lists/{}/edit/'
 
     def setUp(self):
-        QuestionListFactory(title='awesome list')
+        question_list = QuestionListFactory(title='awesome list')
+        self.base_url = self.base_url.format(question_list.slug)
 
     def test_returns_correct_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get('/lists/awesome-list/edit/')
+        response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'edit_question_list.html')
