@@ -210,5 +210,6 @@ def add_alternatives(request, list_slug, question_slug, question_id):
     return render(request, 'add_alternatives.html', {'form': form})
 
 
+@login_required
 def edit_list(request, list_slug):
     return render(request, 'edit_question_list.html')
