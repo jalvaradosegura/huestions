@@ -1,6 +1,7 @@
 import datetime
 import time
 
+from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase
 from selenium import webdriver
 
@@ -335,8 +336,13 @@ class UserProfileTests(FunctionalTestsBase):
         self.browser = webdriver.Firefox()
 
     def test_user_activate_a_list(self):
-        # Javi goes the the section where she can all her lists
+        # Set up a few lists for Javi
         self.sign_up('javi@email.com', 'super_password_123')
+        user = get_user_model().objects.get(email='javi@email.com')
+        QuestionListFactory(title='my first list', owner=user)
+        QuestionListFactory(title='my second list', owner=user)
+
+        # Javi goes the the section where she can all her lists
         self.browser.get(
             f'{self.live_server_url}/users/javi/lists/'
         )
@@ -344,3 +350,9 @@ class UserProfileTests(FunctionalTestsBase):
         # There is a message welcoming her to her lists
         title = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('These are your lists', title)
+
+        self.browser.find_element_by_id('edit_0').click()
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/my-first-list/edit/',
+        )

@@ -1,6 +1,6 @@
 <h1>These are your lists</h1>
 <ul>
   {% for question_list in object_list %}
-  <li id="list_{{ forloop.counter0}}">{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a></li>
+  <li>{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a>status: {% if question_list.active %}Published{% else %}Incomplete | <a href="/" id="edit_{{ forloop.counter0 }}">Edit</a>{% endif %}</li>
   {% endfor %}
 </ul>
