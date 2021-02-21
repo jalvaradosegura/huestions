@@ -1,6 +1,6 @@
 <h1>These are your lists</h1>
 <ul>
   {% for question_list in object_list %}
-    <li>{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a></li>
+  <li id="list_{{ forloop.counter0}}">{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a></li>
   {% endfor %}
 </ul>
