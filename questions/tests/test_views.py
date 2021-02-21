@@ -371,6 +371,20 @@ class CreateQuestionListViewTests(ViewsMixin, TestCase):
             response['Location'], '/lists/super-list/add_question/'
         )
 
+'''
+class EditQuestionListViewTests(ViewsMixin, TestCase):
+    base_url = '/lists/create/'
+'''
+class EditQuestionListViewTests(TestCase):
+    def test_returns_correct_html(self):
+        # self.create_and_login_a_user()
+        QuestionListFactory(title='awesome list')
+
+        response = self.client.get('/lists/awesome-list/edit/')
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'edit_question_list.html')
+
 
 class CreateQuestionViewTests(ViewsMixin, TestCase):
     base_url = '/lists/{}/add_question/'

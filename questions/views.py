@@ -208,3 +208,7 @@ def add_alternatives(request, list_slug, question_slug, question_id):
             return redirect('create_question', question_list.slug)
 
     return render(request, 'add_alternatives.html', {'form': form})
+
+
+def edit_list(request, list_slug):
+    return render(request, 'edit_question_list.html')
