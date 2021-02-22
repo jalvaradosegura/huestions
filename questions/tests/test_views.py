@@ -45,17 +45,6 @@ class HomePageTests(ViewsMixin, TestCase):
         self.assertTemplateUsed(response, 'home.html')
 
 
-class RandomPageTests(ViewsMixin, TestCase):
-    base_url = '/random/'
-
-    def test_root_url_returns_correct_html(self):
-        self.create_and_login_a_user()
-
-        response = self.client.get('/random/')
-
-        self.assertTemplateUsed(response, 'home.html')
-
-
 class DetailsPageTests(ViewsMixin, TestCase):
     base_url = '/1/'
 
