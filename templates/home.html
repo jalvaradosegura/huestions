@@ -4,23 +4,4 @@
 {% else %}
 	<a href="{% url 'account_login' %}" id="login_button">Login</a>
 {% endif %}
-<title>{{ title }}</title>
-
-
-{{ already_voted }}
-{% if alread_voted %}
-    <p id="you_already_voted">You have already voted for this question or you have answered all the questions.</p>
-{% else %}
-<h1>{{ question }}</h1>
-<p id="creation_date">Publication date: {{ question.created|date:"d-m-Y" }}</p>
-    <form method="POST">
-    {% csrf_token %}
-    {% for alternative in question.alternatives.all %}
-	    <input type="hidden" name="question_id" value="{{ question.id }}">
-	    <input required name="alternative" type="radio" id="alternative_{{ forloop.counter }}" value="{{ alternative.id }}">
-	    <label id="label_alternative_{{ forloop.counter }}" for="alternative_{{ forloop.counter }}">{{ alternative.title }}</label>
-    {% endfor %}
-    <input hidden name="username" value="{{ user }}"/>
-    <button id="button_to_vote">Vote</button>
-{% endif %}
-</form>
+<h1>Welcome</h1>

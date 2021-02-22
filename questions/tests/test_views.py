@@ -29,11 +29,6 @@ from ..views import (
 class HomePageTests(ViewsMixin, TestCase):
     base_url = '/'
 
-    def setUp(self):
-        self.question = QuestionFactory()
-        self.alternative_1 = AlternativeFactory(question=self.question)
-        self.alternative_2 = AlternativeFactory(question=self.question)
-
     def test_root_url_resolves_to_home_page_view(self):
         self.create_and_login_a_user()
 
@@ -48,63 +43,6 @@ class HomePageTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'home.html')
-
-    def test_home_page_contains_latest_question(self):
-        self.create_and_login_a_user()
-
-        last_question = Question.objects.last()
-
-        response = self.client.get('/')
-        html = response.content.decode('utf8')
-
-        self.assertIn(last_question.title, html)
-
-    def test_home_page_contains_alternatives(self):
-        self.create_and_login_a_user()
-
-        response = self.client.get('/')
-        html = response.content.decode('utf8')
-
-        self.assertIn(self.alternative_1.title, html)
-        self.assertIn(self.alternative_2.title, html)
-
-    def test_home_page_contains_form(self):
-        self.create_and_login_a_user()
-
-        response = self.client.get('/')
-        html = response.content.decode('utf8')
-
-        self.assertRegex(html, '<form.*>')
-        self.assertRegex(html, '</form>')
-
-    def test_home_page_contains_button_to_vote(self):
-        self.create_and_login_a_user()
-
-        response = self.client.get('/')
-        html = response.content.decode('utf8')
-
-        self.assertRegex(html, '<button.* id="button_to_vote">Vote.*</button>')
-
-    def test_home_page_contains_radio_buttons_for_the_alternatives(self):
-        self.create_and_login_a_user()
-
-        response = self.client.get('/')
-        html = response.content.decode('utf8')
-
-        self.assertRegex(html, '<input.*type="radio".*id="alternative_1".*>')
-        self.assertRegex(html, '<input.*type="radio".*id="alternative_2".*>')
-
-    def test_home_page_redirect_after_post_request(self):
-        self.create_and_login_a_user()
-
-        question = Question.objects.last()
-        alternative = self.alternative_1.id
-
-        response = self.client.post(
-            '', data={'question_id': question.id, 'alternative': alternative}
-        )
-
-        self.assertRedirects(response, f'/{question.id}/')
 
 
 class RandomPageTests(ViewsMixin, TestCase):

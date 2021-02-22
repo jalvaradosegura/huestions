@@ -20,26 +20,7 @@ from .utils import get_random_question_for_user
 
 @login_required
 def home(request):
-    if request.method == 'POST':
-        chosen_alternative = Alternative.objects.get(
-            id=request.POST['alternative']
-        )
-        user = request.user
-        chosen_alternative.users.add(user)
-        question = Question.objects.get(id=request.POST['question_id'])
-        return redirect(question)
-
-    last_question = Question.objects.last()
-    already_voted = last_question.has_the_user_already_voted(request.user)
-    return render(
-        request,
-        'home.html',
-        {
-            'question': last_question,
-            'alread_voted': already_voted,
-            'title': 'Huestion',
-        },
-    )
+    return render(request, 'home.html')
 
 
 @login_required
