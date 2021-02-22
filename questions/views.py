@@ -15,7 +15,6 @@ from .forms import (
     EditListForm
 )
 from .models import Alternative, Question, QuestionList
-from .utils import get_random_question_for_user
 
 
 @login_required
