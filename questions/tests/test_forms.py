@@ -14,7 +14,7 @@ from ..forms import (
     AnswerQuestionForm,
     CompleteListForm,
     CreateQuestionForm,
-    CreateQuestionListForm
+    CreateQuestionListForm,
 )
 from ..models import Alternative, Question, QuestionList
 
@@ -69,7 +69,7 @@ class AnswerQuestionFormViewTests(TestCase):
                 'alternatives': [1],
                 'question_list_id': '1',
                 'next_page': '2',
-            }
+            },
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -86,10 +86,7 @@ class AnswerQuestionFormViewTests(TestCase):
 
         response = self.client.post(
             '/lists/awesome-list/',
-            data={
-                'alternatives': [1],
-                'question_list_id': '1'
-            }
+            data={'alternatives': [1], 'question_list_id': '1'},
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -110,9 +107,7 @@ class CreateQuestionListFormTests(TestCase):
         response = self.client.get('/lists/create/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertContains(
-            response, '<label for="id_title">Title:'
-        )
+        self.assertContains(response, '<label for="id_title">Title:')
 
     def test_create_question_list_with_form(self):
         self.sign_up()
@@ -185,14 +180,10 @@ class EditListFormTests(TestCase):
             title='an awesome list', owner=self.user
         )
 
-        response = self.client.get(
-            f'/lists/{question_list.slug}/edit/'
-        )
+        response = self.client.get(f'/lists/{question_list.slug}/edit/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertContains(
-            response, '<input type="text" name="list_title"'
-        )
+        self.assertContains(response, '<input type="text" name="list_title"')
 
     def test_submit_form_success(self):
         self.sign_up()
@@ -205,7 +196,7 @@ class EditListFormTests(TestCase):
             f'/lists/{question_list.slug}/edit/',
             data={
                 'list_title': 'new title',
-            }
+            },
         )
         question_list = QuestionList.objects.get(id=list_id)
 
@@ -228,9 +219,7 @@ class CreateQuestionFormTests(TestCase):
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertContains(
-            response, '<input type="text" name="title"'
-        )
+        self.assertContains(response, '<input type="text" name="title"')
 
     def test_create_question_with_form(self):
         question_list = QuestionListFactory(title='an awesome list')
@@ -287,10 +276,10 @@ class AddAlternativesFormTests(TestCase):
 
     def test_add_alternatives_with_form(self):
         form = AddAlternativesForm(
-                data={
-                    'alternative_1': 'Yes it is',
-                    'alternative_2': 'No it is not'
-                }
+            data={
+                'alternative_1': 'Yes it is',
+                'alternative_2': 'No it is not',
+            }
         )
 
         if form.is_valid():
@@ -307,10 +296,7 @@ class AddAlternativesFormTests(TestCase):
     def test_alternatives_all_in_lower_case(self):
         self.sign_up()
         form = AddAlternativesForm(
-                data={
-                    'alternative_1': 'yes',
-                    'alternative_2': 'no'
-                },
+            data={'alternative_1': 'yes', 'alternative_2': 'no'},
         )
 
         if form.is_valid():

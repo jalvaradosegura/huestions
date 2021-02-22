@@ -9,7 +9,9 @@ def main():
     # Allow to activate parallelization with python 3.8 and Django 3.1.X
     multiprocessing.set_start_method("fork")
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'huestion_project.settings')
+    os.environ.setdefault(
+        'DJANGO_SETTINGS_MODULE', 'huestion_project.settings'
+    )
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

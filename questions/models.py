@@ -37,7 +37,7 @@ class QuestionList(BaseAbstractModel):
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='lists'
+        related_name='lists',
     )
     active = models.BooleanField(default=False)
 

@@ -12,7 +12,7 @@ from .forms import (
     CompleteListForm,
     CreateQuestionForm,
     CreateQuestionListForm,
-    EditListForm
+    EditListForm,
 )
 from .models import Alternative, Question, QuestionList
 
@@ -41,7 +41,7 @@ class AnswerQuestionListView(LoginRequiredMixin, DetailView):
         messages.add_message(
             request,
             messages.WARNING,
-            ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
+            ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
         )
         return redirect('questions_list')
 
@@ -125,7 +125,7 @@ def create_question(request, list_slug):
             messages.add_message(
                 request,
                 messages.ERROR,
-                complete_list_form.custom_error_message
+                complete_list_form.custom_error_message,
             )
         form = CreateQuestionForm(request.POST, question_list=question_list)
         alternatives_form = AddAlternativesForm(request.POST)
@@ -133,10 +133,7 @@ def create_question(request, list_slug):
             question = form.save(commit=False)
             question.save()
             alternatives_form.save(question=question)
-            return redirect(
-                'create_question',
-                question_list.slug
-            )
+            return redirect('create_question', question_list.slug)
 
     return render(
         request,
@@ -144,8 +141,8 @@ def create_question(request, list_slug):
         {
             'form': form,
             'complete_list_form': complete_list_form,
-            'alternatives_form': alternatives_form
-        }
+            'alternatives_form': alternatives_form,
+        },
     )
 
 
@@ -155,7 +152,7 @@ class EditListView(LoginRequiredMixin, UserPassesTestMixin, View):
         question_list = QuestionList.objects.get(slug=slug)
         form = EditListForm(
             question_list=question_list,
-            initial={'list_title': question_list.title}
+            initial={'list_title': question_list.title},
         )
         return render(request, 'edit_question_list.html', {'form': form})
 

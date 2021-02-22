@@ -6,23 +6,23 @@ from django.urls import resolve
 
 from ..constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
-    LIST_COMPLETION_ERROR_MESSAGE
+    LIST_COMPLETION_ERROR_MESSAGE,
 )
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
-    UserFactory
+    UserFactory,
 )
-from .mixins import ViewsMixin
 from ..models import QuestionList
 from ..views import (
     AnswerQuestionListView,
-    QuestionsListView,
     QuestionListResultsView,
+    QuestionsListView,
+    create_question_list,
     home,
-    create_question_list
 )
+from .mixins import ViewsMixin
 
 
 class HomePageTests(ViewsMixin, TestCase):
@@ -137,8 +137,7 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
         self.create_and_login_a_user()
         question_list = QuestionListFactory(title='cool list', owner=self.user)
         question = QuestionFactory(
-            title='This is a title for a question',
-            child_of=question_list
+            title='This is a title for a question', child_of=question_list
         )
         AlternativeFactory(title='a1', question=question).users.add(self.user)
         AlternativeFactory(title='a2', question=question).users.add(self.user)
@@ -147,8 +146,7 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
         html = response.content.decode('utf8')
 
         self.assertRegex(
-            html,
-            "Question already answered. Your vote won't count this time."
+            html, "Question already answered. Your vote won't count this time."
         )
 
     def test_no_message_that_you_already_answered_the_question(self):
@@ -162,8 +160,7 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
         html = response.content.decode('utf8')
 
         self.assertNotRegex(
-            html,
-            "Question already answered. Your vote won't count this time."
+            html, "Question already answered. Your vote won't count this time."
         )
 
     def test_attempt_to_access_an_incomplete_list(self):
@@ -199,8 +196,7 @@ class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
         found = resolve('/lists/an-awesome-list/results/')
 
         self.assertEqual(
-            found.func.__name__,
-            QuestionListResultsView.as_view().__name__
+            found.func.__name__, QuestionListResultsView.as_view().__name__
         )
 
     def test_page_contains_html(self):
@@ -230,10 +226,7 @@ class CreateQuestionListViewTests(ViewsMixin, TestCase):
 
         found = resolve('/lists/create/')
 
-        self.assertEqual(
-            found.func.__name__,
-            create_question_list.__name__
-        )
+        self.assertEqual(found.func.__name__, create_question_list.__name__)
 
     def test_page_contains_title_within_html(self):
         self.create_and_login_a_user()
@@ -326,10 +319,7 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
         AlternativeFactory(title='no', question=question)
         url = f'/lists/{question_list.slug}/add_question/'
 
-        self.client.post(
-            url,
-            data={}
-        )
+        self.client.post(url, data={})
         modified_list = QuestionList.objects.get(slug=question_list.slug)
 
         self.assertTrue(modified_list.active)
@@ -342,12 +332,11 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
             data={
                 'title': 'Is this hard to answer?',
                 'alternative_1': 'Yes',
-                'alternative_2': 'No'
-            }
+                'alternative_2': 'No',
+            },
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
-            response['Location'],
-            '/lists/an-amazing-list/add_question/'
+            response['Location'], '/lists/an-amazing-list/add_question/'
         )

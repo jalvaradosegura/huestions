@@ -8,7 +8,7 @@ from selenium import webdriver
 
 from questions.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
-    LIST_COMPLETION_ERROR_MESSAGE
+    LIST_COMPLETION_ERROR_MESSAGE,
 )
 from questions.factories import (
     AlternativeFactory,
@@ -246,9 +246,7 @@ class CreateQuestionListTest(FunctionalTestsBase):
         # Javi attemps to visits an incomplete list view
         self.sign_up('javi@email.com', 'super_password_123')
         QuestionListFactory(title='incomplete list')
-        self.browser.get(
-            f'{self.live_server_url}/lists/incomplete-list/'
-            )
+        self.browser.get(f'{self.live_server_url}/lists/incomplete-list/')
 
         # She is redirected to the lists view
         self.assertEqual(
@@ -275,9 +273,7 @@ class UserProfileTests(FunctionalTestsBase):
         QuestionListFactory(title='my second list', owner=user)
 
         # Javi goes the the section where she can see all her lists
-        self.browser.get(
-            f'{self.live_server_url}/users/javi/lists/'
-        )
+        self.browser.get(f'{self.live_server_url}/users/javi/lists/')
 
         # There is a message welcoming her to her lists
         title = self.browser.find_element_by_tag_name('h1').text
