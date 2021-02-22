@@ -57,9 +57,16 @@ class CompleteListForm(forms.Form):
 class EditListForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.question_list = kwargs.pop('question_list')
+        if 'new_data' in kwargs:
+            new_data = kwargs.pop('new_data')
+            self.new_title = new_data['list_title']
         super().__init__(*args, **kwargs)
 
         self.fields['list_title'] = forms.CharField(label='List title')
+
+    def save(self):
+        self.question_list.title = self.new_title
+        self.question_list.save()
 
 
 class CreateQuestionForm(forms.ModelForm):

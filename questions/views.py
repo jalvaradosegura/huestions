@@ -215,8 +215,18 @@ class EditListView(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request, *args, **kwargs):
         slug = self.kwargs['list_slug']
         question_list = QuestionList.objects.get(slug=slug)
-        form = EditListForm(question_list=question_list)
+        form = EditListForm(
+            question_list=question_list,
+            initial={'list_title': question_list.title}
+        )
         return render(request, 'edit_question_list.html', {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        slug = self.kwargs['list_slug']
+        question_list = QuestionList.objects.get(slug=slug)
+        form = EditListForm(new_data=request.POST, question_list=question_list)
+        form.save()
+        return redirect('lists', question_list.owner)
 
     def test_func(self):
         slug = self.kwargs['list_slug']

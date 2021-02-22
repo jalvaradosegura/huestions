@@ -360,7 +360,12 @@ class UserProfileTests(FunctionalTestsBase):
 
         # There is a form inviting here to write a question and 2 alternatives
         # for the list (it also offers to change the list name)
-        title_input = self.browser.find_element_by_tag_name('list_title')
+        title_input = self.browser.find_element_by_id('id_list_title')
+
+        # Check for the text of the input of the list title
+        self.assertEqual(title_input.get_attribute('value'), 'my first list')
+
+        # She writes a new title for the list
         title_input.send_keys('new name for my list')
         self.browser.find_element_by_tag_name('button').click()
 

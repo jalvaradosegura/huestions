@@ -194,6 +194,23 @@ class EditListFormTests(TestCase):
             response, '<input type="text" name="list_title"'
         )
 
+    def test_submit_form_success(self):
+        self.sign_up()
+        question_list = QuestionListFactory(
+            title='an awesome list', owner=self.user
+        )
+        list_id = question_list.id
+
+        self.client.post(
+            f'/lists/{question_list.slug}/edit/',
+            data={
+                'list_title': 'new title',
+            }
+        )
+        question_list = QuestionList.objects.get(id=list_id)
+
+        self.assertEqual(question_list.title, 'new title')
+
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
             email='javi@email.com', username='javi', password='password123'
