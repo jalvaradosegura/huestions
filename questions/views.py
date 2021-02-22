@@ -11,7 +11,8 @@ from .forms import (
     AnswerQuestionForm,
     CompleteListForm,
     CreateQuestionForm,
-    CreateQuestionListForm
+    CreateQuestionListForm,
+    EditListForm
 )
 from .models import Alternative, Question, QuestionList
 from .utils import get_random_question_for_user
@@ -212,7 +213,10 @@ def add_alternatives(request, list_slug, question_slug, question_id):
 
 class EditListView(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'edit_question_list.html')
+        slug = self.kwargs['list_slug']
+        question_list = QuestionList.objects.get(slug=slug)
+        form = EditListForm(question_list=question_list)
+        return render(request, 'edit_question_list.html', {'form': form})
 
     def test_func(self):
         slug = self.kwargs['list_slug']

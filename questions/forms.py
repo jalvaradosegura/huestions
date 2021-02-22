@@ -54,6 +54,14 @@ class CompleteListForm(forms.Form):
         return self.question_list
 
 
+class EditListForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.question_list = kwargs.pop('question_list')
+        super().__init__(*args, **kwargs)
+
+        self.fields['list_title'] = forms.CharField(label='List title')
+
+
 class CreateQuestionForm(forms.ModelForm):
     class Meta:
         model = Question

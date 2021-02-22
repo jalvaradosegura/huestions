@@ -156,7 +156,7 @@ class CreateQuestionListFormTests(TestCase):
         self.client.login(email='javi@email.com', password='password123')
 
 
-class CompleteListFormTest(TestCase):
+class CompleteListFormTests(TestCase):
     def test_complete_list_with_form_fail(self):
         question_list = QuestionListFactory(title='an awesome list')
 
@@ -176,6 +176,29 @@ class CompleteListFormTest(TestCase):
         form = CompleteListForm(question_list=question_list)
 
         self.assertEqual(form.custom_error_message, '')
+
+
+class EditListFormTests(TestCase):
+    def test_get_form_success(self):
+        self.sign_up()
+        question_list = QuestionListFactory(
+            title='an awesome list', owner=self.user
+        )
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/edit/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(
+            response, '<input type="text" name="list_title"'
+        )
+
+    def sign_up(self):
+        self.user = get_user_model().objects.create_user(
+            email='javi@email.com', username='javi', password='password123'
+        )
+        self.client.login(email='javi@email.com', password='password123')
 
 
 class CreateQuestionFormTests(TestCase):
