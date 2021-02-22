@@ -15,12 +15,11 @@ from ..factories import (
     UserFactory
 )
 from .mixins import ViewsMixin
-from ..models import Question, QuestionList
+from ..models import QuestionList
 from ..views import (
     AnswerQuestionListView,
     QuestionsListView,
     QuestionListResultsView,
-    details,
     home,
     create_question_list
 )
@@ -43,41 +42,6 @@ class HomePageTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'home.html')
-
-
-class DetailsPageTests(ViewsMixin, TestCase):
-    base_url = '/1/'
-
-    def setUp(self):
-        self.question = QuestionFactory()
-        self.alternative_1 = AlternativeFactory(question=self.question)
-        self.alternative_2 = AlternativeFactory(question=self.question)
-
-    def test_details_url_resolves_to_details_page_view(self):
-        self.create_and_login_a_user()
-        self.alternative_1.users.add(self.user)
-
-        found = resolve('/1/')
-
-        self.assertEqual(found.func, details)
-
-    def test_details_url_returns_correct_html(self):
-        self.create_and_login_a_user()
-        self.alternative_1.users.add(self.user)
-
-        response = self.client.get('/1/')
-
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'details.html')
-
-    def test_details_page_contains_question_title(self):
-        self.create_and_login_a_user()
-        self.alternative_1.users.add(self.user)
-
-        response = self.client.get('/1/')
-        html = response.content.decode('utf8')
-
-        self.assertIn(self.question.title, html)
 
 
 class SignUpPageTests(TestCase):

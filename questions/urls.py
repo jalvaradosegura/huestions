@@ -5,9 +5,6 @@ from . import views
 urlpatterns = [
     path(route='', view=views.home, name='home'),
     path(
-        route='<int:question_id>/', view=views.details, name='question_details'
-    ),
-    path(
         route='lists/',
         view=views.QuestionsListView.as_view(),
         name='questions_list',

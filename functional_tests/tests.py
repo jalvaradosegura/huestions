@@ -15,7 +15,7 @@ from questions.factories import (
     QuestionFactory,
     QuestionListFactory,
 )
-from questions.models import Question, QuestionList
+from questions.models import QuestionList
 
 
 def vote_for_an_alternative(browser, selected_alternative):

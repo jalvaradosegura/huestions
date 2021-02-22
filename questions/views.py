@@ -23,12 +23,6 @@ def home(request):
     return render(request, 'home.html')
 
 
-@login_required
-def details(request, question_id):
-    question = Question.objects.get(id=question_id)
-    return render(request, 'details.html', {'question': question})
-
-
 class QuestionsListView(LoginRequiredMixin, ListView):
     queryset = QuestionList.activated_lists.all()
     template_name = 'question_list.html'
