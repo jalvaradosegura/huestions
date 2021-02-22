@@ -342,7 +342,7 @@ class UserProfileTests(FunctionalTestsBase):
         QuestionListFactory(title='my first list', owner=user)
         QuestionListFactory(title='my second list', owner=user)
 
-        # Javi goes the the section where she can all her lists
+        # Javi goes the the section where she can see all her lists
         self.browser.get(
             f'{self.live_server_url}/users/javi/lists/'
         )
@@ -351,6 +351,7 @@ class UserProfileTests(FunctionalTestsBase):
         title = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('These are your lists', title)
 
+        # She tries to edit one of the lists
         self.browser.find_element_by_id('edit_0').click()
         self.assertEqual(
             self.browser.current_url,
