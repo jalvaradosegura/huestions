@@ -244,21 +244,19 @@ class CreateQuestionListTest(FunctionalTestsBase):
 
         # She fill the form and create a question
         title_input = self.browser.find_element_by_id('id_title')
+        alternative_1_input = self.browser.find_element_by_id(
+            'id_alternative_1'
+        )
+        alternative_2_input = self.browser.find_element_by_id(
+            'id_alternative_2'
+        )
         title_input.send_keys('Is this actually working?')
+        alternative_1_input.send_keys('yes')
+        alternative_2_input.send_keys('no')
         self.browser.find_element_by_tag_name('button').click()
 
-        # There is a title that invites her to add alternatives to the question
-        title = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('Add alternatives', title)
-
-        # She fill the form and create a two alternatives
-        title_input = self.browser.find_element_by_id('id_alternative_1')
-        title_input.send_keys('Yes, is working')
-        title_input = self.browser.find_element_by_id('id_alternative_2')
-        title_input.send_keys('No, is not working')
-        self.browser.find_element_by_tag_name('button').click()
-
-        # Check that the url changed, to something related to add a question
+        # She is redirected to the same page
+        self.assertIn('Create a question', title)
         self.assertEqual(
             self.browser.current_url,
             f'{self.live_server_url}/lists/an-amazing-list/add_question/',
@@ -272,9 +270,18 @@ class CreateQuestionListTest(FunctionalTestsBase):
         # She presses the "complete list" button
         complete_button = self.browser.find_element_by_id('complete_button')
         complete_button.click()
+
         # Check that the list activated
         last_list = QuestionList.activated_lists.last()
         self.assertTrue(last_list.active)
+
+        # Check that the list has the question and the latter the alternatives
+        question = last_list.questions.last()
+        alternative_1 = question.alternatives.first()
+        alternative_2 = question.alternatives.last()
+        self.assertEqual(question.title, 'Is this actually working?')
+        self.assertEqual(alternative_1.title, 'Yes')
+        self.assertEqual(alternative_2.title, 'No')
 
     def test_only_active_list_are_shown(self):
         # 2 question lists are created
