@@ -97,16 +97,17 @@ class AddAlternativesForm(forms.Form):
     alternative_2 = forms.CharField()
 
     def __init__(self, *args, **kwargs):
-        self.question = kwargs.pop('question')
+        # self.question = kwargs.pop('question')
         super().__init__(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         cleaned_data = super().clean()
+        question = kwargs.pop('question')
         AlternativeFactory(
-            title=cleaned_data.get('alternative_1'), question=self.question
+            title=cleaned_data.get('alternative_1'), question=question
         )
         AlternativeFactory(
-            title=cleaned_data.get('alternative_2'), question=self.question
+            title=cleaned_data.get('alternative_2'), question=question
         )
 
     def clean_alternative_1(self):

@@ -447,46 +447,16 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
         self.create_and_login_a_user()
 
         response = self.client.post(
-            self.base_url, data={'title': 'Is this hard to answer?'}
+            self.base_url,
+            data={
+                'title': 'Is this hard to answer?',
+                'alternative_1': 'Yes',
+                'alternative_2': 'No'
+            }
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            '/lists/an-amazing-list/is-this-hard-to-answer/1/add_alternatives/'
-        )
-
-
-class AddAlternativesViewTests(ViewsMixin, TestCase):
-    base_url = '/lists/{}/{}/{}/add_alternatives/'
-
-    def setUp(self):
-        question_list = QuestionListFactory(title='awesome list')
-        question = QuestionFactory(
-            title='who is the best?', child_of=question_list
-        )
-        self.base_url = self.base_url.format(
-            question_list.slug, question.slug, question.id
-        )
-
-    def test_returns_correct_html(self):
-        self.create_and_login_a_user()
-
-        response = self.client.get(self.base_url)
-
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'add_alternatives.html')
-
-    def test_post_success(self):
-        self.create_and_login_a_user()
-
-        response = self.client.post(
-                self.base_url,
-                data={'alternative_1': 'Corgis', 'alternative_2': 'Corgis!!'}
-        )
-
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(
-            response['Location'],
-            '/lists/awesome-list/add_question/'
+            '/lists/an-amazing-list/add_question/'
         )

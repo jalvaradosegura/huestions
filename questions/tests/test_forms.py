@@ -274,10 +274,7 @@ class AddAlternativesFormTests(TestCase):
         self.sign_up()
 
         response = self.client.get(
-            (
-                f'/lists/{self.question_list.slug}/{self.question.slug}/'
-                f'{self.question.id}/add_alternatives/'
-            )
+            f'/lists/{self.question_list.slug}/add_question/'
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -293,12 +290,11 @@ class AddAlternativesFormTests(TestCase):
                 data={
                     'alternative_1': 'Yes it is',
                     'alternative_2': 'No it is not'
-                },
-                question=self.question
+                }
         )
 
         if form.is_valid():
-            form.save()
+            form.save(question=self.question)
         firt_alternative = Alternative.objects.first()
         last_alternative = Alternative.objects.last()
 
@@ -315,11 +311,10 @@ class AddAlternativesFormTests(TestCase):
                     'alternative_1': 'yes',
                     'alternative_2': 'no'
                 },
-                question=self.question
         )
 
         if form.is_valid():
-            form.save()
+            form.save(question=self.question)
         firt_alternative = Alternative.objects.first()
         last_alternative = Alternative.objects.last()
 

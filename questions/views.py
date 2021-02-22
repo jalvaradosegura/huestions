@@ -166,6 +166,7 @@ def create_question(request, list_slug):
     question_list = QuestionList.objects.get(slug=list_slug)
     form = CreateQuestionForm(question_list=question_list)
     complete_list_form = CompleteListForm(question_list=question_list)
+    alternatives_form = AddAlternativesForm()
 
     if request.method == 'POST':
         if 'title' not in request.POST:
@@ -178,37 +179,25 @@ def create_question(request, list_slug):
                 complete_list_form.custom_error_message
             )
         form = CreateQuestionForm(request.POST, question_list=question_list)
-        if form.is_valid():
+        alternatives_form = AddAlternativesForm(request.POST)
+        if form.is_valid() and alternatives_form.is_valid():
             question = form.save(commit=False)
             question.save()
+            alternatives_form.save(question=question)
             return redirect(
-                'add_alternatives',
-                question_list.slug,
-                question.slug,
-                question.id
+                'create_question',
+                question_list.slug
             )
 
     return render(
         request,
         'create_question.html',
-        {'form': form, 'complete_list_form': complete_list_form}
+        {
+            'form': form,
+            'complete_list_form': complete_list_form,
+            'alternatives_form': alternatives_form
+        }
     )
-
-
-@login_required
-def add_alternatives(request, list_slug, question_slug, question_id):
-    question = Question.objects.get(id=question_id)
-    form = AddAlternativesForm(question=question)
-
-    if request.method == 'POST':
-        form = AddAlternativesForm(request.POST, question=question)
-
-        if form.is_valid():
-            form.save()
-            question_list = question.child_of
-            return redirect('create_question', question_list.slug)
-
-    return render(request, 'add_alternatives.html', {'form': form})
 
 
 class EditListView(LoginRequiredMixin, UserPassesTestMixin, View):
