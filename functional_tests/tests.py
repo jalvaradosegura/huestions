@@ -335,7 +335,7 @@ class UserProfileTests(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
-    def test_user_activate_a_list(self):
+    def test_user_complete_a_list(self):
         # Set up a few lists for Javi
         self.sign_up('javi@email.com', 'super_password_123')
         user = get_user_model().objects.get(email='javi@email.com')
@@ -357,3 +357,17 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/my-first-list/edit/',
         )
+
+        # There is a form inviting here to write a question and 2 alternatives
+        # for the list (it also offers to change the list name)
+        title_input = self.browser.find_element_by_tag_name('list')
+        title_input.send_keys('new name for my list')
+        self.browser.find_element_by_tag_name('button').click()
+
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/users/javi/lists/',
+        )
+
+        lists = self.browser.find_element_by_tag_name('ul').text
+        self.assertIn('new name for my list', lists)
