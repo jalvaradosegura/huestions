@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, View
 
 from .constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
 from .forms import (
@@ -210,6 +210,13 @@ def add_alternatives(request, list_slug, question_slug, question_id):
     return render(request, 'add_alternatives.html', {'form': form})
 
 
-@login_required
-def edit_list(request, list_slug):
-    return render(request, 'edit_question_list.html')
+class EditListView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'edit_question_list.html')
+
+    def test_func(self):
+        slug = self.kwargs['list_slug']
+        question_list = QuestionList.objects.get(slug=slug)
+        if self.request.user == question_list.owner:
+            return True
+        return False

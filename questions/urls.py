@@ -35,7 +35,7 @@ urlpatterns = [
     ),
     path(
         route='lists/<slug:list_slug>/edit/',
-        view=views.edit_list,
+        view=views.EditListView.as_view(),
         name='edit_list',
     ),
     path(

@@ -12,6 +12,7 @@ from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
+    UserFactory
 )
 from .mixins import ViewsMixin
 from ..models import Question, QuestionList
@@ -381,11 +382,21 @@ class EditQuestionListViewTests(ViewsMixin, TestCase):
 
     def test_returns_correct_html(self):
         self.create_and_login_a_user()
+        QuestionListFactory(title="some list", owner=self.user)
 
-        response = self.client.get(self.base_url)
+        response = self.client.get('/lists/some-list/edit/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'edit_question_list.html')
+
+    def test_cant_access_if_user_is_not_the_owner(self):
+        user_1 = UserFactory(username='Jorge', email='jorge@email.com')
+        QuestionListFactory(title="access list", owner=user_1)
+        self.create_and_login_a_user()
+
+        response = self.client.get('/lists/access-list/edit/')
+
+        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
 
 class CreateQuestionViewTests(ViewsMixin, TestCase):

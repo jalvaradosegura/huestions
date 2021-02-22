@@ -18,9 +18,10 @@ class ViewsMixin:
     def base_url(self):
         return NotImplemented
 
-    def create_and_login_a_user(self):
+    def create_and_login_a_user(self, email='javi@email.com'):
+        username = email.split('@')[0]
         self.user = get_user_model().objects.create_user(
-            email='javi@email.com', username='javi', password='password123'
+            email=email, username=username, password='password123'
         )
         self.client.login(email='javi@email.com', password='password123')
 
