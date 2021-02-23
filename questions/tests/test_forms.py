@@ -212,7 +212,9 @@ class EditListFormTests(TestCase):
 class CreateQuestionFormTests(TestCase):
     def test_get_form_success(self):
         self.sign_up()
-        question_list = QuestionListFactory(title='an awesome list')
+        question_list = QuestionListFactory(
+            title='an awesome list', owner=self.user
+        )
 
         response = self.client.get(
             f'/lists/{question_list.slug}/add_question/'
@@ -261,9 +263,10 @@ class AddAlternativesFormTests(TestCase):
 
     def test_get_form_success(self):
         self.sign_up()
+        QuestionListFactory(title='cool list', owner=self.user)
 
         response = self.client.get(
-            f'/lists/{self.question_list.slug}/add_question/'
+            '/lists/cool-list/add_question/'
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)

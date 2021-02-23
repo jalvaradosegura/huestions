@@ -10,7 +10,7 @@
 
 <form action="" method="post">
   {% csrf_token %}
-  {{ form.title.label }}: {{ form.title }}
+  {{ question_form }}
   {{ alternatives_form }}
   <button type="submit">Create</button>
 </form>

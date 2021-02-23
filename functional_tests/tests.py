@@ -1,6 +1,4 @@
-import datetime
 import time
-from unittest import skip
 
 from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase
@@ -16,6 +14,7 @@ from questions.factories import (
     QuestionListFactory,
 )
 from questions.models import QuestionList
+from users.models import CustomUser
 
 
 def vote_for_an_alternative(browser, selected_alternative):
@@ -223,7 +222,8 @@ class CreateQuestionListTest(FunctionalTestsBase):
     def test_attempt_to_complete_a_list_with_no_full_question(self):
         # javi goes the the section where she can add questions to a list
         self.sign_up('javi@email.com', 'super_password_123')
-        QuestionListFactory(title='awesome list')
+        user = CustomUser.objects.get(email='javi@email.com')
+        QuestionListFactory(title='awesome list', owner=user)
         self.browser.get(
             f'{self.live_server_url}/lists/awesome-list/add_question/'
         )

@@ -26,7 +26,8 @@ urlpatterns = [
     ),
     path(
         route='lists/<slug:list_slug>/add_question/',
-        view=views.create_question,
+        view=views.AddQuestionView.as_view(),
+        # view=views.create_question,
         name='create_question',
     ),
     path(

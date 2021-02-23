@@ -110,40 +110,67 @@ def create_question_list(request):
     return render(request, 'create_question_list.html', {'form': form})
 
 
-@login_required
-def create_question(request, list_slug):
-    question_list = QuestionList.objects.get(slug=list_slug)
-    form = CreateQuestionForm(question_list=question_list)
-    complete_list_form = CompleteListForm(question_list=question_list)
-    alternatives_form = AddAlternativesForm()
+class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs['list_slug']
+        question_list = QuestionList.objects.get(slug=slug)
 
-    if request.method == 'POST':
+        question_form = CreateQuestionForm(question_list=question_list)
+        complete_list_form = CompleteListForm(question_list=question_list)
+        alternatives_form = AddAlternativesForm()
+
+        return render(
+            request,
+            'create_question.html',
+            {
+                'question_form': question_form,
+                'complete_list_form': complete_list_form,
+                'alternatives_form': alternatives_form,
+            },
+        )
+
+    def post(self, request, *args, **kwargs):
+        slug = self.kwargs['list_slug']
+        question_list = QuestionList.objects.get(slug=slug)
+
+        complete_list_form = CompleteListForm(question_list=question_list)
         if 'title' not in request.POST:
             if complete_list_form.is_valid():
                 complete_list_form.save()
                 return redirect('questions_list')
+
             messages.add_message(
                 request,
                 messages.ERROR,
                 complete_list_form.custom_error_message,
             )
-        form = CreateQuestionForm(request.POST, question_list=question_list)
+
+        question_form = CreateQuestionForm(
+            request.POST, question_list=question_list
+        )
         alternatives_form = AddAlternativesForm(request.POST)
-        if form.is_valid() and alternatives_form.is_valid():
-            question = form.save(commit=False)
+        if question_form.is_valid() and alternatives_form.is_valid():
+            question = question_form.save(commit=False)
             question.save()
             alternatives_form.save(question=question)
             return redirect('create_question', question_list.slug)
 
-    return render(
-        request,
-        'create_question.html',
-        {
-            'form': form,
-            'complete_list_form': complete_list_form,
-            'alternatives_form': alternatives_form,
-        },
-    )
+        return render(
+            request,
+            'create_question.html',
+            {
+                'question_form': question_form,
+                'complete_list_form': complete_list_form,
+                'alternatives_form': alternatives_form,
+            },
+        )
+
+    def test_func(self):
+        slug = self.kwargs['list_slug']
+        question_list = QuestionList.objects.get(slug=slug)
+        if self.request.user == question_list.owner:
+            return True
+        return False
 
 
 class EditListView(LoginRequiredMixin, UserPassesTestMixin, View):
