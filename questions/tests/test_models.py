@@ -27,6 +27,12 @@ class QuestionModelTests(TestStrMixin, TestCase):
         self.alternative_1.users.add(self.user_1)
         self.alternative_2.users.add(self.user_2)
 
+    def test_get_absolute_url(self):
+        self.assertEqual(
+            self.question.get_absolute_url(),
+            '/lists/some-title/super-question/1/edit/',
+        )
+
     def test_was_created_recently(self):
         self.assertTrue(self.question.was_created_recently())
 

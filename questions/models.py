@@ -81,6 +81,11 @@ class Question(BaseAbstractModel):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse(
+            'question_details', args=[self.child_of.slug, self.slug, self.id]
+        )
+
     def was_created_recently(self):
         return self.created >= timezone.now() - datetime.timedelta(days=1)
 

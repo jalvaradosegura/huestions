@@ -34,4 +34,12 @@ urlpatterns = [
         view=views.EditListView.as_view(),
         name='edit_list',
     ),
+    path(
+        route=(
+            'lists/<slug:list_slug>/<slug:question_slug>/'
+            '<int:question_id>/edit/'
+        ),
+        view=views.EditListView.as_view(),
+        name='question_details',
+    ),
 ]
