@@ -286,8 +286,7 @@ class UserProfileTests(FunctionalTestsBase):
             f'{self.live_server_url}/lists/my-first-list/edit/',
         )
 
-        # There is a form inviting here to write a question and 2 alternatives
-        # for the list (it also offers to change the list name)
+        # There is a form inviting here to change the title of the list
         title_input = self.browser.find_element_by_id('id_list_title')
 
         # Check for the text of the input of the list title
