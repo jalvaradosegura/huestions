@@ -175,7 +175,6 @@ class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
 
 class EditListView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = QuestionList
-    # fields = ['title']
     template_name = 'edit_question_list.html'
     form_class = EditListForm
 
