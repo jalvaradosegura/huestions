@@ -5,7 +5,7 @@
 </form>
 
 <ol>
-  {% for question in questions %}
+  {% for question in questionlist.questions.all %}
     <li>{{ question }}</li>
   {% endfor %}
 </ol>
