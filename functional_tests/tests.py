@@ -273,7 +273,9 @@ class UserProfileTests(FunctionalTestsBase):
         QuestionListFactory(title='my second list', owner=user)
 
         # Add a questions to one of the lists
-        QuestionFactory(title='is this cool?', child_of=question_list)
+        question = QuestionFactory(
+            title='is this cool?', child_of=question_list
+        )
         QuestionFactory(title='is this awesome?', child_of=question_list)
 
         # Javi goes the the section where she can see all her lists
@@ -323,3 +325,15 @@ class UserProfileTests(FunctionalTestsBase):
         # with the questions that belong to the list
         questions = self.browser.find_element_by_tag_name('ol').text
         self.assertIn('is this awesome?', questions)
+
+        # There is a button for editing each question, she presses the first
+        # one
+        self.browser.find_element_by_id('question_0').click()
+        # She is now on a url for editing the question with its alternatives
+        self.assertEqual(
+            self.browser.current_url,
+            (
+                f'{self.live_server_url}/lists/new-name-for-my-list/'
+                f'{question.slug}/{question.id}/edit/'
+            ),
+        )

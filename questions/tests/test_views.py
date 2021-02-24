@@ -374,3 +374,42 @@ class CreateQuestionViewTests(ViewsMixin, TestCase):
         response = self.client.get('/lists/access-list/add_question/')
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+
+
+class EditQuestionViewTests(ViewsMixin, TestCase):
+    base_url = '/lists/{}/{}/{}/edit/'
+
+    def setUp(self):
+        self.question_list = QuestionListFactory(title='An amazing list')
+        self.question = QuestionFactory(title='Is this cool?')
+        self.base_url = self.base_url.format(
+            self.question_list.slug,
+            self.question.slug,
+            self.question.id,
+        )
+
+    def test_returns_correct_html(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(title='cool list', owner=self.user)
+        question = QuestionFactory(
+            title='Is this hard', child_of=question_list
+        )
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'edit_question.html')
+
+    def test_cant_access_if_user_is_not_the_owner(self):
+        user_1 = UserFactory(username='Jorge', email='jorge@email.com')
+        question_list = QuestionListFactory(title="access list", owner=user_1)
+        question = QuestionFactory(title='what?', child_of=question_list)
+        self.create_and_login_a_user()
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)

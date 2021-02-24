@@ -6,6 +6,6 @@
 
 <ol>
   {% for question in questionlist.questions.all %}
-    <li>{{ question }}</li>
+  <li>{{ question }} <a id="question_{{ forloop.counter0 }}" href="{{ question.get_absolute_url }}">Edit</a></li>
   {% endfor %}
 </ol>

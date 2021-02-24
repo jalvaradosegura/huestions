@@ -187,3 +187,16 @@ class EditListView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == question_list.owner:
             return True
         return False
+
+
+class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Question
+    fields = ['title']
+    template_name = 'edit_question.html'
+
+    def test_func(self):
+        slug = self.kwargs['list_slug']
+        question_list = QuestionList.objects.get(slug=slug)
+        if self.request.user == question_list.owner:
+            return True
+        return False
