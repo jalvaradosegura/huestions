@@ -293,6 +293,7 @@ class UserProfileTests(FunctionalTestsBase):
         self.assertEqual(title_input.get_attribute('value'), 'my first list')
 
         # She writes a new title for the list
+        title_input.clear()
         title_input.send_keys('new name for my list')
         self.browser.find_element_by_tag_name('button').click()
 
@@ -305,3 +306,11 @@ class UserProfileTests(FunctionalTestsBase):
         # Check that the list has the new name
         lists = self.browser.find_element_by_tag_name('ul').text
         self.assertIn('new name for my list', lists)
+
+        # She tries to edit the same list again
+        self.browser.find_element_by_id('edit_0').click()
+        # Check that the url has the new name
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/new-name-for-my-list/edit/',
+        )

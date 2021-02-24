@@ -12,6 +12,7 @@ from .forms import (
     CompleteListForm,
     CreateQuestionForm,
     CreateQuestionListForm,
+    EditListForm,
 )
 from .models import Alternative, Question, QuestionList
 
@@ -174,8 +175,9 @@ class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
 
 class EditListView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = QuestionList
-    fields = ['title']
+    # fields = ['title']
     template_name = 'edit_question_list.html'
+    form_class = EditListForm
 
     def get_success_url(self):
         return reverse('lists', kwargs={'username': self.request.user})

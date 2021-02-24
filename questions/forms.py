@@ -112,3 +112,14 @@ class AddAlternativesForm(forms.Form):
         alternative = first_char_upper + alternative_2[1:]
 
         return alternative
+
+
+class EditListForm(forms.ModelForm):
+    class Meta:
+        model = QuestionList
+        fields = ['title']
+
+    def save(self, *args, **kwargs):
+        self.instance.slug = self.instance._generate_unique_slug_if_needed()
+        question_list = super().save(*args, **kwargs)
+        return question_list

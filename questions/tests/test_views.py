@@ -289,11 +289,13 @@ class EditQuestionListViewTests(ViewsMixin, TestCase):
         response = self.client.post(
             '/lists/access-list/edit/', data={'title': 'another title'}
         )
+        question_list = QuestionList.objects.last()
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'], '/users/javi/lists/'
         )
+        self.assertEqual(question_list.slug, 'another-title')
 
 
 class CreateQuestionViewTests(ViewsMixin, TestCase):

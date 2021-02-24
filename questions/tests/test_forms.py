@@ -15,6 +15,7 @@ from ..forms import (
     CompleteListForm,
     CreateQuestionForm,
     CreateQuestionListForm,
+    EditListForm,
 )
 from ..models import Alternative, Question, QuestionList
 
@@ -279,3 +280,14 @@ class AddAlternativesFormTests(TestCase):
             email='javi@email.com', username='javi', password='password123'
         )
         self.client.login(email='javi@email.com', password='password123')
+
+
+class EditListFormTests(TestCase):
+    def test_create_list_with_form(self):
+        form = EditListForm(data={'title': 'Is this working?'})
+        form.save()
+        question_list = QuestionList.objects.last()
+
+        self.assertEqual(question_list.__str__(), 'Is this working?')
+        self.assertEqual(question_list.slug, 'is-this-working')
+        self.assertEqual(QuestionList.objects.all().count(), 1)
