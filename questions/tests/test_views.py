@@ -282,6 +282,19 @@ class EditQuestionListViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
+    def test_post_success(self):
+        self.create_and_login_a_user()
+        QuestionListFactory(title="access list", owner=self.user)
+
+        response = self.client.post(
+            '/lists/access-list/edit/', data={'title': 'another title'}
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'], '/users/javi/lists/'
+        )
+
 
 class CreateQuestionViewTests(ViewsMixin, TestCase):
     base_url = '/lists/{}/add_question/'

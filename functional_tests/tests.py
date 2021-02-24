@@ -287,7 +287,7 @@ class UserProfileTests(FunctionalTestsBase):
         )
 
         # There is a form inviting here to change the title of the list
-        title_input = self.browser.find_element_by_id('id_list_title')
+        title_input = self.browser.find_element_by_id('id_title')
 
         # Check for the text of the input of the list title
         self.assertEqual(title_input.get_attribute('value'), 'my first list')

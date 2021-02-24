@@ -31,7 +31,7 @@ urlpatterns = [
         name='create_question',
     ),
     path(
-        route='lists/<slug:list_slug>/edit/',
+        route='lists/<slug:slug>/edit/',
         view=views.EditListView.as_view(),
         name='edit_list',
     ),
