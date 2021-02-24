@@ -296,10 +296,12 @@ class UserProfileTests(FunctionalTestsBase):
         title_input.send_keys('new name for my list')
         self.browser.find_element_by_tag_name('button').click()
 
+        # Check she is back to her lists
         self.assertEqual(
             self.browser.current_url,
             f'{self.live_server_url}/users/javi/lists/',
         )
 
+        # Check that the list has the new name
         lists = self.browser.find_element_by_tag_name('ul').text
         self.assertIn('new name for my list', lists)
