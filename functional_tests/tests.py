@@ -269,8 +269,12 @@ class UserProfileTests(FunctionalTestsBase):
         # Set up a few lists for Javi
         self.sign_up('javi@email.com', 'super_password_123')
         user = get_user_model().objects.get(email='javi@email.com')
-        QuestionListFactory(title='my first list', owner=user)
+        question_list = QuestionListFactory(title='my first list', owner=user)
         QuestionListFactory(title='my second list', owner=user)
+
+        # Add a questions to one of the lists
+        QuestionFactory(title='is this cool?', child_of=question_list)
+        QuestionFactory(title='is this awesome?', child_of=question_list)
 
         # Javi goes the the section where she can see all her lists
         self.browser.get(f'{self.live_server_url}/users/javi/lists/')
@@ -314,3 +318,8 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/new-name-for-my-list/edit/',
         )
+
+        # She realizes that below the input for the list name, there is a list
+        # with the questions that belong to the list
+        questions = self.browser.find_element_by_tag_name('ol').text
+        self.assertIn('is this awesome?', questions)

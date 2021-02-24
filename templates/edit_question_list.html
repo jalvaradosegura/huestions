@@ -3,3 +3,9 @@
   {{ form }}
   <button type="submit">Change name</button>
 </form>
+
+<ol>
+  {% for question in questions %}
+    <li>{{ question }}</li>
+  {% endfor %}
+</ol>
