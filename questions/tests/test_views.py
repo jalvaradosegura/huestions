@@ -15,7 +15,7 @@ from ..factories import (
     UserFactory,
 )
 from ..forms import AddAlternativesForm
-from ..models import QuestionList
+from ..models import Alternative, Question, QuestionList
 from ..views import (
     AnswerQuestionListView,
     QuestionListResultsView,
@@ -451,3 +451,31 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         self.assertRegex(html, '<label for="id_title">')
         self.assertRegex(html, '<label for="id_alternative_1">')
         self.assertRegex(html, '<label for="id_alternative_2">')
+
+    def test_post_success(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(
+            title='cool list', owner=self.user
+        )
+        question = QuestionFactory(title='cool?', child_of=question_list)
+        alternative_1 = AlternativeFactory(title='yes', question=question)
+        alternative_2 = AlternativeFactory(title='no', question=question)
+
+        response = self.client.post(
+            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/',
+            data={
+                'title': 'edited',
+                'alternative_1': 'edited',
+                'alternative_2': 'edited'
+            }
+        )
+        edited_question = Question.objects.get(id=question.id)
+        edited_alternative_1 = Alternative.objects.get(id=alternative_1.id)
+        edited_alternative_2 = Alternative.objects.get(id=alternative_2.id)
+
+        self.assertEqual(edited_question.title, 'edited')
+        self.assertEqual(edited_alternative_1.title, 'Edited')
+        self.assertEqual(edited_alternative_2.title, 'Edited')
+        self.assertEqual(
+            response['Location'], '/lists/cool-list/edit/'
+        )

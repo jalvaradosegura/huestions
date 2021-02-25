@@ -215,3 +215,10 @@ class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_success_url(self):
         list_slug = self.kwargs.get('list_slug')
         return reverse('edit_list', kwargs={'slug': list_slug})
+
+    def post(self, request, *args, **kwargs):
+        alternatives_form = AddAlternativesForm(request.POST)
+        question = self.get_object()
+        if alternatives_form.is_valid():
+            alternatives_form.save(question=question)
+        return super().post(request, *args, **kwargs)
