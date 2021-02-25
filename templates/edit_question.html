@@ -1,2 +1,6 @@
-{{ form }}
-{{ alternatives_form }}
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form }}
+  {{ alternatives_form }}
+  <button type="submit">Apply changes</button>
+</form>

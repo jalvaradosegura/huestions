@@ -211,3 +211,7 @@ class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             }
         )
         return context
+
+    def get_success_url(self):
+        list_slug = self.kwargs.get('list_slug')
+        return reverse('edit_list', kwargs={'slug': list_slug})

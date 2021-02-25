@@ -278,6 +278,10 @@ class UserProfileTests(FunctionalTestsBase):
         )
         QuestionFactory(title='is this awesome?', child_of=question_list)
 
+        # Add alternatives to the same list
+        AlternativeFactory(title='Yes', question=question)
+        AlternativeFactory(title='No', question=question)
+
         # Javi goes the the section where she can see all her lists
         self.browser.get(f'{self.live_server_url}/users/javi/lists/')
 
@@ -344,9 +348,12 @@ class UserProfileTests(FunctionalTestsBase):
         alternative_2 = self.browser.find_element_by_id('id_alternative_2')
 
         # She writes some new info
-        question_title.clear().send_keys("This was edited?")
-        alternative_1.clear().send_keys("Yes it was")
-        alternative_2.clear().send_keys("No it was not")
+        question_title.clear()
+        alternative_1.clear()
+        alternative_2.clear()
+        question_title.send_keys("This was edited?")
+        alternative_1.send_keys("Yes it was")
+        alternative_2.send_keys("No it was not")
         self.browser.find_element_by_tag_name('button').click()
 
         # She tries to edit the same question again

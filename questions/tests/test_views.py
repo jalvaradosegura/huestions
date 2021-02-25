@@ -395,6 +395,8 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         question = QuestionFactory(
             title='Is this hard', child_of=question_list
         )
+        AlternativeFactory(title='Yes', question=question)
+        AlternativeFactory(title='No', question=question)
 
         response = self.client.get(
             f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
