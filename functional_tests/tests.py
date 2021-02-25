@@ -337,3 +337,25 @@ class UserProfileTests(FunctionalTestsBase):
                 f'{question.slug}/{question.id}/edit/'
             ),
         )
+
+        # There is a form for editing the question and its alternatives
+        question_title = self.browser.find_element_by_id('id_title')
+        alternative_1 = self.browser.find_element_by_id('id_alternative_1')
+        alternative_2 = self.browser.find_element_by_id('id_alternative_2')
+
+        # She writes some new info
+        question_title.clear().send_keys("This was edited?")
+        alternative_1.clear().send_keys("Yes it was")
+        alternative_2.clear().send_keys("No it was not")
+        self.browser.find_element_by_tag_name('button').click()
+
+        # She tries to edit the same question again
+        self.browser.find_element_by_id('question_0').click()
+        # The url has the new name now
+        self.assertEqual(
+            self.browser.current_url,
+            (
+                f'{self.live_server_url}/lists/new-name-for-my-list/'
+                f'this-was-edited/{question.id}/edit/'
+            ),
+        )
