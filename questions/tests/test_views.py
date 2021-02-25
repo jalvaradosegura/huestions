@@ -14,6 +14,7 @@ from ..factories import (
     QuestionListFactory,
     UserFactory,
 )
+from ..forms import AddAlternativesForm
 from ..models import QuestionList
 from ..views import (
     AnswerQuestionListView,
@@ -413,3 +414,38 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+
+    def test_pass_alternatives_form_to_context(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(title='cool list', owner=self.user)
+        question = QuestionFactory(
+            title='Is this hard', child_of=question_list
+        )
+        AlternativeFactory(title="Yes it is", question=question)
+        AlternativeFactory(title="No it isn't", question=question)
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+        )
+
+        self.assertIsInstance(
+            response.context['alternatives_form'], AddAlternativesForm
+        )
+
+    def test_forms_are_being_used_within_template(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(title='cool list', owner=self.user)
+        question = QuestionFactory(
+            title='Is this hard', child_of=question_list
+        )
+        AlternativeFactory(title="Yes it is", question=question)
+        AlternativeFactory(title="No it isn't", question=question)
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+        )
+        html = response.content.decode('utf8')
+
+        self.assertRegex(html, '<label for="id_title">')
+        self.assertRegex(html, '<label for="id_alternative_1">')
+        self.assertRegex(html, '<label for="id_alternative_2">')

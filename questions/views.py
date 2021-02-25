@@ -201,3 +201,13 @@ class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == question_list.owner:
             return True
         return False
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        alternative_1, alternative_2 = self.object.alternatives.all()
+        context['alternatives_form'] = AddAlternativesForm(
+            initial={
+                'alternative_1': alternative_1, 'alternative_2': alternative_2
+            }
+        )
+        return context
