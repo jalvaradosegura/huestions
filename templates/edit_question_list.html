@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block main %}
+
 <form action="" method="post">
   {% csrf_token %}
   {{ form }}
@@ -9,3 +12,5 @@
   <li>{{ question }} <a id="question_{{ forloop.counter0 }}" href="{{ question.get_absolute_url }}">Edit</a></li>
   {% endfor %}
 </ol>
+
+{% endblock main %}

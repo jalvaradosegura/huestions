@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block main %}
+
 <p>{{ questionlist.title }}</p>
 
 {% for question in questions %}
@@ -35,3 +38,4 @@
  Question already answered. Your vote won't count this time. 
 {% endif %}
 
+{% endblock main %}

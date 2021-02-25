@@ -1,0 +1,11 @@
+{% if user.is_authenticated %}
+  <p>Welcome {{ user }}, <a href="{% url 'account_logout' %}" id="logout_button">Log out</a></p>
+  <a href="{% url 'questions_list' %}">Lists</a>
+  <a href="{% url 'lists' user.username %}">Your lists</a>
+{% else %}
+  <p>Welcome</p>
+  <a href="{% url 'account_login' %}" id="login_button">Login</a>
+{% endif %}
+
+{% block main %}
+{% endblock main %}

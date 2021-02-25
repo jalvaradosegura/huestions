@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block main %}
+
 <h1>Create a question</h1>
 
 {% if messages %}
@@ -20,3 +23,5 @@
   {{ complete_list_form }}
   <button type="submit" id="complete_button">Complete the list</button>
 </form>
+
+{% endblock main %}

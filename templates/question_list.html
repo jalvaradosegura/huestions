@@ -1,15 +1,20 @@
+{% extends "base.html" %}
+{% block main %}
+
 <h1>These are the question lists</h1>
 
-{% if messages %}
-<ul id="messages" class="messages">
-  {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
+  {% if messages %}
+    <ul id="messages" class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
-<ul id="list">
-{% for question_list in object_list %}
-  <li>{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a></li>
-{% endfor %}
-</ul>
+  <ul id="list">
+    {% for question_list in object_list %}
+      <li>{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a></li>
+    {% endfor %}
+  </ul>
+
+{% endblock main %}

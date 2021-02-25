@@ -1,7 +1,6 @@
-{% if user.is_authenticated %}
-	<p>Welcome {{ user }}</p>
-	<a href="{% url 'account_logout' %}" id="logout_button">Log out</a>
-{% else %}
-	<a href="{% url 'account_login' %}" id="login_button">Login</a>
-{% endif %}
-<h1>Welcome</h1>
+{% extends "base.html" %}
+{% block main %}
+
+  <h1>Home Page</h1>
+
+{% endblock main %}
