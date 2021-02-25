@@ -193,6 +193,7 @@ class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Question
     fields = ['title']
     template_name = 'edit_question.html'
+    pk_url_kwarg = 'question_id'
 
     def test_func(self):
         slug = self.kwargs['list_slug']
