@@ -1,6 +1,7 @@
 import time
 
 from django.contrib.auth import get_user_model
+from django.contrib.messages import get_messages
 from django.test import LiveServerTestCase
 from selenium import webdriver
 
@@ -265,13 +266,13 @@ class UserProfileTests(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
-    def test_user_complete_a_list(self):
-        # Set up a few lists for Javi
+    def test_user_publish_a_list(self):
+        # Set up a list for Javi
         self.sign_up('javi@email.com', 'super_password_123')
         user = get_user_model().objects.get(email='javi@email.com')
         question_list = QuestionListFactory(title='my first list', owner=user)
 
-        # Add a questions to one of the lists
+        # Add a question to the lists
         question = QuestionFactory(
             title='is this cool?', child_of=question_list
         )
@@ -384,3 +385,27 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/users/javi/lists/'
         )
+
+    def test_user_try_to_publish_an_incomplete_list(self):
+        # Set up a list for Javi
+        self.sign_up('javi@email.com', 'super_password_123')
+        user = get_user_model().objects.get(email='javi@email.com')
+        question_list = QuestionListFactory(title='my first list', owner=user)
+
+        # Add a questions to the lists
+        QuestionFactory(title='is this cool?', child_of=question_list)
+
+        # She goes to the the edit list view and try to complete it
+        self.browser.get(
+            f'{self.live_server_url}/lists/my-first-list/edit/'
+        )
+        complete_button = self.browser.find_element_by_id('complete_button')
+        complete_button.click()
+        # She is still in the same page because the list is not completed
+        # It needs at least 1 question with 2 alternatives
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/my-first-list/edit/'
+        )
+        error_message = self.browser.find_element_by_id('messages').text
+        self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
