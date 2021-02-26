@@ -446,7 +446,24 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         user_1 = UserFactory(username='Jorge', email='jorge@email.com')
         question_list = QuestionListFactory(title="access list", owner=user_1)
         question = QuestionFactory(title='what?', child_of=question_list)
+        AlternativeFactory(title="Yes it is", question=question)
+        AlternativeFactory(title="No it isn't", question=question)
         self.create_and_login_a_user()
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+
+    def test_cant_access_if_list_is_already_completed(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(
+            title="access list", owner=self.user, active=True
+        )
+        question = QuestionFactory(title='what?', child_of=question_list)
+        AlternativeFactory(title="Yes it is", question=question)
+        AlternativeFactory(title="No it isn't", question=question)
 
         response = self.client.get(
             f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
