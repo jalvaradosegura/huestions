@@ -356,6 +356,12 @@ class UserProfileTests(FunctionalTestsBase):
         alternative_2.send_keys("No it was not")
         self.browser.find_element_by_tag_name('button').click()
 
+        # She is back to the list detail view
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/new-name-for-my-list/edit/'
+        )
+
         # She tries to edit the same question again
         self.browser.find_element_by_id('question_0').click()
         # The url has the new name now
