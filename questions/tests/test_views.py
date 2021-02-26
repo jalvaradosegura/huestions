@@ -315,7 +315,7 @@ class EditQuestionListViewTests(ViewsMixin, TestCase):
         self.assertTrue(modified_list.active)
 
 
-class CreateQuestionViewTests(ViewsMixin, TestCase):
+class AddQuestionViewTests(ViewsMixin, TestCase):
     base_url = '/lists/{}/add_question/'
 
     def setUp(self):
