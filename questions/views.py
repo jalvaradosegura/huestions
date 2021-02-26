@@ -168,7 +168,10 @@ class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self):
         slug = self.kwargs['list_slug']
         question_list = QuestionList.objects.get(slug=slug)
-        if self.request.user == question_list.owner:
+        if (
+            self.request.user == question_list.owner
+            and question_list.active is False
+        ):
             return True
         return False
 

@@ -283,7 +283,7 @@ class EditListViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
-    def test_cant_access_if_list_is_already_completed(self):
+    def test_cant_access_if_list_is_already_published(self):
         self.create_and_login_a_user()
         QuestionListFactory(title="access list", owner=self.user, active=True)
 
@@ -413,6 +413,18 @@ class AddQuestionViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
+    def test_cant_access_if_list_is_already_published(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(
+            title="access list", owner=self.user, active=True
+        )
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/add_question/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+
 
 class EditQuestionViewTests(ViewsMixin, TestCase):
     base_url = '/lists/{}/{}/{}/edit/'
@@ -456,7 +468,7 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
-    def test_cant_access_if_list_is_already_completed(self):
+    def test_cant_access_if_list_is_already_published(self):
         self.create_and_login_a_user()
         question_list = QuestionListFactory(
             title="access list", owner=self.user, active=True
