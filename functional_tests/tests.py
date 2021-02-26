@@ -270,7 +270,6 @@ class UserProfileTests(FunctionalTestsBase):
         self.sign_up('javi@email.com', 'super_password_123')
         user = get_user_model().objects.get(email='javi@email.com')
         question_list = QuestionListFactory(title='my first list', owner=user)
-        QuestionListFactory(title='my second list', owner=user)
 
         # Add a questions to one of the lists
         question = QuestionFactory(
@@ -356,7 +355,7 @@ class UserProfileTests(FunctionalTestsBase):
         alternative_2.send_keys("No it was not")
         self.browser.find_element_by_tag_name('button').click()
 
-        # She is back to the list detail view
+        # She is back to the edit list view
         self.assertEqual(
             self.browser.current_url,
             f'{self.live_server_url}/lists/new-name-for-my-list/edit/'
@@ -371,4 +370,17 @@ class UserProfileTests(FunctionalTestsBase):
                 f'{self.live_server_url}/lists/new-name-for-my-list/'
                 f'this-was-edited/{question.id}/edit/'
             ),
+        )
+
+        # She goes back to the edit list view with the intention of
+        # completing it
+        self.browser.get(
+            f'{self.live_server_url}/lists/new-name-for-my-list/edit/'
+        )
+        complete_button = self.browser.find_element_by_id('complete_button')
+        complete_button.click()
+        # She is back to her lists after clicking it
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/users/javi/lists/'
         )
