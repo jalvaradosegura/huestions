@@ -65,7 +65,7 @@ class NewVisitorTest(FunctionalTestsBase):
 
         # Javi can see now the details of the question she answered
         welcome = self.browser.find_element_by_tag_name('h1').text
-        self.assertEqual(welcome, 'Welcome')
+        self.assertEqual(welcome, 'Home Page')
 
 
 class QuestionListsTest(FunctionalTestsBase):
@@ -109,10 +109,6 @@ class QuestionListsTest(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/some-cool-title/',
         )
-
-        # She now sees the list title and a question below it
-        list_title = self.browser.find_element_by_tag_name('p').text
-        self.assertEqual(list_title, 'some cool title')
 
         # She now sees the first question of the list
         current_page = self.browser.find_element_by_tag_name('span').text

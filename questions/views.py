@@ -191,9 +191,18 @@ class EditListView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def post(self, request, *args, **kwargs):
         question_list = self.get_object()
-        complete_list_form = CompleteListForm(question_list=question_list)
-        if complete_list_form.is_valid():
+
+        if 'title' not in request.POST:
+            complete_list_form = CompleteListForm(question_list=question_list)
+            if not complete_list_form.is_valid():
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    complete_list_form.custom_error_message,
+                )
+                return redirect('edit_list', question_list.slug)
             complete_list_form.save()
+            return redirect(self.get_success_url())
 
         return super().post(request, *args, **kwargs)
 

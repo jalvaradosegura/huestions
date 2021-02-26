@@ -15,7 +15,12 @@
   <button type="submit">Change name</button>
 </form>
 
-<button id="complete_button">Publish list</button>
+<form action="" method="post">
+  {% csrf_token %}
+  {{ complete_list_form }}
+  <button id="complete_button">Publish list</button>
+</form>
+
 
 <ol>
   {% for question in questionlist.questions.all %}

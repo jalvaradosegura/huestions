@@ -258,7 +258,7 @@ class CreateQuestionListViewTests(ViewsMixin, TestCase):
         )
 
 
-class EditQuestionListViewTests(ViewsMixin, TestCase):
+class EditListViewTests(ViewsMixin, TestCase):
     base_url = '/lists/{}/edit/'
 
     def setUp(self):
@@ -283,7 +283,7 @@ class EditQuestionListViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
-    def test_post_success(self):
+    def test_post_change_name_success(self):
         self.create_and_login_a_user()
         QuestionListFactory(title="access list", owner=self.user)
 
@@ -313,6 +313,19 @@ class EditQuestionListViewTests(ViewsMixin, TestCase):
 
         self.assertFalse(question_list.active)
         self.assertTrue(modified_list.active)
+
+    def test_post_publish_list_fail(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(title='cool list', owner=self.user)
+        url = f'/lists/{question_list.slug}/edit/'
+
+        response = self.client.post(url, data={})
+        request = response.wsgi_request
+        storage = get_messages(request)
+        messages = [message.message for message in storage]
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, messages)
 
 
 class AddQuestionViewTests(ViewsMixin, TestCase):
