@@ -346,7 +346,7 @@ class AddQuestionViewTests(ViewsMixin, TestCase):
 
         self.assertFalse(question_list.active)
         self.assertEqual(message, LIST_COMPLETION_ERROR_MESSAGE)
-        # self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_post_complete_list_success(self):
         self.create_and_login_a_user()
