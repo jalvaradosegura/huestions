@@ -181,6 +181,22 @@ class EditListView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_success_url(self):
         return reverse('lists', kwargs={'username': self.request.user})
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        question_list = self.get_object()
+        complete_list_form = CompleteListForm(question_list=question_list)
+        context['complete_list_form'] = complete_list_form
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        question_list = self.get_object()
+        complete_list_form = CompleteListForm(question_list=question_list)
+        if complete_list_form.is_valid():
+            complete_list_form.save()
+
+        return super().post(request, *args, **kwargs)
+
     def test_func(self):
         slug = self.kwargs['slug']
         question_list = QuestionList.objects.get(slug=slug)

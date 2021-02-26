@@ -7,6 +7,8 @@
   <button type="submit">Change name</button>
 </form>
 
+<button id="complete_button">Publish list</button>
+
 <ol>
   {% for question in questionlist.questions.all %}
   <li>{{ question }} <a id="question_{{ forloop.counter0 }}" href="{{ question.get_absolute_url }}">Edit</a></li>

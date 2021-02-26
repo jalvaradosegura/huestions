@@ -298,6 +298,22 @@ class EditQuestionListViewTests(ViewsMixin, TestCase):
         )
         self.assertEqual(question_list.slug, 'another-title')
 
+    def test_post_publish_list_success(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(
+            title='a list to publish', owner=self.user
+        )
+        question = QuestionFactory(title='cool?', child_of=question_list)
+        AlternativeFactory(title='yes', question=question)
+        AlternativeFactory(title='no', question=question)
+        url = f'/lists/{question_list.slug}/edit/'
+
+        self.client.post(url, data={})
+        modified_list = QuestionList.objects.get(slug=question_list.slug)
+
+        self.assertFalse(question_list.active)
+        self.assertTrue(modified_list.active)
+
 
 class CreateQuestionViewTests(ViewsMixin, TestCase):
     base_url = '/lists/{}/add_question/'
