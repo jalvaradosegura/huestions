@@ -586,3 +586,19 @@ class DeleteListViewTests(ViewsMixin, TestCase):
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+
+    def test_post_success(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(
+            title="access list", owner=self.user
+        )
+
+        response = self.client.post(
+            f'/lists/{question_list.slug}/delete/',
+            data={}
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'], '/users/javi/lists/'
+        )

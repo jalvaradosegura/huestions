@@ -277,3 +277,6 @@ class DeleteListView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         ):
             return True
         return False
+
+    def get_success_url(self):
+        return reverse('lists', kwargs={'username': self.request.user})

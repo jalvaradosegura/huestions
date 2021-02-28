@@ -420,3 +420,12 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/my-first-list/delete/'
         )
+
+        # There is a confirmation form, she presses the delete button
+        self.browser.find_element_by_id('delete_button').click()
+
+        # She is redirected to her lists
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/users/javi/lists/'
+        )
