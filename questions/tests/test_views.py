@@ -563,3 +563,26 @@ class DeleteListViewTests(ViewsMixin, TestCase):
         self.assertEqual(
             found.func.__name__, DeleteListView.as_view().__name__
         )
+
+    def test_cant_access_if_user_is_not_the_owner(self):
+        user_1 = UserFactory(username='Jorge', email='jorge@email.com')
+        question_list = QuestionListFactory(title="access list", owner=user_1)
+        self.create_and_login_a_user()
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/delete/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+
+    def test_cant_access_if_list_is_already_published(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(
+            title="access list", owner=self.user, active=True
+        )
+
+        response = self.client.get(
+            f'/lists/{question_list.slug}/delete/'
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)

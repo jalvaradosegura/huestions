@@ -264,6 +264,16 @@ class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return super().post(request, *args, **kwargs)
 
 
-class DeleteListView(LoginRequiredMixin, DeleteView):
+class DeleteListView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = QuestionList
     template_name = 'delete_list.html'
+
+    def test_func(self):
+        slug = self.kwargs['slug']
+        question_list = QuestionList.objects.get(slug=slug)
+        if (
+            self.request.user == question_list.owner
+            and question_list.active is False
+        ):
+            return True
+        return False
