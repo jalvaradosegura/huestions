@@ -441,9 +441,7 @@ class UserProfileTests(FunctionalTestsBase):
         self.browser.get(f'{self.live_server_url}/lists/a-list/edit/')
 
         # She press the button to delete the question
-        time.sleep(2)
         self.browser.find_element_by_id('delete_0').click()
-        time.sleep(5)
 
         # She is redirected to the same edit list view
         self.assertEqual(
