@@ -5,10 +5,10 @@ from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
-    UserFactory,
 )
 from ..models import Question, QuestionList
 from .mixins import TestStrMixin
+from users.factories import UserFactory
 
 
 class QuestionModelTests(TestStrMixin, TestCase):

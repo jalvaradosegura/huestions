@@ -12,7 +12,6 @@ from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
-    UserFactory,
 )
 from ..forms import AddAlternativesForm
 from ..models import Alternative, Question, QuestionList
@@ -26,6 +25,7 @@ from ..views import (
     DeleteQuestionView,
 )
 from .mixins import ViewsMixin
+from users.factories import UserFactory
 
 
 class HomePageTests(ViewsMixin, TestCase):

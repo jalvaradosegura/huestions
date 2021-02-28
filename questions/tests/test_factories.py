@@ -1,11 +1,9 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
-    UserFactory,
 )
 from questions.models import Alternative, Question
 
@@ -61,13 +59,3 @@ class AlternativeFactoryTests(TestCase):
         alternative = Alternative.objects.last()
 
         self.assertEqual(alternative.title, 'Rafael Nadal')
-
-
-class UserFactoryTests(TestCase):
-    def setUp(self):
-        UserFactory()
-
-    def test_user_got_created(self):
-        user = get_user_model().objects.last()
-
-        self.assertEqual(user.username, 'testuser')

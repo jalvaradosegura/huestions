@@ -3,7 +3,7 @@ from django.urls import resolve
 
 from questions.factories import QuestionListFactory, UserFactory
 
-from .views import UserListsView
+from ..views import UserListsView
 
 
 class UserListsViewTests(TestCase):
