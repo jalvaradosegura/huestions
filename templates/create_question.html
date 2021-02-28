@@ -24,4 +24,7 @@
   <button type="submit" id="complete_button">Complete the list</button>
 </form>
 
+{{ kwargs }}
+<a href="{% url 'edit_list' question_list_slug %}" id="view_list">View list</a>
+
 {% endblock main %}

@@ -132,6 +132,7 @@ class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
                 'question_form': question_form,
                 'complete_list_form': complete_list_form,
                 'alternatives_form': alternatives_form,
+                'question_list_slug': question_list.slug,
             },
         )
 
@@ -168,6 +169,7 @@ class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
                 'question_form': question_form,
                 'complete_list_form': complete_list_form,
                 'alternatives_form': alternatives_form,
+                'question_list_slug': question_list.slug,
             },
         )
 

@@ -437,7 +437,7 @@ class UserProfileTests(FunctionalTestsBase):
         question_list = QuestionListFactory(title='a list', owner=user)
         QuestionFactory(title='is this cool?', child_of=question_list)
 
-        # She goes  to see her lists
+        # She goes to see the details of the list
         self.browser.get(f'{self.live_server_url}/lists/a-list/edit/')
 
         # She press the button to delete the question
@@ -447,4 +447,32 @@ class UserProfileTests(FunctionalTestsBase):
         self.assertEqual(
             self.browser.current_url,
             f'{self.live_server_url}/lists/a-list/edit/'
+        )
+
+    def test_user_navigates_from_edit_list_to_add_question_then_return(self):
+        # Set up a list for Javi
+        self.sign_up('javi@email.com', 'super_password_123')
+        user = get_user_model().objects.get(email='javi@email.com')
+        question_list = QuestionListFactory(title='a list', owner=user)
+
+        # She goes to see her list
+        self.browser.get(
+            f'{self.live_server_url}/lists/{question_list.slug}/edit/'
+        )
+        # She press the button to add a question
+        self.browser.find_element_by_id('add_question').click()
+
+        # She is sent to the add question view
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/{question_list.slug}/add_question/'
+        )
+
+        # She press the button to go back to the list
+        self.browser.find_element_by_id('view_list').click()
+
+        # She is sent back to her list
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/{question_list.slug}/edit/'
         )
