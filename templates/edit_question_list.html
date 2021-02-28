@@ -24,7 +24,7 @@
 
 <ol>
   {% for question in questionlist.questions.all %}
-  <li>{{ question }} <a id="question_{{ forloop.counter0 }}" href="{{ question.get_absolute_url }}">Edit</a></li>
+  <li>{{ question }} <a id="question_{{ forloop.counter0 }}" href="{{ question.get_absolute_url }}">Edit</a><form method="post" action="{% url 'delete_question' questionlist.slug question.id %}">{% csrf_token %}<input type="submit" id="delete_{{ forloop.counter0 }}" value="Delete"></form></li>
   {% endfor %}
 </ol>
 

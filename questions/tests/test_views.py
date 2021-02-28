@@ -23,6 +23,7 @@ from ..views import (
     create_question_list,
     home,
     DeleteListView,
+    DeleteQuestionView,
 )
 from .mixins import ViewsMixin
 
@@ -601,4 +602,43 @@ class DeleteListViewTests(ViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'], '/users/javi/lists/'
+        )
+
+
+class DeleteQuestionViewTests(ViewsMixin, TestCase):
+    base_url = '/lists/{}/{}/delete/'
+
+    def setUp(self):
+        question_list = QuestionListFactory(title='test error list')
+        question = QuestionFactory(title='cool?', child_of=question_list)
+        self.base_url = self.base_url.format(question_list.slug, question.id)
+
+    def test_question_list_url_resolves_to_view(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(title='some list')
+        question = QuestionFactory(title='cool?', child_of=question_list)
+
+        found = resolve(
+            '/lists/{}/{}/delete/'.format(question_list.slug, question.id)
+        )
+
+        self.assertEqual(
+            found.func.__name__, DeleteQuestionView.as_view().__name__
+        )
+
+    def test_post_success(self):
+        self.create_and_login_a_user()
+        question_list = QuestionListFactory(
+            title="access list", owner=self.user
+        )
+        question = QuestionFactory(title='cool?', child_of=question_list)
+
+        response = self.client.post(
+            f'/lists/{question_list.slug}/{question.id}/delete/',
+            data={}
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'], f'/lists/{question_list.slug}/edit/'
         )

@@ -429,3 +429,24 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/users/javi/lists/'
         )
+
+    def test_user_delete_a_question_from_a_list(self):
+        # Set up a list for Javi
+        self.sign_up('javi@email.com', 'super_password_123')
+        user = get_user_model().objects.get(email='javi@email.com')
+        question_list = QuestionListFactory(title='a list', owner=user)
+        QuestionFactory(title='is this cool?', child_of=question_list)
+
+        # She goes  to see her lists
+        self.browser.get(f'{self.live_server_url}/lists/a-list/edit/')
+
+        # She press the button to delete the question
+        time.sleep(2)
+        self.browser.find_element_by_id('delete_0').click()
+        time.sleep(5)
+
+        # She is redirected to the same edit list view
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/a-list/edit/'
+        )

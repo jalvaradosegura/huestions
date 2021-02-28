@@ -280,3 +280,11 @@ class DeleteListView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('lists', kwargs={'username': self.request.user})
+
+
+class DeleteQuestionView(DeleteListView):
+    model = Question
+    pk_url_kwarg = 'id'
+
+    def get_success_url(self):
+        return reverse('edit_list', kwargs={'slug': self.kwargs.get('slug')})
