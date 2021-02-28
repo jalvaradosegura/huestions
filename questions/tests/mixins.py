@@ -25,7 +25,7 @@ class ViewsMixin:
         )
         self.client.login(email='javi@email.com', password='password123')
 
-    def test_error(self):
+    def test_user_not_logged_in(self):
         response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
