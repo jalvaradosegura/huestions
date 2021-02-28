@@ -3,7 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
-from django.views.generic import DetailView, ListView, View, UpdateView
+from django.views.generic import (
+    DeleteView,
+    DetailView,
+    ListView,
+    View,
+    UpdateView,
+)
 
 from .constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
 from .forms import (
@@ -256,3 +262,8 @@ class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if alternatives_form.is_valid():
             alternatives_form.save(question=question)
         return super().post(request, *args, **kwargs)
+
+
+class DeleteListView(LoginRequiredMixin, DeleteView):
+    model = QuestionList
+    template_name = 'delete_list.html'

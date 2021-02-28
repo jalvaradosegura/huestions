@@ -35,6 +35,11 @@ urlpatterns = [
         name='edit_list',
     ),
     path(
+        route='lists/<slug:slug>/delete/',
+        view=views.DeleteListView.as_view(),
+        name='delete_list',
+    ),
+    path(
         route=(
             'lists/<slug:list_slug>/<slug:slug>/'
             '<int:question_id>/edit/'

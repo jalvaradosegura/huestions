@@ -22,6 +22,7 @@ from ..views import (
     QuestionsListView,
     create_question_list,
     home,
+    DeleteListView,
 )
 from .mixins import ViewsMixin
 
@@ -544,4 +545,21 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         self.assertEqual(edited_alternative_2.title, 'Edited')
         self.assertEqual(
             response['Location'], '/lists/cool-list/edit/'
+        )
+
+
+class DeleteListViewTests(ViewsMixin, TestCase):
+    base_url = '/lists/{}/delete/'
+
+    def setUp(self):
+        self.question_list = QuestionListFactory(title='test error list')
+        self.base_url = self.base_url.format(self.question_list.slug)
+
+    def test_question_list_url_resolves_to_view(self):
+        self.create_and_login_a_user()
+        QuestionListFactory(title='delete this list', owner=self.user)
+
+        found = resolve('/lists/delete-this-list/delete/')
+        self.assertEqual(
+            found.func.__name__, DeleteListView.as_view().__name__
         )
