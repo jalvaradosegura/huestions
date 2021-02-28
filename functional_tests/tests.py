@@ -391,9 +391,7 @@ class UserProfileTests(FunctionalTestsBase):
         QuestionFactory(title='is this cool?', child_of=question_list)
 
         # She goes to the the edit list view and try to complete it
-        self.browser.get(
-            f'{self.live_server_url}/lists/my-first-list/edit/'
-        )
+        self.browser.get(f'{self.live_server_url}/lists/my-first-list/edit/')
         complete_button = self.browser.find_element_by_id('complete_button')
         complete_button.click()
         # She is still in the same page because the list is not completed
@@ -404,3 +402,21 @@ class UserProfileTests(FunctionalTestsBase):
         )
         error_message = self.browser.find_element_by_id('messages').text
         self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
+
+    def test_user_delete_a_list(self):
+        # Set up a list for Javi
+        self.sign_up('javi@email.com', 'super_password_123')
+        user = get_user_model().objects.get(email='javi@email.com')
+        QuestionListFactory(title='my first list', owner=user)
+
+        # She goes  to see her lists
+        self.browser.get(f'{self.live_server_url}/users/javi/lists/')
+
+        # She press the button to delete the question
+        self.browser.find_element_by_id('delete_0').click()
+
+        # She is redirected to a view for confirming the deletion
+        self.assertEqual(
+            self.browser.current_url,
+            f'{self.live_server_url}/lists/my-first-list/delete/'
+        )
