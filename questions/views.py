@@ -110,7 +110,7 @@ def create_list(request):
         if form.is_valid():
             question_list = form.save(commit=False)
             question_list.save()
-            return redirect('create_question', question_list.slug)
+            return redirect('add_question', question_list.slug)
 
     form = CreateQuestionListForm(owner=request.user)
     return render(request, 'create_question_list.html', {'form': form})
@@ -160,7 +160,7 @@ class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
             question = question_form.save(commit=False)
             question.save()
             alternatives_form.save(question=question)
-            return redirect('create_question', question_list.slug)
+            return redirect('add_question', question_list.slug)
 
         return render(
             request,

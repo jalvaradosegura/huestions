@@ -21,7 +21,7 @@
   <button id="complete_button">Publish list</button>
 </form>
 
-<a href="{% url 'create_question' questionlist.slug %}" id="add_question">Add question</a>
+<a href="{% url 'add_question' questionlist.slug %}" id="add_question">Add question</a>
 
 <ol>
   {% for question in questionlist.questions.all %}
