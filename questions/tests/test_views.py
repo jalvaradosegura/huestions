@@ -49,7 +49,7 @@ class HomePageViewTests(ViewsMixin, TestCase):
 
 class SignUpPageTests(TestCase):
     def test_signup_url_returns_correct_html(self):
-        response = self.client.get('/accounts/signup/')
+        response = self.client.get(reverse('account_signup'))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'account/signup.html')
@@ -57,7 +57,7 @@ class SignUpPageTests(TestCase):
 
 class LoginPageTests(TestCase):
     def test_login_url_returns_correct_html(self):
-        response = self.client.get('/accounts/login/')
+        response = self.client.get(reverse('account_login'))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'account/login.html')
@@ -69,7 +69,7 @@ class LogoutPageTests(ViewsMixin, TestCase):
     def test_logout_url_returns_correct_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get('/accounts/logout/')
+        response = self.client.get(reverse('account_logout'))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'account/logout.html')
@@ -333,7 +333,6 @@ class EditListViewTests(ViewsMixin, TestCase):
         question_list = QuestionList.objects.last()
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(response['Location'], '/users/javi/lists/')
         self.assertEqual(
             response['Location'],
             reverse('lists', kwargs={'username': self.user.username})
