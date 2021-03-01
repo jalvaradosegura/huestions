@@ -288,41 +288,56 @@ class EditListViewTests(ViewsMixin, TestCase):
 
     def test_returns_correct_html(self):
         self.create_and_login_a_user()
-        QuestionListFactory(title="some list", owner=self.user)
+        question_list = QuestionListFactory(title="some list", owner=self.user)
 
-        response = self.client.get('/lists/some-list/edit/')
+        response = self.client.get(
+            reverse('edit_list', kwargs={'slug': question_list.slug})
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'edit_question_list.html')
 
     def test_cant_access_if_user_is_not_the_owner(self):
         user_1 = UserFactory(username='Jorge', email='jorge@email.com')
-        QuestionListFactory(title="access list", owner=user_1)
+        question_list = QuestionListFactory(title="access list", owner=user_1)
         self.create_and_login_a_user()
 
-        response = self.client.get('/lists/access-list/edit/')
+        response = self.client.get(
+            reverse('edit_list', kwargs={'slug': question_list.slug})
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
     def test_cant_access_if_list_is_already_published(self):
         self.create_and_login_a_user()
-        QuestionListFactory(title="access list", owner=self.user, active=True)
+        question_list = QuestionListFactory(
+            title="access list", owner=self.user, active=True
+        )
 
-        response = self.client.get('/lists/access-list/edit/')
+        response = self.client.get(
+            reverse('edit_list', kwargs={'slug': question_list.slug})
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
     def test_post_change_name_success(self):
         self.create_and_login_a_user()
-        QuestionListFactory(title="access list", owner=self.user)
+        question_list = QuestionListFactory(
+            title="access list", owner=self.user
+        )
 
         response = self.client.post(
-            '/lists/access-list/edit/', data={'title': 'another title'}
+            reverse('edit_list', kwargs={'slug': question_list.slug}),
+            data={'title': 'another title'}
         )
         question_list = QuestionList.objects.last()
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response['Location'], '/users/javi/lists/')
+        self.assertEqual(
+            response['Location'],
+            reverse('lists', kwargs={'username': self.user.username})
+        )
         self.assertEqual(question_list.slug, 'another-title')
 
     def test_post_publish_list_success(self):
@@ -333,20 +348,25 @@ class EditListViewTests(ViewsMixin, TestCase):
         question = QuestionFactory(title='cool?', child_of=question_list)
         AlternativeFactory(title='yes', question=question)
         AlternativeFactory(title='no', question=question)
-        url = f'/lists/{question_list.slug}/edit/'
 
-        self.client.post(url, data={})
+        response = self.client.post(
+            reverse('edit_list', kwargs={'slug': question_list.slug}),
+            data={}
+        )
         modified_list = QuestionList.objects.get(slug=question_list.slug)
 
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertFalse(question_list.active)
         self.assertTrue(modified_list.active)
 
     def test_post_publish_list_fail(self):
         self.create_and_login_a_user()
         question_list = QuestionListFactory(title='cool list', owner=self.user)
-        url = f'/lists/{question_list.slug}/edit/'
 
-        response = self.client.post(url, data={})
+        response = self.client.post(
+            reverse('edit_list', kwargs={'slug': question_list.slug}),
+            data={}
+        )
         request = response.wsgi_request
         storage = get_messages(request)
         messages = [message.message for message in storage]
