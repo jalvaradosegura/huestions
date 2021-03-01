@@ -33,7 +33,7 @@ class QuestionsListView(LoginRequiredMixin, ListView):
     template_name = 'question_list.html'
 
 
-class AnswerQuestionListView(LoginRequiredMixin, DetailView):
+class AnswerListView(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'question_list_details.html'
 
@@ -87,7 +87,7 @@ class AnswerQuestionListView(LoginRequiredMixin, DetailView):
             next_page = request.POST['next_page']
             return redirect(
                 reverse(
-                    'questions_list_details',
+                    'answer_list',
                     kwargs={'slug': question_list.slug},
                 )
                 + f'?page={next_page}'

@@ -16,7 +16,7 @@ from ..factories import (
 from ..forms import AddAlternativesForm
 from ..models import Alternative, Question, QuestionList
 from ..views import (
-    AnswerQuestionListView,
+    AnswerListView,
     ListResultsView,
     QuestionsListView,
     create_question_list,
@@ -109,7 +109,7 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
         found = resolve('/lists/an-awesome-list/')
 
         self.assertEqual(
-            found.func.__name__, AnswerQuestionListView.as_view().__name__
+            found.func.__name__, AnswerListView.as_view().__name__
         )
 
     def test_returns_correct_html(self):

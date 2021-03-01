@@ -16,8 +16,8 @@ urlpatterns = [
     ),
     path(
         route='lists/<slug:slug>/',
-        view=views.AnswerQuestionListView.as_view(),
-        name='questions_list_details',
+        view=views.AnswerListView.as_view(),
+        name='answer_list',
     ),
     path(
         route='lists/<slug:slug>/results/',
