@@ -387,7 +387,7 @@ class AddQuestionViewTests(ViewsMixin, TestCase):
         question_list = QuestionListFactory(title='cool list', owner=self.user)
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/add_question/'
+            reverse('add_question', kwargs={'list_slug': question_list.slug})
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -397,7 +397,10 @@ class AddQuestionViewTests(ViewsMixin, TestCase):
         self.create_and_login_a_user()
         question_list = QuestionListFactory(title='cool list', owner=self.user)
 
-        response = self.client.post('/lists/cool-list/add_question/', data={})
+        response = self.client.post(
+            reverse('add_question', kwargs={'list_slug': question_list.slug}),
+            data={}
+        )
         request = response.wsgi_request
         storage = get_messages(request)
         message = [message.message for message in storage][0]
@@ -408,27 +411,27 @@ class AddQuestionViewTests(ViewsMixin, TestCase):
 
     def test_post_complete_list_success(self):
         self.create_and_login_a_user()
-        question_list = QuestionListFactory(
-            title='An amazing list', owner=self.user
-        )
+        question_list = QuestionListFactory(title='a list', owner=self.user)
         question = QuestionFactory(title='cool?', child_of=question_list)
         AlternativeFactory(title='yes', question=question)
         AlternativeFactory(title='no', question=question)
-        url = f'/lists/{question_list.slug}/add_question/'
 
-        self.client.post(url, data={})
+        response = self.client.post(
+            reverse('add_question', kwargs={'list_slug': question_list.slug}),
+            data={}
+        )
         modified_list = QuestionList.objects.get(slug=question_list.slug)
 
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertFalse(question_list.active)
         self.assertTrue(modified_list.active)
 
     def test_post_create_question_success(self):
         self.create_and_login_a_user()
-        QuestionListFactory(title='super list', owner=self.user)
-        url = '/lists/super-list/add_question/'
+        question_list = QuestionListFactory(title='a list', owner=self.user)
 
         response = self.client.post(
-            url,
+            reverse('add_question', kwargs={'list_slug': question_list.slug}),
             data={
                 'title': 'Is this hard to answer?',
                 'alternative_1': 'Yes',
@@ -438,26 +441,29 @@ class AddQuestionViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
-            response['Location'], '/lists/super-list/add_question/'
+            response['Location'],
+            reverse('add_question', kwargs={'list_slug': question_list.slug}),
         )
 
     def test_cant_access_if_user_is_not_the_owner(self):
         user_1 = UserFactory(username='Jorge', email='jorge@email.com')
-        QuestionListFactory(title="access list", owner=user_1)
+        question_list = QuestionListFactory(title="access list", owner=user_1)
         self.create_and_login_a_user()
 
-        response = self.client.get('/lists/access-list/add_question/')
+        response = self.client.get(
+            reverse('add_question', kwargs={'list_slug': question_list.slug})
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
     def test_cant_access_if_list_is_already_published(self):
         self.create_and_login_a_user()
         question_list = QuestionListFactory(
-            title="access list", owner=self.user, active=True
+            title='a list', owner=self.user, active=True
         )
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/add_question/'
+            reverse('add_question', kwargs={'list_slug': question_list.slug})
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
