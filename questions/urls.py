@@ -45,11 +45,8 @@ urlpatterns = [
         name='delete_question',
     ),
     path(
-        route=(
-            'lists/<slug:list_slug>/<slug:slug>/'
-            '<int:question_id>/edit/'
-        ),
+        route='lists/<slug:list_slug>/<slug:slug>/<int:question_id>/edit/',
         view=views.EditQuestionView.as_view(),
-        name='question_details',
+        name='edit_question',
     ),
 ]

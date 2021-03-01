@@ -83,7 +83,7 @@ class Question(BaseAbstractModel):
 
     def get_absolute_url(self):
         return reverse(
-            'question_details', args=[self.child_of.slug, self.slug, self.id]
+            'edit_question', args=[self.child_of.slug, self.slug, self.id]
         )
 
     def was_created_recently(self):
