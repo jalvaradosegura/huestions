@@ -93,7 +93,7 @@ class AnswerQuestionListView(LoginRequiredMixin, DetailView):
                 + f'?page={next_page}'
             )
         return redirect(
-            'questions_list_details_results', slug=question_list.slug
+            'list_results', slug=question_list.slug
         )
 
 
