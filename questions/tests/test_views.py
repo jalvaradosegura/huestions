@@ -94,7 +94,7 @@ class QuestionsListViewTests(ViewsMixin, TestCase):
         self.assertTemplateUsed(response, 'question_list.html')
 
 
-class QuestionsListDetailViewTests(ViewsMixin, TestCase):
+class AnswerListViewTests(ViewsMixin, TestCase):
     base_url = '/lists/an-awesome-list/'
 
     def setUp(self):
