@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from django.contrib.messages import get_messages
 from django.test import TestCase
-from django.urls import resolve
+from django.urls import resolve, reverse
 
 from ..constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
@@ -41,7 +41,7 @@ class HomePageTests(ViewsMixin, TestCase):
     def test_root_url_returns_correct_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get('/')
+        response = self.client.get(reverse('home'))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'home.html')
@@ -106,7 +106,9 @@ class AnswerListViewTests(ViewsMixin, TestCase):
     def test_resolves_to_view(self):
         self.create_and_login_a_user()
 
-        found = resolve('/lists/an-awesome-list/')
+        found = resolve(
+            reverse('answer_list', kwargs={'slug': self.question_list.slug})
+        )
 
         self.assertEqual(
             found.func.__name__, AnswerListView.as_view().__name__
@@ -116,7 +118,9 @@ class AnswerListViewTests(ViewsMixin, TestCase):
         self.create_and_login_a_user()
         QuestionFactory(title='some question', child_of=self.question_list)
 
-        response = self.client.get('/lists/an-awesome-list/')
+        response = self.client.get(
+            reverse('answer_list', kwargs={'slug': self.question_list.slug})
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'question_list_details.html')
@@ -126,12 +130,10 @@ class AnswerListViewTests(ViewsMixin, TestCase):
         QuestionFactory(title='some question', child_of=self.question_list)
         QuestionFactory(title='another question', child_of=self.question_list)
 
-        response = self.client.get('/lists/an-awesome-list/?page=1')
-
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'question_list_details.html')
-
-        response = self.client.get('/lists/an-awesome-list/?page=1')
+        response = self.client.get(
+            reverse('answer_list', kwargs={'slug': self.question_list.slug})
+            + '?page=1'
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'question_list_details.html')
@@ -145,7 +147,10 @@ class AnswerListViewTests(ViewsMixin, TestCase):
         AlternativeFactory(title='a1', question=question).users.add(self.user)
         AlternativeFactory(title='a2', question=question).users.add(self.user)
 
-        response = self.client.get('/lists/cool-list/?page=1')
+        response = self.client.get(
+            reverse('answer_list', kwargs={'slug': question_list.slug})
+            + '?page=1'
+        )
         html = response.content.decode('utf8')
 
         self.assertRegex(
@@ -159,7 +164,10 @@ class AnswerListViewTests(ViewsMixin, TestCase):
         )
         AlternativeFactory(question=question)
 
-        response = self.client.get('/lists/an-awesome-list/?page=1')
+        response = self.client.get(
+            reverse('answer_list', kwargs={'slug': self.question_list.slug})
+            + '?page=1'
+        )
         html = response.content.decode('utf8')
 
         self.assertNotRegex(
@@ -168,9 +176,13 @@ class AnswerListViewTests(ViewsMixin, TestCase):
 
     def test_attempt_to_access_an_incomplete_list(self):
         self.create_and_login_a_user()
-        QuestionListFactory(title='cool list')
+        question_list = QuestionListFactory(title='cool list')
 
         response = self.client.get('/lists/cool-list/?page=1')
+        response = self.client.get(
+            reverse('answer_list', kwargs={'slug': question_list.slug})
+            + '?page=1'
+        )
         request = response.wsgi_request
         storage = get_messages(request)
         message = [message.message for message in storage][0]
@@ -303,9 +315,7 @@ class EditListViewTests(ViewsMixin, TestCase):
         question_list = QuestionList.objects.last()
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(
-            response['Location'], '/users/javi/lists/'
-        )
+        self.assertEqual(response['Location'], '/users/javi/lists/')
         self.assertEqual(question_list.slug, 'another-title')
 
     def test_post_publish_list_success(self):
@@ -360,9 +370,7 @@ class AddQuestionViewTests(ViewsMixin, TestCase):
         self.create_and_login_a_user()
         question_list = QuestionListFactory(title='cool list', owner=self.user)
 
-        response = self.client.post(
-            '/lists/cool-list/add_question/', data={}
-        )
+        response = self.client.post('/lists/cool-list/add_question/', data={})
         request = response.wsgi_request
         storage = get_messages(request)
         message = [message.message for message in storage][0]
@@ -522,9 +530,7 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
 
     def test_post_success(self):
         self.create_and_login_a_user()
-        question_list = QuestionListFactory(
-            title='cool list', owner=self.user
-        )
+        question_list = QuestionListFactory(title='cool list', owner=self.user)
         question = QuestionFactory(title='cool?', child_of=question_list)
         alternative_1 = AlternativeFactory(title='yes', question=question)
         alternative_2 = AlternativeFactory(title='no', question=question)
@@ -534,8 +540,8 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
             data={
                 'title': 'edited',
                 'alternative_1': 'edited',
-                'alternative_2': 'edited'
-            }
+                'alternative_2': 'edited',
+            },
         )
         edited_question = Question.objects.get(id=question.id)
         edited_alternative_1 = Alternative.objects.get(id=alternative_1.id)
@@ -544,9 +550,7 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         self.assertEqual(edited_question.title, 'edited')
         self.assertEqual(edited_alternative_1.title, 'Edited')
         self.assertEqual(edited_alternative_2.title, 'Edited')
-        self.assertEqual(
-            response['Location'], '/lists/cool-list/edit/'
-        )
+        self.assertEqual(response['Location'], '/lists/cool-list/edit/')
 
 
 class DeleteListViewTests(ViewsMixin, TestCase):
@@ -570,9 +574,7 @@ class DeleteListViewTests(ViewsMixin, TestCase):
         question_list = QuestionListFactory(title="access list", owner=user_1)
         self.create_and_login_a_user()
 
-        response = self.client.get(
-            f'/lists/{question_list.slug}/delete/'
-        )
+        response = self.client.get(f'/lists/{question_list.slug}/delete/')
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
@@ -582,9 +584,7 @@ class DeleteListViewTests(ViewsMixin, TestCase):
             title="access list", owner=self.user, active=True
         )
 
-        response = self.client.get(
-            f'/lists/{question_list.slug}/delete/'
-        )
+        response = self.client.get(f'/lists/{question_list.slug}/delete/')
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
@@ -595,14 +595,11 @@ class DeleteListViewTests(ViewsMixin, TestCase):
         )
 
         response = self.client.post(
-            f'/lists/{question_list.slug}/delete/',
-            data={}
+            f'/lists/{question_list.slug}/delete/', data={}
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(
-            response['Location'], '/users/javi/lists/'
-        )
+        self.assertEqual(response['Location'], '/users/javi/lists/')
 
 
 class DeleteQuestionViewTests(ViewsMixin, TestCase):
@@ -634,8 +631,7 @@ class DeleteQuestionViewTests(ViewsMixin, TestCase):
         question = QuestionFactory(title='cool?', child_of=question_list)
 
         response = self.client.post(
-            f'/lists/{question_list.slug}/{question.id}/delete/',
-            data={}
+            f'/lists/{question_list.slug}/{question.id}/delete/', data={}
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
