@@ -213,7 +213,7 @@ class ListResultsViewTests(ViewsMixin, TestCase):
         )
 
 
-class CreateQuestionListViewTests(ViewsMixin, TestCase):
+class CreateListViewTests(ViewsMixin, TestCase):
     base_url = '/lists/create/'
 
     def test_returns_correct_html(self):
