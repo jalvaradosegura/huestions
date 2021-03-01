@@ -103,7 +103,7 @@ class ListResultsView(LoginRequiredMixin, DetailView):
 
 
 @login_required
-def create_question_list(request):
+def create_list(request):
     if request.method == 'POST':
         form = CreateQuestionListForm(request.POST, owner=request.user)
 

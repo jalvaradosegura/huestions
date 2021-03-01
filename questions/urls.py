@@ -11,8 +11,8 @@ urlpatterns = [
     ),
     path(
         route='lists/create/',
-        view=views.create_question_list,
-        name='create_question_list',
+        view=views.create_list,
+        name='create_list',
     ),
     path(
         route='lists/<slug:slug>/',

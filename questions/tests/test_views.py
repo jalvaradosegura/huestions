@@ -19,7 +19,7 @@ from ..views import (
     AnswerListView,
     ListResultsView,
     QuestionsListView,
-    create_question_list,
+    create_list,
     home,
     DeleteListView,
     DeleteQuestionView,
@@ -229,7 +229,7 @@ class CreateQuestionListViewTests(ViewsMixin, TestCase):
 
         found = resolve('/lists/create/')
 
-        self.assertEqual(found.func.__name__, create_question_list.__name__)
+        self.assertEqual(found.func.__name__, create_list.__name__)
 
     def test_page_contains_title_within_html(self):
         self.create_and_login_a_user()
