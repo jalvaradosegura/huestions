@@ -28,13 +28,13 @@ from .mixins import ViewsMixin
 from users.factories import UserFactory
 
 
-class HomePageTests(ViewsMixin, TestCase):
+class HomePageViewTests(ViewsMixin, TestCase):
     base_url = '/'
 
     def test_root_url_resolves_to_home_page_view(self):
         self.create_and_login_a_user()
 
-        found = resolve('/')
+        found = resolve(reverse('home'))
 
         self.assertEqual(found.func, home)
 
