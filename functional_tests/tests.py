@@ -45,7 +45,7 @@ class FunctionalTestsBase(LiveServerTestCase):
         self.browser.find_element_by_tag_name('button').click()
 
 
-class NewVisitorTest(FunctionalTestsBase):
+class NewVisitorTests(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.sign_up('javi@email.com', 'super_password_123')
@@ -60,7 +60,7 @@ class NewVisitorTest(FunctionalTestsBase):
         self.assertEqual(welcome, 'Home Page')
 
 
-class QuestionListsTest(FunctionalTestsBase):
+class QuestionListsTests(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
@@ -119,7 +119,7 @@ class QuestionListsTest(FunctionalTestsBase):
         self.assertIn('These are the results for', results_title)
 
 
-class CreateQuestionListTest(FunctionalTestsBase):
+class CreateListTests(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
