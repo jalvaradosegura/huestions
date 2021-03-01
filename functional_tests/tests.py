@@ -49,20 +49,13 @@ class NewVisitorTest(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.sign_up('javi@email.com', 'super_password_123')
-        self.question = QuestionFactory(title='some question')
-        self.alternative_1 = AlternativeFactory(
-            title='alternative 1', question=self.question
-        )
-        self.alternative_2 = AlternativeFactory(
-            title='alternative 2', question=self.question
-        )
 
     def test_can_visit_home_page(self):
         # Javi heard about a fun page, where you have to answer hard questions
         # She visits it
         self.browser.get(f'{self.live_server_url}/')
 
-        # Javi can see now the details of the question she answered
+        # Javi sees a Home Page title
         welcome = self.browser.find_element_by_tag_name('h1').text
         self.assertEqual(welcome, 'Home Page')
 
