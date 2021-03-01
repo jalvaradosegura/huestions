@@ -640,9 +640,12 @@ class DeleteListViewTests(ViewsMixin, TestCase):
 
     def test_question_list_url_resolves_to_view(self):
         self.create_and_login_a_user()
-        QuestionListFactory(title='delete this list', owner=self.user)
+        question_list = QuestionListFactory(title='some list', owner=self.user)
 
-        found = resolve('/lists/delete-this-list/delete/')
+        found = resolve(
+            reverse('delete_list', kwargs={'slug': question_list.slug})
+        )
+
         self.assertEqual(
             found.func.__name__, DeleteListView.as_view().__name__
         )
@@ -652,7 +655,9 @@ class DeleteListViewTests(ViewsMixin, TestCase):
         question_list = QuestionListFactory(title="access list", owner=user_1)
         self.create_and_login_a_user()
 
-        response = self.client.get(f'/lists/{question_list.slug}/delete/')
+        response = self.client.get(
+            reverse('delete_list', kwargs={'slug': question_list.slug})
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
@@ -662,22 +667,26 @@ class DeleteListViewTests(ViewsMixin, TestCase):
             title="access list", owner=self.user, active=True
         )
 
-        response = self.client.get(f'/lists/{question_list.slug}/delete/')
+        response = self.client.get(
+            reverse('delete_list', kwargs={'slug': question_list.slug})
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
     def test_post_success(self):
         self.create_and_login_a_user()
-        question_list = QuestionListFactory(
-            title="access list", owner=self.user
-        )
+        question_list = QuestionListFactory(title='a list', owner=self.user)
 
         response = self.client.post(
-            f'/lists/{question_list.slug}/delete/', data={}
+            reverse('delete_list', kwargs={'slug': question_list.slug}),
+            data={}
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(response['Location'], '/users/javi/lists/')
+        self.assertEqual(
+            response['Location'],
+            reverse('lists', kwargs={'username': self.user.username})
+        )
 
 
 class DeleteQuestionViewTests(ViewsMixin, TestCase):
