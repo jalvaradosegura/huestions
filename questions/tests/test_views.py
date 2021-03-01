@@ -17,7 +17,7 @@ from ..forms import AddAlternativesForm
 from ..models import Alternative, Question, QuestionList
 from ..views import (
     AnswerQuestionListView,
-    QuestionListResultsView,
+    ListResultsView,
     QuestionsListView,
     create_question_list,
     home,
@@ -179,7 +179,7 @@ class QuestionsListDetailViewTests(ViewsMixin, TestCase):
         self.assertEqual(message, ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE)
 
 
-class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
+class ListResultsViewTests(ViewsMixin, TestCase):
     base_url = '/lists/an-awesome-list/results/'
 
     def setUp(self):
@@ -199,7 +199,7 @@ class QuestionsListDetailViewResultsTests(ViewsMixin, TestCase):
         found = resolve('/lists/an-awesome-list/results/')
 
         self.assertEqual(
-            found.func.__name__, QuestionListResultsView.as_view().__name__
+            found.func.__name__, ListResultsView.as_view().__name__
         )
 
     def test_page_contains_html(self):

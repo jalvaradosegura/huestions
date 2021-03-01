@@ -97,7 +97,7 @@ class AnswerQuestionListView(LoginRequiredMixin, DetailView):
         )
 
 
-class QuestionListResultsView(LoginRequiredMixin, DetailView):
+class ListResultsView(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'question_list_details_results.html'
 
