@@ -200,7 +200,9 @@ class ListResultsViewTests(ViewsMixin, TestCase):
     def test_returns_correct_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get('/lists/an-awesome-list/results/')
+        response = self.client.get(
+            reverse('list_results', kwargs={'slug': self.question_list.slug})
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'question_list_details_results.html')
@@ -208,7 +210,9 @@ class ListResultsViewTests(ViewsMixin, TestCase):
     def test_resolves_to_view(self):
         self.create_and_login_a_user()
 
-        found = resolve('/lists/an-awesome-list/results/')
+        found = resolve(
+            reverse('list_results', kwargs={'slug': self.question_list.slug})
+        )
 
         self.assertEqual(
             found.func.__name__, ListResultsView.as_view().__name__
@@ -217,7 +221,9 @@ class ListResultsViewTests(ViewsMixin, TestCase):
     def test_page_contains_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get(self.base_url)
+        response = self.client.get(
+            reverse('list_results', kwargs={'slug': self.question_list.slug})
+        )
         html = response.content.decode('utf8')
 
         self.assertRegex(
@@ -231,7 +237,7 @@ class CreateListViewTests(ViewsMixin, TestCase):
     def test_returns_correct_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get('/lists/create/')
+        response = self.client.get(reverse('create_list'))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'create_question_list.html')
@@ -239,21 +245,21 @@ class CreateListViewTests(ViewsMixin, TestCase):
     def test_resolves_to_view(self):
         self.create_and_login_a_user()
 
-        found = resolve('/lists/create/')
+        found = resolve(reverse('create_list'))
 
         self.assertEqual(found.func.__name__, create_list.__name__)
 
     def test_page_contains_title_within_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get(self.base_url)
+        response = self.client.get(reverse('create_list'))
 
         self.assertContains(response, 'Create a question')
 
     def test_page_contains_form_within_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get(self.base_url)
+        response = self.client.get(reverse('create_list'))
         html = response.content.decode('utf8')
 
         self.assertRegex(html, '<form.*>')
@@ -263,7 +269,7 @@ class CreateListViewTests(ViewsMixin, TestCase):
         self.create_and_login_a_user()
 
         response = self.client.post(
-            self.base_url, data={'title': 'super list'}
+            reverse('create_list'), data={'title': 'super list'}
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
