@@ -274,7 +274,8 @@ class CreateListViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
-            response['Location'], '/lists/super-list/add_question/'
+            response['Location'],
+            reverse('add_question', kwargs={'list_slug': 'super-list'})
         )
 
 
