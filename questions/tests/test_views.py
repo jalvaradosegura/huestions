@@ -491,7 +491,14 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         AlternativeFactory(title='No', question=question)
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+            reverse(
+                'edit_question',
+                kwargs={
+                    'list_slug': question_list.slug,
+                    'slug': question.slug,
+                    'question_id': question.id
+                }
+            )
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -506,7 +513,14 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         self.create_and_login_a_user()
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+            reverse(
+                'edit_question',
+                kwargs={
+                    'list_slug': question_list.slug,
+                    'slug': question.slug,
+                    'question_id': question.id
+                }
+            )
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
@@ -521,7 +535,14 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         AlternativeFactory(title="No it isn't", question=question)
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+            reverse(
+                'edit_question',
+                kwargs={
+                    'list_slug': question_list.slug,
+                    'slug': question.slug,
+                    'question_id': question.id
+                }
+            )
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
@@ -536,7 +557,14 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         AlternativeFactory(title="No it isn't", question=question)
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+            reverse(
+                'edit_question',
+                kwargs={
+                    'list_slug': question_list.slug,
+                    'slug': question.slug,
+                    'question_id': question.id
+                }
+            )
         )
 
         self.assertIsInstance(
@@ -553,7 +581,14 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         AlternativeFactory(title="No it isn't", question=question)
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/'
+            reverse(
+                'edit_question',
+                kwargs={
+                    'list_slug': question_list.slug,
+                    'slug': question.slug,
+                    'question_id': question.id
+                }
+            )
         )
         html = response.content.decode('utf8')
 
@@ -569,7 +604,14 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         alternative_2 = AlternativeFactory(title='no', question=question)
 
         response = self.client.post(
-            f'/lists/{question_list.slug}/{question.slug}/{question.id}/edit/',
+            reverse(
+                'edit_question',
+                kwargs={
+                    'list_slug': question_list.slug,
+                    'slug': question.slug,
+                    'question_id': question.id
+                }
+            ),
             data={
                 'title': 'edited',
                 'alternative_1': 'edited',
@@ -583,7 +625,10 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         self.assertEqual(edited_question.title, 'edited')
         self.assertEqual(edited_alternative_1.title, 'Edited')
         self.assertEqual(edited_alternative_2.title, 'Edited')
-        self.assertEqual(response['Location'], '/lists/cool-list/edit/')
+        self.assertEqual(
+            response['Location'],
+            reverse('edit_list', kwargs={'slug': question_list.slug})
+        )
 
 
 class DeleteListViewTests(ViewsMixin, TestCase):
