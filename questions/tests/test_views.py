@@ -81,7 +81,7 @@ class QuestionsListViewTests(ViewsMixin, TestCase):
     def test_question_list_url_resolves_to_view(self):
         self.create_and_login_a_user()
 
-        found = resolve('/lists/')
+        found = resolve(reverse('questions_list'))
         self.assertEqual(
             found.func.__name__, QuestionsListView.as_view().__name__
         )
@@ -89,7 +89,7 @@ class QuestionsListViewTests(ViewsMixin, TestCase):
     def test_returns_correct_html(self):
         self.create_and_login_a_user()
 
-        response = self.client.get('/lists/')
+        response = self.client.get(reverse('questions_list'))
 
         self.assertTemplateUsed(response, 'question_list.html')
 
