@@ -703,7 +703,10 @@ class DeleteQuestionViewTests(ViewsMixin, TestCase):
         question = QuestionFactory(title='cool?', child_of=question_list)
 
         found = resolve(
-            '/lists/{}/{}/delete/'.format(question_list.slug, question.id)
+            reverse(
+                'delete_question',
+                kwargs={'slug': question_list.slug, 'id': question.id}
+            )
         )
 
         self.assertEqual(
@@ -718,10 +721,15 @@ class DeleteQuestionViewTests(ViewsMixin, TestCase):
         question = QuestionFactory(title='cool?', child_of=question_list)
 
         response = self.client.post(
-            f'/lists/{question_list.slug}/{question.id}/delete/', data={}
+            reverse(
+                'delete_question',
+                kwargs={'slug': question_list.slug, 'id': question.id}
+            ),
+            data={}
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
-            response['Location'], f'/lists/{question_list.slug}/edit/'
+            response['Location'],
+            reverse('edit_list', kwargs={'slug': question_list.slug})
         )
