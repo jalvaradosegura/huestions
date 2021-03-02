@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .mixins import TestStrMixin, ViewsMixin
+from .mixins import TestStrMixin
 
 
 class TestTestStrMixin(TestCase):
@@ -8,10 +8,3 @@ class TestTestStrMixin(TestCase):
         mixin = TestStrMixin()
 
         self.assertEqual(mixin.model_factory, NotImplemented)
-
-
-class TestViewsMixin(TestCase):
-    def test_base_url_property(self):
-        mixin = ViewsMixin()
-
-        self.assertEqual(mixin.base_url, NotImplemented)

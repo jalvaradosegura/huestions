@@ -14,10 +14,6 @@ class TestStrMixin:
 
 
 class ViewsMixin:
-    @property
-    def base_url(self):
-        return NotImplemented
-
     def create_and_login_a_user(self, email='javi@email.com'):
         username = email.split('@')[0]
         self.user = get_user_model().objects.create_user(
@@ -26,6 +22,7 @@ class ViewsMixin:
         self.client.login(email='javi@email.com', password='password123')
 
     def test_user_not_logged_in(self):
+        self.client.logout()
         response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
