@@ -1,12 +1,11 @@
 from django.db import models
 from django.conf import settings
 
+from core.models import TimeStampedModel
 from questions.models import QuestionList, Question, Alternative
 
 
-class Vote(models.Model):
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
+class Vote(TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,

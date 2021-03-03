@@ -6,32 +6,11 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 
+from core.models import TitleAndTimeStampedModel
 from .managers import ActivatedListManager
 
 
-class BaseAbstractModel(models.Model):
-    """
-    An abstract base class model that provides selfupdating
-    ``created`` and ``modified`` fields.
-    """
-
-    title = models.CharField(max_length=100)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        """
-        When we define a new class that inherits from it, Django doesn’t
-        create a core_timestampedmodel table when migrate is run.
-        """
-
-        abstract = True
-
-    def __str__(self):
-        return self.title
-
-
-class QuestionList(BaseAbstractModel):
+class QuestionList(TitleAndTimeStampedModel):
     slug = models.SlugField(unique=True, null=False)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -71,7 +50,7 @@ class QuestionList(BaseAbstractModel):
         return False
 
 
-class Question(BaseAbstractModel):
+class Question(TitleAndTimeStampedModel):
     slug = models.SlugField(null=False)
     child_of = models.ForeignKey(
         QuestionList, on_delete=models.CASCADE, related_name='questions'
@@ -116,7 +95,7 @@ class Question(BaseAbstractModel):
         return False
 
 
-class Alternative(BaseAbstractModel):
+class Alternative(TitleAndTimeStampedModel):
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name='alternatives'
     )
