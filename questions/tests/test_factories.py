@@ -1,11 +1,11 @@
 from django.test import TestCase
 
-from questions.factories import (
+from ..factories import (
     AlternativeFactory,
     QuestionFactory,
     QuestionListFactory,
 )
-from questions.models import Alternative, Question
+from ..models import Alternative, Question
 
 
 class QuestionListFactoryTests(TestCase):
