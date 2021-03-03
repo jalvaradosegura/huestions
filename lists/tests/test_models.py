@@ -1,10 +1,11 @@
 from django.test import TestCase
 
-from ..models import QuestionList
-from ..factories import QuestionListFactory
 from core.mixins import TestModelStrMixin
 from questions.factories import AlternativeFactory, QuestionFactory
 from users.factories import UserFactory
+
+from ..factories import QuestionListFactory
+from ..models import QuestionList
 
 
 class QuestionListModelTests(TestModelStrMixin, TestCase):

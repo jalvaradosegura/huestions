@@ -8,6 +8,11 @@ from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_COMPLETION_ERROR_MESSAGE,
 )
+from core.mixins import TestViewsMixin
+from lists.models import QuestionList
+from users.factories import UserFactory
+from votes.models import Vote
+
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
@@ -15,15 +20,7 @@ from ..factories import (
 )
 from ..forms import AddAlternativesForm
 from ..models import Alternative, Question
-from ..views import (
-    AnswerListView,
-    home,
-    DeleteQuestionView,
-)
-from core.mixins import TestViewsMixin
-from lists.models import QuestionList
-from users.factories import UserFactory
-from votes.models import Vote
+from ..views import AnswerListView, DeleteQuestionView, home
 
 
 class HomePageViewTests(TestViewsMixin, TestCase):
@@ -161,13 +158,13 @@ class AnswerListViewTests(TestViewsMixin, TestCase):
                 'alternatives': '3',
                 'question_list_id': question_list.id,
                 'next_page': '2',
-            }
+            },
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('answer_list', args=[question_list.slug]) + '?page=2'
+            reverse('answer_list', args=[question_list.slug]) + '?page=2',
         )
         self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
 
@@ -267,8 +264,8 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
             kwargs={
                 'list_slug': self.question_list.slug,
                 'slug': self.question.slug,
-                'question_id': self.question.id
-            }
+                'question_id': self.question.id,
+            },
         )
 
     def test_returns_correct_html(self):
@@ -290,8 +287,8 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
                 kwargs={
                     'list_slug': question_list.slug,
                     'slug': question.slug,
-                    'question_id': question.id
-                }
+                    'question_id': question.id,
+                },
             )
         )
 
@@ -342,7 +339,7 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
         self.assertEqual(edited_alternative_2.title, 'Edited')
         self.assertEqual(
             response['Location'],
-            reverse('edit_list', kwargs={'slug': self.question_list.slug})
+            reverse('edit_list', kwargs={'slug': self.question_list.slug}),
         )
 
 
@@ -355,7 +352,7 @@ class DeleteQuestionViewTests(TestViewsMixin, TestCase):
         question = QuestionFactory(title='cool?', child_of=self.question_list)
         self.base_url = reverse(
             'delete_question',
-            kwargs={'slug': self.question_list.slug, 'id': question.id}
+            kwargs={'slug': self.question_list.slug, 'id': question.id},
         )
 
     def test_question_list_url_resolves_to_view(self):
@@ -371,5 +368,5 @@ class DeleteQuestionViewTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('edit_list', kwargs={'slug': self.question_list.slug})
+            reverse('edit_list', kwargs={'slug': self.question_list.slug}),
         )

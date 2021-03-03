@@ -1,7 +1,8 @@
 from django.test import TestCase
 
-from ..factories import QuestionListFactory
 from questions.factories import QuestionFactory
+
+from ..factories import QuestionListFactory
 
 
 class QuestionListFactoryTests(TestCase):

@@ -1,9 +1,9 @@
 import factory
 
 from questions.factories import (
-    QuestionListFactory,
-    QuestionFactory,
     AlternativeFactory,
+    QuestionFactory,
+    QuestionListFactory,
 )
 from users.factories import UserFactory
 

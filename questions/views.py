@@ -3,23 +3,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
-from django.views.generic import (
-    DetailView,
-    View,
-    UpdateView,
-)
+from django.views.generic import DetailView, UpdateView, View
 
 from core.constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
-from .forms import (
-    AddAlternativesForm,
-    AnswerQuestionForm,
-    CreateQuestionForm,
-)
-from .models import Alternative, Question
 from lists.forms import CompleteListForm
 from lists.models import QuestionList
 from lists.views import DeleteListView
 from votes.models import Vote
+
+from .forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
+from .models import Alternative, Question
 
 
 @login_required
@@ -79,7 +72,7 @@ class AnswerListView(LoginRequiredMixin, DetailView):
                 user=self.request.user,
                 list=question_list,
                 question=selected_alternative.question,
-                alternative=selected_alternative
+                alternative=selected_alternative,
             )
 
         if 'next_page' in request.POST:
@@ -91,9 +84,7 @@ class AnswerListView(LoginRequiredMixin, DetailView):
                 )
                 + f'?page={next_page}'
             )
-        return redirect(
-            'list_results', slug=question_list.slug
-        )
+        return redirect('list_results', slug=question_list.slug)
 
 
 class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -185,7 +176,8 @@ class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         alternative_1, alternative_2 = self.object.alternatives.all()
         context['alternatives_form'] = AddAlternativesForm(
             initial={
-                'alternative_1': alternative_1, 'alternative_2': alternative_2
+                'alternative_1': alternative_1,
+                'alternative_2': alternative_2,
             }
         )
         return context

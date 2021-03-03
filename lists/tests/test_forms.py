@@ -3,11 +3,12 @@ from http import HTTPStatus
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+from core.constants import LIST_COMPLETION_ERROR_MESSAGE
+from questions.factories import AlternativeFactory, QuestionFactory
+
 from ..factories import QuestionListFactory
 from ..forms import CompleteListForm, CreateQuestionListForm, EditListForm
 from ..models import QuestionList
-from core.constants import LIST_COMPLETION_ERROR_MESSAGE
-from questions.factories import AlternativeFactory, QuestionFactory
 
 
 class CompleteListFormTests(TestCase):

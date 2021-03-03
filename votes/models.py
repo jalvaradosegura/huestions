@@ -1,8 +1,8 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 from core.models import TimeStampedModel
-from questions.models import QuestionList, Question, Alternative
+from questions.models import Alternative, Question, QuestionList
 
 
 class Vote(TimeStampedModel):
@@ -16,7 +16,7 @@ class Vote(TimeStampedModel):
         QuestionList,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='votes'
+        related_name='votes',
     )
     question = models.ForeignKey(
         Question, on_delete=models.SET_NULL, null=True, related_name='votes'

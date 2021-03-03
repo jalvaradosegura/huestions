@@ -4,16 +4,13 @@ from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase
 from selenium import webdriver
 
+from lists.factories import QuestionListFactory
+from lists.models import QuestionList
 from questions.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_COMPLETION_ERROR_MESSAGE,
 )
-from questions.factories import (
-    AlternativeFactory,
-    QuestionFactory,
-)
-from lists.factories import QuestionListFactory
-from lists.models import QuestionList
+from questions.factories import AlternativeFactory, QuestionFactory
 from users.models import CustomUser
 from votes.models import Vote
 
@@ -352,7 +349,7 @@ class UserProfileTests(FunctionalTestsBase):
         # She is back to the edit list view
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/lists/new-name-for-my-list/edit/'
+            f'{self.live_server_url}/lists/new-name-for-my-list/edit/',
         )
 
         # She tries to edit the same question again
@@ -376,7 +373,7 @@ class UserProfileTests(FunctionalTestsBase):
         # She is back to her lists after clicking it
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/users/javi/lists/'
+            f'{self.live_server_url}/users/javi/lists/',
         )
 
     def test_user_try_to_publish_an_incomplete_list(self):
@@ -396,7 +393,7 @@ class UserProfileTests(FunctionalTestsBase):
         # It needs at least 1 question with 2 alternatives
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/lists/my-first-list/edit/'
+            f'{self.live_server_url}/lists/my-first-list/edit/',
         )
         error_message = self.browser.find_element_by_id('messages').text
         self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
@@ -416,7 +413,7 @@ class UserProfileTests(FunctionalTestsBase):
         # She is redirected to a view for confirming the deletion
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/lists/my-first-list/delete/'
+            f'{self.live_server_url}/lists/my-first-list/delete/',
         )
 
         # There is a confirmation form, she presses the delete button
@@ -425,7 +422,7 @@ class UserProfileTests(FunctionalTestsBase):
         # She is redirected to her lists
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/users/javi/lists/'
+            f'{self.live_server_url}/users/javi/lists/',
         )
 
     def test_user_delete_a_question_from_a_list(self):
@@ -444,7 +441,7 @@ class UserProfileTests(FunctionalTestsBase):
         # She is redirected to the same edit list view
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/lists/a-list/edit/'
+            f'{self.live_server_url}/lists/a-list/edit/',
         )
 
     def test_user_navigates_from_edit_list_to_add_question_then_return(self):
@@ -463,7 +460,7 @@ class UserProfileTests(FunctionalTestsBase):
         # She is sent to the add question view
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/lists/{question_list.slug}/add_question/'
+            f'{self.live_server_url}/lists/{question_list.slug}/add_question/',
         )
 
         # She press the button to go back to the list
@@ -472,5 +469,5 @@ class UserProfileTests(FunctionalTestsBase):
         # She is sent back to her list
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/lists/{question_list.slug}/edit/'
+            f'{self.live_server_url}/lists/{question_list.slug}/edit/',
         )

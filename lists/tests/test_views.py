@@ -4,18 +4,19 @@ from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import resolve, reverse
 
+from core.constants import LIST_COMPLETION_ERROR_MESSAGE
+from core.mixins import TestViewsMixin
+from questions.factories import AlternativeFactory, QuestionFactory
+from users.factories import UserFactory
+
 from ..factories import QuestionListFactory
 from ..models import QuestionList
 from ..views import (
-    create_list,
     DeleteListView,
     ListResultsView,
-    QuestionsListView
+    QuestionsListView,
+    create_list,
 )
-from core.constants import LIST_COMPLETION_ERROR_MESSAGE
-from questions.factories import AlternativeFactory, QuestionFactory
-from core.mixins import TestViewsMixin
-from users.factories import UserFactory
 
 
 class QuestionsListViewTests(TestViewsMixin, TestCase):
@@ -101,7 +102,7 @@ class CreateListViewTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('add_question', kwargs={'list_slug': 'super-list'})
+            reverse('add_question', kwargs={'list_slug': 'super-list'}),
         )
 
 
@@ -145,15 +146,14 @@ class EditListViewTests(TestViewsMixin, TestCase):
 
     def test_post_change_name_success(self):
         response = self.client.post(
-            self.base_url,
-            data={'title': 'another title'}
+            self.base_url, data={'title': 'another title'}
         )
         question_list = QuestionList.objects.last()
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('lists', kwargs={'username': self.user.username})
+            reverse('lists', kwargs={'username': self.user.username}),
         )
         self.assertEqual(question_list.slug, 'another-title')
 
@@ -169,8 +169,7 @@ class EditListViewTests(TestViewsMixin, TestCase):
         question_list = QuestionListFactory(title='cool list', owner=self.user)
 
         response = self.client.post(
-            reverse('edit_list', kwargs={'slug': question_list.slug}),
-            data={}
+            reverse('edit_list', kwargs={'slug': question_list.slug}), data={}
         )
         request = response.wsgi_request
         storage = get_messages(request)
@@ -221,5 +220,5 @@ class DeleteListViewTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('lists', kwargs={'username': self.user.username})
+            reverse('lists', kwargs={'username': self.user.username}),
         )

@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect, render, reverse
-from django.views.generic import DetailView, ListView, DeleteView, UpdateView
+from django.views.generic import DeleteView, DetailView, ListView, UpdateView
 
 from .forms import CompleteListForm, CreateQuestionListForm, EditListForm
 from .models import QuestionList

@@ -1,13 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from ..factories import (
-    AlternativeFactory,
-    QuestionFactory,
-)
-from ..models import Question
 from core.mixins import TestModelStrMixin
 from users.factories import UserFactory
+
+from ..factories import AlternativeFactory, QuestionFactory
+from ..models import Question
 
 
 class QuestionModelTests(TestModelStrMixin, TestCase):

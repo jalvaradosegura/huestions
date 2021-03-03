@@ -8,11 +8,7 @@ from ..factories import (
     QuestionFactory,
     QuestionListFactory,
 )
-from ..forms import (
-    AddAlternativesForm,
-    AnswerQuestionForm,
-    CreateQuestionForm,
-)
+from ..forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
 from ..models import Alternative, Question
 
 
@@ -153,9 +149,7 @@ class AddAlternativesFormTests(TestCase):
         self.sign_up()
         QuestionListFactory(title='cool list', owner=self.user)
 
-        response = self.client.get(
-            '/lists/cool-list/add_question/'
-        )
+        response = self.client.get('/lists/cool-list/add_question/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(

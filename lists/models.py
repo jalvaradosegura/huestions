@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 from core.models import TitleAndTimeStampedModel
+
 from .managers import ActivatedListManager
 
 
