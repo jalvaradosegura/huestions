@@ -48,6 +48,7 @@ LOCAL_APPS = [
     'users.apps.UsersConfig',
     'votes.apps.VotesConfig',
     'core.apps.CoreConfig',
+    'lists.apps.ListsConfig',
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

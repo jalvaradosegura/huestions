@@ -12,12 +12,11 @@ from ..factories import (
 from ..forms import (
     AddAlternativesForm,
     AnswerQuestionForm,
-    CompleteListForm,
     CreateQuestionForm,
-    CreateQuestionListForm,
-    EditListForm,
 )
-from ..models import Alternative, Question, QuestionList
+from ..models import Alternative, Question
+from lists.forms import CompleteListForm, CreateQuestionListForm, EditListForm
+from lists.models import QuestionList
 
 
 class AnswerQuestionFormTests(TestCase):

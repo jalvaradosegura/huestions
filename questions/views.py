@@ -4,9 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
 from django.views.generic import (
-    DeleteView,
     DetailView,
-    ListView,
     View,
     UpdateView,
 )
@@ -15,23 +13,18 @@ from .constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
 from .forms import (
     AddAlternativesForm,
     AnswerQuestionForm,
-    CompleteListForm,
     CreateQuestionForm,
-    CreateQuestionListForm,
-    EditListForm,
 )
-from .models import Alternative, Question, QuestionList
+from .models import Alternative, Question
+from lists.forms import CompleteListForm
+from lists.models import QuestionList
+from lists.views import DeleteListView
 from votes.models import Vote
 
 
 @login_required
 def home(request):
     return render(request, 'home.html')
-
-
-class QuestionsListView(LoginRequiredMixin, ListView):
-    queryset = QuestionList.activated_lists.all()
-    template_name = 'question_list.html'
 
 
 class AnswerListView(LoginRequiredMixin, DetailView):
@@ -103,25 +96,6 @@ class AnswerListView(LoginRequiredMixin, DetailView):
         )
 
 
-class ListResultsView(LoginRequiredMixin, DetailView):
-    model = QuestionList
-    template_name = 'question_list_details_results.html'
-
-
-@login_required
-def create_list(request):
-    if request.method == 'POST':
-        form = CreateQuestionListForm(request.POST, owner=request.user)
-
-        if form.is_valid():
-            question_list = form.save(commit=False)
-            question_list.save()
-            return redirect('add_question', question_list.slug)
-
-    form = CreateQuestionListForm(owner=request.user)
-    return render(request, 'create_question_list.html', {'form': form})
-
-
 class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request, *args, **kwargs):
         slug = self.kwargs['list_slug']
@@ -190,50 +164,6 @@ class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
         return False
 
 
-class EditListView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = QuestionList
-    template_name = 'edit_question_list.html'
-    form_class = EditListForm
-
-    def get_success_url(self):
-        return reverse('lists', kwargs={'username': self.request.user})
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        question_list = self.get_object()
-        complete_list_form = CompleteListForm(question_list=question_list)
-        context['complete_list_form'] = complete_list_form
-
-        return context
-
-    def post(self, request, *args, **kwargs):
-        question_list = self.get_object()
-
-        if 'title' not in request.POST:
-            complete_list_form = CompleteListForm(question_list=question_list)
-            if not complete_list_form.is_valid():
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    complete_list_form.custom_error_message,
-                )
-                return redirect('edit_list', question_list.slug)
-            complete_list_form.save()
-            return redirect(self.get_success_url())
-
-        return super().post(request, *args, **kwargs)
-
-    def test_func(self):
-        slug = self.kwargs['slug']
-        question_list = QuestionList.objects.get(slug=slug)
-        if (
-            self.request.user == question_list.owner
-            and question_list.active is False
-        ):
-            return True
-        return False
-
-
 class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Question
     fields = ['title']
@@ -270,24 +200,6 @@ class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if alternatives_form.is_valid():
             alternatives_form.save(question=question)
         return super().post(request, *args, **kwargs)
-
-
-class DeleteListView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = QuestionList
-    template_name = 'delete_list.html'
-
-    def test_func(self):
-        slug = self.kwargs['slug']
-        question_list = QuestionList.objects.get(slug=slug)
-        if (
-            self.request.user == question_list.owner
-            and question_list.active is False
-        ):
-            return True
-        return False
-
-    def get_success_url(self):
-        return reverse('lists', kwargs={'username': self.request.user})
 
 
 class DeleteQuestionView(DeleteListView):

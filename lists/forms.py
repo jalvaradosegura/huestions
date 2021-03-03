@@ -1,0 +1,49 @@
+from django import forms
+
+from .models import QuestionList
+from questions.constants import LIST_COMPLETION_ERROR_MESSAGE
+
+
+class CreateQuestionListForm(forms.ModelForm):
+    class Meta:
+        model = QuestionList
+        fields = ['title']
+
+    def __init__(self, *args, **kwargs):
+        self.owner = kwargs.pop('owner')
+        super().__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        self.instance.owner = self.owner
+        question_list = super().save(*args, **kwargs)
+        return question_list
+
+
+class CompleteListForm(forms.Form):
+    custom_error_message = ''
+
+    def __init__(self, *args, **kwargs):
+        self.question_list = kwargs.pop('question_list')
+        super().__init__(*args, **kwargs)
+
+    def is_valid(self):
+        if self.question_list.has_at_least_one_full_question():
+            return True
+        self.custom_error_message = LIST_COMPLETION_ERROR_MESSAGE
+        return False
+
+    def save(self, *args, **kwargs):
+        self.question_list.activate()
+        self.question_list.save()
+        return self.question_list
+
+
+class EditListForm(forms.ModelForm):
+    class Meta:
+        model = QuestionList
+        fields = ['title']
+
+    def save(self, *args, **kwargs):
+        self.instance.slug = self.instance._generate_unique_slug_if_needed()
+        question_list = super().save(*args, **kwargs)
+        return question_list

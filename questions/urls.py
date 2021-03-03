@@ -5,39 +5,14 @@ from . import views
 urlpatterns = [
     path(route='', view=views.home, name='home'),
     path(
-        route='lists/',
-        view=views.QuestionsListView.as_view(),
-        name='questions_list',
-    ),
-    path(
-        route='lists/create/',
-        view=views.create_list,
-        name='create_list',
-    ),
-    path(
         route='lists/<slug:slug>/',
         view=views.AnswerListView.as_view(),
         name='answer_list',
     ),
     path(
-        route='lists/<slug:slug>/results/',
-        view=views.ListResultsView.as_view(),
-        name='list_results',
-    ),
-    path(
         route='lists/<slug:list_slug>/add_question/',
         view=views.AddQuestionView.as_view(),
         name='add_question',
-    ),
-    path(
-        route='lists/<slug:slug>/edit/',
-        view=views.EditListView.as_view(),
-        name='edit_list',
-    ),
-    path(
-        route='lists/<slug:slug>/delete/',
-        view=views.DeleteListView.as_view(),
-        name='delete_list',
     ),
     path(
         route='lists/<slug:slug>/<int:id>/delete/',

@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.urls import resolve
 
-from questions.factories import QuestionListFactory, UserFactory
-
+from lists.factories import QuestionListFactory
+from ..factories import UserFactory
 from ..views import UserListsView
 
 

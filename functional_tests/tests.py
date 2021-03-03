@@ -11,9 +11,9 @@ from questions.constants import (
 from questions.factories import (
     AlternativeFactory,
     QuestionFactory,
-    QuestionListFactory,
 )
-from questions.models import QuestionList
+from lists.factories import QuestionListFactory
+from lists.models import QuestionList
 from users.models import CustomUser
 from votes.models import Vote
 

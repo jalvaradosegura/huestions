@@ -1,14 +1,6 @@
 import factory
 
-from users.factories import UserFactory
-
-
-class QuestionListFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = 'questions.QuestionList'
-
-    title = 'some title'
-    owner = factory.SubFactory(UserFactory)
+from lists.factories import QuestionListFactory
 
 
 class QuestionFactory(factory.django.DjangoModelFactory):

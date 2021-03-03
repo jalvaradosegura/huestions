@@ -14,17 +14,20 @@ from ..factories import (
     QuestionListFactory,
 )
 from ..forms import AddAlternativesForm
-from ..models import Alternative, Question, QuestionList
+from ..models import Alternative, Question
 from ..views import (
     AnswerListView,
-    ListResultsView,
-    QuestionsListView,
-    create_list,
     home,
-    DeleteListView,
     DeleteQuestionView,
 )
 from .mixins import ViewsMixin
+from lists.models import QuestionList
+from lists.views import (
+    create_list,
+    DeleteListView,
+    ListResultsView,
+    QuestionsListView,
+)
 from users.factories import UserFactory
 from votes.models import Vote
 
