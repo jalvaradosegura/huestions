@@ -83,7 +83,7 @@ class QuestionListsTests(FunctionalTestsBase):
             title='some alternative', question=self.another_question
         )
 
-    def test_can_visit_a_list_of_question_page(self):
+    def test_can_visit_a_list_of_question_page_and_vote(self):
         # Javi visits a page that show a list of list questions
         self.browser.get(f'{self.live_server_url}/lists/')
 
@@ -117,6 +117,10 @@ class QuestionListsTests(FunctionalTestsBase):
         vote_for_an_alternative(self.browser, 'id_alternatives_0')
         results_title = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('These are the results for', results_title)
+
+        # Check that a vote record got created
+        vote = Vote.objects.last()
+        self.assertEqual(vote.list, "some cool title")
 
 
 class CreateListTests(FunctionalTestsBase):
