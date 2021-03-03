@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ..models import Vote
+from ..factories import VoteFactory
 
 
 class VoteModelTests(TestCase):
