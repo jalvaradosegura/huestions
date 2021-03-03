@@ -14,11 +14,11 @@ from ..views import (
 )
 from questions.constants import LIST_COMPLETION_ERROR_MESSAGE
 from questions.factories import AlternativeFactory, QuestionFactory
-from questions.tests.mixins import ViewsMixin
+from core.mixins import TestViewsMixin
 from users.factories import UserFactory
 
 
-class QuestionsListViewTests(ViewsMixin, TestCase):
+class QuestionsListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.base_url = reverse('questions_list')
@@ -37,7 +37,7 @@ class QuestionsListViewTests(ViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
 
-class ListResultsViewTests(ViewsMixin, TestCase):
+class ListResultsViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.question_list = QuestionListFactory(title='an awesome list')
@@ -65,7 +65,7 @@ class ListResultsViewTests(ViewsMixin, TestCase):
         )
 
 
-class CreateListViewTests(ViewsMixin, TestCase):
+class CreateListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.base_url = reverse('create_list')
@@ -105,7 +105,7 @@ class CreateListViewTests(ViewsMixin, TestCase):
         )
 
 
-class EditListViewTests(ViewsMixin, TestCase):
+class EditListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.question_list = QuestionListFactory(
@@ -180,7 +180,7 @@ class EditListViewTests(ViewsMixin, TestCase):
         self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, messages)
 
 
-class DeleteListViewTests(ViewsMixin, TestCase):
+class DeleteListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.question_list = QuestionListFactory(

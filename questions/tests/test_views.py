@@ -20,13 +20,13 @@ from ..views import (
     home,
     DeleteQuestionView,
 )
-from .mixins import ViewsMixin
+from core.mixins import TestViewsMixin
 from lists.models import QuestionList
 from users.factories import UserFactory
 from votes.models import Vote
 
 
-class HomePageViewTests(ViewsMixin, TestCase):
+class HomePageViewTests(TestViewsMixin, TestCase):
     base_url = reverse('home')
 
     def setUp(self):
@@ -60,7 +60,7 @@ class LoginPageTests(TestCase):
         self.assertTemplateUsed(response, 'account/login.html')
 
 
-class LogoutPageTests(ViewsMixin, TestCase):
+class LogoutPageTests(TestViewsMixin, TestCase):
     base_url = reverse('account_logout')
 
     def test_logout_url_returns_correct_html(self):
@@ -72,7 +72,7 @@ class LogoutPageTests(ViewsMixin, TestCase):
         self.assertTemplateUsed(response, 'account/logout.html')
 
 
-class AnswerListViewTests(ViewsMixin, TestCase):
+class AnswerListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.question_list = QuestionListFactory(
@@ -172,7 +172,7 @@ class AnswerListViewTests(ViewsMixin, TestCase):
         self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
 
 
-class AddQuestionViewTests(ViewsMixin, TestCase):
+class AddQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.question_list = QuestionListFactory(
@@ -247,7 +247,7 @@ class AddQuestionViewTests(ViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
 
-class EditQuestionViewTests(ViewsMixin, TestCase):
+class EditQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.question_list = QuestionListFactory(
@@ -346,7 +346,7 @@ class EditQuestionViewTests(ViewsMixin, TestCase):
         )
 
 
-class DeleteQuestionViewTests(ViewsMixin, TestCase):
+class DeleteQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.question_list = QuestionListFactory(
