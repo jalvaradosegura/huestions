@@ -121,7 +121,7 @@ class QuestionListsTests(FunctionalTestsBase):
 
         # Check that a vote record got created
         vote = Vote.objects.last()
-        self.assertEqual(vote.list, "some cool title")
+        self.assertEqual(vote.list.__str__(), 'some cool title')
 
 
 class CreateListTests(FunctionalTestsBase):

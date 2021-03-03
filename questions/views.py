@@ -21,6 +21,7 @@ from .forms import (
     EditListForm,
 )
 from .models import Alternative, Question, QuestionList
+from votes.models import Vote
 
 
 @login_required
@@ -74,14 +75,19 @@ class AnswerListView(LoginRequiredMixin, DetailView):
         selected_alternative = Alternative.objects.get(
             id=request.POST['alternatives']
         )
+        question_list = QuestionList.objects.get(
+            id=request.POST['question_list_id']
+        )
         if not selected_alternative.question.has_the_user_already_voted(
             self.request.user
         ):
             selected_alternative.vote_for_this_alternative(self.request.user)
-
-        question_list = QuestionList.objects.get(
-            id=request.POST['question_list_id']
-        )
+            Vote.objects.create(
+                user=self.request.user,
+                list=question_list,
+                question=selected_alternative.question,
+                alternative=selected_alternative
+            )
 
         if 'next_page' in request.POST:
             next_page = request.POST['next_page']

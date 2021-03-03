@@ -26,6 +26,7 @@ from ..views import (
 )
 from .mixins import ViewsMixin
 from users.factories import UserFactory
+from votes.models import Vote
 
 
 class HomePageViewTests(ViewsMixin, TestCase):
@@ -168,11 +169,18 @@ class AnswerListViewTests(ViewsMixin, TestCase):
         self.assertEqual(message, ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE)
 
     def test_post_success(self):
+        question_list = QuestionListFactory(title='post list', owner=self.user)
+        question = QuestionFactory(
+            title='post question', child_of=question_list
+        )
+        AlternativeFactory(title='post alternative 1', question=question)
+        AlternativeFactory(title='post alternative 2', question=question)
+
         response = self.client.post(
-            self.base_url,
+            reverse('answer_list', args=[question_list.slug]),
             data={
-                'alternatives': '1',
-                'question_list_id': self.question_list.id,
+                'alternatives': '3',
+                'question_list_id': question_list.id,
                 'next_page': '2',
             }
         )
@@ -180,8 +188,9 @@ class AnswerListViewTests(ViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            self.base_url + '?page=2'
+            reverse('answer_list', args=[question_list.slug]) + '?page=2'
         )
+        self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
 
 
 class ListResultsViewTests(ViewsMixin, TestCase):
