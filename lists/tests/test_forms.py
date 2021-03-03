@@ -6,7 +6,7 @@ from django.test import TestCase
 from ..factories import QuestionListFactory
 from ..forms import CompleteListForm, CreateQuestionListForm, EditListForm
 from ..models import QuestionList
-from questions.constants import LIST_COMPLETION_ERROR_MESSAGE
+from core.constants import LIST_COMPLETION_ERROR_MESSAGE
 from questions.factories import AlternativeFactory, QuestionFactory
 
 

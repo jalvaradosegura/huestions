@@ -4,7 +4,7 @@ from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import resolve, reverse
 
-from ..constants import (
+from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_COMPLETION_ERROR_MESSAGE,
 )

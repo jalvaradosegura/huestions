@@ -12,7 +12,7 @@ from ..views import (
     ListResultsView,
     QuestionsListView
 )
-from questions.constants import LIST_COMPLETION_ERROR_MESSAGE
+from core.constants import LIST_COMPLETION_ERROR_MESSAGE
 from questions.factories import AlternativeFactory, QuestionFactory
 from core.mixins import TestViewsMixin
 from users.factories import UserFactory

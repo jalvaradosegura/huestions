@@ -9,7 +9,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
+from core.constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
 from .forms import (
     AddAlternativesForm,
     AnswerQuestionForm,

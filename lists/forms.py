@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import QuestionList
-from questions.constants import LIST_COMPLETION_ERROR_MESSAGE
+from core.constants import LIST_COMPLETION_ERROR_MESSAGE
 
 
 class CreateQuestionListForm(forms.ModelForm):
