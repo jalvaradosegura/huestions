@@ -156,7 +156,6 @@ class AnswerListViewTests(ViewsMixin, TestCase):
     def test_attempt_to_access_an_incomplete_list(self):
         question_list = QuestionListFactory(title='cool list')
 
-        response = self.client.get('/lists/cool-list/?page=1')
         response = self.client.get(
             reverse('answer_list', kwargs={'slug': question_list.slug})
             + '?page=1'
@@ -167,6 +166,22 @@ class AnswerListViewTests(ViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(message, ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE)
+
+    def test_post_success(self):
+        response = self.client.post(
+            self.base_url,
+            data={
+                'alternatives': '1',
+                'question_list_id': self.question_list.id,
+                'next_page': '2',
+            }
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            self.base_url + '?page=2'
+        )
 
 
 class ListResultsViewTests(ViewsMixin, TestCase):

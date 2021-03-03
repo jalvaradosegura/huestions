@@ -15,6 +15,7 @@ from questions.factories import (
 )
 from questions.models import QuestionList
 from users.models import CustomUser
+from votes.models import Vote
 
 
 def vote_for_an_alternative(browser, selected_alternative):
