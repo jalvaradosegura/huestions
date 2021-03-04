@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
 from django.views.generic import DetailView, UpdateView, View
 
 from core.constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
+from core.mixins import CustomUserPassesTestMixin
 from lists.forms import CompleteListForm
 from lists.models import QuestionList
 from lists.views import DeleteListView
@@ -87,7 +88,7 @@ class AnswerListView(LoginRequiredMixin, DetailView):
         return redirect('list_results', slug=question_list.slug)
 
 
-class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
+class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
     def get(self, request, *args, **kwargs):
         slug = self.kwargs['list_slug']
         question_list = QuestionList.objects.get(slug=slug)
@@ -144,32 +145,14 @@ class AddQuestionView(LoginRequiredMixin, UserPassesTestMixin, View):
             },
         )
 
-    def test_func(self):
-        slug = self.kwargs['list_slug']
-        question_list = QuestionList.objects.get(slug=slug)
-        if (
-            self.request.user == question_list.owner
-            and question_list.active is False
-        ):
-            return True
-        return False
 
-
-class EditQuestionView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class EditQuestionView(
+    LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView
+):
     model = Question
     fields = ['title']
     template_name = 'edit_question.html'
     pk_url_kwarg = 'question_id'
-
-    def test_func(self):
-        slug = self.kwargs['list_slug']
-        question_list = QuestionList.objects.get(slug=slug)
-        if (
-            self.request.user == question_list.owner
-            and question_list.active is False
-        ):
-            return True
-        return False
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -4,6 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect, render, reverse
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
 
+from core.mixins import CustomUserPassesTestMixin
+
 from .forms import CompleteListForm, CreateQuestionListForm, EditListForm
 from .models import QuestionList
 
@@ -32,7 +34,7 @@ def create_list(request):
     return render(request, 'create_question_list.html', {'form': form})
 
 
-class EditListView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class EditListView(LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView):
     model = QuestionList
     template_name = 'edit_question_list.html'
     form_class = EditListForm
@@ -65,30 +67,12 @@ class EditListView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
         return super().post(request, *args, **kwargs)
 
-    def test_func(self):
-        slug = self.kwargs['slug']
-        question_list = QuestionList.objects.get(slug=slug)
-        if (
-            self.request.user == question_list.owner
-            and question_list.active is False
-        ):
-            return True
-        return False
 
-
-class DeleteListView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeleteListView(
+    LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView
+):
     model = QuestionList
     template_name = 'delete_list.html'
-
-    def test_func(self):
-        slug = self.kwargs['slug']
-        question_list = QuestionList.objects.get(slug=slug)
-        if (
-            self.request.user == question_list.owner
-            and question_list.active is False
-        ):
-            return True
-        return False
 
     def get_success_url(self):
         return reverse('lists', kwargs={'username': self.request.user})
