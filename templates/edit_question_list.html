@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 {% block main %}
 
-{% if messages %}
-<ul id="messages" class="messages">
-  {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-  {% endfor %}
-</ul>
-{% endif %}
-
 <form action="" method="post">
   {% csrf_token %}
   {{ form }}
