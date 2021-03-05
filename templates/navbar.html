@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     {% with url_name=request.resolver_match.url_name %}
       <div class="navbar-nav mr-auto">
-        <a class="nav-item nav-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
         <a class="nav-item nav-link {% if url_name == 'questions_list' %}active{% endif %}" href="{% url 'questions_list' %}">Lists</a>
       </div>
       <div class="navbar-nav">
