@@ -20,7 +20,13 @@ from ..factories import (
 )
 from ..forms import AddAlternativesForm
 from ..models import Alternative, Question
-from ..views import AnswerListView, DeleteQuestionView, home
+from ..views import (
+    AddQuestionView,
+    AnswerQuestionView,
+    EditQuestionView,
+    DeleteQuestionView,
+    home,
+)
 
 
 class HomePageViewTests(TestViewsMixin, TestCase):
@@ -69,7 +75,7 @@ class LogoutPageTests(TestViewsMixin, TestCase):
         self.assertTemplateUsed(response, 'account/logout.html')
 
 
-class AnswerListViewTests(TestViewsMixin, TestCase):
+class AnswerQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_and_login_a_user()
         self.question_list = QuestionListFactory(
@@ -88,14 +94,14 @@ class AnswerListViewTests(TestViewsMixin, TestCase):
         found = resolve(self.base_url)
 
         self.assertEqual(
-            found.func.__name__, AnswerListView.as_view().__name__
+            found.func.__name__, AnswerQuestionView.as_view().__name__
         )
 
     def test_returns_correct_html(self):
         response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'question_list_details.html')
+        self.assertTemplateUsed(response, AnswerQuestionView.template_name)
 
     def test_pagination_works(self):
         QuestionFactory(title='some question', child_of=self.question_list)
@@ -104,7 +110,7 @@ class AnswerListViewTests(TestViewsMixin, TestCase):
         response = self.client.get(self.base_url + '?page=1')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'question_list_details.html')
+        self.assertTemplateUsed(response, AnswerQuestionView.template_name)
 
     def test_message_that_you_already_answered_the_question(self):
         response = self.client.get(self.base_url + '?page=1')
@@ -181,7 +187,14 @@ class AddQuestionViewTests(TestViewsMixin, TestCase):
         response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'create_question.html')
+        self.assertTemplateUsed(response, AddQuestionView.template_name)
+
+    def test_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(
+            found.func.__name__, AddQuestionView.as_view().__name__
+        )
 
     def test_post_complete_list_fail(self):
         response = self.client.post(self.base_url, data={})
@@ -272,7 +285,14 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
         response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'edit_question.html')
+        self.assertTemplateUsed(response, EditQuestionView.template_name)
+
+    def test_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(
+            found.func.__name__, EditQuestionView.as_view().__name__
+        )
 
     def test_cant_access_if_user_is_not_the_owner(self):
         user_1 = UserFactory(username='Jorge', email='jorge@email.com')

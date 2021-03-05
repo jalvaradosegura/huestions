@@ -21,9 +21,9 @@ def home(request):
     return render(request, 'home.html')
 
 
-class AnswerListView(LoginRequiredMixin, DetailView):
+class AnswerQuestionView(LoginRequiredMixin, DetailView):
     model = QuestionList
-    template_name = 'question_list_details.html'
+    template_name = 'answer_question.html'
 
     def get(self, request, *args, **kwargs):
         slug = kwargs.get('slug')
@@ -89,6 +89,8 @@ class AnswerListView(LoginRequiredMixin, DetailView):
 
 
 class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
+    template_name = 'create_question.html'
+
     def get(self, request, *args, **kwargs):
         slug = self.kwargs['list_slug']
         question_list = QuestionList.objects.get(slug=slug)
@@ -99,7 +101,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
 
         return render(
             request,
-            'create_question.html',
+            self.template_name,
             {
                 'question_form': question_form,
                 'complete_list_form': complete_list_form,
@@ -136,7 +138,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
 
         return render(
             request,
-            'create_question.html',
+            self.template_name,
             {
                 'question_form': question_form,
                 'complete_list_form': complete_list_form,

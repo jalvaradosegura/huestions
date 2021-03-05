@@ -232,7 +232,7 @@ class CreateListTests(FunctionalTestsBase):
             f'{self.live_server_url}/lists/awesome-list/add_question/',
         )
 
-        error_message = self.browser.find_element_by_id('messages').text
+        error_message = self.browser.find_element_by_class_name('alert').text
 
         self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
 
@@ -398,7 +398,7 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/my-first-list/edit/',
         )
-        error_message = self.browser.find_element_by_id('messages').text
+        error_message = self.browser.find_element_by_class_name('alert').text
         self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
 
     def test_user_delete_a_list(self):

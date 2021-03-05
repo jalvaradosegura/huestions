@@ -13,6 +13,7 @@ from ..factories import QuestionListFactory
 from ..models import QuestionList
 from ..views import (
     DeleteListView,
+    EditListView,
     ListResultsView,
     QuestionsListView,
     create_list,
@@ -34,7 +35,7 @@ class QuestionsListViewTests(TestViewsMixin, TestCase):
     def test_returns_correct_html(self):
         response = self.client.get(self.base_url)
 
-        self.assertTemplateUsed(response, 'question_list.html')
+        self.assertTemplateUsed(response, QuestionsListView.template_name)
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
 
@@ -48,7 +49,7 @@ class ListResultsViewTests(TestViewsMixin, TestCase):
         response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'question_list_details_results.html')
+        self.assertTemplateUsed(response, ListResultsView.template_name)
 
     def test_resolves_to_view(self):
         found = resolve(self.base_url)
@@ -75,7 +76,7 @@ class CreateListViewTests(TestViewsMixin, TestCase):
         response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'create_question_list.html')
+        self.assertTemplateUsed(response, 'create_list.html')
 
     def test_resolves_to_view(self):
         found = resolve(self.base_url)
@@ -121,7 +122,12 @@ class EditListViewTests(TestViewsMixin, TestCase):
         response = self.client.get(self.base_url)
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(response, 'edit_question_list.html')
+        self.assertTemplateUsed(response, EditListView.template_name)
+
+    def test_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(found.func.__name__, EditListView.__name__)
 
     def test_cant_access_if_user_is_not_the_owner(self):
         user_1 = UserFactory(username='Jorge', email='jorge@email.com')
@@ -195,6 +201,12 @@ class DeleteListViewTests(TestViewsMixin, TestCase):
         self.assertEqual(
             found.func.__name__, DeleteListView.as_view().__name__
         )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(self.base_url)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, DeleteListView.template_name)
 
     def test_cant_access_if_user_is_not_the_owner(self):
         user_1 = UserFactory(username='Jorge', email='jorge@email.com')

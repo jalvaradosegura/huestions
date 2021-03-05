@@ -6,7 +6,7 @@ urlpatterns = [
     path(route='', view=views.home, name='home'),
     path(
         route='lists/<slug:slug>/',
-        view=views.AnswerListView.as_view(),
+        view=views.AnswerQuestionView.as_view(),
         name='answer_list',
     ),
     path(

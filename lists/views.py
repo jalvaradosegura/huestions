@@ -12,12 +12,12 @@ from .models import QuestionList
 
 class QuestionsListView(LoginRequiredMixin, ListView):
     queryset = QuestionList.activated_lists.all()
-    template_name = 'question_list.html'
+    template_name = 'lists.html'
 
 
 class ListResultsView(LoginRequiredMixin, DetailView):
     model = QuestionList
-    template_name = 'question_list_details_results.html'
+    template_name = 'list_results.html'
 
 
 @login_required
@@ -31,12 +31,12 @@ def create_list(request):
             return redirect('add_question', question_list.slug)
 
     form = CreateQuestionListForm(owner=request.user)
-    return render(request, 'create_question_list.html', {'form': form})
+    return render(request, 'create_list.html', {'form': form})
 
 
 class EditListView(LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView):
     model = QuestionList
-    template_name = 'edit_question_list.html'
+    template_name = 'edit_list.html'
     form_class = EditListForm
 
     def get_success_url(self):
