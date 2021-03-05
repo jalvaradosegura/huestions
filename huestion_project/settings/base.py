@@ -42,6 +42,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
+    'crispy_forms',
 ]
 LOCAL_APPS = [
     'questions.apps.QuestionsConfig',
@@ -149,3 +150,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

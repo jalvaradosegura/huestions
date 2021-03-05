@@ -6,7 +6,7 @@ from selenium import webdriver
 
 from lists.factories import QuestionListFactory
 from lists.models import QuestionList
-from questions.constants import (
+from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_COMPLETION_ERROR_MESSAGE,
 )
@@ -40,7 +40,7 @@ class FunctionalTestsBase(LiveServerTestCase):
 
         # She press the signup button
         time.sleep(3)
-        self.browser.find_element_by_tag_name('button').click()
+        self.browser.find_element_by_id('sign_up_button').click()
 
 
 class NewVisitorTests(FunctionalTestsBase):
@@ -101,7 +101,7 @@ class QuestionListsTests(FunctionalTestsBase):
         )
 
         # She now sees the first question of the list
-        current_page = self.browser.find_element_by_tag_name('span').text
+        current_page = self.browser.find_element_by_id('current_question').text
         self.assertIn('1 of ', current_page)
 
         # She answer the first question
@@ -137,7 +137,7 @@ class CreateListTests(FunctionalTestsBase):
         # She fill the form and create a question list
         title_input = self.browser.find_element_by_id('id_title')
         title_input.send_keys('An amazing list')
-        self.browser.find_element_by_tag_name('button').click()
+        self.browser.find_element_by_id('create_list_button').click()
 
         # Check that the question list got created
         last_list = QuestionList.objects.last()
@@ -163,7 +163,10 @@ class CreateListTests(FunctionalTestsBase):
         title_input.send_keys('Is this actually working?')
         alternative_1_input.send_keys('yes')
         alternative_2_input.send_keys('no')
-        self.browser.find_element_by_tag_name('button').click()
+        create_question_button = self.browser.find_element_by_id(
+            'create_question_button'
+        )
+        create_question_button.click()
 
         # She is redirected to the same page
         self.assertIn('Create a question', title)
@@ -295,7 +298,7 @@ class UserProfileTests(FunctionalTestsBase):
         # She writes a new title for the list
         title_input.clear()
         title_input.send_keys('new name for my list')
-        self.browser.find_element_by_tag_name('button').click()
+        self.browser.find_element_by_id('edit_list_button').click()
 
         # Check she is back to her lists
         self.assertEqual(
@@ -344,7 +347,7 @@ class UserProfileTests(FunctionalTestsBase):
         question_title.send_keys("This was edited?")
         alternative_1.send_keys("Yes it was")
         alternative_2.send_keys("No it was not")
-        self.browser.find_element_by_tag_name('button').click()
+        self.browser.find_element_by_id('edit_question_button').click()
 
         # She is back to the edit list view
         self.assertEqual(

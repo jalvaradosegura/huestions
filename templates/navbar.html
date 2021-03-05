@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Huestions</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    {% with url_name=request.resolver_match.url_name %}
+      <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link {% if url_name == 'questions_list' %}active{% endif %}" href="{% url 'questions_list' %}">Lists</a>
+      </div>
+      <div class="navbar-nav">
+        {% if user.is_authenticated %}
+        <span class="navbar-text">Hi, {{ user }}👋</span>
+      	  <a class="nav-item nav-link {% if url_name == 'create_list' %}active{% endif %}" href="{% url 'create_list' %}">Create a list</a>
+      	  <a class="nav-item nav-link {% if url_name == 'lists' %}active{% endif %}" href="{% url 'lists' user.username %}">Your Lists</a>
+      	  <a class="nav-item nav-link {% if url_name == 'account_logout' %}active{% endif %}" href="{% url 'account_logout' %}">Log out</a>
+        {% else %}
+      	  <a class="nav-item nav-link {% if url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}">Log in</a>
+        {% endif %}
+      </div>
+    {% endwith %}
+  </div>
+</nav>
