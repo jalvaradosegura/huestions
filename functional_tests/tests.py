@@ -9,6 +9,13 @@ from lists.models import QuestionList
 from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_COMPLETION_ERROR_MESSAGE,
+    LIST_CREATED_SUCCESSFULLY,
+    LIST_DELETED_SUCCESSFULLY,
+    LIST_EDITED_SUCCESSFULLY,
+    LIST_PUBLISHED_SUCCESSFULLY,
+    QUESTION_CREATED_SUCCESSFULLY,
+    QUESTION_DELETED_SUCCESSFULLY,
+    QUESTION_EDITED_SUCCESSFULLY,
 )
 from questions.factories import AlternativeFactory, QuestionFactory
 from users.models import CustomUser
@@ -139,6 +146,10 @@ class CreateListTests(FunctionalTestsBase):
         title_input.send_keys('An amazing list')
         self.browser.find_element_by_id('create_list_button').click()
 
+        # Check for flash message
+        message = self.browser.find_element_by_class_name('alert').text
+        self.assertIn(LIST_CREATED_SUCCESSFULLY, message)
+
         # Check that the question list got created
         last_list = QuestionList.objects.last()
         self.assertEqual(last_list.__str__(), 'An amazing list')
@@ -167,6 +178,10 @@ class CreateListTests(FunctionalTestsBase):
             'create_question_button'
         )
         create_question_button.click()
+
+        # Check for flash message
+        message = self.browser.find_element_by_class_name('alert').text
+        self.assertIn(QUESTION_CREATED_SUCCESSFULLY, message)
 
         # She is redirected to the same page
         self.assertIn('Create a question', title)
@@ -300,6 +315,10 @@ class UserProfileTests(FunctionalTestsBase):
         title_input.send_keys('new name for my list')
         self.browser.find_element_by_id('edit_list_button').click()
 
+        # Check for flash message
+        message = self.browser.find_element_by_class_name('alert').text
+        self.assertIn(LIST_EDITED_SUCCESSFULLY, message)
+
         # Check she is back to her lists
         self.assertEqual(
             self.browser.current_url,
@@ -349,6 +368,10 @@ class UserProfileTests(FunctionalTestsBase):
         alternative_2.send_keys("No it was not")
         self.browser.find_element_by_id('edit_question_button').click()
 
+        # Check for flash message
+        message = self.browser.find_element_by_class_name('alert').text
+        self.assertIn(QUESTION_EDITED_SUCCESSFULLY, message)
+
         # She is back to the edit list view
         self.assertEqual(
             self.browser.current_url,
@@ -373,6 +396,11 @@ class UserProfileTests(FunctionalTestsBase):
         )
         complete_button = self.browser.find_element_by_id('complete_button')
         complete_button.click()
+
+        # Check for flash message
+        message = self.browser.find_element_by_class_name('alert').text
+        self.assertIn(LIST_PUBLISHED_SUCCESSFULLY, message)
+
         # She is back to her lists after clicking it
         self.assertEqual(
             self.browser.current_url,
@@ -422,6 +450,10 @@ class UserProfileTests(FunctionalTestsBase):
         # There is a confirmation form, she presses the delete button
         self.browser.find_element_by_id('delete_button').click()
 
+        # Check for flash message
+        message = self.browser.find_element_by_class_name('alert').text
+        self.assertIn(LIST_DELETED_SUCCESSFULLY, message)
+
         # She is redirected to her lists
         self.assertEqual(
             self.browser.current_url,
@@ -440,6 +472,10 @@ class UserProfileTests(FunctionalTestsBase):
 
         # She press the button to delete the question
         self.browser.find_element_by_id('delete_0').click()
+
+        # Check for flash message
+        message = self.browser.find_element_by_class_name('alert').text
+        self.assertIn(QUESTION_DELETED_SUCCESSFULLY, message)
 
         # She is redirected to the same edit list view
         self.assertEqual(

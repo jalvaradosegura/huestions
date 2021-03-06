@@ -1,9 +1,16 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render, reverse
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
 
+from core.constants import (
+    LIST_CREATED_SUCCESSFULLY,
+    LIST_DELETED_SUCCESSFULLY,
+    LIST_EDITED_SUCCESSFULLY,
+    LIST_PUBLISHED_SUCCESSFULLY,
+)
 from core.mixins import CustomUserPassesTestMixin
 
 from .forms import CompleteListForm, CreateQuestionListForm, EditListForm
@@ -28,16 +35,27 @@ def create_list(request):
         if form.is_valid():
             question_list = form.save(commit=False)
             question_list.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                LIST_CREATED_SUCCESSFULLY
+            )
             return redirect('add_question', question_list.slug)
 
     form = CreateQuestionListForm(owner=request.user)
     return render(request, 'create_list.html', {'form': form})
 
 
-class EditListView(LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView):
+class EditListView(
+    LoginRequiredMixin,
+    CustomUserPassesTestMixin,
+    SuccessMessageMixin,
+    UpdateView
+):
     model = QuestionList
     template_name = 'edit_list.html'
     form_class = EditListForm
+    success_message = LIST_EDITED_SUCCESSFULLY
 
     def get_success_url(self):
         return reverse('lists', kwargs={'username': self.request.user})
@@ -63,6 +81,11 @@ class EditListView(LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView):
                 )
                 return redirect('edit_list', question_list.slug)
             complete_list_form.save()
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                LIST_PUBLISHED_SUCCESSFULLY
+            )
             return redirect(self.get_success_url())
 
         return super().post(request, *args, **kwargs)
@@ -76,3 +99,12 @@ class DeleteListView(
 
     def get_success_url(self):
         return reverse('lists', kwargs={'username': self.request.user})
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            LIST_DELETED_SUCCESSFULLY
+        )
+        return response

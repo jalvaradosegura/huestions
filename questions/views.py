@@ -1,15 +1,21 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
-from django.views.generic import DetailView, UpdateView, View
+from django.views.generic import DetailView, DeleteView, UpdateView, View
 
-from core.constants import ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE
+from core.constants import (
+    ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
+    LIST_PUBLISHED_SUCCESSFULLY,
+    QUESTION_CREATED_SUCCESSFULLY,
+    QUESTION_DELETED_SUCCESSFULLY,
+    QUESTION_EDITED_SUCCESSFULLY,
+)
 from core.mixins import CustomUserPassesTestMixin
 from lists.forms import CompleteListForm
 from lists.models import QuestionList
-from lists.views import DeleteListView
 from votes.models import Vote
 
 from .forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
@@ -118,6 +124,11 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
         if 'title' not in request.POST:
             if complete_list_form.is_valid():
                 complete_list_form.save()
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    LIST_PUBLISHED_SUCCESSFULLY
+                )
                 return redirect('questions_list')
 
             messages.add_message(
@@ -134,6 +145,11 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
             question = question_form.save(commit=False)
             question.save()
             alternatives_form.save(question=question)
+            messages.add_message(
+                request,
+                messages.SUCCESS,
+                QUESTION_CREATED_SUCCESSFULLY
+            )
             return redirect('add_question', question_list.slug)
 
         return render(
@@ -149,12 +165,16 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
 
 
 class EditQuestionView(
-    LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView
+    LoginRequiredMixin,
+    CustomUserPassesTestMixin,
+    SuccessMessageMixin,
+    UpdateView
 ):
     model = Question
     fields = ['title']
     template_name = 'edit_question.html'
     pk_url_kwarg = 'question_id'
+    success_message = QUESTION_EDITED_SUCCESSFULLY
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -179,9 +199,20 @@ class EditQuestionView(
         return super().post(request, *args, **kwargs)
 
 
-class DeleteQuestionView(DeleteListView):
+class DeleteQuestionView(
+    LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView
+):
     model = Question
     pk_url_kwarg = 'id'
 
     def get_success_url(self):
         return reverse('edit_list', kwargs={'slug': self.kwargs.get('slug')})
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            QUESTION_DELETED_SUCCESSFULLY
+        )
+        return response
