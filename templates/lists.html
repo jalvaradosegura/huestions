@@ -11,10 +11,16 @@
     </ul>
   {% endif %}
 
-  <ul id="list">
-    {% for question_list in object_list %}
-      <li>{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a></li>
-    {% endfor %}
-  </ul>
+  {% for question_list in object_list %}
+    <div class="card" style="">
+      <div class="card-body">
+	<h5 class="card-title">{{ question_list.title }}</h5>
+	<h6 class="card-subtitle mb-2 text-muted">{{ question_list.created }}</h6>
+	<p class="card-text">Some description</p>
+	<a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="btn btn-success">Go!</a>
+      </div>
+    </div>
+    <br/>
+  {% endfor %}
 
 {% endblock main %}

@@ -224,7 +224,9 @@ class CreateListTests(FunctionalTestsBase):
         self.browser.get(f'{self.live_server_url}/lists/')
 
         # She only sees one of the lists (the activated one)
-        html_ul_list = self.browser.find_element_by_id('list').text
+        html_ul_list = self.browser.find_element_by_class_name(
+            'container'
+        ).text
         self.assertIn('awesome list', html_ul_list)
         self.assertNotIn('normal list', html_ul_list)
 
@@ -326,7 +328,7 @@ class UserProfileTests(FunctionalTestsBase):
         )
 
         # Check that the list has the new name
-        lists = self.browser.find_element_by_tag_name('ul').text
+        lists = self.browser.find_element_by_tag_name('h5').text
         self.assertIn('new name for my list', lists)
 
         # She tries to edit the same list again

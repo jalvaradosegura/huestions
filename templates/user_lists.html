@@ -2,10 +2,21 @@
 {% block main %}
 
 <h1>Your lists</h1>
-  <ul>
     {% for question_list in object_list %}
-      <li>{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a> - status: {% if question_list.active %}Published{% else %}Incomplete | <a href="{% url 'edit_list' question_list.slug %}" id="edit_{{ forloop.counter0 }}">Edit</a> <a href="{% url 'delete_list' question_list.slug %}" id="delete_{{ forloop.counter0 }}">Delete</a>{% endif %}</li>
+      <div class="card" style="">
+	<div class="card-body">
+	  <h5 class="card-title">{{ question_list.title }}</h5>
+	  <h6 class="card-subtitle mb-2 text-muted">{{ question_list.created }}</h6>
+	  <p class="card-text">Some description</p>
+	  {% if question_list.active %}
+	    <p>Published</p>
+	  {% else %}
+	    <a href="{% url 'edit_list' question_list.slug %}" class="btn btn-primary" id="edit_{{ forloop.counter0 }}">Edit</a>
+	    <a href="{% url 'delete_list' question_list.slug %}" class="btn btn-danger" id="delete_{{ forloop.counter0 }}">Delete</a>
+	  {% endif %}
+	</div>
+      </div>
+      <br/>
     {% endfor %}
-  </ul>
 
 {% endblock main %}
