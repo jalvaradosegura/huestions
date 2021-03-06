@@ -1,22 +1,26 @@
 {% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
 {% block main %}
 
 <h1>Create a question</h1>
 
-<form action="" method="post">
+<form id="form1" action="" method="post">
   {% csrf_token %}
-  {{ question_form }}
-  {{ alternatives_form }}
-  <button type="submit" id="create_question_button">Create</button>
+  {{ question_form|crispy }}
+  {{ alternatives_form|crispy }}
 </form>
 
-<form action="" method="post">
+<form id="form2" action="" method="post">
   {% csrf_token %}
   {{ complete_list_form }}
-  <button type="submit" id="complete_button">Complete the list</button>
 </form>
 
-{{ kwargs }}
-<a href="{% url 'edit_list' question_list_slug %}" id="view_list">View list</a>
+<button form="form1" class="btn btn-success" type="submit" id="create_question_button">Create</button>
+<button form="form2" class="btn btn-success" type="submit" id="complete_button">Publish the list</button>
+
+<br>
+<a class="btn btn-link" href="{% url 'edit_list' question_list_slug %}" id="view_list">See the list</a>
 
 {% endblock main %}

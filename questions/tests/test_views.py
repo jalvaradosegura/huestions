@@ -116,9 +116,7 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
         response = self.client.get(self.base_url + '?page=1')
         html = response.content.decode('utf8')
 
-        self.assertRegex(
-            html, "Question already answered. Your vote won't count this time."
-        )
+        self.assertRegex(html, "Question already answered")
 
     def test_no_message_that_you_already_answered_the_question(self):
         question_list = QuestionListFactory(title='no message')

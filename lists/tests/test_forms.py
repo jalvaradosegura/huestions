@@ -40,7 +40,7 @@ class CreateQuestionListFormTests(TestCase):
         response = self.client.get('/lists/create/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertContains(response, '<label for="id_title">Title:')
+        self.assertContains(response, '<label for="id_title"')
 
     def test_create_question_list_with_form(self):
         self.sign_up()

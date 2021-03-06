@@ -1,19 +1,24 @@
 {% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
 {% block main %}
 
-<form action="" method="post">
+<form id="form1" action="" method="post">
   {% csrf_token %}
-  {{ form }}
-  <button type="submit" id="edit_list_button">Change name</button>
+  {{ form|crispy }}
 </form>
 
-<form action="" method="post">
+<form id="form2" action="" method="post">
   {% csrf_token %}
   {{ complete_list_form }}
-  <button id="complete_button">Publish list</button>
 </form>
 
-<a href="{% url 'add_question' questionlist.slug %}" id="add_question">Add question</a>
+<button form="form1" class="btn btn-success" type="submit" id="edit_list_button">Change name</button>
+<button form="form2" class="btn btn-success" id="complete_button">Publish list</button>
+
+<hr>
+<a class="btn btn-primary" href="{% url 'add_question' questionlist.slug %}" id="add_question">Add question</a>
 
 <ol>
   {% for question in questionlist.questions.all %}
