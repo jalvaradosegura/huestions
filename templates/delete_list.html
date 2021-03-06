@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block main %}
 
-<form method="post">{% csrf_token %}
+<form id="form1" method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input id="delete_button" type="submit" value="Confirm">
 </form>
+
+<a class="btn btn-link" href="{% url 'lists' user %}">Go back</a>
+<input form="form1" id="delete_button" type="submit" value="Delete" class="btn btn-danger">
 
 {% endblock main %}
