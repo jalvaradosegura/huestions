@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block main %}
 
+<div id="copy-to-clipboard-div" class="alert alert-info alert-dismissible text-center" role="alert" style="display:none">
+  <strong>Copied!</strong> List copied to your clipboard, share with your friends 
+</div>
+
 <p>{{ questionlist.title }}</p>
 
 {% for question in questions %}
@@ -38,4 +42,24 @@
  Question already answered. Your vote won't count this time. 
 {% endif %}
 
+<button onclick="copyToClipboard()" class="btn btn-secondary"><span class="glyphicon glyphicon-copy"></span>Share list</button>
+<script>
+    function showThenHideDiv(){
+	document.getElementById("copy-to-clipboard-div").style.display = 'block';
+	setTimeout(function(){
+        document.getElementById("copy-to-clipboard-div").style.display = 'none';
+        }, 5000);
+    }
+
+    function copyToClipboard(){
+	const el = document.createElement('textarea');
+	el.value = '{{ request.build_absolute_uri }}';
+	document.body.appendChild(el);
+	el.select();
+	el.setSelectionRange(0, 99999);
+	document.execCommand('copy');
+	document.body.removeChild(el);
+	showThenHideDiv();
+    }
+</script>
 {% endblock main %}
