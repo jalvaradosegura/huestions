@@ -95,7 +95,7 @@ class QuestionListsTests(FunctionalTestsBase):
         time.sleep(3)
         # She sees a big title that says something abouth the lists
         title = self.browser.find_element_by_tag_name('h1').text
-        self.assertEqual(title, 'These are the question lists')
+        self.assertEqual(title, 'Lists')
 
         # She selects the first list
         button_to_select = self.browser.find_element_by_id('button_to_select')
@@ -139,7 +139,7 @@ class CreateListTests(FunctionalTestsBase):
 
         # There is a title that invites her to create a question list
         title = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('Create a question list', title)
+        self.assertIn('Create', title)
 
         # She fill the form and create a question list
         title_input = self.browser.find_element_by_id('id_title')
@@ -295,7 +295,7 @@ class UserProfileTests(FunctionalTestsBase):
 
         # There is a message welcoming her to her lists
         title = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('These are your lists', title)
+        self.assertIn('Your lists', title)
 
         # She tries to edit one of the lists
         self.browser.find_element_by_id('edit_0').click()

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block main %}
 
-<h1>These are your lists</h1>
+<h1>Your lists</h1>
   <ul>
     {% for question_list in object_list %}
       <li>{{ question_list.title }} <a href="{{ question_list.get_absolute_url }}" id="button_to_select">View</a> - status: {% if question_list.active %}Published{% else %}Incomplete | <a href="{% url 'edit_list' question_list.slug %}" id="edit_{{ forloop.counter0 }}">Edit</a> <a href="{% url 'delete_list' question_list.slug %}" id="delete_{{ forloop.counter0 }}">Delete</a>{% endif %}</li>

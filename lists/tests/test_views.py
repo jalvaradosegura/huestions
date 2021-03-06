@@ -86,7 +86,7 @@ class CreateListViewTests(TestViewsMixin, TestCase):
     def test_page_contains_title_within_html(self):
         response = self.client.get(self.base_url)
 
-        self.assertContains(response, 'Create a question')
+        self.assertContains(response, 'Create a list')
 
     def test_page_contains_form_within_html(self):
         response = self.client.get(self.base_url)
