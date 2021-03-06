@@ -267,7 +267,7 @@ class CreateListTests(FunctionalTestsBase):
 
         # She sees a message, it says she is attempting to see an incomplete
         # view
-        error_message = self.browser.find_element_by_id('messages').text
+        error_message = self.browser.find_element_by_class_name('alert').text
 
         self.assertIn(ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE, error_message)
 

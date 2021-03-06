@@ -1,5 +1,12 @@
 {% extends "base.html" %}
+
+{% load static %}
+
 {% block main %}
+
+<div id="copy-to-clipboard-div" class="alert alert-info alert-dismissible text-center" role="alert" style="display:none">
+  <strong>Copied!</strong> List copied to your clipboard, share with your friends
+</div>
 
 <h1>Your lists</h1>
     {% for question_list in object_list %}
@@ -10,6 +17,8 @@
 	  <p class="card-text">Some description</p>
 	  {% if question_list.active %}
 	    <p>Published</p>
+	    <button onclick="copyToClipboard('{{ request.get_host }}{{ question_list.get_absolute_url }}')" class="btn btn-secondary">Share list</button>
+
 	  {% else %}
 	    <a href="{% url 'edit_list' question_list.slug %}" class="btn btn-primary" id="edit_{{ forloop.counter0 }}">Edit</a>
 	    <a href="{% url 'delete_list' question_list.slug %}" class="btn btn-danger" id="delete_{{ forloop.counter0 }}">Delete</a>
@@ -18,5 +27,7 @@
       </div>
       <br/>
     {% endfor %}
+
+  <script src="{% static 'js/share_list.js' %}" type="text/javascript"></script>
 
 {% endblock main %}
