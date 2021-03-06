@@ -36,9 +36,7 @@ def create_list(request):
             question_list = form.save(commit=False)
             question_list.save()
             messages.add_message(
-                request,
-                messages.SUCCESS,
-                LIST_CREATED_SUCCESSFULLY
+                request, messages.SUCCESS, LIST_CREATED_SUCCESSFULLY
             )
             return redirect('add_question', question_list.slug)
 
@@ -50,7 +48,7 @@ class EditListView(
     LoginRequiredMixin,
     CustomUserPassesTestMixin,
     SuccessMessageMixin,
-    UpdateView
+    UpdateView,
 ):
     model = QuestionList
     template_name = 'edit_list.html'
@@ -82,9 +80,7 @@ class EditListView(
                 return redirect('edit_list', question_list.slug)
             complete_list_form.save()
             messages.add_message(
-                request,
-                messages.SUCCESS,
-                LIST_PUBLISHED_SUCCESSFULLY
+                request, messages.SUCCESS, LIST_PUBLISHED_SUCCESSFULLY
             )
             return redirect(self.get_success_url())
 
@@ -103,8 +99,6 @@ class DeleteListView(
     def delete(self, request, *args, **kwargs):
         response = super().delete(request, *args, **kwargs)
         messages.add_message(
-            self.request,
-            messages.SUCCESS,
-            LIST_DELETED_SUCCESSFULLY
+            self.request, messages.SUCCESS, LIST_DELETED_SUCCESSFULLY
         )
         return response

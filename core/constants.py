@@ -11,3 +11,6 @@ LIST_PUBLISHED_SUCCESSFULLY = 'List was published successfully'
 QUESTION_CREATED_SUCCESSFULLY = 'Question was created successfully'
 QUESTION_EDITED_SUCCESSFULLY = 'Question was edited successfully'
 QUESTION_DELETED_SUCCESSFULLY = 'Question was deleted successfully'
+QUESTION_ALREADY_ANSWERED = (
+    "Question already answered. Your vote won't count this time."
+)

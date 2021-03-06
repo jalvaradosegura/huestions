@@ -16,7 +16,7 @@
     {% if questions.has_next %}
       <input type="hidden" name="next_page" value="{{ questions.next_page_number }}">
     {% endif %}
-    <input id="button_to_vote" type="submit" value="answer">
+    <button id="button_to_vote" class="btn btn-success">Answer</button>
   </form>
 {% endfor %}
 
@@ -38,11 +38,7 @@
   </span>
 </div>
 
-{% if already_voted %}
- Question already answered. Your vote won't count this time. 
-{% endif %}
-
-<button onclick="copyToClipboard()" class="btn btn-secondary"><span class="glyphicon glyphicon-copy"></span>Share list</button>
+<button onclick="copyToClipboard()" class="btn btn-secondary btn-sm">Share list</button>
 <script>
     function showThenHideDiv(){
 	document.getElementById("copy-to-clipboard-div").style.display = 'block';

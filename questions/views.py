@@ -9,6 +9,7 @@ from django.views.generic import DetailView, DeleteView, UpdateView, View
 from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_PUBLISHED_SUCCESSFULLY,
+    QUESTION_ALREADY_ANSWERED,
     QUESTION_CREATED_SUCCESSFULLY,
     QUESTION_DELETED_SUCCESSFULLY,
     QUESTION_EDITED_SUCCESSFULLY,
@@ -58,9 +59,14 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
         question_id = [question.id for question in context['questions']][0]
         context['form'] = AnswerQuestionForm(question_id)
 
-        context['already_voted'] = Question.objects.get(
-            id=question_id
-        ).has_the_user_already_voted(self.request.user)
+        if Question.objects.get(id=question_id).has_the_user_already_voted(
+            self.request.user
+        ):
+            messages.add_message(
+                self.request,
+                messages.INFO,
+                QUESTION_ALREADY_ANSWERED,
+            )
 
         return context
 
@@ -125,9 +131,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
             if complete_list_form.is_valid():
                 complete_list_form.save()
                 messages.add_message(
-                    request,
-                    messages.SUCCESS,
-                    LIST_PUBLISHED_SUCCESSFULLY
+                    request, messages.SUCCESS, LIST_PUBLISHED_SUCCESSFULLY
                 )
                 return redirect('questions_list')
 
@@ -146,9 +150,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
             question.save()
             alternatives_form.save(question=question)
             messages.add_message(
-                request,
-                messages.SUCCESS,
-                QUESTION_CREATED_SUCCESSFULLY
+                request, messages.SUCCESS, QUESTION_CREATED_SUCCESSFULLY
             )
             return redirect('add_question', question_list.slug)
 
@@ -168,7 +170,7 @@ class EditQuestionView(
     LoginRequiredMixin,
     CustomUserPassesTestMixin,
     SuccessMessageMixin,
-    UpdateView
+    UpdateView,
 ):
     model = Question
     fields = ['title']
@@ -211,8 +213,6 @@ class DeleteQuestionView(
     def delete(self, request, *args, **kwargs):
         response = super().delete(request, *args, **kwargs)
         messages.add_message(
-            self.request,
-            messages.SUCCESS,
-            QUESTION_DELETED_SUCCESSFULLY
+            self.request, messages.SUCCESS, QUESTION_DELETED_SUCCESSFULLY
         )
         return response

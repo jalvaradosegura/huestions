@@ -156,6 +156,4 @@ STATIC_URL = '/static/'
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-MESSAGE_TAGS = {
-    messages.ERROR: 'danger'
-}
+MESSAGE_TAGS = {messages.ERROR: 'danger'}
