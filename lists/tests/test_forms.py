@@ -45,13 +45,18 @@ class CreateQuestionListFormTests(TestCase):
     def test_create_question_list_with_form(self):
         self.sign_up()
         form = CreateQuestionListForm(
-            data={'title': 'Super List'}, owner=self.user
+            data={
+                'title': 'Super List',
+                'description': 'some cool description'
+            },
+            owner=self.user
         )
         form.save()
 
         question_list = QuestionList.objects.last()
 
         self.assertEqual(question_list.__str__(), 'Super List')
+        self.assertEqual(question_list.description, 'some cool description')
 
     def test_create_two_question_lists(self):
         self.sign_up()

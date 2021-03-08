@@ -17,6 +17,7 @@ class QuestionList(TitleAndTimeStampedModel):
         related_name='lists',
     )
     active = models.BooleanField(default=False)
+    description = models.TextField(max_length=200, blank=True)
 
     objects = models.Manager()
     activated_lists = ActivatedListManager()

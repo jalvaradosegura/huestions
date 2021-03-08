@@ -8,7 +8,7 @@ from .models import QuestionList
 class CreateQuestionListForm(forms.ModelForm):
     class Meta:
         model = QuestionList
-        fields = ['title']
+        fields = ['title', 'description']
 
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner')

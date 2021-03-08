@@ -331,9 +331,9 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
         response = self.client.get(self.base_url)
         html = response.content.decode('utf8')
 
-        self.assertRegex(html, '<label for="id_title">')
-        self.assertRegex(html, '<label for="id_alternative_1">')
-        self.assertRegex(html, '<label for="id_alternative_2">')
+        self.assertRegex(html, '<label for="id_title"')
+        self.assertRegex(html, '<label for="id_alternative_1"')
+        self.assertRegex(html, '<label for="id_alternative_2"')
 
     def test_post_success(self):
         response = self.client.post(

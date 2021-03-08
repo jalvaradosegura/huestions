@@ -15,7 +15,7 @@
       <div class="card-body">
 	<h5 class="card-title">{{ question_list.title }} &middot <small>by {{ question_list.owner }}</small></h5>
 	<h6 class="card-subtitle mb-2 text-muted">Created: {{ question_list.created|date:"M d, Y" }}</h6>
-	<p class="card-text">Some description</p>
+	<p class="card-text">{{ question_list.description }}</p>
 	<a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="btn btn-success">Go!</a>
 	<button onclick="copyToClipboard('{{ request.get_host }}{{ question_list.get_absolute_url }}')" class="btn btn-secondary">Share list</button>
       </div>
