@@ -32,13 +32,13 @@ or
       <form id="form3" method="post" action="{% url 'delete_question' questionlist.slug question.id %}"> {% csrf_token %} </form>
       <div class="card mr-1 mt-1" style="">
         <div class="card-body">
-	  <h5 class="card-title">{{ forloop.counter }}) {{ question }}</h5>
+	  <h5 class="card-title" id="question_{{ forloop.counter0 }}_title">{{ forloop.counter }}) {{ question }}</h5>
 	  <ul>
 	    {% for alternative in question.alternatives.all %}
 	      <li>{{ alternative }}</li>
 	    {% endfor %}
 	  </ul>
-          <a href="{{ question.get_absolute_url }}" class="btn btn-outline-primary" id="edit_{{ forloop.counter0 }}">Edit</a>
+          <a href="{{ question.get_absolute_url }}" class="btn btn-outline-primary" id="edit_question_{{ forloop.counter0 }}">Edit</a>
           <button form="form3" class="btn btn-danger" id="delete_{{ forloop.counter0 }}">Delete</button>
         </div>
       </div>

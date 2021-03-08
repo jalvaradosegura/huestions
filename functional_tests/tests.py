@@ -341,12 +341,12 @@ class UserProfileTests(FunctionalTestsBase):
 
         # She realizes that below the input for the list name, there is a list
         # with the questions that belong to the list
-        questions = self.browser.find_element_by_tag_name('ol').text
-        self.assertIn('is this awesome?', questions)
+        questions = self.browser.find_element_by_id('question_0_title').text
+        self.assertIn('is this cool', questions)
 
         # There is a button for editing each question, she presses the first
         # one
-        self.browser.find_element_by_id('question_0').click()
+        self.browser.find_element_by_id('edit_question_0').click()
         # She is now on a url for editing the question with its alternatives
         self.assertEqual(
             self.browser.current_url,
@@ -381,7 +381,7 @@ class UserProfileTests(FunctionalTestsBase):
         )
 
         # She tries to edit the same question again
-        self.browser.find_element_by_id('question_0').click()
+        self.browser.find_element_by_id('edit_question_0').click()
         # The url has the new name now
         self.assertEqual(
             self.browser.current_url,

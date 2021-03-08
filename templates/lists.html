@@ -4,10 +4,6 @@
 
 {% block main %}
 
-<div id="copy-to-clipboard-div" class="alert alert-info alert-dismissible text-center" role="alert" style="display:none">
-  <strong>Copied!</strong> List copied to your clipboard, share with your friends
-</div>
-
 <h1>Lists</h1>
 
   {% for question_list in object_list %}
@@ -17,12 +13,14 @@
 	<h6 class="card-subtitle mb-2 text-muted">Created: {{ question_list.created|date:"M d, Y" }}</h6>
 	<p class="card-text">{{ question_list.description }}</p>
 	<a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="btn btn-success">Go!</a>
-	<button onclick="copyToClipboard('{{ request.get_host }}{{ question_list.get_absolute_url }}')" class="btn btn-secondary">Share list</button>
+	<button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ question_list.get_absolute_url }}')" class="btn btn-secondary">Share list</button>
       </div>
     </div>
     <br>
   {% endfor %}
 
-  <script src="{% static 'js/share_list.js' %}" type="text/javascript"></script>
+  {% block bootstrap_js_loaded %}
+    <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>
+  {% endblock bootstrap_js_loaded %}
 
 {% endblock main %}
