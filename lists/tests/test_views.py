@@ -58,14 +58,6 @@ class ListResultsViewTests(TestViewsMixin, TestCase):
             found.func.__name__, ListResultsView.as_view().__name__
         )
 
-    def test_page_contains_html(self):
-        response = self.client.get(self.base_url)
-        html = response.content.decode('utf8')
-
-        self.assertRegex(
-            html, f'These are the results for {self.question_list}!'
-        )
-
 
 class CreateListViewTests(TestViewsMixin, TestCase):
     def setUp(self):

@@ -10,12 +10,12 @@ function copyToClipboard(urlToCopy){
 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip({
-        title: 'Copied!',
+        title: 'Copied to clipboard!',
         trigger: 'click',
     });
 });
 $(document).on('show.bs.tooltip', function (e) {
     setTimeout(function() {
         $('[data-toggle="tooltip"]').tooltip('hide');
-    }, 3000);
+    }, 2000);
 });

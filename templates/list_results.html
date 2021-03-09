@@ -1,17 +1,39 @@
 {% extends "base.html" %}
+
+{% load static %}
+
 {% block main %}
 
-<h1>These are the results for {{ questionlist }}!</h1>
-<ul>
+<h1 class="text-center">{{ questionlist }} - results! <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ questionlist.get_absolute_url }}')" class="btn btn-secondary btn-sm">Share list</button></h1>
+
+<div class="row">
   {% for question in questionlist.questions.all %}
-    <li>{{ question }} | {{  question.get_amount_of_users_that_have_voted }} vote{{ question.get_amount_of_users_that_have_voted|pluralize }}</li>
-    <ul>
-      {% for alternative in question.alternatives.all %}
-      	<li>{{ alternative }} | {{ alternative.get_votes_percentage }}%</li>
-      {% endfor %}
-    </ul>
+
+    <div class="card mr-1 mt-1" style="">
+        <div class="card-body">
+	  <h5 class="card-title">{{ forloop.counter }}) {{ question.title }}</h5>
+	  <h6 class="card-subtitle mb-2 text-muted">{{  question.get_amount_of_users_that_have_voted }} vote{{ question.get_amount_of_users_that_have_voted|pluralize }}</h6>
+	  <div class="progress">
+            {% with  question.alternatives.all.0 as alternative_1 %}
+              <div class="progress-bar bg-success" role="progressbar" style="width: {{ alternative_1.get_votes_percentage }}%;" aria-valuenow="{{ alternative_1.get_votes_percentage }}" aria-valuemin="0" aria-valuemax="100">{{ alternative_1 }} &middot {{ alternative_1.get_votes_percentage }}%</div>
+            {% endwith %}
+          </div>
+	  <div class="progress mt-1">
+            {% with  question.alternatives.all.1 as alternative_2 %}
+              <div class="progress-bar bg-success" role="progressbar" style="width: {{ alternative_2.get_votes_percentage }}%;" aria-valuenow="{{ alternative_2.get_votes_percentage }}" aria-valuemin="0" aria-valuemax="100">{{ alternative_2 }} &middot {{ alternative_2.get_votes_percentage }}%</div>
+            {% endwith %}
+          </div>
+        </div>
+    </div>
+
+    <br>
+
   {% endfor %}
-</ul>
-<a href="{% url 'questions_list' %}">Back to lists</a>
+</div>
+
+{% block bootstrap_js_loaded %}
+  <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>
+{% endblock bootstrap_js_loaded %}
+
 
 {% endblock %}

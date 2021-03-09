@@ -94,8 +94,8 @@ class QuestionListsTests(FunctionalTestsBase):
 
         time.sleep(3)
         # She sees a big title that says something abouth the lists
-        title = self.browser.find_element_by_tag_name('h1').text
-        self.assertEqual(title, 'Lists')
+        title = self.browser.find_element_by_tag_name('h2').text
+        self.assertIn('Lists', title)
 
         # She selects the first list
         button_to_select = self.browser.find_element_by_id('button_to_select')
@@ -120,8 +120,6 @@ class QuestionListsTests(FunctionalTestsBase):
 
         # She answer the next question
         vote_for_an_alternative(self.browser, 'id_alternatives_0')
-        results_title = self.browser.find_element_by_tag_name('h1').text
-        self.assertIn('These are the results for', results_title)
 
         # Check that a vote record got created
         vote = Vote.objects.last()
