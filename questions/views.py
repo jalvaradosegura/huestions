@@ -68,6 +68,13 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
                 QUESTION_ALREADY_ANSWERED,
             )
 
+        percentage = (
+            context['questions'].number
+            / context['questions'].paginator.num_pages
+            * 100
+        )
+        context['percentage'] = percentage
+
         return context
 
     def post(self, request, *args, **kwargs):

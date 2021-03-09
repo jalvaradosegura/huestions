@@ -152,12 +152,8 @@ class AddAlternativesFormTests(TestCase):
         response = self.client.get('/lists/cool-list/add_question/')
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertContains(
-            response, '<label for="id_alternative_1"'
-        )
-        self.assertContains(
-            response, '<label for="id_alternative_2"'
-        )
+        self.assertContains(response, '<label for="id_alternative_1"')
+        self.assertContains(response, '<label for="id_alternative_2"')
 
     def test_add_alternatives_with_form(self):
         form = AddAlternativesForm(

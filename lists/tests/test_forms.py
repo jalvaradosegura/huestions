@@ -47,9 +47,9 @@ class CreateQuestionListFormTests(TestCase):
         form = CreateQuestionListForm(
             data={
                 'title': 'Super List',
-                'description': 'some cool description'
+                'description': 'some cool description',
             },
-            owner=self.user
+            owner=self.user,
         )
         form.save()
 

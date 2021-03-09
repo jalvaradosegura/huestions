@@ -4,10 +4,17 @@
 
 {% block main %}
 
-<p>{{ questionlist.title }}</p>
+<h1 class="text-center">{{ questionlist.title }}</h1>
+
+<div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ percentage }}%"></div>
+</div>
+
+<br>
 
 {% for question in questions %}
   <h1>{{ question.title }}</h1>
+  <div class="form-check form-check-inline">
   <form action="" method="post">
     {% csrf_token %}
     {{ form }}
@@ -17,6 +24,7 @@
     {% endif %}
     <button id="button_to_vote" class="btn btn-success">Answer</button>
   </form>
+  </div>
 {% endfor %}
 
 <div class="pagination">
