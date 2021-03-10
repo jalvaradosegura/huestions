@@ -18,7 +18,6 @@ from core.constants import (
     QUESTION_EDITED_SUCCESSFULLY,
 )
 from questions.factories import AlternativeFactory, QuestionFactory
-from users.models import CustomUser
 from votes.models import Vote
 
 
@@ -173,7 +172,7 @@ class CreateListTests(FunctionalTestsBase):
         alternative_1_input.send_keys('yes')
         alternative_2_input.send_keys('no')
         create_question_button = self.browser.find_element_by_id(
-            'create_question_button'
+            'create_question_and_add_another_button'
         )
         create_question_button.click()
 
@@ -193,9 +192,21 @@ class CreateListTests(FunctionalTestsBase):
         # Check that the list is not activated yet
         self.assertFalse(last_list.active)
 
-        # She presses the "complete list" button
-        complete_button = self.browser.find_element_by_id('complete_button')
-        complete_button.click()
+        # She fill the form again and create a question & publish the list
+        title_input = self.browser.find_element_by_id('id_title')
+        alternative_1_input = self.browser.find_element_by_id(
+            'id_alternative_1'
+        )
+        alternative_2_input = self.browser.find_element_by_id(
+            'id_alternative_2'
+        )
+        title_input.send_keys('Is this actually working?')
+        alternative_1_input.send_keys('yes')
+        alternative_2_input.send_keys('no')
+        create_question_button = self.browser.find_element_by_id(
+            'create_question_and_publish'
+        )
+        create_question_button.click()
 
         # Check that the list activated
         last_list = QuestionList.activated_lists.last()
@@ -227,29 +238,6 @@ class CreateListTests(FunctionalTestsBase):
         ).text
         self.assertIn('awesome list', html_ul_list)
         self.assertNotIn('normal list', html_ul_list)
-
-    def test_attempt_to_complete_a_list_with_no_full_question(self):
-        # javi goes the the section where she can add questions to a list
-        self.sign_up('javi@email.com', 'super_password_123')
-        user = CustomUser.objects.get(email='javi@email.com')
-        QuestionListFactory(title='awesome list', owner=user)
-        self.browser.get(
-            f'{self.live_server_url}/lists/awesome-list/add_question/'
-        )
-
-        # She presses the "complete list" button
-        complete_button = self.browser.find_element_by_id('complete_button')
-        complete_button.click()
-
-        # She is redirected to the same url but with an error message
-        self.assertEqual(
-            self.browser.current_url,
-            f'{self.live_server_url}/lists/awesome-list/add_question/',
-        )
-
-        error_message = self.browser.find_element_by_class_name('alert').text
-
-        self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
 
     def test_attempt_to_access_an_incomplete_list(self):
         # Javi attemps to visits an incomplete list view

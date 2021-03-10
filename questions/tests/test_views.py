@@ -6,7 +6,6 @@ from django.urls import resolve, reverse
 
 from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
-    LIST_COMPLETION_ERROR_MESSAGE,
 )
 from core.mixins import TestViewsMixin
 from lists.models import QuestionList
@@ -194,36 +193,34 @@ class AddQuestionViewTests(TestViewsMixin, TestCase):
             found.func.__name__, AddQuestionView.as_view().__name__
         )
 
-    def test_post_complete_list_fail(self):
-        response = self.client.post(self.base_url, data={})
-        question_list = QuestionList.objects.get(id=self.question_list.id)
-        request = response.wsgi_request
-        storage = get_messages(request)
-        message = [message.message for message in storage][0]
-
-        self.assertFalse(question_list.active)
-        self.assertEqual(message, LIST_COMPLETION_ERROR_MESSAGE)
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-
-    def test_post_complete_list_success(self):
-        question = QuestionFactory(title='cool?', child_of=self.question_list)
-        AlternativeFactory(title='yes', question=question)
-        AlternativeFactory(title='no', question=question)
-
-        response = self.client.post(self.base_url, data={})
-        modified_list = QuestionList.objects.get(id=self.question_list.id)
-
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertFalse(self.question_list.active)
-        self.assertTrue(modified_list.active)
-
-    def test_post_create_question_success(self):
+    def test_post_create_question_and_publish_success(self):
         response = self.client.post(
             self.base_url,
             data={
-                'title': 'Is this hard to answer?',
-                'alternative_1': 'Yes',
-                'alternative_2': 'No',
+                'title': 'is this hard to answer?',
+                'alternative_1': 'yes',
+                'alternative_2': 'no',
+                'create_and_publish': '',
+            },
+        )
+        request = response.wsgi_request
+        question_list = QuestionList.objects.get(id=self.question_list.id)
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('lists', args=[request.user]),
+        )
+        self.assertTrue(question_list.active)
+
+    def test_post_create_question_and_add_another_success(self):
+        response = self.client.post(
+            self.base_url,
+            data={
+                'title': 'is this hard to answer?',
+                'alternative_1': 'yes',
+                'alternative_2': 'no',
+                'create_and_add_another': '',
             },
         )
 
@@ -231,6 +228,22 @@ class AddQuestionViewTests(TestViewsMixin, TestCase):
         self.assertEqual(
             response['Location'],
             reverse('add_question', args=[self.question_list.slug]),
+        )
+
+    def test_post_create_question_and_go_back(self):
+        response = self.client.post(
+            self.base_url,
+            data={
+                'title': 'is this hard to answer?',
+                'alternative_1': 'yes',
+                'alternative_2': 'no',
+            },
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('edit_list', args=[self.question_list.slug]),
         )
 
     def test_cant_access_if_user_is_not_the_owner(self):

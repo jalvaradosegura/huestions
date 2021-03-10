@@ -133,25 +133,11 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
         slug = self.kwargs['list_slug']
         question_list = QuestionList.objects.get(slug=slug)
 
-        complete_list_form = CompleteListForm(question_list=question_list)
-        if 'title' not in request.POST:
-            if complete_list_form.is_valid():
-                complete_list_form.save()
-                messages.add_message(
-                    request, messages.SUCCESS, LIST_PUBLISHED_SUCCESSFULLY
-                )
-                return redirect('questions_list')
-
-            messages.add_message(
-                request,
-                messages.ERROR,
-                complete_list_form.custom_error_message,
-            )
-
         question_form = CreateQuestionForm(
             request.POST, question_list=question_list
         )
         alternatives_form = AddAlternativesForm(request.POST)
+
         if question_form.is_valid() and alternatives_form.is_valid():
             question = question_form.save(commit=False)
             question.save()
@@ -159,18 +145,21 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
             messages.add_message(
                 request, messages.SUCCESS, QUESTION_CREATED_SUCCESSFULLY
             )
-            return redirect('add_question', question_list.slug)
 
-        return render(
-            request,
-            self.template_name,
-            {
-                'question_form': question_form,
-                'complete_list_form': complete_list_form,
-                'alternatives_form': alternatives_form,
-                'question_list_slug': question_list.slug,
-            },
-        )
+            if 'create_and_publish' in request.POST:
+                complete_list_form = CompleteListForm(
+                    question_list=question_list
+                )
+                if complete_list_form.is_valid():
+                    complete_list_form.save()
+                    messages.add_message(
+                        request, messages.SUCCESS, LIST_PUBLISHED_SUCCESSFULLY
+                    )
+
+                return redirect('lists', request.user)
+            elif 'create_and_add_another' in request.POST:
+                return redirect('add_question', question_list.slug)
+        return redirect('edit_list', question_list.slug)
 
 
 class EditQuestionView(

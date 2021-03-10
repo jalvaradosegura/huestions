@@ -1,5 +1,6 @@
 from django import forms
 
+from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
 from .factories import AlternativeFactory
 from .models import Question
 
@@ -20,6 +21,8 @@ class AnswerQuestionForm(forms.Form):
 
 
 class CreateQuestionForm(forms.ModelForm):
+    questions_amount_limit = 20
+
     class Meta:
         model = Question
         fields = ['title']
@@ -40,6 +43,10 @@ class CreateQuestionForm(forms.ModelForm):
         title_question_mark_appended = title_question_marks_removed + '?'
 
         return title_question_mark_appended
+
+    def clean(self):
+        if self.question_list.questions.count() >= self.questions_amount_limit:
+            raise forms.ValidationError(LIST_REACHED_MAXIMUM_OF_QUESTION)
 
 
 class AddAlternativesForm(forms.Form):

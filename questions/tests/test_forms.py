@@ -3,6 +3,7 @@ from http import HTTPStatus
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
@@ -130,6 +131,21 @@ class CreateQuestionFormTests(TestCase):
 
         self.assertEqual(question.__str__(), 'Who is better?')
         self.assertEqual(Question.objects.all().count(), 1)
+
+    def test_list_reached_the_limit_of_questions(self):
+        question_list = QuestionListFactory(title='an awesome list')
+        QuestionFactory(title='a', child_of=question_list)
+        QuestionFactory(title='a', child_of=question_list)
+        QuestionFactory(title='a', child_of=question_list)
+
+        form = CreateQuestionForm(
+            data={'title': 'Who is better'}, question_list=question_list
+        )
+        form.questions_amount_limit = 3
+        response = form.is_valid()
+
+        self.assertFalse(response)
+        self.assertIn(LIST_REACHED_MAXIMUM_OF_QUESTION, form.errors['__all__'])
 
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
