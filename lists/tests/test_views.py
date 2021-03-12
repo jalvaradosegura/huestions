@@ -22,7 +22,7 @@ from ..views import (
 
 class QuestionsListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.base_url = reverse('questions_list')
 
     def test_question_list_url_resolves_to_view(self):
@@ -41,7 +41,7 @@ class QuestionsListViewTests(TestViewsMixin, TestCase):
 
 class ListResultsViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(title='an awesome list')
         self.base_url = reverse('list_results', args=[self.question_list.slug])
 
@@ -61,7 +61,7 @@ class ListResultsViewTests(TestViewsMixin, TestCase):
 
 class CreateListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.base_url = reverse('create_list')
 
     def test_returns_correct_html(self):
@@ -101,7 +101,7 @@ class CreateListViewTests(TestViewsMixin, TestCase):
 
 class EditListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
             title='awesome list', owner=self.user
         )
@@ -179,7 +179,7 @@ class EditListViewTests(TestViewsMixin, TestCase):
 
 class DeleteListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
             title='test error list', owner=self.user
         )

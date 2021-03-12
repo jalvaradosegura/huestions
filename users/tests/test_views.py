@@ -10,7 +10,7 @@ from ..views import UserListsView
 
 class UserListsViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.base_url = reverse('lists', args=[self.user.username])
 
     def test_question_list_url_resolves_to_view(self):

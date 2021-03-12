@@ -1,11 +1,9 @@
 from http import HTTPStatus
 
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from allauth.account.models import EmailAddress
-
 from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
+from core.mixins import LoginUserMixin
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,
@@ -28,7 +26,7 @@ class AnswerQuestionFormTests(TestCase):
             self.assertEqual(only_alternative.__str__(), alternative[1])
 
 
-class AnswerQuestionFormViewTests(TestCase):
+class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
     def test_get_success(self):
         question_list = QuestionListFactory(title='awesome list')
         question = QuestionFactory(
@@ -36,7 +34,7 @@ class AnswerQuestionFormViewTests(TestCase):
         )
         AlternativeFactory(title='awesome alternative 1', question=question)
         AlternativeFactory(title='awesome alternative 2', question=question)
-        self.sign_up()
+        self.create_login_and_verify_user()
 
         response = self.client.get('/lists/awesome-list/')
 
@@ -57,7 +55,7 @@ class AnswerQuestionFormViewTests(TestCase):
         AlternativeFactory(
             title='another alternative', question=another_question
         )
-        self.sign_up()
+        self.create_login_and_verify_user()
 
         response = self.client.post(
             '/lists/awesome-list/',
@@ -78,7 +76,7 @@ class AnswerQuestionFormViewTests(TestCase):
             title='awesome question', child_of=question_list
         )
         AlternativeFactory(title='awesome alternative', question=question)
-        self.sign_up()
+        self.create_login_and_verify_user()
 
         response = self.client.post(
             '/lists/awesome-list/',
@@ -89,19 +87,10 @@ class AnswerQuestionFormViewTests(TestCase):
         self.assertEqual(response['Location'], '/lists/awesome-list/results/')
         self.assertEqual(self.user.alternatives_chosen.count(), 1)
 
-    def sign_up(self):
-        self.user = get_user_model().objects.create_user(
-            email='javi@email.com', username='javi', password='password123'
-        )
-        EmailAddress.objects.create(
-            user=self.user, email=self.user.email, verified=True
-        )
-        self.client.login(email='javi@email.com', password='password123')
 
-
-class CreateQuestionFormTests(TestCase):
+class CreateQuestionFormTests(LoginUserMixin, TestCase):
     def test_get_form_success(self):
-        self.sign_up()
+        self.create_login_and_verify_user()
         question_list = QuestionListFactory(
             title='an awesome list', owner=self.user
         )
@@ -152,17 +141,8 @@ class CreateQuestionFormTests(TestCase):
         self.assertFalse(response)
         self.assertIn(LIST_REACHED_MAXIMUM_OF_QUESTION, form.errors['__all__'])
 
-    def sign_up(self):
-        self.user = get_user_model().objects.create_user(
-            email='javi@email.com', username='javi', password='password123'
-        )
-        EmailAddress.objects.create(
-            user=self.user, email=self.user.email, verified=True
-        )
-        self.client.login(email='javi@email.com', password='password123')
 
-
-class AddAlternativesFormTests(TestCase):
+class AddAlternativesFormTests(LoginUserMixin, TestCase):
     def setUp(self):
         self.question_list = QuestionListFactory(title='an awesome list')
         self.question = QuestionFactory(
@@ -170,7 +150,7 @@ class AddAlternativesFormTests(TestCase):
         )
 
     def test_get_form_success(self):
-        self.sign_up()
+        self.create_login_and_verify_user()
         QuestionListFactory(title='cool list', owner=self.user)
 
         response = self.client.get('/lists/cool-list/add_question/')
@@ -199,7 +179,7 @@ class AddAlternativesFormTests(TestCase):
         self.assertEqual(Alternative.objects.all().count(), 2)
 
     def test_alternatives_all_in_lower_case(self):
-        self.sign_up()
+        self.create_login_and_verify_user()
         form = AddAlternativesForm(
             data={'alternative_1': 'yes', 'alternative_2': 'no'},
         )
@@ -211,12 +191,3 @@ class AddAlternativesFormTests(TestCase):
 
         self.assertEqual(firt_alternative.__str__(), 'Yes')
         self.assertEqual(last_alternative.__str__(), 'No')
-
-    def sign_up(self):
-        self.user = get_user_model().objects.create_user(
-            email='javi@email.com', username='javi', password='password123'
-        )
-        EmailAddress.objects.create(
-            user=self.user, email=self.user.email, verified=True
-        )
-        self.client.login(email='javi@email.com', password='password123')

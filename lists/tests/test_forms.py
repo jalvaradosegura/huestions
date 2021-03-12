@@ -1,11 +1,9 @@
 from http import HTTPStatus
 
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from allauth.account.models import EmailAddress
-
 from core.constants import LIST_COMPLETION_ERROR_MESSAGE
+from core.mixins import LoginUserMixin
 from questions.factories import AlternativeFactory, QuestionFactory
 
 from ..factories import QuestionListFactory
@@ -35,9 +33,9 @@ class CompleteListFormTests(TestCase):
         self.assertEqual(form.custom_error_message, '')
 
 
-class CreateQuestionListFormTests(TestCase):
+class CreateQuestionListFormTests(LoginUserMixin, TestCase):
     def test_get_form_success(self):
-        self.sign_up()
+        self.create_login_and_verify_user()
 
         response = self.client.get('/lists/create/')
 
@@ -45,7 +43,7 @@ class CreateQuestionListFormTests(TestCase):
         self.assertContains(response, '<label for="id_title"')
 
     def test_create_question_list_with_form(self):
-        self.sign_up()
+        self.create_login_and_verify_user()
         form = CreateQuestionListForm(
             data={
                 'title': 'Super List',
@@ -61,7 +59,7 @@ class CreateQuestionListFormTests(TestCase):
         self.assertEqual(question_list.description, 'some cool description')
 
     def test_create_two_question_lists(self):
-        self.sign_up()
+        self.create_login_and_verify_user()
         form = CreateQuestionListForm(
             data={'title': 'Super List 1'}, owner=self.user
         )
@@ -74,7 +72,7 @@ class CreateQuestionListFormTests(TestCase):
         self.assertEqual(QuestionList.objects.count(), 2)
 
     def test_user_gets_added_to_list_after_creating_one(self):
-        self.sign_up()
+        self.create_login_and_verify_user()
         form = CreateQuestionListForm(
             data={'title': 'Super List 1'}, owner=self.user
         )
@@ -83,15 +81,6 @@ class CreateQuestionListFormTests(TestCase):
         question_list = QuestionList.objects.last()
 
         self.assertEqual(question_list.owner.username, 'javi')
-
-    def sign_up(self):
-        self.user = get_user_model().objects.create_user(
-            email='javi@email.com', username='javi', password='password123'
-        )
-        EmailAddress.objects.create(
-            user=self.user, email=self.user.email, verified=True
-        )
-        self.client.login(email='javi@email.com', password='password123')
 
 
 class EditListFormTests(TestCase):

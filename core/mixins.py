@@ -18,8 +18,8 @@ class TestModelStrMixin:
         self.assertEqual(model_instance.__str__(), model_instance.title)
 
 
-class TestViewsMixin:
-    def create_and_login_a_user(self, email='javi@email.com'):
+class LoginUserMixin:
+    def create_login_and_verify_user(self, email='javi@email.com'):
         username = email.split('@')[0]
         self.user = get_user_model().objects.create_user(
             email=email, username=username, password='password123'
@@ -31,6 +31,8 @@ class TestViewsMixin:
 
         self.client.login(email=email, password='password123')
 
+
+class TestViewsMixin(LoginUserMixin):
     def test_user_not_logged_in(self):
         self.client.logout()
         response = self.client.get(self.base_url)

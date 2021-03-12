@@ -32,7 +32,7 @@ class HomePageViewTests(TestViewsMixin, TestCase):
     base_url = reverse('home')
 
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve(self.base_url)
@@ -66,7 +66,7 @@ class LogoutPageTests(TestViewsMixin, TestCase):
     base_url = reverse('account_logout')
 
     def test_logout_url_returns_correct_html(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
 
         response = self.client.get(self.base_url)
 
@@ -80,7 +80,7 @@ class LogoutPageTests(TestViewsMixin, TestCase):
 
 class AnswerQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
             title='base list', owner=self.user
         )
@@ -178,7 +178,7 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
 
 class AddQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
             title='An amazing list', owner=self.user
         )
@@ -274,7 +274,7 @@ class AddQuestionViewTests(TestViewsMixin, TestCase):
 
 class EditQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
             title='An amazing list', owner=self.user
         )
@@ -380,7 +380,7 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
 
 class DeleteQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
-        self.create_and_login_a_user()
+        self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
             title='test error list', owner=self.user
         )
