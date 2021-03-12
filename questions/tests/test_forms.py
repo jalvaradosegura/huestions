@@ -3,6 +3,8 @@ from http import HTTPStatus
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
+from allauth.account.models import EmailAddress
+
 from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
 from ..factories import (
     AlternativeFactory,
@@ -91,6 +93,9 @@ class AnswerQuestionFormViewTests(TestCase):
         self.user = get_user_model().objects.create_user(
             email='javi@email.com', username='javi', password='password123'
         )
+        EmailAddress.objects.create(
+            user=self.user, email=self.user.email, verified=True
+        )
         self.client.login(email='javi@email.com', password='password123')
 
 
@@ -151,6 +156,9 @@ class CreateQuestionFormTests(TestCase):
         self.user = get_user_model().objects.create_user(
             email='javi@email.com', username='javi', password='password123'
         )
+        EmailAddress.objects.create(
+            user=self.user, email=self.user.email, verified=True
+        )
         self.client.login(email='javi@email.com', password='password123')
 
 
@@ -207,5 +215,8 @@ class AddAlternativesFormTests(TestCase):
     def sign_up(self):
         self.user = get_user_model().objects.create_user(
             email='javi@email.com', username='javi', password='password123'
+        )
+        EmailAddress.objects.create(
+            user=self.user, email=self.user.email, verified=True
         )
         self.client.login(email='javi@email.com', password='password123')

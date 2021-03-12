@@ -3,7 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render, reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
+
+from allauth.account.decorators import verified_email_required
 
 from core.constants import (
     LIST_CREATED_SUCCESSFULLY,
@@ -17,17 +20,20 @@ from .forms import CompleteListForm, CreateQuestionListForm, EditListForm
 from .models import QuestionList
 
 
+@method_decorator(verified_email_required, name='dispatch')
 class QuestionsListView(LoginRequiredMixin, ListView):
     queryset = QuestionList.activated_lists.all()
     template_name = 'lists.html'
 
 
+@method_decorator(verified_email_required, name='dispatch')
 class ListResultsView(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'list_results.html'
 
 
 @login_required
+@verified_email_required
 def create_list(request):
     if request.method == 'POST':
         form = CreateQuestionListForm(request.POST, owner=request.user)
@@ -44,6 +50,7 @@ def create_list(request):
     return render(request, 'create_list.html', {'form': form})
 
 
+@method_decorator(verified_email_required, name='dispatch')
 class EditListView(
     LoginRequiredMixin,
     CustomUserPassesTestMixin,
@@ -87,6 +94,7 @@ class EditListView(
         return super().post(request, *args, **kwargs)
 
 
+@method_decorator(verified_email_required, name='dispatch')
 class DeleteListView(
     LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView
 ):

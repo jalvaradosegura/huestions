@@ -73,6 +73,10 @@ class LogoutPageTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'account/logout.html')
 
+    def test_user_havent_verified_its_account_yet(self):
+        # This isn't needed for this view
+        pass
+
 
 class AnswerQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):

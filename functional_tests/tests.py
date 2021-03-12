@@ -2,6 +2,8 @@ import time
 
 from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase
+
+from allauth.account.models import EmailAddress
 from selenium import webdriver
 
 from lists.factories import QuestionListFactory
@@ -47,6 +49,11 @@ class FunctionalTestsBase(LiveServerTestCase):
         # She press the signup button
         time.sleep(3)
         self.browser.find_element_by_id('sign_up_button').click()
+
+        # Verify the user
+        email_address = EmailAddress.objects.get(email=email)
+        email_address.verified = True
+        email_address.save()
 
 
 class NewVisitorTests(FunctionalTestsBase):

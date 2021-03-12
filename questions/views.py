@@ -4,7 +4,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, DeleteView, UpdateView, View
+
+from allauth.account.decorators import verified_email_required
 
 from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
@@ -24,10 +27,12 @@ from .models import Alternative, Question
 
 
 @login_required
+@verified_email_required
 def home(request):
     return render(request, 'home.html')
 
 
+@method_decorator(verified_email_required, name='dispatch')
 class AnswerQuestionView(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'answer_question.html'
@@ -107,6 +112,7 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
         return redirect('list_results', slug=question_list.slug)
 
 
+@method_decorator(verified_email_required, name='dispatch')
 class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
     template_name = 'create_question.html'
 
@@ -162,6 +168,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
         return redirect('edit_list', question_list.slug)
 
 
+@method_decorator(verified_email_required, name='dispatch')
 class EditQuestionView(
     LoginRequiredMixin,
     CustomUserPassesTestMixin,
@@ -197,6 +204,7 @@ class EditQuestionView(
         return super().post(request, *args, **kwargs)
 
 
+@method_decorator(verified_email_required, name='dispatch')
 class DeleteQuestionView(
     LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView
 ):
