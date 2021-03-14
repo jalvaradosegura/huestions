@@ -11,10 +11,19 @@
       </div>
       <div class="navbar-nav">
         {% if user.is_authenticated %}
-        <span class="navbar-text">Hi, {{ user }}👋</span>
+	  <span class="navbar-text">Hi, {{ user }}👋</span>
       	  <a class="nav-item nav-link {% if url_name == 'create_list' %}active{% endif %}" href="{% url 'create_list' %}">Create a list</a>
       	  <a class="nav-item nav-link {% if url_name == 'lists' %}active{% endif %}" href="{% url 'lists' user.username %}">Your Lists</a>
-      	  <a class="nav-item nav-link {% if url_name == 'account_logout' %}active{% endif %}" href="{% url 'account_logout' %}">Log out</a>
+	  <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+	      <a class="dropdown-item {% if url_name == 'account_change_password' %}active{% endif %}" href="{% url 'account_change_password' %}">Change password</a>
+              <div class="dropdown-divider"></div>
+	      <a class="dropdown-item {% if url_name == 'account_logout' %}active{% endif %}" href="{% url 'account_logout' %}">Log out</a>
+            </div>
+	  </li>
         {% else %}
       	  <a class="nav-item nav-link {% if url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}">Log in</a>
         {% endif %}
