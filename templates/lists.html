@@ -13,8 +13,8 @@
 	<h5 class="card-title">{{ question_list.title }} &middot <small>{% trans "by" %} {{ question_list.owner }}</small></h5>
 	<h6 class="card-subtitle mb-2 text-muted">{% trans "Created:" %} {{ question_list.created|date:"M d, Y" }}</h6>
 	<p class="card-text">{{ question_list.description }}</p>
+	<button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ question_list.get_absolute_url }}')" class="btn btn-outline-secondary">{% trans "Share list" %}</button>
 	<a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="btn btn-success">{% trans "Go" %}!</a>
-	<button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ question_list.get_absolute_url }}')" class="btn btn-secondary">{% trans "Share list" %}</button>
       </div>
     </div>
     <br>

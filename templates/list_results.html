@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 {% load l10n %}
 
 {% block main %}
 
-<h1 class="text-center">{{ questionlist }} - results! <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ questionlist.get_absolute_url }}')" class="btn btn-secondary btn-sm">Share list</button></h1>
+<h1 class="text-center">{{ questionlist }} - {% trans "results" %}! <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ questionlist.get_absolute_url }}')" class="btn btn-outline-secondary btn-sm">{% trans "Share list" %}</button></h1>
 
 {% localize off %}
 <div class="row">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-14 02:56-0300\n"
+"POT-Creation-Date: 2021-03-14 20:08-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,6 +88,15 @@ msgstr ""
 
 #: questions/forms.py:55
 msgid "Alternative 2"
+msgstr ""
+
+#: templates/account/email/email_confirmation_message.txt:5
+#, python-format
+msgid ""
+"You're receiving this e-mail because user %(user_display)s has given your e-"
+"mail address to register an account on %(site_domain)s.\n"
+"\n"
+"To confirm this is correct, go to %(activate_url)s"
 msgstr ""
 
 #: templates/account/email_confirm.html:6
@@ -199,11 +208,12 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
-#: templates/answer_question.html:8 templates/lists.html:17
+#: templates/answer_question.html:9 templates/list_results.html:9
+#: templates/lists.html:16 templates/user_lists.html:17
 msgid "Share list"
 msgstr ""
 
-#: templates/answer_question.html:26
+#: templates/answer_question.html:29
 msgid "Answer"
 msgstr ""
 
@@ -239,12 +249,36 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
-#: templates/delete_list.html:12
+#: templates/delete_list.html:12 templates/user_lists.html:22
 msgid "Delete"
+msgstr ""
+
+#: templates/edit_list.html:23
+msgid "Note"
+msgstr ""
+
+#: templates/edit_list.html:23
+msgid "once published you can neither edit nor delete the list."
+msgstr ""
+
+#: templates/edit_list.html:27
+msgid "Current questions"
+msgstr ""
+
+#: templates/edit_list.html:27
+msgid "Maximum of 20 questions"
+msgstr ""
+
+#: templates/edit_list.html:28
+msgid "Add a question"
 msgstr ""
 
 #: templates/edit_question.html:12
 msgid "Apply changes"
+msgstr ""
+
+#: templates/list_results.html:9
+msgid "results"
 msgstr ""
 
 #: templates/lists.html:8 templates/navbar.html:12
@@ -259,7 +293,7 @@ msgstr ""
 msgid "Created:"
 msgstr ""
 
-#: templates/lists.html:16
+#: templates/lists.html:17 templates/user_lists.html:18
 msgid "Go"
 msgstr ""
 
@@ -277,4 +311,16 @@ msgstr ""
 
 #: templates/navbar.html:29
 msgid "Log in"
+msgstr ""
+
+#: templates/user_lists.html:8
+msgid "Your lists"
+msgstr ""
+
+#: templates/user_lists.html:13
+msgid "Created"
+msgstr ""
+
+#: templates/user_lists.html:21
+msgid "Edit"
 msgstr ""

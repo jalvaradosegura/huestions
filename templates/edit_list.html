@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block main %}
@@ -19,12 +20,12 @@
 <button form="form1" class="btn btn-outline-success" type="submit" id="edit_list_button">Change name</button>
 or
 <button form="form2" class="btn btn-success" id="complete_button">Publish list</button>
-<p class="text-muted mt-2"><b>Note:</b> once published you can neither edit nor delete the list.</p>
+<p class="text-muted mt-2"><b>{% trans "Note" %}:</b> {% trans "once published you can neither edit nor delete the list." %}</p>
 
 <hr>
 
-<h2 class="text-center">Current questions <small>(Maximum of 20 questions)</small></h2>
-<a class="btn btn-primary mb-2" href="{% url 'add_question' questionlist.slug %}" id="add_question">Add a question</a>
+<h2 class="text-center">{% trans "Current questions" %} <small>({% trans "Maximum of 20 questions" %})</small></h2>
+<a class="btn btn-primary mb-2" href="{% url 'add_question' questionlist.slug %}" id="add_question">{% trans "Add a question" %}</a>
 
 <div class="row">
   {% for question in questionlist.questions.all %}

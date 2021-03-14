@@ -1,24 +1,25 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load static %}
 
 {% block main %}
 
-<h1>Your lists</h1>
+<h1>{% trans "Your lists" %}</h1>
     {% for question_list in object_list %}
       <div class="card" style="">
 	<div class="card-body">
 	  <h5 class="card-title">{{ question_list.title }}</h5>
-	  <h6 class="card-subtitle mb-2 text-muted">Created: {{ question_list.created|date:"M d, Y" }}</h6>
+	  <h6 class="card-subtitle mb-2 text-muted">{% trans "Created" %}: {{ question_list.created|date:"M d, Y" }}</h6>
 	  <p class="card-text">{{ question_list.description }}</p>
 	  {% if question_list.active %}
 	    <p>Published</p>
-	    <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ question_list.get_absolute_url }}')" class="btn btn-outline-secondary">Share list</button>
-	    <a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="btn btn-success">Go!</a>
+	    <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ question_list.get_absolute_url }}')" class="btn btn-outline-secondary">{% trans "Share list" %}</button>
+	    <a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="btn btn-success">{% trans "Go" %}!</a>
 
 	  {% else %}
-	    <a href="{% url 'edit_list' question_list.slug %}" class="btn btn-outline-primary" id="edit_{{ forloop.counter0 }}">Edit</a>
-	    <a href="{% url 'delete_list' question_list.slug %}" class="btn btn-danger" id="delete_{{ forloop.counter0 }}">Delete</a>
+	    <a href="{% url 'edit_list' question_list.slug %}" class="btn btn-outline-primary" id="edit_{{ forloop.counter0 }}">{% trans "Edit" %}</a>
+	    <a href="{% url 'delete_list' question_list.slug %}" class="btn btn-danger" id="delete_{{ forloop.counter0 }}">{% trans "Delete" %}</a>
 	  {% endif %}
 	</div>
       </div>
