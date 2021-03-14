@@ -8,5 +8,8 @@ htmlcov/
 coverage.xml
 *.cover
 
+# Translations
+*.mo
+
 # macOS
 .DS_Store
