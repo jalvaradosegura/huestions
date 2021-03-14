@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-14 02:40-0300\n"
+"POT-Creation-Date: 2021-03-14 02:56-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,6 +125,14 @@ msgstr ""
 msgid "Don't have an account yet"
 msgstr ""
 
+#: templates/account/logout.html:7 templates/account/logout.html:16
+msgid "Sign Out"
+msgstr ""
+
+#: templates/account/logout.html:9
+msgid "Are you sure you want to sign out"
+msgstr ""
+
 #: templates/account/password_change.html:6
 #: templates/account/password_change.html:9
 #: templates/account/password_change.html:14
@@ -191,7 +199,7 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
-#: templates/answer_question.html:8
+#: templates/answer_question.html:8 templates/lists.html:17
 msgid "Share list"
 msgstr ""
 
@@ -239,8 +247,20 @@ msgstr ""
 msgid "Apply changes"
 msgstr ""
 
-#: templates/navbar.html:12
+#: templates/lists.html:8 templates/navbar.html:12
 msgid "Lists"
+msgstr ""
+
+#: templates/lists.html:13
+msgid "by"
+msgstr ""
+
+#: templates/lists.html:14
+msgid "Created:"
+msgstr ""
+
+#: templates/lists.html:16
+msgid "Go"
 msgstr ""
 
 #: templates/navbar.html:17

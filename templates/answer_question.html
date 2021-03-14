@@ -1,15 +1,18 @@
 {% extends "base.html" %}
 
 {% load i18n %}
+{% load l10n %}
 {% load static %}
 
 {% block main %}
 
 <h1 class="text-center">{{ questionlist.title }} <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ questionlist.get_absolute_url }}')" class="btn btn-secondary btn-sm">{% trans "Share list" %}</button></h1>
 
+{% localize off %}
 <div class="progress">
   <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ percentage }}%"></div>
 </div>
+{% endlocalize %}
 
 <br>
 
