@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block main %}
+
+<h1>{% trans "Log In" %}</h1>
+
 
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
@@ -10,11 +14,11 @@
   {% if redirect_field_value %}
   	<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button class="btn btn-success" type="submit">Log In</button>
+  <button class="btn btn-success" type="submit">{% trans "Log In" %}</button>
   <br>
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a>
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password" %}?</a>
   <br>
-  <a class="button secondaryAction" id="dont_have_an_account" href="{% url 'account_signup' %}">Don't have an account yet?</a>
+  <a class="button secondaryAction" id="dont_have_an_account" href="{% url 'account_signup' %}">{% trans "Don't have an account yet" %}?</a>
 </form>
 
 {% endblock main %}

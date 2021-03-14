@@ -1,4 +1,4 @@
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 LIST_COMPLETION_ERROR_MESSAGE = (
     _('The list needs at least 1 question with 2 alternatives to be completed')

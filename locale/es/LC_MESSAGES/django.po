@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-14 02:15-0300\n"
+"POT-Creation-Date: 2021-03-14 02:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -114,6 +114,18 @@ msgid ""
 "\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
 
+#: templates/account/login.html:8 templates/account/login.html:17
+msgid "Log In"
+msgstr "Iniciar sesión"
+
+#: templates/account/login.html:19
+msgid "Forgot Password"
+msgstr "Olvidaste la contraseña"
+
+#: templates/account/login.html:21
+msgid "Don't have an account yet"
+msgstr "Todavía no tienes cuenta"
+
 #: templates/account/password_change.html:6
 #: templates/account/password_change.html:9
 #: templates/account/password_change.html:14
@@ -181,9 +193,13 @@ msgstr "Cambiar contraseña"
 msgid "Your password is now changed."
 msgstr "Tu contraseña ha sido cambiada."
 
+#: templates/account/signup.html:8 templates/account/signup.html:16
+msgid "Sign Up"
+msgstr "Regístrate"
+
 #: templates/answer_question.html:8
 msgid "Share list"
-msgstr "Comparte lista"
+msgstr "Compartir lista"
 
 #: templates/answer_question.html:26
 msgid "Answer"
