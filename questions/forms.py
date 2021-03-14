@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
 from .factories import AlternativeFactory
@@ -7,7 +8,7 @@ from .models import Question
 
 class AnswerQuestionForm(forms.Form):
     alternatives = forms.ChoiceField(
-        label='Alternatives', widget=forms.RadioSelect
+        label=_('Alternatives'), widget=forms.RadioSelect
     )
 
     def __init__(self, question_id, *args, **kwargs):
@@ -50,8 +51,8 @@ class CreateQuestionForm(forms.ModelForm):
 
 
 class AddAlternativesForm(forms.Form):
-    alternative_1 = forms.CharField()
-    alternative_2 = forms.CharField()
+    alternative_1 = forms.CharField(label=_('Alternative 1'))
+    alternative_2 = forms.CharField(label=_('Alternative 2'))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

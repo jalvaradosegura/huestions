@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-14 02:15-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/constants.py:4
+msgid "The list needs at least 1 question with 2 alternatives to be completed"
+msgstr ""
+
+#: core/constants.py:7
+msgid "The list you are trying to see is incomplete"
+msgstr ""
+
+#: core/constants.py:9
+msgid "List was created successfully"
+msgstr ""
+
+#: core/constants.py:10
+msgid "List was edited successfully"
+msgstr ""
+
+#: core/constants.py:11
+msgid "List was deleted successfully"
+msgstr ""
+
+#: core/constants.py:12
+msgid "List was published successfully"
+msgstr ""
+
+#: core/constants.py:13
+msgid "The list reached the limit of questions"
+msgstr ""
+
+#: core/constants.py:14
+msgid "Question was created successfully"
+msgstr ""
+
+#: core/constants.py:15
+msgid "Question was edited successfully"
+msgstr ""
+
+#: core/constants.py:16
+msgid "Question was deleted successfully"
+msgstr ""
+
+#: core/constants.py:18
+msgid "Question already answered. Your vote won't count this time."
+msgstr ""
+
+#: core/models.py:24
+msgid "title"
+msgstr ""
+
+#: huestion_project/settings/base.py:142
+msgid "English"
+msgstr ""
+
+#: huestion_project/settings/base.py:143
+msgid "Spanish"
+msgstr ""
+
+#: lists/models.py:22
+msgid "description"
+msgstr ""
+
+#: questions/forms.py:11
+msgid "Alternatives"
+msgstr ""
+
+#: questions/forms.py:54
+msgid "Alternative 1"
+msgstr ""
+
+#: questions/forms.py:55
+msgid "Alternative 2"
+msgstr ""
+
+#: templates/account/email_confirm.html:6
+#: templates/account/email_confirm.html:10
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: templates/account/email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: templates/account/email_confirm.html:20
+msgid "Confirm"
+msgstr ""
+
+#: templates/account/email_confirm.html:27
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: templates/account/password_change.html:6
+#: templates/account/password_change.html:9
+#: templates/account/password_change.html:14
+#: templates/account/password_reset_from_key.html:5
+#: templates/account/password_reset_from_key.html:8
+#: templates/account/password_reset_from_key_done.html:4
+#: templates/account/password_reset_from_key_done.html:7
+msgid "Change Password"
+msgstr ""
+
+#: templates/account/password_change.html:15
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset.html:11
+#: templates/account/password_reset_done.html:6
+#: templates/account/password_reset_done.html:9
+msgid "Password Reset"
+msgstr ""
+
+#: templates/account/password_reset.html:16
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: templates/account/password_reset.html:21
+msgid "Reset My Password"
+msgstr ""
+
+#: templates/account/password_reset.html:24
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: templates/account/password_reset_done.html:15
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:8
+msgid "Bad Token"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:12
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:23
+msgid "Change password"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:21
+#: templates/account/password_reset_from_key_done.html:8
+msgid "Your password is now changed."
+msgstr ""
+
+#: templates/answer_question.html:8
+msgid "Share list"
+msgstr ""
+
+#: templates/answer_question.html:26
+msgid "Answer"
+msgstr ""
+
+#: templates/create_list.html:12
+msgid "Create"
+msgstr ""
+
+#: templates/create_question.html:8
+msgid "Create a question"
+msgstr ""
+
+#: templates/create_question.html:21
+msgid "Create & add another"
+msgstr ""
+
+#: templates/create_question.html:22
+msgid "Create & publish the list"
+msgstr ""
+
+#: templates/create_question.html:23
+msgid "Create & go back"
+msgstr ""
+
+#: templates/create_question.html:26
+msgid "Go back to the list"
+msgstr ""
+
+#: templates/delete_list.html:8
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: templates/delete_list.html:11
+msgid "Go back"
+msgstr ""
+
+#: templates/delete_list.html:12
+msgid "Delete"
+msgstr ""
+
+#: templates/edit_question.html:12
+msgid "Apply changes"
+msgstr ""
+
+#: templates/navbar.html:12
+msgid "Lists"
+msgstr ""
+
+#: templates/navbar.html:17
+msgid "Create a list"
+msgstr ""
+
+#: templates/navbar.html:18
+msgid "Your Lists"
+msgstr ""
+
+#: templates/navbar.html:25
+msgid "Log out"
+msgstr ""
+
+#: templates/navbar.html:29
+msgid "Log in"
+msgstr ""

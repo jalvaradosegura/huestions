@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load static %}
 
 {% block main %}
 
-<h1 class="text-center">{{ questionlist.title }} <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ questionlist.get_absolute_url }}')" class="btn btn-secondary btn-sm">Share list</button></h1>
+<h1 class="text-center">{{ questionlist.title }} <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ questionlist.get_absolute_url }}')" class="btn btn-secondary btn-sm">{% trans "Share list" %}</button></h1>
 
 <div class="progress">
   <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ percentage }}%"></div>
@@ -22,7 +23,7 @@
     {% if questions.has_next %}
       <input type="hidden" name="next_page" value="{{ questions.next_page_number }}">
     {% endif %}
-    <button id="button_to_vote" class="btn btn-success">Answer</button>
+    <button id="button_to_vote" class="btn btn-success">{% trans "Answer" %}</button>
   </form>
   </div>
 {% endfor %}

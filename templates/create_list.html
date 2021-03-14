@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block main %}
@@ -8,7 +9,7 @@
 <form action="" method="post">
   {% csrf_token %}
   {{ form|crispy }}
-  <button class="btn btn-success" type="submit" id="create_list_button">Create</button>
+  <button class="btn btn-success" type="submit" id="create_list_button">{% trans "Create" %}</button>
 </form>
 
 {% endblock main %}

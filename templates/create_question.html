@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
+{% load i18n %}
 {% load crispy_forms_tags %}
 
 {% block main %}
 
-<h1>Create a question</h1>
+<h1>{% trans "Create a question" %}</h1>
 
 <form id="form1" action="" method="post">
   {% csrf_token %}
@@ -17,11 +18,11 @@
   {{ complete_list_form }}
 </form>
 
-<input form="form1" class="btn btn-success" type="submit" id="create_question_and_add_another_button" name="create_and_add_another" value="Create & add another">
-<input form="form1" class="btn btn-success" type="submit" id="create_question_and_publish" name="create_and_publish" value="Create & publish the list">
-<input form="form1" class="btn btn-success" type="submit" id="complete_button" value="Create & go back">
+<input form="form1" class="btn btn-success" type="submit" id="create_question_and_add_another_button" name="create_and_add_another" value="{% trans "Create & add another" %}">
+<input form="form1" class="btn btn-success" type="submit" id="create_question_and_publish" name="create_and_publish" value="{% trans "Create & publish the list" %}">
+<input form="form1" class="btn btn-success" type="submit" id="complete_button" value="{% trans "Create & go back" %}">
 
 <br>
-<a class="btn btn-link" href="{% url 'edit_list' question_list_slug %}" id="view_list">Go back to the list</a>
+<a class="btn btn-link" href="{% url 'edit_list' question_list_slug %}" id="view_list">{% trans "Go back to the list" %}</a>
 
 {% endblock main %}

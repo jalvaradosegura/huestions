@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+
+{% load i18n %}
+
 {% block main %}
 
 <form id="form1" method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
+  <p>{% trans "Are you sure you want to delete" %} "{{ object }}"?</p>
 </form>
 
-<a class="btn btn-link" href="{% url 'lists' user %}">Go back</a>
-<input form="form1" id="delete_button" type="submit" value="Delete" class="btn btn-danger">
+<a class="btn btn-link" href="{% url 'lists' user %}">{% trans "Go back" %}</a>
+<input form="form1" id="delete_button" type="submit" value="{% trans "Delete" %}" class="btn btn-danger">
 
 {% endblock main %}

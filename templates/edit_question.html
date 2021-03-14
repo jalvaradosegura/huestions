@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% extends "base.html" %}
 {% load crispy_forms_tags %}
 
 {% block main %}
@@ -8,7 +9,7 @@
   {% csrf_token %}
   {{ form|crispy }}
   {{ alternatives_form|crispy }}
-  <button type="submit" id="edit_question_button" class="btn btn-success">Apply changes</button>
+  <button type="submit" id="edit_question_button" class="btn btn-success">{% trans "Apply changes" %}</button>
 </form>
 
 {% endblock main %}
