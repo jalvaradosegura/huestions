@@ -5,7 +5,7 @@
 
 {% block main %}
 
-<h2 class="text-center">List: {{ questionlist}} <small>(Edit)</small></h2>
+<h2 class="text-center">{% trans "List" %}: {{ questionlist}}</h2>
 
 <form id="form1" action="" method="post">
   {% csrf_token %}
@@ -17,9 +17,9 @@
   {{ complete_list_form }}
 </form>
 
-<button form="form1" class="btn btn-outline-success" type="submit" id="edit_list_button">Change name</button>
-or
-<button form="form2" class="btn btn-success" id="complete_button">Publish list</button>
+<button form="form1" class="btn btn-outline-success" type="submit" id="edit_list_button">{% trans "Change name" %}</button>
+{% trans "or" %}
+<button form="form2" class="btn btn-success" id="complete_button">{% trans "Publish list" %}</button>
 <p class="text-muted mt-2"><b>{% trans "Note" %}:</b> {% trans "once published you can neither edit nor delete the list." %}</p>
 
 <hr>

@@ -13,7 +13,7 @@
       </div>
       <div class="navbar-nav">
         {% if user.is_authenticated %}
-	  <span class="navbar-text">Hi, {{ user }}👋</span>
+	  <span class="navbar-text">{% trans "Hi" %}, {{ user }}👋</span>
 	  <a class="nav-item nav-link {% if url_name == 'create_list' %}active{% endif %}" href="{% url 'create_list' %}">{% trans "Create a list" %}</a>
 	  <a class="nav-item nav-link {% if url_name == 'lists' %}active{% endif %}" href="{% url 'lists' user.username %}">{% trans "Your Lists" %}</a>
 	  <li class="nav-item dropdown ml-3">
@@ -26,7 +26,8 @@
             </div>
 	  </li>
         {% else %}
-	<a class="nav-item nav-link {% if url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}">{% trans "Log in" %}</a>
+	  <a class="nav-item nav-link {% if url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}">{% trans "Log in" %}</a>
+	  <a class="nav-item nav-link {% if url_name == 'account_signup' %}active{% endif %}" href="{% url 'account_signup' %}">{% trans "Sign up" %}</a>
         {% endif %}
       </div>
     {% endwith %}

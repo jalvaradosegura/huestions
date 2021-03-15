@@ -5,7 +5,7 @@
 
 {% block main %}
 
-<h1>Create a list</h1>
+<h1>{% trans "Create a list" %}</h1>
 <form action="" method="post">
   {% csrf_token %}
   {{ form|crispy }}

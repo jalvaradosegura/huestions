@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 
@@ -7,4 +8,5 @@ urlpatterns = [
     path('', include('questions.urls')),
     path('users/', include('users.urls')),
     path('accounts/', include('allauth.urls')),
+    path('rosetta/', include('rosetta.urls')),
 ]

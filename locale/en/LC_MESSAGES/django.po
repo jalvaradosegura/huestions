@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-14 20:08-0300\n"
+"POT-Creation-Date: 2021-03-14 23:15-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,11 +66,11 @@ msgstr ""
 msgid "title"
 msgstr ""
 
-#: huestion_project/settings/base.py:142
+#: huestion_project/settings/base.py:143
 msgid "English"
 msgstr ""
 
-#: huestion_project/settings/base.py:143
+#: huestion_project/settings/base.py:144
 msgid "Spanish"
 msgstr ""
 
@@ -88,6 +88,18 @@ msgstr ""
 
 #: questions/forms.py:55
 msgid "Alternative 2"
+msgstr ""
+
+#: templates/account/email/base_message.txt:1
+#, python-format
+msgid "Hello from %(site_name)s!"
+msgstr ""
+
+#: templates/account/email/base_message.txt:5
+#, python-format
+msgid ""
+"Thank you for using %(site_name)s!\n"
+"%(site_domain)s"
 msgstr ""
 
 #: templates/account/email/email_confirmation_message.txt:5
@@ -208,6 +220,31 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
+#: templates/account/verified_email_required.html:6
+msgid "Verify Your E-mail Address"
+msgstr ""
+
+#: templates/account/verified_email_required.html:10
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your e-mail address. "
+msgstr ""
+
+#: templates/account/verified_email_required.html:14
+msgid ""
+"We have sent an e-mail to you for\n"
+"verification. Please click on the link inside this e-mail. Please\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: templates/account/verified_email_required.html:18
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
+
 #: templates/answer_question.html:9 templates/list_results.html:9
 #: templates/lists.html:16 templates/user_lists.html:17
 msgid "Share list"
@@ -215,6 +252,10 @@ msgstr ""
 
 #: templates/answer_question.html:29
 msgid "Answer"
+msgstr ""
+
+#: templates/create_list.html:8 templates/navbar.html:17
+msgid "Create a list"
 msgstr ""
 
 #: templates/create_list.html:12
@@ -251,6 +292,22 @@ msgstr ""
 
 #: templates/delete_list.html:12 templates/user_lists.html:22
 msgid "Delete"
+msgstr ""
+
+#: templates/edit_list.html:8
+msgid "List"
+msgstr ""
+
+#: templates/edit_list.html:20
+msgid "Change name"
+msgstr ""
+
+#: templates/edit_list.html:21
+msgid "or"
+msgstr ""
+
+#: templates/edit_list.html:22
+msgid "Publish list"
 msgstr ""
 
 #: templates/edit_list.html:23
@@ -297,8 +354,8 @@ msgstr ""
 msgid "Go"
 msgstr ""
 
-#: templates/navbar.html:17
-msgid "Create a list"
+#: templates/navbar.html:16
+msgid "Hi"
 msgstr ""
 
 #: templates/navbar.html:18
@@ -311,6 +368,10 @@ msgstr ""
 
 #: templates/navbar.html:29
 msgid "Log in"
+msgstr ""
+
+#: templates/navbar.html:30
+msgid "Sign up"
 msgstr ""
 
 #: templates/user_lists.html:8
