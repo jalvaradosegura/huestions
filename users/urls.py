@@ -8,4 +8,9 @@ urlpatterns = [
         view=views.UserListsView.as_view(),
         name='lists',
     ),
+    path(
+        route='<str:username>/stats/',
+        view=views.UserStatsView.as_view(),
+        name='stats',
+    ),
 ]

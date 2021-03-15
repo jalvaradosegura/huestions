@@ -8,3 +8,6 @@ class CustomUser(AbstractUser):
     alternatives_chosen = models.ManyToManyField(
         Alternative, related_name='users', blank=True
     )
+
+    def get_amount_of_lists_created(self):
+        return self.lists.count()

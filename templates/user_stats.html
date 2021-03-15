@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block main %}
+
+<h1>{% trans "Your stats" %}</h1>
+
+<br>
+
+<div class="card text-center" style="width: 18rem;">
+  <div class="card-body">
+    <p class="card-text" style="font-size:50px">{{ lists_created }}</p>
+  </div>
+  <div class="card-footer">
+      <h6>Lists created</h6>
+    </div>
+</div>
+
+
+{% endblock main %}

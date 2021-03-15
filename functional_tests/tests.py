@@ -73,7 +73,9 @@ class NewVisitorTests(FunctionalTestsBase):
 
 class QuestionListsTests(FunctionalTestsBase):
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference('intl.accept_languages', 'en')
+        self.browser = webdriver.Firefox(firefox_profile=profile)
 
         self.sign_up('javi@email.com', 'super_password_123')
 
@@ -134,7 +136,9 @@ class QuestionListsTests(FunctionalTestsBase):
 
 class CreateListTests(FunctionalTestsBase):
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference('intl.accept_languages', 'en')
+        self.browser = webdriver.Firefox(firefox_profile=profile)
 
     def test_can_create_a_question_list(self):
         # javi goes the the section where she can create a question list
@@ -152,7 +156,7 @@ class CreateListTests(FunctionalTestsBase):
 
         # Check for flash message
         message = self.browser.find_element_by_class_name('alert').text
-        self.assertIn(LIST_CREATED_SUCCESSFULLY, message)
+        self.assertIn(str(LIST_CREATED_SUCCESSFULLY), message)
 
         # Check that the question list got created
         last_list = QuestionList.objects.last()
@@ -185,7 +189,7 @@ class CreateListTests(FunctionalTestsBase):
 
         # Check for flash message
         message = self.browser.find_element_by_class_name('alert').text
-        self.assertIn(QUESTION_CREATED_SUCCESSFULLY, message)
+        self.assertIn(str(QUESTION_CREATED_SUCCESSFULLY), message)
 
         # She is redirected to the same page
         self.assertIn('Create a question', title)
@@ -262,12 +266,16 @@ class CreateListTests(FunctionalTestsBase):
         # view
         error_message = self.browser.find_element_by_class_name('alert').text
 
-        self.assertIn(ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE, error_message)
+        self.assertIn(
+            str(ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE), error_message
+        )
 
 
 class UserProfileTests(FunctionalTestsBase):
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference('intl.accept_languages', 'en')
+        self.browser = webdriver.Firefox(firefox_profile=profile)
 
     def test_user_publish_a_list(self):
         # Set up a list for Javi
@@ -312,7 +320,7 @@ class UserProfileTests(FunctionalTestsBase):
 
         # Check for flash message
         message = self.browser.find_element_by_class_name('alert').text
-        self.assertIn(LIST_EDITED_SUCCESSFULLY, message)
+        self.assertIn(str(LIST_EDITED_SUCCESSFULLY), message)
 
         # Check she is back to her lists
         self.assertEqual(
@@ -365,7 +373,7 @@ class UserProfileTests(FunctionalTestsBase):
 
         # Check for flash message
         message = self.browser.find_element_by_class_name('alert').text
-        self.assertIn(QUESTION_EDITED_SUCCESSFULLY, message)
+        self.assertIn(str(QUESTION_EDITED_SUCCESSFULLY), message)
 
         # She is back to the edit list view
         self.assertEqual(
@@ -394,7 +402,7 @@ class UserProfileTests(FunctionalTestsBase):
 
         # Check for flash message
         message = self.browser.find_element_by_class_name('alert').text
-        self.assertIn(LIST_PUBLISHED_SUCCESSFULLY, message)
+        self.assertIn(str(LIST_PUBLISHED_SUCCESSFULLY), message)
 
         # She is back to her lists after clicking it
         self.assertEqual(
@@ -422,7 +430,7 @@ class UserProfileTests(FunctionalTestsBase):
             f'{self.live_server_url}/lists/my-first-list/edit/',
         )
         error_message = self.browser.find_element_by_class_name('alert').text
-        self.assertIn(LIST_COMPLETION_ERROR_MESSAGE, error_message)
+        self.assertIn(str(LIST_COMPLETION_ERROR_MESSAGE), error_message)
 
     def test_user_delete_a_list(self):
         # Set up a list for Javi
@@ -447,7 +455,7 @@ class UserProfileTests(FunctionalTestsBase):
 
         # Check for flash message
         message = self.browser.find_element_by_class_name('alert').text
-        self.assertIn(LIST_DELETED_SUCCESSFULLY, message)
+        self.assertIn(str(LIST_DELETED_SUCCESSFULLY), message)
 
         # She is redirected to her lists
         self.assertEqual(
@@ -470,7 +478,7 @@ class UserProfileTests(FunctionalTestsBase):
 
         # Check for flash message
         message = self.browser.find_element_by_class_name('alert').text
-        self.assertIn(QUESTION_DELETED_SUCCESSFULLY, message)
+        self.assertIn(str(QUESTION_DELETED_SUCCESSFULLY), message)
 
         # She is redirected to the same edit list view
         self.assertEqual(
@@ -505,3 +513,22 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/{question_list.slug}/edit/',
         )
+
+    def test_users_can_see_their_stats(self):
+        # Set up a few lists for Javi
+        self.sign_up('javi@email.com', 'super_password_123')
+        user = get_user_model().objects.get(email='javi@email.com')
+        QuestionListFactory(title='list 1', owner=user)
+        QuestionListFactory(title='list 2', owner=user)
+        QuestionListFactory(title='list 3', owner=user)
+        QuestionListFactory(title='list 4', owner=user)
+
+        # She goes to see her stats
+        self.browser.get(
+            f'{self.live_server_url}/users/{user.username}/stats/'
+        )
+        body = self.browser.find_element_by_tag_name('body').text
+
+        # There is a 4 within the body of the page, indicating that she has
+        # created 4 lists
+        self.assertIn('4', body)
