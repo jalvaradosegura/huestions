@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-14 23:15-0300\n"
-"PO-Revision-Date: 2021-03-15 02:13+0000\n"
+"POT-Creation-Date: 2021-03-15 01:13-0300\n"
+"PO-Revision-Date: 2021-03-15 04:13+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -109,13 +109,11 @@ msgstr ""
 #: templates/account/email/email_confirmation_message.txt:5
 #, python-format
 msgid ""
-"You're receiving this e-mail because user %(user_display)s has given your e-"
-"mail address to register an account on %(site_domain)s.\n"
+"You're receiving this e-mail because user %(user_display)s has given your e-mail address to register an account on %(site_domain)s.\n"
 "\n"
 "To confirm this is correct, go to %(activate_url)s"
 msgstr ""
-"Has recibido este correo porque el usuario %(user_display)s ha indicado este "
-"correo para registrar su cuenta en %(site_domain)s.\n"
+"Has recibido este correo porque el usuario %(user_display)s ha indicado este correo para registrar su cuenta en %(site_domain)s.\n"
 "\n"
 "Para confirmar que esto es correcto, ir a %(activate_url)s"
 
@@ -140,11 +138,11 @@ msgstr "Confirmar"
 #: templates/account/email_confirm.html:27
 #, python-format
 msgid ""
-"This e-mail confirmation link expired or is invalid. Please <a href="
-"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+"This e-mail confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
-"Este link de confirmación de correo expiró o es inválido. Por favor  <a href="
-"\"%(email_url)s\"> emitir un nuevo correo de confirmación."
+"Este link de confirmación de correo expiró o es inválido. Por favor  <a "
+"href=\"%(email_url)s\"> emitir un nuevo correo de confirmación."
 
 #: templates/account/login.html:8 templates/account/login.html:17
 msgid "Log In"
@@ -189,8 +187,8 @@ msgstr "Restablece la contraseña"
 
 #: templates/account/password_reset.html:16
 msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it."
+"Forgotten your password? Enter your e-mail address below, and we'll send you"
+" an e-mail allowing you to reset it."
 msgstr ""
 "Olvidaste tu contraseña? Ingresa tu dirección de correo a continuación y "
 "nosotros te enviaremos un correo para restablecerla."
@@ -220,14 +218,14 @@ msgstr "Token erróneo"
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>."
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password "
+"reset</a>."
 msgstr ""
 "El link para resetear la contraseña no era válido, posiblemente porque ya "
 "fue usado. Por favor solicitar <a href=\"%(passwd_reset_url)s\"> nuevo "
 "reseteo de contraseña"
 
-#: templates/account/password_reset_from_key.html:18 templates/navbar.html:23
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:24
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -241,8 +239,6 @@ msgid "Sign Up"
 msgstr "Regístrate"
 
 #: templates/account/verified_email_required.html:6
-#, fuzzy
-#| msgid "Confirm E-mail Address"
 msgid "Verify Your E-mail Address"
 msgstr "Confirma dirección de correo"
 
@@ -252,12 +248,10 @@ msgid ""
 "you are who you claim to be. For this purpose, we require that you\n"
 "verify ownership of your e-mail address. "
 msgstr ""
+"Esta parte del sitio require que verifiquemos que seas quien dices ser. Por "
+"eso, necesitamos que verifiques ser el dueño de tu correo."
 
 #: templates/account/verified_email_required.html:14
-#, fuzzy
-#| msgid ""
-#| "We have sent you an e-mail. Please contact us if you do not receive it "
-#| "within a few minutes."
 msgid ""
 "We have sent an e-mail to you for\n"
 "verification. Please click on the link inside this e-mail. Please\n"
@@ -265,13 +259,6 @@ msgid ""
 msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
-
-#: templates/account/verified_email_required.html:18
-#, python-format
-msgid ""
-"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
-"mail address</a>."
-msgstr ""
 
 #: templates/answer_question.html:9 templates/list_results.html:9
 #: templates/lists.html:16 templates/user_lists.html:17
@@ -390,15 +377,19 @@ msgstr "Hola"
 msgid "Your Lists"
 msgstr "Tus listas"
 
-#: templates/navbar.html:25
+#: templates/navbar.html:23 templates/user_stats.html:7
+msgid "Your stats"
+msgstr "Tus estadísticas"
+
+#: templates/navbar.html:26
 msgid "Log out"
 msgstr "Cerrar sesión"
 
-#: templates/navbar.html:29
+#: templates/navbar.html:30
 msgid "Log in"
 msgstr "Iniciar sesión"
 
-#: templates/navbar.html:30
+#: templates/navbar.html:31
 msgid "Sign up"
 msgstr "Regístrate"
 
@@ -413,3 +404,8 @@ msgstr "Creada"
 #: templates/user_lists.html:21
 msgid "Edit"
 msgstr "Editar"
+
+#: templates/user_stats.html:16
+#| msgid "List was created successfully"
+msgid "Lists created"
+msgstr "Listas creadas"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-14 23:15-0300\n"
+"POT-Creation-Date: 2021-03-15 01:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -207,7 +207,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:18 templates/navbar.html:23
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:24
 msgid "Change password"
 msgstr ""
 
@@ -236,13 +236,6 @@ msgid ""
 "We have sent an e-mail to you for\n"
 "verification. Please click on the link inside this e-mail. Please\n"
 "contact us if you do not receive it within a few minutes."
-msgstr ""
-
-#: templates/account/verified_email_required.html:18
-#, python-format
-msgid ""
-"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
-"mail address</a>."
 msgstr ""
 
 #: templates/answer_question.html:9 templates/list_results.html:9
@@ -362,15 +355,19 @@ msgstr ""
 msgid "Your Lists"
 msgstr ""
 
-#: templates/navbar.html:25
+#: templates/navbar.html:23 templates/user_stats.html:7
+msgid "Your stats"
+msgstr ""
+
+#: templates/navbar.html:26
 msgid "Log out"
 msgstr ""
 
-#: templates/navbar.html:29
+#: templates/navbar.html:30
 msgid "Log in"
 msgstr ""
 
-#: templates/navbar.html:30
+#: templates/navbar.html:31
 msgid "Sign up"
 msgstr ""
 
@@ -384,4 +381,8 @@ msgstr ""
 
 #: templates/user_lists.html:21
 msgid "Edit"
+msgstr ""
+
+#: templates/user_stats.html:16
+msgid "Lists created"
 msgstr ""
