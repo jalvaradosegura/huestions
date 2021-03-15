@@ -17,7 +17,7 @@
 	  <a class="nav-item nav-link {% if url_name == 'create_list' %}active{% endif %}" href="{% url 'create_list' %}">{% trans "Create a list" %}</a>
 	  <a class="nav-item nav-link {% if url_name == 'lists' %}active{% endif %}" href="{% url 'lists' user.username %}">{% trans "Your Lists" %}</a>
 	  <li class="nav-item dropdown ml-3">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle {% if url_name in 'stats, account_change_password, account_logout' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 	      <a class="dropdown-item {% if url_name == 'stats' %}active{% endif %}" href="{% url 'stats' user.username %}">{% trans "Your stats" %}</a>
