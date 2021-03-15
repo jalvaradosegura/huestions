@@ -8,13 +8,34 @@
 
 <br>
 
-<div class="card text-center" style="width: 18rem;">
-  <div class="card-body">
-    <p class="card-text" style="font-size:50px">{{ lists_created }}</p>
-  </div>
-  <div class="card-footer">
-      <h6>{% trans "Lists created" %}</h6>
+<div class="row">
+
+  <div class="col-6">
+
+    <div class="card text-center" style="">
+      <div class="card-body">
+        <p class="card-text" style="font-size:50px">{{ lists_created }}</p>
+      </div>
+      <div class="card-footer">
+        <h6>{% trans "Lists created" %}</h6>
+      </div>
     </div>
+
+  </div>
+
+  <div class="col-6">
+
+    <div class="card text-center" style="">
+      <div class="card-body">
+        <p class="card-text" style="font-size:50px">{{ questions_answered }}</p>
+      </div>
+      <div class="card-footer">
+          <h6>{% trans "Questions Answered" %}</h6>
+        </div>
+    </div>
+
+  </div>
+
 </div>
 
 

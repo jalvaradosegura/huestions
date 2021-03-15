@@ -522,6 +522,9 @@ class UserProfileTests(FunctionalTestsBase):
         QuestionListFactory(title='list 2', owner=user)
         QuestionListFactory(title='list 3', owner=user)
         QuestionListFactory(title='list 4', owner=user)
+        AlternativeFactory().vote_for_this_alternative(user)
+        AlternativeFactory().vote_for_this_alternative(user)
+        AlternativeFactory().vote_for_this_alternative(user)
 
         # She goes to see her stats
         self.browser.get(
@@ -532,3 +535,6 @@ class UserProfileTests(FunctionalTestsBase):
         # There is a 4 within the body of the page, indicating that she has
         # created 4 lists
         self.assertIn('4', body)
+        # There is a 3 within the body of the page, indicating that she has
+        # answered 3 questions
+        self.assertIn('3', body)

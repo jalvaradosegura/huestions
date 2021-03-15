@@ -6,6 +6,7 @@ from django.urls import resolve, reverse
 from lists.factories import QuestionListFactory
 
 from core.mixins import TestViewsMixin
+from questions.factories import AlternativeFactory
 from ..factories import UserFactory
 from ..views import UserListsView, UserStatsView
 
@@ -62,10 +63,20 @@ class UserStatsViewTests(TestViewsMixin, TestCase):
         QuestionListFactory(owner=self.user)
         QuestionListFactory(owner=self.user)
         QuestionListFactory(owner=self.user)
+
         response = self.client.get(self.base_url)
         html = response.content.decode('utf8')
 
         self.assertRegex(html, '3')
+
+    def test_html_contains_amount_of_questions_answered(self):
+        for i in range(10):
+            AlternativeFactory().vote_for_this_alternative(self.user)
+
+        response = self.client.get(self.base_url)
+        html = response.content.decode('utf8')
+
+        self.assertRegex(html, '10')
 
     def test_cant_access_if_user_is_not_the_owner_of_the_stats_profile(self):
         user = UserFactory(username='jorge', email='jorge@email.com')

@@ -11,3 +11,6 @@ class CustomUser(AbstractUser):
 
     def get_amount_of_lists_created(self):
         return self.lists.count()
+
+    def get_amount_of_questions_answered(self):
+        return self.alternatives_chosen.count()

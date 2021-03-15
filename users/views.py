@@ -27,10 +27,16 @@ class UserStatsView(LoginRequiredMixin, UserPassesTestMixin, View):
     template_name = 'user_stats.html'
 
     def get(self, request, *args, **kwargs):
-        lists_created = request.user.get_amount_of_lists_created()
-        return render(
-            request, self.template_name, {'lists_created': lists_created}
-        )
+        user = request.user
+        lists_created = user.get_amount_of_lists_created()
+        questions_answered = user.get_amount_of_questions_answered()
+
+        context = {
+            'lists_created': lists_created,
+            'questions_answered': questions_answered
+        }
+
+        return render(request, self.template_name, context)
 
     def test_func(self):
         username = self.kwargs['username']

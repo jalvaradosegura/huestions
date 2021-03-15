@@ -15,6 +15,5 @@ class AlternativeFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = 'questions.Alternative'
 
-    # alternative = 'Roger Federer'
     title = factory.Iterator(['Roger Federer', 'Rafael Nadal'])
     question = factory.SubFactory(QuestionFactory)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-15 01:13-0300\n"
+"POT-Creation-Date: 2021-03-15 08:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,15 +134,15 @@ msgid ""
 "\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
 
-#: templates/account/login.html:8 templates/account/login.html:17
+#: templates/account/login.html:8 templates/account/login.html:16
 msgid "Log In"
 msgstr ""
 
-#: templates/account/login.html:19
+#: templates/account/login.html:21
 msgid "Forgot Password"
 msgstr ""
 
-#: templates/account/login.html:21
+#: templates/account/login.html:25
 msgid "Don't have an account yet"
 msgstr ""
 
@@ -218,6 +218,10 @@ msgstr ""
 
 #: templates/account/signup.html:8 templates/account/signup.html:16
 msgid "Sign Up"
+msgstr ""
+
+#: templates/account/signup.html:21
+msgid "Already have an account"
 msgstr ""
 
 #: templates/account/verified_email_required.html:6
@@ -383,6 +387,10 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: templates/user_stats.html:16
+#: templates/user_stats.html:20
 msgid "Lists created"
+msgstr ""
+
+#: templates/user_stats.html:33
+msgid "Questions Answered"
 msgstr ""

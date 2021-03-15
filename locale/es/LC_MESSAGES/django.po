@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-15 01:13-0300\n"
-"PO-Revision-Date: 2021-03-15 04:13+0000\n"
+"POT-Creation-Date: 2021-03-15 08:05-0300\n"
+"PO-Revision-Date: 2021-03-15 11:05+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -144,15 +144,15 @@ msgstr ""
 "Este link de confirmación de correo expiró o es inválido. Por favor  <a "
 "href=\"%(email_url)s\"> emitir un nuevo correo de confirmación."
 
-#: templates/account/login.html:8 templates/account/login.html:17
+#: templates/account/login.html:8 templates/account/login.html:16
 msgid "Log In"
 msgstr "Iniciar sesión"
 
-#: templates/account/login.html:19
+#: templates/account/login.html:21
 msgid "Forgot Password"
 msgstr "Olvidaste la contraseña"
 
-#: templates/account/login.html:21
+#: templates/account/login.html:25
 msgid "Don't have an account yet"
 msgstr "Todavía no tienes cuenta"
 
@@ -236,7 +236,12 @@ msgstr "Tu contraseña ha sido cambiada."
 
 #: templates/account/signup.html:8 templates/account/signup.html:16
 msgid "Sign Up"
-msgstr "Regístrate"
+msgstr "Registrarse"
+
+#: templates/account/signup.html:21
+#| msgid "Don't have an account yet"
+msgid "Already have an account"
+msgstr "Ya tienes una cuenta"
 
 #: templates/account/verified_email_required.html:6
 msgid "Verify Your E-mail Address"
@@ -271,7 +276,7 @@ msgstr "Responder"
 
 #: templates/create_list.html:8 templates/navbar.html:17
 msgid "Create a list"
-msgstr "Crea una lista"
+msgstr "Crear una lista"
 
 #: templates/create_list.html:12
 msgid "Create"
@@ -311,7 +316,7 @@ msgstr "Borrar"
 
 #: templates/edit_list.html:8
 msgid "List"
-msgstr "Listas"
+msgstr "Lista"
 
 #: templates/edit_list.html:20
 msgid "Change name"
@@ -343,7 +348,7 @@ msgstr "Máximo de 20 preguntas"
 
 #: templates/edit_list.html:28
 msgid "Add a question"
-msgstr "Agrega una pregunta"
+msgstr "Agregar una pregunta"
 
 #: templates/edit_question.html:12
 msgid "Apply changes"
@@ -391,7 +396,7 @@ msgstr "Iniciar sesión"
 
 #: templates/navbar.html:31
 msgid "Sign up"
-msgstr "Regístrate"
+msgstr "Registrarse"
 
 #: templates/user_lists.html:8
 msgid "Your lists"
@@ -405,7 +410,10 @@ msgstr "Creada"
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/user_stats.html:16
-#| msgid "List was created successfully"
+#: templates/user_stats.html:20
 msgid "Lists created"
 msgstr "Listas creadas"
+
+#: templates/user_stats.html:33
+msgid "Questions Answered"
+msgstr "Preguntas respondidas"

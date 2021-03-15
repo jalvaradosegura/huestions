@@ -7,7 +7,6 @@
 
 <h1>{% trans "Log In" %} 😁</h1>
 
-
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
   {{ form|crispy }}
@@ -15,10 +14,16 @@
   	<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
   <button class="btn btn-success" type="submit">{% trans "Log In" %}</button>
-  <br>
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password" %}?</a>
-  <br>
-  <a class="button secondaryAction" id="dont_have_an_account" href="{% url 'account_signup' %}">{% trans "Don't have an account yet" %}?</a>
 </form>
+
+<div class="border-top pt-1 mt-2">
+  <small class="text-muted">
+    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password" %}?</a>
+  </small>
+  <br>
+  <small class="text-muted">
+    <a class="button secondaryAction" id="dont_have_an_account" href="{% url 'account_signup' %}">{% trans "Don't have an account yet" %}?</a>
+  </small>
+</div>
 
 {% endblock main %}
