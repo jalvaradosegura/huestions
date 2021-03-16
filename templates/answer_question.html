@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load l10n %}
 {% load static %}
+{% load l10n %}
 
 {% block main %}
 
@@ -48,8 +48,6 @@
     {% endif %}
   </span>
 </div>
-
-<script src="{% static 'js/share_list.js' %}" type="text/javascript"></script>
 
 {% block bootstrap_js_loaded %}
   <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>

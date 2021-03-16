@@ -62,3 +62,35 @@ class QuestionListModelTests(TestModelStrMixin, TestCase):
         question_list = self.model_factory(title='awesome list')
 
         self.assertFalse(question_list.has_at_least_one_full_question())
+
+    def test_get_unanswered_questions(self):
+        user = UserFactory(username='testuser')
+        question_list = self.model_factory(title='awesome list', owner=user)
+        for _ in range(2):
+            question = QuestionFactory(title='cool?', child_of=question_list)
+            AlternativeFactory(title='yes', question=question)
+            AlternativeFactory(title='no', question=question)
+        question = QuestionFactory(title='cool?', child_of=question_list)
+        AlternativeFactory(title='yes', question=question)
+        alternative = AlternativeFactory(title='no', question=question)
+
+        alternative.vote_for_this_alternative(user)
+
+        self.assertEqual(len(question_list.get_unanswered_questions(user)), 2)
+
+    def test_get_amount_of_unanswered_questions(self):
+        user = UserFactory(username='testuser')
+        question_list = self.model_factory(title='awesome list', owner=user)
+        for _ in range(2):
+            question = QuestionFactory(title='cool?', child_of=question_list)
+            AlternativeFactory(title='yes', question=question)
+            AlternativeFactory(title='no', question=question)
+        question = QuestionFactory(title='cool?', child_of=question_list)
+        AlternativeFactory(title='yes', question=question)
+        alternative = AlternativeFactory(title='no', question=question)
+
+        alternative.vote_for_this_alternative(user)
+
+        self.assertEqual(
+            question_list.get_amount_of_unanswered_questions(user), 2
+        )

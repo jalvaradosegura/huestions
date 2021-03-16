@@ -12,7 +12,6 @@ from allauth.account.decorators import verified_email_required
 from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_PUBLISHED_SUCCESSFULLY,
-    QUESTION_ALREADY_ANSWERED,
     QUESTION_CREATED_SUCCESSFULLY,
     QUESTION_DELETED_SUCCESSFULLY,
     QUESTION_EDITED_SUCCESSFULLY,
@@ -39,10 +38,17 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
 
     def get(self, request, *args, **kwargs):
         slug = kwargs.get('slug')
-        question_list = QuestionList.objects.get(slug=slug)
+        self.question_list = QuestionList.objects.get(slug=slug)
 
-        if question_list.has_at_least_one_full_question():
-            return super().get(request, *args, **kwargs)
+        if self.question_list.active:
+            if (
+                self.question_list.get_amount_of_unanswered_questions(
+                    request.user
+                )
+                > 0
+            ):
+                return super().get(request, *args, **kwargs)
+            return redirect('list_results', slug)
 
         messages.add_message(
             request,
@@ -54,7 +60,9 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        questions_list = self.get_object().questions.all().order_by('id')
+        questions_list = self.question_list.get_unanswered_questions(
+            self.request.user
+        )
         paginator = Paginator(questions_list, 1)
 
         page = self.request.GET.get('page')
@@ -63,15 +71,6 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
 
         question_id = [question.id for question in context['questions']][0]
         context['form'] = AnswerQuestionForm(question_id)
-
-        if Question.objects.get(id=question_id).has_the_user_already_voted(
-            self.request.user
-        ):
-            messages.add_message(
-                self.request,
-                messages.INFO,
-                QUESTION_ALREADY_ANSWERED,
-            )
 
         percentage = (
             context['questions'].number

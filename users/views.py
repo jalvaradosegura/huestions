@@ -33,7 +33,7 @@ class UserStatsView(LoginRequiredMixin, UserPassesTestMixin, View):
 
         context = {
             'lists_created': lists_created,
-            'questions_answered': questions_answered
+            'questions_answered': questions_answered,
         }
 
         return render(request, self.template_name, context)

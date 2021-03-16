@@ -82,7 +82,7 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
-            title='base list', owner=self.user
+            title='base list', owner=self.user, active=True
         )
         self.base_url = reverse('answer_list', args=[self.question_list.slug])
         question = QuestionFactory(
@@ -91,6 +91,11 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
         AlternativeFactory(
             title='base alternative 1', question=question
         ).users.add(self.user)
+        AlternativeFactory(title='base alternative 2', question=question)
+        question = QuestionFactory(
+            title='another base question', child_of=self.question_list
+        )
+        AlternativeFactory(title='base alternative 1', question=question)
         AlternativeFactory(title='base alternative 2', question=question)
 
     def test_resolves_to_view(self):
@@ -115,29 +120,28 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, AnswerQuestionView.template_name)
 
-    def test_message_that_you_already_answered_the_question(self):
-        response = self.client.get(self.base_url + '?page=1')
-        html = response.content.decode('utf8')
-
-        self.assertRegex(html, "Question already answered")
-
-    def test_no_message_that_you_already_answered_the_question(self):
-        question_list = QuestionListFactory(title='no message')
+    def test_user_answered_all_the_questions(self):
+        question_list = QuestionListFactory(
+            title='no message', active=True, owner=self.user
+        )
         question = QuestionFactory(
             title='some question', child_of=question_list
         )
         AlternativeFactory(question=question)
+        alternative = AlternativeFactory(question=question)
+        alternative.vote_for_this_alternative(self.user)
 
         response = self.client.get(
-            reverse('answer_list', args=[question_list.slug]) + '?page=1'
-        )
-        html = response.content.decode('utf8')
-
-        self.assertNotRegex(
-            html, "Question already answered. Your vote won't count this time."
+            reverse('answer_list', args=[question_list.slug])
         )
 
-    def test_attempt_to_access_an_incomplete_list(self):
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('list_results', args=[question_list.slug]),
+        )
+
+    def test_attempt_to_access_an_unpublished_list(self):
         question_list = QuestionListFactory(title='cool list')
 
         response = self.client.get(

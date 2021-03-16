@@ -28,7 +28,7 @@ class AnswerQuestionFormTests(TestCase):
 
 class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
     def test_get_success(self):
-        question_list = QuestionListFactory(title='awesome list')
+        question_list = QuestionListFactory(title='awesome list', active=True)
         question = QuestionFactory(
             title='awesome question', child_of=question_list
         )

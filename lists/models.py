@@ -50,3 +50,14 @@ class QuestionList(TitleAndTimeStampedModel):
                 if question.is_completed():
                     return True
         return False
+
+    def get_unanswered_questions(self, user):
+        unanswered = []
+        if self.questions.exists():
+            for question in self.questions.all():
+                if not question.has_the_user_already_voted(user):
+                    unanswered.append(question)
+        return unanswered
+
+    def get_amount_of_unanswered_questions(self, user):
+        return len(self.get_unanswered_questions(user))
