@@ -14,3 +14,6 @@ LIST_REACHED_MAXIMUM_OF_QUESTION = _('The list reached the limit of questions')
 QUESTION_CREATED_SUCCESSFULLY = _('Question was created successfully')
 QUESTION_EDITED_SUCCESSFULLY = _('Question was edited successfully')
 QUESTION_DELETED_SUCCESSFULLY = _('Question was deleted successfully')
+ALREADY_ANSWERED_ALL_THE_QUESTIONS = _(
+    'You already answered all the questions for this list'
+)

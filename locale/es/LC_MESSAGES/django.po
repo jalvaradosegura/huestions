@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-15 08:05-0300\n"
-"PO-Revision-Date: 2021-03-15 11:05+0000\n"
+"POT-Creation-Date: 2021-03-16 00:19-0300\n"
+"PO-Revision-Date: 2021-03-16 03:19+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -61,8 +61,9 @@ msgid "Question was deleted successfully"
 msgstr "Pregunta eliminada con éxito"
 
 #: core/constants.py:18
-msgid "Question already answered. Your vote won't count this time."
-msgstr "Pregunta ya respondida. Tú voto no contará esta vez."
+#| msgid "Question already answered. Your vote won't count this time."
+msgid "You already answered all the questions for this list"
+msgstr "Ya respondiste todas las preguntas de esta lista"
 
 #: core/models.py:24
 msgid "title"
@@ -239,7 +240,6 @@ msgid "Sign Up"
 msgstr "Registrarse"
 
 #: templates/account/signup.html:21
-#| msgid "Don't have an account yet"
 msgid "Already have an account"
 msgstr "Ya tienes una cuenta"
 

@@ -10,6 +10,7 @@ from django.views.generic import DetailView, DeleteView, UpdateView, View
 from allauth.account.decorators import verified_email_required
 
 from core.constants import (
+    ALREADY_ANSWERED_ALL_THE_QUESTIONS,
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_PUBLISHED_SUCCESSFULLY,
     QUESTION_CREATED_SUCCESSFULLY,
@@ -48,6 +49,11 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
                 > 0
             ):
                 return super().get(request, *args, **kwargs)
+            messages.add_message(
+                request,
+                messages.INFO,
+                ALREADY_ANSWERED_ALL_THE_QUESTIONS
+            )
             return redirect('list_results', slug)
 
         messages.add_message(

@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.urls import resolve, reverse
 
 from core.constants import (
+    ALREADY_ANSWERED_ALL_THE_QUESTIONS,
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
 )
 from core.mixins import TestViewsMixin
@@ -134,12 +135,16 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
         response = self.client.get(
             reverse('answer_list', args=[question_list.slug])
         )
+        request = response.wsgi_request
+        storage = get_messages(request)
+        message = [message.message for message in storage][0]
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
             reverse('list_results', args=[question_list.slug]),
         )
+        self.assertEqual(message, ALREADY_ANSWERED_ALL_THE_QUESTIONS)
 
     def test_attempt_to_access_an_unpublished_list(self):
         question_list = QuestionListFactory(title='cool list')
@@ -154,6 +159,9 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(message, ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE)
+        self.assertEqual(
+            response['Location'], reverse('questions_list'),
+        )
 
     def test_post_success(self):
         question_list = QuestionListFactory(title='post list', owner=self.user)
