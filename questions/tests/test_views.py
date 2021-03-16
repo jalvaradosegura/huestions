@@ -160,7 +160,8 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(message, ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE)
         self.assertEqual(
-            response['Location'], reverse('questions_list'),
+            response['Location'],
+            reverse('questions_list'),
         )
 
     def test_post_success(self):
@@ -174,16 +175,15 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
         response = self.client.post(
             reverse('answer_list', args=[question_list.slug]),
             data={
-                'alternatives': '3',
+                'alternatives': '3',  # Alternative id
                 'question_list_id': question_list.id,
-                'next_page': '2',
             },
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('answer_list', args=[question_list.slug]) + '?page=2',
+            reverse('answer_list', args=[question_list.slug]),
         )
         self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
 

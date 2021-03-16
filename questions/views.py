@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator
 from django.shortcuts import redirect, render, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, DeleteView, UpdateView, View
@@ -50,9 +49,7 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
             ):
                 return super().get(request, *args, **kwargs)
             messages.add_message(
-                request,
-                messages.INFO,
-                ALREADY_ANSWERED_ALL_THE_QUESTIONS
+                request, messages.INFO, ALREADY_ANSWERED_ALL_THE_QUESTIONS
             )
             return redirect('list_results', slug)
 
@@ -69,22 +66,18 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
         questions_list = self.question_list.get_unanswered_questions(
             self.request.user
         )
-        paginator = Paginator(questions_list, 1)
-
-        page = self.request.GET.get('page')
-
-        context['questions'] = paginator.get_page(page)
-
-        question_id = [question.id for question in context['questions']][0]
+        question = questions_list[0]
+        question_id = question.id
         context['form'] = AnswerQuestionForm(question_id)
+        context['question'] = question
 
-        percentage = (
-            context['questions'].number
-            / context['questions'].paginator.num_pages
-            * 100
+        total_of_questions = self.question_list.questions.count()
+        answered_questions_plus_one = (
+            total_of_questions - len(questions_list) + 1
         )
-        context['percentage'] = percentage
-
+        context['percentage'] = (
+            answered_questions_plus_one / total_of_questions * 100
+        )
         return context
 
     def post(self, request, *args, **kwargs):
@@ -105,16 +98,12 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
                 alternative=selected_alternative,
             )
 
-        if 'next_page' in request.POST:
-            next_page = request.POST['next_page']
-            return redirect(
-                reverse(
-                    'answer_list',
-                    kwargs={'slug': question_list.slug},
-                )
-                + f'?page={next_page}'
-            )
-        return redirect('list_results', slug=question_list.slug)
+        if question_list.get_amount_of_unanswered_questions(request.user) == 0:
+            return redirect('list_results', slug=question_list.slug)
+
+        return redirect(
+            reverse('answer_list', kwargs={'slug': question_list.slug},)
+        )
 
 
 @method_decorator(verified_email_required, name='dispatch')

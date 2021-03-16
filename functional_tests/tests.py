@@ -115,15 +115,11 @@ class QuestionListsTests(FunctionalTestsBase):
             f'{self.live_server_url}/lists/some-cool-title/',
         )
 
-        # She now sees the first question of the list
-        current_page = self.browser.find_element_by_id('current_question').text
-        self.assertIn('1 of ', current_page)
-
         # She answer the first question
         vote_for_an_alternative(self.browser, 'id_alternatives_0')
         self.assertEqual(
             self.browser.current_url,
-            f'{self.live_server_url}/lists/some-cool-title/?page=2',
+            f'{self.live_server_url}/lists/some-cool-title/',
         )
 
         # She answer the next question

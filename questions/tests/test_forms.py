@@ -1,5 +1,6 @@
 from http import HTTPStatus
 
+from django.urls import reverse
 from django.test import TestCase
 
 from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
@@ -67,7 +68,7 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(response['Location'], '/lists/awesome-list/?page=2')
+        self.assertEqual(response['Location'], '/lists/awesome-list/')
         self.assertEqual(self.user.alternatives_chosen.count(), 1)
 
     def test_post_and_go_to_results(self):
@@ -79,7 +80,7 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         self.create_login_and_verify_user()
 
         response = self.client.post(
-            '/lists/awesome-list/',
+            reverse('answer_list', args=[question_list.slug]),
             data={'alternatives': [1], 'question_list_id': '1'},
         )
 
