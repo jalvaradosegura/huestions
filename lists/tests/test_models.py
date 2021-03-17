@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from core.mixins import TestModelStrMixin
 from questions.factories import AlternativeFactory, QuestionFactory
@@ -25,7 +26,7 @@ class QuestionListModelTests(TestModelStrMixin, TestCase):
 
         self.assertEqual(
             question_list_1.get_absolute_url(),
-            '/lists/this-is-something-awesome/',
+            reverse('answer_list', args=[question_list_1.slug]),
         )
 
     def test_set_owner_of_question_list(self):

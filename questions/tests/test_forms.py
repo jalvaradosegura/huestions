@@ -37,7 +37,9 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         AlternativeFactory(title='awesome alternative 2', question=question)
         self.create_login_and_verify_user()
 
-        response = self.client.get('/lists/awesome-list/')
+        response = self.client.get(
+            reverse('answer_list', args=[question_list.slug])
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(
@@ -68,7 +70,10 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(response['Location'], '/lists/awesome-list/')
+        self.assertEqual(
+            response['Location'],
+            reverse('answer_list', args=[question_list.slug])
+        )
         self.assertEqual(self.user.alternatives_chosen.count(), 1)
 
     def test_post_and_go_to_results(self):
@@ -90,7 +95,10 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(response['Location'], '/lists/awesome-list/results/')
+        self.assertEqual(
+            response['Location'],
+            reverse('list_results', args=[question_list.slug])
+        )
         self.assertEqual(self.user.alternatives_chosen.count(), 1)
 
 
@@ -102,7 +110,7 @@ class CreateQuestionFormTests(LoginUserMixin, TestCase):
         )
 
         response = self.client.get(
-            f'/lists/{question_list.slug}/add_question/'
+            reverse('add_question', args=[question_list.slug])
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -157,9 +165,11 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
 
     def test_get_form_success(self):
         self.create_login_and_verify_user()
-        QuestionListFactory(title='cool list', owner=self.user)
+        question_list = QuestionListFactory(title='cool list', owner=self.user)
 
-        response = self.client.get('/lists/cool-list/add_question/')
+        response = self.client.get(
+            reverse('add_question', args=[question_list.slug])
+        )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, '<label for="id_alternative_1"')

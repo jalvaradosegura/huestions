@@ -1,6 +1,7 @@
 from http import HTTPStatus
 
 from django.test import TestCase
+from django.urls import reverse
 
 from core.constants import LIST_COMPLETION_ERROR_MESSAGE
 from core.mixins import LoginUserMixin
@@ -37,7 +38,7 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
     def test_get_form_success(self):
         self.create_login_and_verify_user()
 
-        response = self.client.get('/lists/create/')
+        response = self.client.get(reverse('create_list'))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, '<label for="id_title"')
