@@ -2,12 +2,14 @@ import time
 
 from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase
+from django.urls import reverse
 
 from allauth.account.models import EmailAddress
 from selenium import webdriver
 
 from lists.factories import QuestionListFactory
 from lists.models import QuestionList
+from questions.models import Question
 from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_COMPLETION_ERROR_MESSAGE,
@@ -379,12 +381,14 @@ class UserProfileTests(FunctionalTestsBase):
 
         # She tries to edit the same question again
         self.browser.find_element_by_id('edit_question_0').click()
+        question = Question.objects.get(id=question.id)
         # The url has the new name now
         self.assertEqual(
             self.browser.current_url,
-            (
-                f'{self.live_server_url}/lists/new-name-for-my-list/'
-                f'this-was-edited/{question.id}/edit/'
+            self.live_server_url
+            + reverse(
+                'edit_question',
+                args=[question.child_of.slug, question.slug, question.id],
             ),
         )
 

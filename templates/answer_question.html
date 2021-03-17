@@ -25,7 +25,7 @@
   <form action="" method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="hidden" name="question_list_id" value="{{ questionlist.id }}">
+    <input type="hidden" name="list_slug" value="{{ questionlist.slug }}">
     <button id="button_to_vote" class="btn btn-success">{% trans "Answer" %}</button>
   </form>
   </div>

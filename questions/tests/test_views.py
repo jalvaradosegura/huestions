@@ -151,7 +151,6 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
 
         response = self.client.get(
             reverse('answer_list', kwargs={'slug': question_list.slug})
-            + '?page=1'
         )
         request = response.wsgi_request
         storage = get_messages(request)
@@ -170,20 +169,22 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
             title='post question', child_of=question_list
         )
         AlternativeFactory(title='post alternative 1', question=question)
-        AlternativeFactory(title='post alternative 2', question=question)
+        alternative = AlternativeFactory(
+            title='post alternative 2', question=question
+        )
 
         response = self.client.post(
             reverse('answer_list', args=[question_list.slug]),
             data={
-                'alternatives': '3',  # Alternative id
-                'question_list_id': question_list.id,
+                'alternatives': alternative.id,
+                'list_slug': question_list.slug,
             },
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('answer_list', args=[question_list.slug]),
+            reverse('list_results', args=[question_list.slug]),
         )
         self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
 

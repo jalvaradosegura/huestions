@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.urls import reverse
 
 from core.mixins import TestModelStrMixin
 from users.factories import UserFactory
@@ -27,7 +28,14 @@ class QuestionModelTests(TestModelStrMixin, TestCase):
     def test_get_absolute_url(self):
         self.assertEqual(
             self.question.get_absolute_url(),
-            '/lists/some-title/super-question/1/edit/',
+            reverse(
+                'edit_question',
+                args=[
+                    self.question.child_of.slug,
+                    self.question.slug,
+                    self.question.id,
+                ],
+            ),
         )
 
     def test_was_created_recently(self):

@@ -85,7 +85,7 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
             id=request.POST['alternatives']
         )
         question_list = QuestionList.objects.get(
-            id=request.POST['question_list_id']
+            slug=request.POST['list_slug']
         )
         if not selected_alternative.question.has_the_user_already_voted(
             self.request.user
@@ -102,7 +102,10 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
             return redirect('list_results', slug=question_list.slug)
 
         return redirect(
-            reverse('answer_list', kwargs={'slug': question_list.slug},)
+            reverse(
+                'answer_list',
+                kwargs={'slug': question_list.slug},
+            )
         )
 
 

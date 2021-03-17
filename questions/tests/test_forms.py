@@ -46,6 +46,7 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
 
     def test_post_success_and_adds_user_to_alternative(self):
         question_list = QuestionListFactory(title='awesome list')
+
         question = QuestionFactory(
             title='awesome question', child_of=question_list
         )
@@ -53,17 +54,16 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
             title='another awesome question', child_of=question_list
         )
         AlternativeFactory(title='awesome alternative', question=question)
-        AlternativeFactory(
+        alternative = AlternativeFactory(
             title='another alternative', question=another_question
         )
         self.create_login_and_verify_user()
 
         response = self.client.post(
-            '/lists/awesome-list/',
+            reverse('answer_list', args=[question_list.slug]),
             data={
-                'alternatives': [1],
-                'question_list_id': '1',
-                'next_page': '2',
+                'alternatives': [alternative.id],
+                'list_slug': question_list.slug,
             },
         )
 
@@ -76,12 +76,17 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         question = QuestionFactory(
             title='awesome question', child_of=question_list
         )
-        AlternativeFactory(title='awesome alternative', question=question)
+        alternative = AlternativeFactory(
+            title='awesome alternative', question=question
+        )
         self.create_login_and_verify_user()
 
         response = self.client.post(
             reverse('answer_list', args=[question_list.slug]),
-            data={'alternatives': [1], 'question_list_id': '1'},
+            data={
+                'alternatives': [alternative.id],
+                'list_slug': question_list.slug,
+            },
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
