@@ -53,6 +53,11 @@ class Question(TitleAndTimeStampedModel):
             return True
         return False
 
+    def get_user_voted_alternative(self, user):
+        for alternative in self.alternatives.all():
+            if user in alternative.users.all():
+                return alternative
+
 
 class Alternative(TitleAndTimeStampedModel):
     question = models.ForeignKey(
