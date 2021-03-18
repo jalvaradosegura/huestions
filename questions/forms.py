@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import MaxLengthValidator
 from django.utils.translation import gettext_lazy as _
 
 from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
@@ -51,8 +52,14 @@ class CreateQuestionForm(forms.ModelForm):
 
 
 class AddAlternativesForm(forms.Form):
-    alternative_1 = forms.CharField(label=_('Alternative 1'))
-    alternative_2 = forms.CharField(label=_('Alternative 2'))
+    alternative_1 = forms.CharField(
+        label=_('Alternative 1'),
+        validators=[MaxLengthValidator(limit_value=100)]
+    )
+    alternative_2 = forms.CharField(
+        label=_('Alternative 2'),
+        validators=[MaxLengthValidator(limit_value=100)]
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

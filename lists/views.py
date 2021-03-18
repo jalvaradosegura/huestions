@@ -45,6 +45,7 @@ def create_list(request):
                 request, messages.SUCCESS, LIST_CREATED_SUCCESSFULLY
             )
             return redirect('add_question', question_list.slug)
+        return render(request, 'create_list.html', {'form': form})
 
     form = CreateQuestionListForm(owner=request.user)
     return render(request, 'create_list.html', {'form': form})

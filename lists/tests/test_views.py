@@ -98,6 +98,14 @@ class CreateListViewTests(TestViewsMixin, TestCase):
             reverse('add_question', kwargs={'list_slug': 'super-list'}),
         )
 
+    def test_post_fail(self):
+        response = self.client.post(
+            self.base_url, data={'title': '-' * 101}
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'create_list.html')
+
 
 class EditListViewTests(TestViewsMixin, TestCase):
     def setUp(self):

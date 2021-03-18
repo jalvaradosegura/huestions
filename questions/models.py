@@ -10,7 +10,7 @@ from lists.models import QuestionList
 
 
 class Question(TitleAndTimeStampedModel):
-    slug = models.SlugField(null=False)
+    slug = models.SlugField(null=False, max_length=255)
     child_of = models.ForeignKey(
         QuestionList, on_delete=models.CASCADE, related_name='questions'
     )

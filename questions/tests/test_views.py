@@ -254,6 +254,7 @@ class AddQuestionViewTests(TestViewsMixin, TestCase):
                 'title': 'is this hard to answer?',
                 'alternative_1': 'yes',
                 'alternative_2': 'no',
+                'create_and_go_back': '',
             },
         )
 
@@ -262,6 +263,20 @@ class AddQuestionViewTests(TestViewsMixin, TestCase):
             response['Location'],
             reverse('edit_list', args=[self.question_list.slug]),
         )
+
+    def test_post_fail(self):
+        response = self.client.post(
+            self.base_url,
+            data={
+                'title': '-' * 101,
+                'alternative_1': 'yes',
+                'alternative_2': 'no',
+                'create_and_go_back': '',
+            },
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, AddQuestionView.template_name)
 
     def test_cant_access_if_user_is_not_the_owner(self):
         user_1 = UserFactory(username='Jorge', email='jorge@email.com')

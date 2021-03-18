@@ -10,7 +10,7 @@ from .managers import ActivatedListManager
 
 
 class QuestionList(TitleAndTimeStampedModel):
-    slug = models.SlugField(unique=True, null=False)
+    slug = models.SlugField(unique=True, null=False, max_length=255)
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,

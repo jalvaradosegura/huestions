@@ -140,6 +140,9 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
             request.POST, question_list=question_list
         )
         alternatives_form = AddAlternativesForm(request.POST)
+        complete_list_form = CompleteListForm(
+            question_list=question_list
+        )
 
         if question_form.is_valid() and alternatives_form.is_valid():
             question = question_form.save(commit=False)
@@ -150,9 +153,6 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
             )
 
             if 'create_and_publish' in request.POST:
-                complete_list_form = CompleteListForm(
-                    question_list=question_list
-                )
                 if complete_list_form.is_valid():
                     complete_list_form.save()
                     messages.add_message(
@@ -162,7 +162,16 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
                 return redirect('lists', request.user)
             elif 'create_and_add_another' in request.POST:
                 return redirect('add_question', question_list.slug)
-        return redirect('edit_list', question_list.slug)
+            elif 'create_and_go_back' in request.POST:
+                return redirect('edit_list', question_list.slug)
+
+        context = {
+            'question_form': question_form,
+            'complete_list_form': complete_list_form,
+            'alternatives_form': alternatives_form,
+            'question_list_slug': question_list.slug,
+        }
+        return render(request, self.template_name, context)
 
 
 @method_decorator(verified_email_required, name='dispatch')
