@@ -31,6 +31,14 @@ class ListResultsView(LoginRequiredMixin, DetailView):
     model = QuestionList
     template_name = 'list_results.html'
 
+    def get(self, request, *args, **kwargs):
+        list_slug = kwargs.get('slug')
+        question_list = QuestionList.objects.get(slug=list_slug)
+
+        if question_list.get_amount_of_unanswered_questions(request.user) == 0:
+            return super().get(request, *args, **kwargs)
+        return redirect('answer_list', list_slug)
+
 
 @login_required
 @verified_email_required

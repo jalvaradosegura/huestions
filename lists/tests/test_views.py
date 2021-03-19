@@ -58,6 +58,33 @@ class ListResultsViewTests(TestViewsMixin, TestCase):
             found.func.__name__, ListResultsView.as_view().__name__
         )
 
+    def test_redirect_if_user_havent_completed_the_list(self):
+        question_list = QuestionListFactory(title="user won't do this list")
+        QuestionFactory(child_of=question_list)
+
+        response = self.client.get(
+            reverse('list_results', args=[question_list.slug])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('answer_list', args=[question_list.slug]),
+        )
+
+    def test_dont_redirect_if_user_have_completed_the_list(self):
+        question_list = QuestionListFactory(title="user won't do this list")
+        question = QuestionFactory(child_of=question_list)
+        alternative = AlternativeFactory(question=question)
+        alternative.vote_for_this_alternative(self.user)
+
+        response = self.client.get(
+            reverse('list_results', args=[question_list.slug])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, ListResultsView.template_name)
+
 
 class CreateListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
