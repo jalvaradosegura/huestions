@@ -57,6 +57,7 @@ class Question(TitleAndTimeStampedModel):
         for alternative in self.alternatives.all():
             if user in alternative.users.all():
                 return alternative
+        return None
 
 
 class Alternative(TitleAndTimeStampedModel):

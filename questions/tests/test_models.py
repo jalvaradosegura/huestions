@@ -86,6 +86,14 @@ class QuestionModelTests(TestModelStrMixin, TestCase):
             alternative
         )
 
+    def test_get_user_voted_alternative_returns_none(self):
+        user = UserFactory(username='user')
+        question = QuestionFactory(title='cool?')
+        AlternativeFactory(title='a1', question=question)
+        AlternativeFactory(title='a2', question=question)
+
+        self.assertEqual(question.get_user_voted_alternative(user), None)
+
 
 class AlternativeModelTests(TestModelStrMixin, TestCase):
     model_factory = AlternativeFactory
