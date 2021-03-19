@@ -6,7 +6,10 @@
 
 {% block main %}
 
-<h1 class="text-center">{{ questionlist }} - {% trans "results" %}! <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.get_host }}{{ questionlist.get_absolute_url }}')" class="btn btn-outline-secondary btn-sm">{% trans "Share list" %}</button></h1>
+{% url 'answer_list' questionlist.slug user as list_url %}
+{% with domain_url=request.get_host %}
+  <h1 class="text-center">{{ questionlist }} - {% trans "results" %}! <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="btn btn-outline-secondary btn-sm">{% trans "Share list" %}</button></h1>
+{% endwith %}
 
 {% localize off %}
 <div class="row">
