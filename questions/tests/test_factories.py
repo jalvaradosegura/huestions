@@ -23,12 +23,10 @@ class QuestionFactoryTests(TestCase):
 
 class AlternativeFactoryTests(TestCase):
     def setUp(self):
-        AlternativeFactory()
+        self.alternative = AlternativeFactory(title='Hello')
 
     def test_alternative_got_created(self):
-        alternative = Alternative.objects.last()
-
-        self.assertEqual(alternative.title, 'Roger Federer')
+        self.assertEqual(self.alternative.title, 'Hello')
 
     def test_amount_of_alternatives(self):
         amount_of_alternatives = Alternative.objects.all().count()
@@ -36,8 +34,6 @@ class AlternativeFactoryTests(TestCase):
         self.assertEqual(amount_of_alternatives, 1)
 
     def test_create_another_alternative(self):
-        AlternativeFactory(title='Rafael Nadal')
-
-        alternative = Alternative.objects.last()
+        alternative = AlternativeFactory(title='Rafael Nadal')
 
         self.assertEqual(alternative.title, 'Rafael Nadal')

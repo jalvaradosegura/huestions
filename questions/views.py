@@ -51,6 +51,8 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
             messages.add_message(
                 request, messages.INFO, ALREADY_ANSWERED_ALL_THE_QUESTIONS
             )
+            if 'username' in kwargs:
+                return redirect('list_results', slug, self.kwargs['username'])
             return redirect('list_results', slug)
 
         messages.add_message(

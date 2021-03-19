@@ -10,6 +10,11 @@ urlpatterns = [
         name='answer_list',
     ),
     path(
+        route='lists/<slug:slug>/invited_by_<str:username>/',
+        view=views.AnswerQuestionView.as_view(),
+        name='answer_list',
+    ),
+    path(
         route='lists/<slug:list_slug>/add_question/',
         view=views.AddQuestionView.as_view(),
         name='add_question',

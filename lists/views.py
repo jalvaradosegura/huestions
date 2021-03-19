@@ -41,6 +41,9 @@ class ListResultsView(LoginRequiredMixin, DetailView):
         messages.add_message(
             request, messages.INFO, MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS
         )
+
+        if 'username' in kwargs:
+            return redirect('answer_list', list_slug, self.kwargs['username'])
         return redirect('answer_list', list_slug)
 
     def get_context_data(self, **kwargs):

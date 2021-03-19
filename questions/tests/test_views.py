@@ -146,6 +146,28 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
         )
         self.assertEqual(message, ALREADY_ANSWERED_ALL_THE_QUESTIONS)
 
+    def test_user_answered_all_the_questions_with_invitation(self):
+        user = UserFactory()
+        question_list = QuestionListFactory(
+            title='no message', active=True, owner=self.user
+        )
+        question = QuestionFactory(
+            title='some question', child_of=question_list
+        )
+        AlternativeFactory(question=question)
+        alternative = AlternativeFactory(question=question)
+        alternative.vote_for_this_alternative(self.user)
+
+        response = self.client.get(
+            reverse('answer_list', args=[question_list.slug, user])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('list_results', args=[question_list.slug, user]),
+        )
+
     def test_attempt_to_access_an_unpublished_list(self):
         question_list = QuestionListFactory(title='cool list')
 

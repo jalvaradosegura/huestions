@@ -19,6 +19,11 @@ urlpatterns = [
         name='list_results',
     ),
     path(
+        route='lists/<slug:slug>/results/invited_by_<str:username>/',
+        view=views.ListResultsView.as_view(),
+        name='list_results',
+    ),
+    path(
         route='lists/<slug:slug>/edit/',
         view=views.EditListView.as_view(),
         name='edit_list',

@@ -92,6 +92,25 @@ class ListResultsViewTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, ListResultsView.template_name)
 
+    def test_redirect_with_invitation_if_user_havent_completed_the_list(self):
+        user = UserFactory()
+        question_list = QuestionListFactory(title="user won't do this list")
+        QuestionFactory(child_of=question_list)
+
+        response = self.client.get(
+            reverse('list_results', args=[question_list.slug, user])
+        )
+        request = response.wsgi_request
+        storage = get_messages(request)
+        messages = [message.message for message in storage]
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('answer_list', args=[question_list.slug, user]),
+        )
+        self.assertIn(MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS, messages)
+
 
 class CreateListViewTests(TestViewsMixin, TestCase):
     def setUp(self):
