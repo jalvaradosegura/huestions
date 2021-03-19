@@ -54,11 +54,11 @@ class CreateQuestionForm(forms.ModelForm):
 class AddAlternativesForm(forms.Form):
     alternative_1 = forms.CharField(
         label=_('Alternative 1'),
-        validators=[MaxLengthValidator(limit_value=100)]
+        validators=[MaxLengthValidator(limit_value=100)],
     )
     alternative_2 = forms.CharField(
         label=_('Alternative 2'),
-        validators=[MaxLengthValidator(limit_value=100)]
+        validators=[MaxLengthValidator(limit_value=100)],
     )
 
     def __init__(self, *args, **kwargs):

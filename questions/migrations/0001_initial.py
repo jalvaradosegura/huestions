@@ -16,12 +16,30 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Question',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('title', models.CharField(max_length=100, verbose_name='title')),
+                (
+                    'title',
+                    models.CharField(max_length=100, verbose_name='title'),
+                ),
                 ('slug', models.SlugField(max_length=100)),
-                ('child_of', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='questions', to='lists.questionlist')),
+                (
+                    'child_of',
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='questions',
+                        to='lists.questionlist',
+                    ),
+                ),
             ],
             options={
                 'abstract': False,
@@ -30,11 +48,29 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Alternative',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('title', models.CharField(max_length=100, verbose_name='title')),
-                ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='alternatives', to='questions.question')),
+                (
+                    'title',
+                    models.CharField(max_length=100, verbose_name='title'),
+                ),
+                (
+                    'question',
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='alternatives',
+                        to='questions.question',
+                    ),
+                ),
             ],
             options={
                 'abstract': False,

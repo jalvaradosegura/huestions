@@ -210,6 +210,62 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
         )
         self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
 
+    def test_post_success_with_invitation_go_to_results(self):
+        user = UserFactory()
+        question_list = QuestionListFactory(title='post list', owner=self.user)
+        question = QuestionFactory(
+            title='post question', child_of=question_list
+        )
+        AlternativeFactory(title='post alternative 1', question=question)
+        alternative = AlternativeFactory(
+            title='post alternative 2', question=question
+        )
+
+        response = self.client.post(
+            reverse('answer_list', args=[question_list.slug, user]),
+            data={
+                'alternatives': alternative.id,
+                'list_slug': question_list.slug,
+            },
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('list_results', args=[question_list.slug, user]),
+        )
+        self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
+
+    def test_post_success_with_invitation_go_to_same_view(self):
+        user = UserFactory()
+        question_list = QuestionListFactory(title='post list', owner=self.user)
+        question = QuestionFactory(
+            title='post question', child_of=question_list
+        )
+        AlternativeFactory(title='post alternative 1', question=question)
+        alternative = AlternativeFactory(
+            title='post alternative 2', question=question
+        )
+        question = QuestionFactory(
+            title='post question', child_of=question_list
+        )
+        AlternativeFactory(title='post alternative 1', question=question)
+
+        response = self.client.post(
+            reverse('answer_list', args=[question_list.slug, user]),
+            data={
+                'alternatives': alternative.id,
+                'list_slug': question_list.slug,
+            },
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('answer_list', args=[question_list.slug, user]),
+        )
+        self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
+
 
 class AddQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):

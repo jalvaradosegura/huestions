@@ -82,8 +82,7 @@ class QuestionModelTests(TestModelStrMixin, TestCase):
         alternative.vote_for_this_alternative(user)
 
         self.assertEqual(
-            question.get_user_voted_alternative(user),
-            alternative
+            question.get_user_voted_alternative(user), alternative
         )
 
     def test_get_user_voted_alternative_returns_none(self):

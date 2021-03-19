@@ -7,20 +7,35 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='QuestionList',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
-                ('title', models.CharField(max_length=100, verbose_name='title')),
+                (
+                    'title',
+                    models.CharField(max_length=100, verbose_name='title'),
+                ),
                 ('slug', models.SlugField(max_length=100, unique=True)),
                 ('active', models.BooleanField(default=False)),
-                ('description', models.TextField(blank=True, max_length=200, verbose_name='description')),
+                (
+                    'description',
+                    models.TextField(
+                        blank=True, max_length=200, verbose_name='description'
+                    ),
+                ),
             ],
             options={
                 'abstract': False,

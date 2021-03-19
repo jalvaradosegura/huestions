@@ -72,7 +72,7 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('answer_list', args=[question_list.slug])
+            reverse('answer_list', args=[question_list.slug]),
         )
         self.assertEqual(self.user.alternatives_chosen.count(), 1)
 
@@ -97,7 +97,7 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
-            reverse('list_results', args=[question_list.slug])
+            reverse('list_results', args=[question_list.slug]),
         )
         self.assertEqual(self.user.alternatives_chosen.count(), 1)
 

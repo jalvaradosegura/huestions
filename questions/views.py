@@ -101,14 +101,22 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
             )
 
         if question_list.get_amount_of_unanswered_questions(request.user) == 0:
-            return redirect('list_results', slug=question_list.slug)
+            if 'username' in kwargs:
+                return redirect(
+                    'list_results', question_list.slug, self.kwargs['username']
+                )
+            else:
+                return redirect('list_results', question_list.slug)
 
-        return redirect(
-            reverse(
-                'answer_list',
-                kwargs={'slug': question_list.slug},
+        if 'username' in kwargs:
+            return redirect(
+                reverse(
+                    'answer_list',
+                    args=[question_list.slug, self.kwargs['username']],
+                )
             )
-        )
+        else:
+            return redirect(reverse('answer_list', args=[question_list.slug]))
 
 
 @method_decorator(verified_email_required, name='dispatch')
@@ -142,9 +150,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
             request.POST, question_list=question_list
         )
         alternatives_form = AddAlternativesForm(request.POST)
-        complete_list_form = CompleteListForm(
-            question_list=question_list
-        )
+        complete_list_form = CompleteListForm(question_list=question_list)
 
         if question_form.is_valid() and alternatives_form.is_valid():
             question = question_form.save(commit=False)
