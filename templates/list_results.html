@@ -10,7 +10,8 @@
 
 {% localize off %}
 <div class="row">
-  {% for question in questionlist.questions.all %}
+  {% for i in questions_and_user_alternatives %}
+    {% with question=i.0 user_alternative=i.1 %}
 
     <div class="card mr-1 mt-1" style="">
         <div class="card-body">
@@ -26,8 +27,12 @@
               <div class="progress-bar bg-success" role="progressbar" style="width: {{ alternative_2.get_votes_percentage }}%;" aria-valuenow="{{ alternative_2.get_votes_percentage }}" aria-valuemin="0" aria-valuemax="100">{{ alternative_2 }} &middot {{ alternative_2.get_votes_percentage }}%</div>
             {% endwith %}
           </div>
+	  <p><strong>Your vote:</strong> {{ user_alternative }}</p>
+
         </div>
     </div>
+
+    {% endwith %}
 
     <br>
 

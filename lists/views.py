@@ -39,6 +39,17 @@ class ListResultsView(LoginRequiredMixin, DetailView):
             return super().get(request, *args, **kwargs)
         return redirect('answer_list', list_slug)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        questions = self.object.questions.all()
+        user_alternatives = [
+            q.get_user_voted_alternative(self.request.user) for q in questions
+        ]
+        context['questions_and_user_alternatives'] = list(
+            zip(questions, user_alternatives)
+        )
+        return context
+
 
 @login_required
 @verified_email_required
