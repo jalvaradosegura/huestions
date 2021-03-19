@@ -17,3 +17,6 @@ QUESTION_DELETED_SUCCESSFULLY = _('Question was deleted successfully')
 ALREADY_ANSWERED_ALL_THE_QUESTIONS = _(
     'You already answered all the questions for this list'
 )
+MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS = _(
+    'You must answer all the list questions before seeing its results'
+)

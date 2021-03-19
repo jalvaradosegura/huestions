@@ -13,6 +13,7 @@ from core.constants import (
     LIST_DELETED_SUCCESSFULLY,
     LIST_EDITED_SUCCESSFULLY,
     LIST_PUBLISHED_SUCCESSFULLY,
+    MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS,
 )
 from core.mixins import CustomUserPassesTestMixin
 
@@ -37,6 +38,9 @@ class ListResultsView(LoginRequiredMixin, DetailView):
 
         if question_list.get_amount_of_unanswered_questions(request.user) == 0:
             return super().get(request, *args, **kwargs)
+        messages.add_message(
+            request, messages.INFO, MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS
+        )
         return redirect('answer_list', list_slug)
 
     def get_context_data(self, **kwargs):

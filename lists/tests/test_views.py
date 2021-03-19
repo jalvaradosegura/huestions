@@ -4,7 +4,10 @@ from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import resolve, reverse
 
-from core.constants import LIST_COMPLETION_ERROR_MESSAGE
+from core.constants import (
+    LIST_COMPLETION_ERROR_MESSAGE,
+    MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS,
+)
 from core.mixins import TestViewsMixin
 from questions.factories import AlternativeFactory, QuestionFactory
 from users.factories import UserFactory
@@ -65,12 +68,16 @@ class ListResultsViewTests(TestViewsMixin, TestCase):
         response = self.client.get(
             reverse('list_results', args=[question_list.slug])
         )
+        request = response.wsgi_request
+        storage = get_messages(request)
+        messages = [message.message for message in storage]
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
             response['Location'],
             reverse('answer_list', args=[question_list.slug]),
         )
+        self.assertIn(MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS, messages)
 
     def test_dont_redirect_if_user_have_completed_the_list(self):
         question_list = QuestionListFactory(title="user won't do this list")

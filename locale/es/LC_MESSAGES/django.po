@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-16 00:19-0300\n"
-"PO-Revision-Date: 2021-03-16 03:19+0000\n"
+"POT-Creation-Date: 2021-03-18 23:45-0300\n"
+"PO-Revision-Date: 2021-03-19 02:45+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -61,19 +61,24 @@ msgid "Question was deleted successfully"
 msgstr "Pregunta eliminada con éxito"
 
 #: core/constants.py:18
-#| msgid "Question already answered. Your vote won't count this time."
 msgid "You already answered all the questions for this list"
 msgstr "Ya respondiste todas las preguntas de esta lista"
+
+#: core/constants.py:21
+#| msgid "You already answered all the questions for this list"
+msgid "You must answer all the list questions before seeing its results"
+msgstr ""
+"Debes responder todas las preguntas de la lista antes de ver los resultados"
 
 #: core/models.py:24
 msgid "title"
 msgstr "título"
 
-#: huestion_project/settings/base.py:143
+#: huestion_project/settings/base.py:153
 msgid "English"
 msgstr "Inglés"
 
-#: huestion_project/settings/base.py:144
+#: huestion_project/settings/base.py:154
 msgid "Spanish"
 msgstr "Español"
 
@@ -81,15 +86,15 @@ msgstr "Español"
 msgid "description"
 msgstr "descripción"
 
-#: questions/forms.py:11
+#: questions/forms.py:12
 msgid "Alternatives"
 msgstr "Alternativas"
 
-#: questions/forms.py:54
+#: questions/forms.py:56
 msgid "Alternative 1"
 msgstr "Alternativa 1"
 
-#: questions/forms.py:55
+#: questions/forms.py:60
 msgid "Alternative 2"
 msgstr "Alternativa 2"
 
