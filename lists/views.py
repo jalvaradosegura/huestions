@@ -14,8 +14,10 @@ from core.constants import (
     LIST_EDITED_SUCCESSFULLY,
     LIST_PUBLISHED_SUCCESSFULLY,
     MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS,
+    USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT,
 )
 from core.mixins import CustomUserPassesTestMixin
+from users.models import CustomUser
 
 from .forms import CompleteListForm, CreateQuestionListForm, EditListForm
 from .models import QuestionList
@@ -37,11 +39,12 @@ class ListResultsView(LoginRequiredMixin, DetailView):
         question_list = QuestionList.objects.get(slug=list_slug)
 
         if question_list.get_amount_of_unanswered_questions(request.user) == 0:
+            self.shared_by = kwargs.get('username', '')
             return super().get(request, *args, **kwargs)
+
         messages.add_message(
             request, messages.INFO, MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS
         )
-
         if 'username' in kwargs:
             return redirect('answer_list', list_slug, self.kwargs['username'])
         return redirect('answer_list', list_slug)
@@ -55,6 +58,24 @@ class ListResultsView(LoginRequiredMixin, DetailView):
         context['questions_and_user_alternatives'] = list(
             zip(questions, user_alternatives)
         )
+
+        if self.shared_by:
+            shared_by = CustomUser.objects.get(username=self.shared_by)
+            if self.object.get_amount_of_unanswered_questions(shared_by) == 0:
+                shared_alternatives = [
+                    q.get_user_voted_alternative(shared_by) for q in questions
+                ]
+                context['shared_user'] = shared_by
+                context['questions_and_user_alternatives'] = list(
+                    zip(questions, user_alternatives, shared_alternatives)
+                )
+            else:
+                messages.add_message(
+                    self.request,
+                    messages.INFO,
+                    USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT
+                )
+
         return context
 
 

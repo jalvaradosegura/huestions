@@ -6,6 +6,7 @@
 
 {% block main %}
 
+{{ shared_alternatives }}
 {% url 'answer_list' questionlist.slug user as list_url %}
 {% with domain_url=request.get_host %}
   <h1 class="text-center">{{ questionlist }} - {% trans "results" %}! <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="btn btn-outline-secondary btn-sm">{% trans "Share list" %}</button></h1>
@@ -30,7 +31,10 @@
               <div class="progress-bar bg-success" role="progressbar" style="width: {{ alternative_2.get_votes_percentage }}%;" aria-valuenow="{{ alternative_2.get_votes_percentage }}" aria-valuemin="0" aria-valuemax="100">{{ alternative_2 }} &middot {{ alternative_2.get_votes_percentage }}%</div>
             {% endwith %}
           </div>
-	  <p><strong>Your vote:</strong> {{ user_alternative }}</p>
+	  <p><strong>{% trans "Your vote" %}:</strong> {{ user_alternative }}</p>
+	  {% if shared_user %}
+	    <p><strong>{% blocktrans %}{{ shared_user }}'s vote{% endblocktrans %}:</strong> {{ i.2 }}</p>
+	  {% endif %}
 
         </div>
     </div>

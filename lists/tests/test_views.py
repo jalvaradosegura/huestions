@@ -7,6 +7,7 @@ from django.urls import resolve, reverse
 from core.constants import (
     LIST_COMPLETION_ERROR_MESSAGE,
     MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS,
+    USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT,
 )
 from core.mixins import TestViewsMixin
 from questions.factories import AlternativeFactory, QuestionFactory
@@ -110,6 +111,47 @@ class ListResultsViewTests(TestViewsMixin, TestCase):
             reverse('answer_list', args=[question_list.slug, user]),
         )
         self.assertIn(MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS, messages)
+
+    def test_see_results_after_invitation(self):
+        user_that_shared_list = UserFactory(username='first-user')
+        question_list = QuestionListFactory(title='some list')
+        question = QuestionFactory(child_of=question_list)
+        alternative = AlternativeFactory(question=question)
+        alternative.vote_for_this_alternative(user_that_shared_list)
+        alternative.vote_for_this_alternative(self.user)
+
+        response = self.client.get(
+            reverse(
+                'list_results',
+                args=[question_list.slug, user_that_shared_list],
+            )
+        )
+        html = response.content.decode('utf8')
+
+        self.assertIn(user_that_shared_list.username, html)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_see_results_after_invitation_list_incomplete_by_the_one_who_share(
+        self,
+    ):
+        user_that_shared_list = UserFactory(username='first-user')
+        question_list = QuestionListFactory(title='some list')
+        question = QuestionFactory(child_of=question_list)
+        alternative = AlternativeFactory(question=question)
+        alternative.vote_for_this_alternative(self.user)
+
+        response = self.client.get(
+            reverse(
+                'list_results',
+                args=[question_list.slug, user_that_shared_list],
+            )
+        )
+        request = response.wsgi_request
+        storage = get_messages(request)
+        messages = [message.message for message in storage]
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertIn(USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT, messages)
 
 
 class CreateListViewTests(TestViewsMixin, TestCase):

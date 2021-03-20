@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-18 23:45-0300\n"
-"PO-Revision-Date: 2021-03-19 02:45+0000\n"
+"POT-Creation-Date: 2021-03-20 00:36-0300\n"
+"PO-Revision-Date: 2021-03-20 03:36+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -65,10 +65,19 @@ msgid "You already answered all the questions for this list"
 msgstr "Ya respondiste todas las preguntas de esta lista"
 
 #: core/constants.py:21
-#| msgid "You already answered all the questions for this list"
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 "Debes responder todas las preguntas de la lista antes de ver los resultados"
+
+#: core/constants.py:24
+msgid ""
+"The user that shared this list with you haven't answer all its questions, so"
+" you won't be able to see that person answers. Tell the user to answer all "
+"the questions"
+msgstr ""
+"La persona que compartió esta lista contigo, no ha respondido sus preguntas,"
+" por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
+"todas las preguntas"
 
 #: core/models.py:24
 msgid "title"
@@ -270,12 +279,12 @@ msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
 
-#: templates/answer_question.html:9 templates/list_results.html:9
-#: templates/lists.html:16 templates/user_lists.html:17
+#: templates/answer_question.html:11 templates/list_results.html:12
+#: templates/lists.html:18 templates/user_lists.html:19
 msgid "Share list"
 msgstr "Compartir lista"
 
-#: templates/answer_question.html:29
+#: templates/answer_question.html:32
 msgid "Answer"
 msgstr "Responder"
 
@@ -315,7 +324,7 @@ msgstr "Realmente quieres borrar"
 msgid "Go back"
 msgstr "Volver"
 
-#: templates/delete_list.html:12 templates/user_lists.html:22
+#: templates/delete_list.html:12 templates/user_lists.html:25
 msgid "Delete"
 msgstr "Borrar"
 
@@ -359,9 +368,19 @@ msgstr "Agregar una pregunta"
 msgid "Apply changes"
 msgstr "Aplicar cambios"
 
-#: templates/list_results.html:9
+#: templates/list_results.html:12
 msgid "results"
 msgstr "resultados"
+
+#: templates/list_results.html:34
+#| msgid "Your Lists"
+msgid "Your vote"
+msgstr "Tu voto"
+
+#: templates/list_results.html:36
+#, python-format
+msgid "%(shared_user)s's vote"
+msgstr "Voto de %(shared_user)s"
 
 #: templates/lists.html:8 templates/navbar.html:12
 msgid "Lists"
@@ -375,7 +394,7 @@ msgstr "por"
 msgid "Created:"
 msgstr "Creada"
 
-#: templates/lists.html:17 templates/user_lists.html:18
+#: templates/lists.html:20 templates/user_lists.html:21
 msgid "Go"
 msgstr "Ir"
 
@@ -411,7 +430,7 @@ msgstr "Tus listas"
 msgid "Created"
 msgstr "Creada"
 
-#: templates/user_lists.html:21
+#: templates/user_lists.html:24
 msgid "Edit"
 msgstr "Editar"
 
