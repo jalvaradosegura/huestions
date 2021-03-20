@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-20 00:36-0300\n"
+"POT-Creation-Date: 2021-03-20 15:26-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,6 +71,10 @@ msgid ""
 "The user that shared this list with you haven't answer all its questions, so "
 "you won't be able to see that person answers. Tell the user to answer all "
 "the questions"
+msgstr ""
+
+#: core/constants.py:30
+msgid "Do not use special chars"
 msgstr ""
 
 #: core/models.py:24

@@ -1,11 +1,20 @@
 from django import forms
+from django.core.validators import MinLengthValidator
 
-from core.constants import LIST_COMPLETION_ERROR_MESSAGE
+from core.constants import LIST_COMPLETION_ERROR_MESSAGE, SPECIAL_CHARS_ERROR
 
 from .models import QuestionList
 
 
+def validate_title(title):
+    invalid_chars = ['%', "'", '"']
+    if any(char in title for char in invalid_chars):
+        raise forms.ValidationError(SPECIAL_CHARS_ERROR)
+
+
 class CreateQuestionListForm(forms.ModelForm):
+    title = forms.CharField(validators=[validate_title, MinLengthValidator(5)])
+
     class Meta:
         model = QuestionList
         fields = ['title', 'description']

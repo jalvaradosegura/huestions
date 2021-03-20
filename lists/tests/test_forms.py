@@ -3,7 +3,7 @@ from http import HTTPStatus
 from django.test import TestCase
 from django.urls import reverse
 
-from core.constants import LIST_COMPLETION_ERROR_MESSAGE
+from core.constants import LIST_COMPLETION_ERROR_MESSAGE, SPECIAL_CHARS_ERROR
 from core.mixins import LoginUserMixin
 from questions.factories import AlternativeFactory, QuestionFactory
 
@@ -82,6 +82,28 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
         question_list = QuestionList.objects.last()
 
         self.assertEqual(question_list.owner.username, 'javi')
+
+    def test_create_question_list_with_form_title_is_too_short_error(self):
+        self.create_login_and_verify_user()
+        form = CreateQuestionListForm(
+            data={'title': 'abc', 'description': 'some cool description', },
+            owner=self.user,
+        )
+
+        self.assertIn(
+            'Ensure this value has at least', form.errors['title'][0]
+        )
+
+    def test_create_list_with_special_chars_on_title(self):
+        self.create_login_and_verify_user()
+        form = CreateQuestionListForm(
+            data={'title': '%%%%%%', 'description': 'some cool description', },
+            owner=self.user,
+        )
+
+        self.assertIn(
+            SPECIAL_CHARS_ERROR, form.errors['title']
+        )
 
 
 class EditListFormTests(TestCase):

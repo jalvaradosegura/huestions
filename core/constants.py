@@ -25,3 +25,6 @@ USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT = _(
     "questions, so you won't be able to see that person answers. Tell the "
     "user to answer all the questions"
 )
+
+# forms
+SPECIAL_CHARS_ERROR = _('Do not use special chars')

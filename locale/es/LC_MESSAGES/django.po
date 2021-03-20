@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-20 00:36-0300\n"
-"PO-Revision-Date: 2021-03-20 03:36+0000\n"
+"POT-Creation-Date: 2021-03-20 15:26-0300\n"
+"PO-Revision-Date: 2021-03-20 18:27+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -78,6 +78,10 @@ msgstr ""
 "La persona que compartió esta lista contigo, no ha respondido sus preguntas,"
 " por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
 "todas las preguntas"
+
+#: core/constants.py:30
+msgid "Do not use special chars"
+msgstr "No uses caracteres especiales"
 
 #: core/models.py:24
 msgid "title"
@@ -373,7 +377,6 @@ msgid "results"
 msgstr "resultados"
 
 #: templates/list_results.html:34
-#| msgid "Your Lists"
 msgid "Your vote"
 msgstr "Tu voto"
 
