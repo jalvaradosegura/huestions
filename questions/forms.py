@@ -2,7 +2,7 @@ from django import forms
 from django.core.validators import (
     MaxLengthValidator,
     MinLengthValidator,
-    RegexValidator
+    RegexValidator,
 )
 from django.utils.translation import gettext_lazy as _
 

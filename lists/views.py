@@ -31,16 +31,21 @@ class QuestionsListView(LoginRequiredMixin, ListView):
 
 @method_decorator(verified_email_required, name='dispatch')
 class ListResultsView(LoginRequiredMixin, DetailView):
-    model = QuestionList
     template_name = 'list_results.html'
 
-    def get(self, request, *args, **kwargs):
-        list_slug = kwargs.get('slug')
-        question_list = QuestionList.objects.get(slug=list_slug)
+    def get_queryset(self):
+        return QuestionList.objects.all().prefetch_related(
+            'questions__alternatives__users'
+        )
 
-        if question_list.get_amount_of_unanswered_questions(request.user) == 0:
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        list_slug = self.object.slug
+
+        if self.object.get_amount_of_unanswered_questions(request.user) == 0:
             self.shared_by = kwargs.get('username', '')
-            return super().get(request, *args, **kwargs)
+            context = self.get_context_data(object=self.object)
+            return self.render_to_response(context)
 
         messages.add_message(
             request, messages.INFO, MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS
@@ -52,23 +57,30 @@ class ListResultsView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         questions = self.object.questions.all()
-        user_alternatives = [
-            q.get_user_voted_alternative(self.request.user) for q in questions
-        ]
-        context['questions_and_user_alternatives'] = list(
-            zip(questions, user_alternatives)
-        )
 
-        if self.shared_by:
+        if not self.shared_by:
+            user_alternatives = []
+            for q in questions:
+                user_alternatives.append(
+                    [q, q.get_user_voted_alternative(self.request.user)]
+                )
+            context['questions_and_user_alternatives'] = user_alternatives
+        else:
             shared_by = CustomUser.objects.get(username=self.shared_by)
             if self.object.get_amount_of_unanswered_questions(shared_by) == 0:
-                shared_alternatives = [
-                    q.get_user_voted_alternative(shared_by) for q in questions
-                ]
+                shared_alternatives = []
+                for q in questions:
+                    shared_alternatives.append(
+                        [
+                            q,
+                            q.get_user_voted_alternative(self.request.user),
+                            q.get_user_voted_alternative(shared_by),
+                        ]
+                    )
                 context['shared_user'] = shared_by
-                context['questions_and_user_alternatives'] = list(
-                    zip(questions, user_alternatives, shared_alternatives)
-                )
+                context[
+                    'questions_and_user_alternatives'
+                ] = shared_alternatives
             else:
                 messages.add_message(
                     self.request,
