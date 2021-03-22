@@ -43,9 +43,8 @@ class Question(TitleAndTimeStampedModel):
         ]
 
     def has_the_user_already_voted(self, user):
-        for alternative in self.alternatives.all():
-            if user in alternative.users.all():
-                return True
+        if self.alternatives.filter(users=user):
+            return True
         return False
 
     def is_completed(self):

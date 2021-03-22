@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.db.models import Q
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -52,12 +53,7 @@ class QuestionList(TitleAndTimeStampedModel):
         return False
 
     def get_unanswered_questions(self, user):
-        unanswered = []
-        if self.questions.exists():
-            for question in self.questions.all():
-                if not question.has_the_user_already_voted(user):
-                    unanswered.append(question)
-        return unanswered
+        return self.questions.filter(~Q(alternatives__users=user))
 
     def get_amount_of_unanswered_questions(self, user):
-        return len(self.get_unanswered_questions(user))
+        return self.get_unanswered_questions(user).count()

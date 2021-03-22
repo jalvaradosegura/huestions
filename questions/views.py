@@ -32,27 +32,32 @@ def home(request):
 
 @method_decorator(verified_email_required, name='dispatch')
 class AnswerQuestionView(LoginRequiredMixin, DetailView):
-    model = QuestionList
     template_name = 'answer_question.html'
 
-    def get(self, request, *args, **kwargs):
-        slug = kwargs.get('slug')
-        self.question_list = QuestionList.objects.get(slug=slug)
+    def get_queryset(self):
+        return QuestionList.objects.all().prefetch_related(
+            'questions__alternatives__users'
+        )
 
-        if self.question_list.active:
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if self.object.active:
             if (
-                self.question_list.get_amount_of_unanswered_questions(
-                    request.user
-                )
+                self.object.get_amount_of_unanswered_questions(request.user)
                 > 0
             ):
-                return super().get(request, *args, **kwargs)
+                context = self.get_context_data(object=self.object)
+                return self.render_to_response(context)
+
             messages.add_message(
                 request, messages.INFO, ALREADY_ANSWERED_ALL_THE_QUESTIONS
             )
             if 'username' in kwargs:
-                return redirect('list_results', slug, self.kwargs['username'])
-            return redirect('list_results', slug)
+                return redirect(
+                    'list_results', self.object.slug, self.kwargs['username']
+                )
+            return redirect('list_results', self.object.slug)
 
         messages.add_message(
             request,
@@ -64,7 +69,7 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        questions_list = self.question_list.get_unanswered_questions(
+        questions_list = self.object.get_unanswered_questions(
             self.request.user
         )
         question = questions_list[0]
@@ -72,7 +77,7 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
         context['form'] = AnswerQuestionForm(question_id)
         context['question'] = question
 
-        total_of_questions = self.question_list.questions.count()
+        total_of_questions = self.object.questions.count()
         answered_questions_plus_one = (
             total_of_questions - len(questions_list) + 1
         )
@@ -82,12 +87,17 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        selected_alternative = Alternative.objects.get(
-            id=request.POST['alternatives']
+        selected_alternative = (
+            Alternative.objects.all()
+            .select_related('question')
+            .get(id=request.POST['alternatives'])
         )
-        question_list = QuestionList.objects.get(
-            slug=request.POST['list_slug']
+        question_list = (
+            QuestionList.objects.all()
+            .prefetch_related('questions__alternatives__users')
+            .get(slug=request.POST['list_slug'])
         )
+
         if not selected_alternative.question.has_the_user_already_voted(
             self.request.user
         ):
