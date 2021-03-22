@@ -475,7 +475,7 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
             id=self.alternative_2.id
         )
 
-        self.assertEqual(edited_question.title, 'edited')
+        self.assertEqual(edited_question.title, 'edited?')
         self.assertEqual(edited_alternative_1.title, 'Edited')
         self.assertEqual(edited_alternative_2.title, 'Edited')
         self.assertEqual(

@@ -1,8 +1,15 @@
 from django import forms
-from django.core.validators import MaxLengthValidator
+from django.core.validators import (
+    MaxLengthValidator,
+    MinLengthValidator,
+    RegexValidator
+)
 from django.utils.translation import gettext_lazy as _
 
-from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
+from core.constants import (
+    LIST_REACHED_MAXIMUM_OF_QUESTION,
+    SPECIAL_CHARS_ERROR,
+)
 from .factories import AlternativeFactory
 from .models import Question
 
@@ -23,6 +30,12 @@ class AnswerQuestionForm(forms.Form):
 
 
 class CreateQuestionForm(forms.ModelForm):
+    title = forms.CharField(
+        validators=[
+            RegexValidator(r'^[0-9a-zA-Z\\? ]*$', SPECIAL_CHARS_ERROR),
+            MinLengthValidator(5),
+        ]
+    )
     questions_amount_limit = 20
 
     class Meta:
@@ -54,11 +67,17 @@ class CreateQuestionForm(forms.ModelForm):
 class AddAlternativesForm(forms.Form):
     alternative_1 = forms.CharField(
         label=_('Alternative 1'),
-        validators=[MaxLengthValidator(limit_value=100)],
+        validators=[
+            RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
+            MaxLengthValidator(limit_value=100),
+        ],
     )
     alternative_2 = forms.CharField(
         label=_('Alternative 2'),
-        validators=[MaxLengthValidator(limit_value=100)],
+        validators=[
+            RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
+            MaxLengthValidator(limit_value=100),
+        ],
     )
 
     def __init__(self, *args, **kwargs):
@@ -90,15 +109,13 @@ class AddAlternativesForm(forms.Form):
 
         first_char = alternative_1[0]
         first_char_upper = first_char.upper()
-        alternative = first_char_upper + alternative_1[1:]
 
-        return alternative
+        return first_char_upper + alternative_1[1:]
 
     def clean_alternative_2(self):
         alternative_2 = self.cleaned_data['alternative_2']
 
         first_char = alternative_2[0]
         first_char_upper = first_char.upper()
-        alternative = first_char_upper + alternative_2[1:]
 
-        return alternative
+        return first_char_upper + alternative_2[1:]

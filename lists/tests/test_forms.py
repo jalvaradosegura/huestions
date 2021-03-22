@@ -45,6 +45,7 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
 
     def test_create_question_list_with_form(self):
         self.create_login_and_verify_user()
+
         form = CreateQuestionListForm(
             data={
                 'title': 'Super List',
@@ -53,7 +54,6 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
             owner=self.user,
         )
         form.save()
-
         question_list = QuestionList.objects.last()
 
         self.assertEqual(question_list.__str__(), 'Super List')
@@ -61,6 +61,7 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
 
     def test_create_two_question_lists(self):
         self.create_login_and_verify_user()
+
         form = CreateQuestionListForm(
             data={'title': 'Super List 1'}, owner=self.user
         )
@@ -83,10 +84,14 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
 
         self.assertEqual(question_list.owner.username, 'javi')
 
-    def test_create_question_list_with_form_title_is_too_short_error(self):
+    def test_create_list_title_is_too_short_error(self):
         self.create_login_and_verify_user()
+
         form = CreateQuestionListForm(
-            data={'title': 'abc', 'description': 'some cool description', },
+            data={
+                'title': 'abc',
+                'description': 'some cool description',
+            },
             owner=self.user,
         )
 
@@ -94,24 +99,48 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
             'Ensure this value has at least', form.errors['title'][0]
         )
 
-    def test_create_list_with_special_chars_on_title(self):
+    def test_create_list_with_special_chars_on_title_1(self):
         self.create_login_and_verify_user()
+
         form = CreateQuestionListForm(
-            data={'title': '%%%%%%', 'description': 'some cool description', },
+            data={
+                'title': '%%%%%%',
+                'description': 'some cool description',
+            },
             owner=self.user,
         )
 
-        self.assertIn(
-            SPECIAL_CHARS_ERROR, form.errors['title']
+        self.assertIn(SPECIAL_CHARS_ERROR, form.errors['title'])
+
+    def test_create_list_with_special_chars_on_title_2(self):
+        self.create_login_and_verify_user()
+
+        form = CreateQuestionListForm(
+            data={
+                'title': 'emoji 😁',
+                'description': 'some cool description',
+            },
+            owner=self.user,
         )
+
+        self.assertIn(SPECIAL_CHARS_ERROR, form.errors['title'])
 
 
 class EditListFormTests(TestCase):
     def test_create_list_with_form(self):
-        form = EditListForm(data={'title': 'Is this working?'})
+        form = EditListForm(data={'title': 'Is this working'})
         form.save()
         question_list = QuestionList.objects.last()
 
-        self.assertEqual(question_list.__str__(), 'Is this working?')
+        self.assertEqual(question_list.__str__(), 'Is this working')
         self.assertEqual(question_list.slug, 'is-this-working')
         self.assertEqual(QuestionList.objects.all().count(), 1)
+
+    def test_edit_list_with_special_chars_on_title(self):
+        form = EditListForm(
+            data={
+                'title': 'emoji 😁',
+            },
+        )
+
+        self.assertIn(SPECIAL_CHARS_ERROR, form.errors['title'])

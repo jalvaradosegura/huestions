@@ -73,7 +73,7 @@ class ListResultsView(LoginRequiredMixin, DetailView):
                 messages.add_message(
                     self.request,
                     messages.INFO,
-                    USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT
+                    USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT,
                 )
 
         return context

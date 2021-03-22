@@ -190,10 +190,10 @@ class EditQuestionView(
     UpdateView,
 ):
     model = Question
-    fields = ['title']
     template_name = 'edit_question.html'
     pk_url_kwarg = 'question_id'
     success_message = QUESTION_EDITED_SUCCESSFULLY
+    form_class = CreateQuestionForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -205,6 +205,13 @@ class EditQuestionView(
             }
         )
         return context
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        list_slug = self.kwargs.get('list_slug')
+        question_list = QuestionList.objects.get(slug=list_slug)
+        kwargs.update({'question_list': question_list})
+        return kwargs
 
     def get_success_url(self):
         list_slug = self.kwargs.get('list_slug')

@@ -3,7 +3,10 @@ from http import HTTPStatus
 from django.urls import reverse
 from django.test import TestCase
 
-from core.constants import LIST_REACHED_MAXIMUM_OF_QUESTION
+from core.constants import (
+    LIST_REACHED_MAXIMUM_OF_QUESTION,
+    SPECIAL_CHARS_ERROR,
+)
 from core.mixins import LoginUserMixin
 from ..factories import (
     AlternativeFactory,
@@ -120,8 +123,9 @@ class CreateQuestionFormTests(LoginUserMixin, TestCase):
         question_list = QuestionListFactory(title='an awesome list')
 
         form = CreateQuestionForm(
-            data={'title': 'Is this working?'}, question_list=question_list
+            data={'title': 'Is this working'}, question_list=question_list
         )
+        # if form.is_valid():
         form.save()
         question = Question.objects.last()
 
@@ -154,6 +158,32 @@ class CreateQuestionFormTests(LoginUserMixin, TestCase):
 
         self.assertFalse(response)
         self.assertIn(LIST_REACHED_MAXIMUM_OF_QUESTION, form.errors['__all__'])
+
+    def test_create_question_with_special_chars_on_title(self):
+        question_list = QuestionListFactory(title='an awesome list')
+
+        form = CreateQuestionForm(
+            data={
+                'title': 'emoji 😁',
+            },
+            question_list=question_list,
+        )
+
+        self.assertIn(SPECIAL_CHARS_ERROR, form.errors['title'])
+
+    def test_create_question_title_is_too_short(self):
+        question_list = QuestionListFactory(title='an awesome list')
+
+        form = CreateQuestionForm(
+            data={
+                'title': 'abc',
+            },
+            question_list=question_list,
+        )
+
+        self.assertIn(
+            'Ensure this value has at least', form.errors['title'][0]
+        )
 
 
 class AddAlternativesFormTests(LoginUserMixin, TestCase):
@@ -207,3 +237,17 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
 
         self.assertEqual(firt_alternative.__str__(), 'Yes')
         self.assertEqual(last_alternative.__str__(), 'No')
+
+    def test_create_alternatives_with_special_chars_on_title(self):
+        form = AddAlternativesForm(
+            data={
+                'alternative_1': 'Yes it is 😁',
+                'alternative_2': 'No it is not 😁',
+            }
+        )
+
+        if form.is_valid():
+            form.save(question=self.question)
+
+        self.assertIn(SPECIAL_CHARS_ERROR, form.errors['alternative_1'])
+        self.assertIn(SPECIAL_CHARS_ERROR, form.errors['alternative_2'])
