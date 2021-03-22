@@ -2,6 +2,7 @@ from django.test import TestCase
 
 from lists.factories import QuestionListFactory
 from questions.factories import AlternativeFactory
+
 from ..factories import UserFactory
 
 

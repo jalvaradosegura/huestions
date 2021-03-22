@@ -1,15 +1,11 @@
 import time
 
+from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
 from django.test import LiveServerTestCase
 from django.urls import reverse
-
-from allauth.account.models import EmailAddress
 from selenium import webdriver
 
-from lists.factories import QuestionListFactory
-from lists.models import QuestionList
-from questions.models import Question
 from core.constants import (
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
     LIST_COMPLETION_ERROR_MESSAGE,
@@ -21,7 +17,10 @@ from core.constants import (
     QUESTION_DELETED_SUCCESSFULLY,
     QUESTION_EDITED_SUCCESSFULLY,
 )
+from lists.factories import QuestionListFactory
+from lists.models import QuestionList
 from questions.factories import AlternativeFactory, QuestionFactory
+from questions.models import Question
 from votes.models import Vote
 
 

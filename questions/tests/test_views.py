@@ -23,8 +23,8 @@ from ..models import Alternative, Question
 from ..views import (
     AddQuestionView,
     AnswerQuestionView,
-    EditQuestionView,
     DeleteQuestionView,
+    EditQuestionView,
     home,
 )
 

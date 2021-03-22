@@ -1,9 +1,8 @@
 from http import HTTPStatus
 
+from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin
-
-from allauth.account.models import EmailAddress
 
 from lists.models import QuestionList
 

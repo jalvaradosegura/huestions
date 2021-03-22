@@ -10,6 +10,7 @@ from core.constants import (
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     SPECIAL_CHARS_ERROR,
 )
+
 from .factories import AlternativeFactory
 from .models import Question
 

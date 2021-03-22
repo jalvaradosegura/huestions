@@ -1,13 +1,14 @@
 from http import HTTPStatus
 
-from django.urls import reverse
 from django.test import TestCase
+from django.urls import reverse
 
 from core.constants import (
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     SPECIAL_CHARS_ERROR,
 )
 from core.mixins import LoginUserMixin
+
 from ..factories import (
     AlternativeFactory,
     QuestionFactory,

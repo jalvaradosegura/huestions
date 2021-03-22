@@ -1,12 +1,11 @@
+from allauth.account.decorators import verified_email_required
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render, reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import DetailView, DeleteView, UpdateView, View
-
-from allauth.account.decorators import verified_email_required
+from django.views.generic import DeleteView, DetailView, UpdateView, View
 
 from core.constants import (
     ALREADY_ANSWERED_ALL_THE_QUESTIONS,

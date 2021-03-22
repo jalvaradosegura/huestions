@@ -3,10 +3,10 @@ from http import HTTPStatus
 from django.test import TestCase
 from django.urls import resolve, reverse
 
-from lists.factories import QuestionListFactory
-
 from core.mixins import TestViewsMixin
+from lists.factories import QuestionListFactory
 from questions.factories import AlternativeFactory
+
 from ..factories import UserFactory
 from ..views import UserListsView, UserStatsView
 

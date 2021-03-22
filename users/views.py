@@ -1,11 +1,9 @@
+from allauth.account.decorators import verified_email_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, View
-
-from allauth.account.decorators import verified_email_required
-
 
 from questions.models import QuestionList
 

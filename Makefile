@@ -28,6 +28,12 @@ coverage:
 shell:
 	python manage.py shell_plus --settings=huestion_project.settings.local
 
+black:
+	black . -l 79 --color -S
+
+isort:
+	isort .  -m 3 --color
+
 help:
 	@echo "==Commands==="
 	@echo "run"
