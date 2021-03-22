@@ -115,10 +115,10 @@ class EditListView(
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        question_list = self.get_object()
-        complete_list_form = CompleteListForm(question_list=question_list)
-        context['sorted_questions'] = question_list.questions.order_by('id')
-        context['complete_list_form'] = complete_list_form
+        context['sorted_questions'] = self.object.questions.order_by('id')
+        context['complete_list_form'] = CompleteListForm(
+            question_list=self.object
+        )
 
         return context
 

@@ -125,7 +125,6 @@ class CreateQuestionFormTests(LoginUserMixin, TestCase):
         form = CreateQuestionForm(
             data={'title': 'Is this working'}, question_list=question_list
         )
-        # if form.is_valid():
         form.save()
         question = Question.objects.last()
 
@@ -245,9 +244,6 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
                 'alternative_2': 'No it is not 😁',
             }
         )
-
-        if form.is_valid():
-            form.save(question=self.question)
 
         self.assertIn(SPECIAL_CHARS_ERROR, form.errors['alternative_1'])
         self.assertIn(SPECIAL_CHARS_ERROR, form.errors['alternative_2'])

@@ -21,6 +21,7 @@ django-crispy-forms = "==1.11.1"
 django-rosetta = "==0.9.5"
 psycopg2-binary = "==2.8.6"
 django-environ = "==0.4.5"
+django-debug-toolbar = "==3.2"
 
 [requires]
 python_version = "3.8"
