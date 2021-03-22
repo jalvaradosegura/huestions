@@ -11,8 +11,7 @@ from core.constants import (
     SPECIAL_CHARS_ERROR,
 )
 
-from .factories import AlternativeFactory
-from .models import Question
+from .models import Alternative, Question
 
 
 class AnswerQuestionForm(forms.Form):
@@ -98,11 +97,17 @@ class AddAlternativesForm(forms.Form):
             alternative_1.save()
             alternative_2.save()
         else:
-            AlternativeFactory(
-                title=cleaned_data.get('alternative_1'), question=question
-            )
-            AlternativeFactory(
-                title=cleaned_data.get('alternative_2'), question=question
+            Alternative.objects.bulk_create(
+                [
+                    Alternative(
+                        title=cleaned_data.get('alternative_1'),
+                        question=question,
+                    ),
+                    Alternative(
+                        title=cleaned_data.get('alternative_2'),
+                        question=question,
+                    ),
+                ]
             )
 
     def clean_alternative_1(self):

@@ -131,10 +131,10 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
 @method_decorator(verified_email_required, name='dispatch')
 class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
     template_name = 'create_question.html'
+    instance = None
 
     def get(self, request, *args, **kwargs):
-        slug = self.kwargs['list_slug']
-        question_list = QuestionList.objects.get(slug=slug)
+        question_list = self.instance
 
         question_form = CreateQuestionForm(question_list=question_list)
         complete_list_form = CompleteListForm(question_list=question_list)

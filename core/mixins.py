@@ -57,11 +57,13 @@ class CustomUserPassesTestMixin(UserPassesTestMixin):
             slug = self.kwargs['list_slug']
         else:
             slug = self.kwargs['slug']
-        question_list = QuestionList.objects.get(slug=slug)
+        self.instance = QuestionList.objects.select_related('owner').get(
+            slug=slug
+        )
 
         if (
-            self.request.user == question_list.owner
-            and question_list.active is False
+            self.request.user == self.instance.owner
+            and self.instance.active is False
         ):
             return True
         return False
