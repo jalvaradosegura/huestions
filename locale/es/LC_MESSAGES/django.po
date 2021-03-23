@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-20 15:26-0300\n"
-"PO-Revision-Date: 2021-03-20 18:27+0000\n"
+"POT-Creation-Date: 2021-03-23 18:36-0300\n"
+"PO-Revision-Date: 2021-03-23 21:37+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -95,19 +95,19 @@ msgstr "Inglés"
 msgid "Spanish"
 msgstr "Español"
 
-#: lists/models.py:22
+#: lists/models.py:23
 msgid "description"
 msgstr "descripción"
 
-#: questions/forms.py:12
+#: questions/forms.py:19
 msgid "Alternatives"
 msgstr "Alternativas"
 
-#: questions/forms.py:56
+#: questions/forms.py:69
 msgid "Alternative 1"
 msgstr "Alternativa 1"
 
-#: questions/forms.py:60
+#: questions/forms.py:76
 msgid "Alternative 2"
 msgstr "Alternativa 2"
 
@@ -444,3 +444,15 @@ msgstr "Listas creadas"
 #: templates/user_stats.html:33
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
+
+#: users/forms.py:13
+#, python-format
+#| msgid ""
+#| "Please accept <a href=\"{}\" target=\"_bank\">Terms and Conditions</a>"
+msgid "Please accept <a href=\"%(url)s\" target=\"_bank\">Terms and Conditions</a>"
+msgstr ""
+"Por favor acepta los <a href=\"%(url)s\" target=\"_bank\">Términos y "
+"Condiciones</a>"
+
+#~ msgid "Please accept"
+#~ msgstr "Por favor acepta"

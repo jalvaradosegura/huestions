@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-20 15:26-0300\n"
+"POT-Creation-Date: 2021-03-23 18:36-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,19 +89,19 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: lists/models.py:22
+#: lists/models.py:23
 msgid "description"
 msgstr ""
 
-#: questions/forms.py:12
+#: questions/forms.py:19
 msgid "Alternatives"
 msgstr ""
 
-#: questions/forms.py:56
+#: questions/forms.py:69
 msgid "Alternative 1"
 msgstr ""
 
-#: questions/forms.py:60
+#: questions/forms.py:76
 msgid "Alternative 2"
 msgstr ""
 
@@ -417,4 +417,10 @@ msgstr ""
 
 #: templates/user_stats.html:33
 msgid "Questions Answered"
+msgstr ""
+
+#: users/forms.py:13
+#, python-format
+msgid ""
+"Please accept <a href=\"%(url)s\" target=\"_bank\">Terms and Conditions</a>"
 msgstr ""

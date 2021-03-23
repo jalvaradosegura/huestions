@@ -46,6 +46,8 @@ class FunctionalTestsBase(LiveServerTestCase):
         email_input.send_keys(email)
         password_input = self.browser.find_element_by_id('id_password1')
         password_input.send_keys(password)
+        check_input = self.browser.find_element_by_id('id_check')
+        check_input.click()
 
         # She press the signup button
         time.sleep(3)
