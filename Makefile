@@ -16,7 +16,7 @@ parallel-tests:
 	python manage.py test questions --parallel --settings=huestion_project.settings.local
 	python manage.py test lists --parallel --settings=huestion_project.settings.local
 	python manage.py test users --parallel --settings=huestion_project.settings.local
-	python manage.py test votes --parallel --settings=huestion_project.settings.local
+	python manage.py test votes --settings=huestion_project.settings.local
 
 reverse-tests:
 	python manage.py test questions --reverse --settings=huestion_project.settings.local

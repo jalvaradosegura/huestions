@@ -15,6 +15,9 @@ class Question(TitleAndTimeStampedModel):
         QuestionList, on_delete=models.CASCADE, related_name='questions'
     )
 
+    class Meta:
+        ordering = ('id', )
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)

@@ -116,17 +116,21 @@ class EditListView(
     SuccessMessageMixin,
     UpdateView,
 ):
-    model = QuestionList
     template_name = 'edit_list.html'
     form_class = EditListForm
     success_message = LIST_EDITED_SUCCESSFULLY
+
+    def get_queryset(self):
+        return QuestionList.objects.all().prefetch_related(
+            'questions__alternatives'
+        )
 
     def get_success_url(self):
         return reverse('lists', kwargs={'username': self.request.user})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['sorted_questions'] = self.object.questions.order_by('id')
+        context['sorted_questions'] = self.object.questions.all()
         context['complete_list_form'] = CompleteListForm(
             question_list=self.object
         )
