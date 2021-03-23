@@ -90,12 +90,12 @@ class AddAlternativesForm(forms.Form):
         if question.alternatives.exists():
             alternative_1 = question.alternatives.first()
             alternative_2 = question.alternatives.last()
-
             alternative_1.title = cleaned_data.get('alternative_1')
             alternative_2.title = cleaned_data.get('alternative_2')
 
-            alternative_1.save()
-            alternative_2.save()
+            Alternative.objects.bulk_update(
+                [alternative_1, alternative_2], ['title']
+            )
         else:
             Alternative.objects.bulk_create(
                 [

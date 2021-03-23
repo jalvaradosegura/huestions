@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render, reverse
+from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, UpdateView, View
 
@@ -195,7 +196,6 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
 class EditQuestionView(
     LoginRequiredMixin,
     CustomUserPassesTestMixin,
-    SuccessMessageMixin,
     UpdateView,
 ):
     model = Question
@@ -227,11 +227,23 @@ class EditQuestionView(
         return reverse('edit_list', kwargs={'slug': list_slug})
 
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+
         alternatives_form = AddAlternativesForm(request.POST)
-        question = self.get_object()
-        if alternatives_form.is_valid():
+        question = self.object
+
+        if form.is_valid() and alternatives_form.is_valid():
             alternatives_form.save(question=question)
-        return super().post(request, *args, **kwargs)
+            messages.success(self.request, self.success_message)
+            return self.form_valid(form)
+        else:
+            return TemplateResponse(
+                self.request,
+                self.template_name,
+                {'alternatives_form': alternatives_form, 'form': form},
+            )
+            return self.form_invalid(form)
 
 
 @method_decorator(verified_email_required, name='dispatch')

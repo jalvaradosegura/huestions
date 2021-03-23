@@ -16,7 +16,7 @@ class Question(TitleAndTimeStampedModel):
     )
 
     class Meta:
-        ordering = ('id', )
+        ordering = ('id',)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
