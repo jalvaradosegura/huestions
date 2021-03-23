@@ -243,7 +243,6 @@ class EditQuestionView(
                 self.template_name,
                 {'alternatives_form': alternatives_form, 'form': form},
             )
-            return self.form_invalid(form)
 
 
 @method_decorator(verified_email_required, name='dispatch')

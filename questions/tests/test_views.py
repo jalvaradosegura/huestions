@@ -483,6 +483,18 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
             reverse('edit_list', kwargs={'slug': self.question_list.slug}),
         )
 
+    def test_post_fail(self):
+        response = self.client.post(
+            self.base_url,
+            data={
+                'title': 'edited',
+                'alternative_1': 'edited %',
+                'alternative_2': 'edited',
+            },
+        )
+
+        self.assertTemplateUsed(response, EditQuestionView.template_name)
+
 
 class DeleteQuestionViewTests(TestViewsMixin, TestCase):
     def setUp(self):
