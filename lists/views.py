@@ -24,7 +24,7 @@ from .models import QuestionList
 
 @method_decorator(verified_email_required, name='dispatch')
 class QuestionsListView(LoginRequiredMixin, ListView):
-    queryset = QuestionList.activated_lists.all()
+    queryset = QuestionList.activated_lists.all().select_related('owner')
     template_name = 'lists.html'
 
 
