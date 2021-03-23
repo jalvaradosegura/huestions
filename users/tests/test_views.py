@@ -17,7 +17,7 @@ class UserListsViewTests(TestViewsMixin, TestCase):
         self.base_url = reverse('lists', args=[self.user.username])
 
     def test_question_list_url_resolves_to_view(self):
-        found = resolve('/users/javi/lists/')
+        found = resolve(self.base_url)
 
         self.assertEqual(found.func.__name__, UserListsView.as_view().__name__)
 

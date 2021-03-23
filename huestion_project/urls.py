@@ -6,6 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('lists.urls')),
     path('', include('questions.urls')),
+    path('', include('core.urls')),
     path('users/', include('users.urls')),
     path('accounts/', include('allauth.urls')),
     path('rosetta/', include('rosetta.urls')),

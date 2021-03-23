@@ -12,7 +12,7 @@ class MyCustomSignupForm(SignupForm):
             _(
                 'Please accept '
                 '<a href="%(url)s" target="_bank">Terms and Conditions</a>'
-                ) % {'url': reverse('home')}
+                ) % {'url': reverse('terms_and_conditions')}
         )
     )
 
