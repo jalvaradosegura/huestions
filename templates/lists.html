@@ -23,6 +23,8 @@
     <br>
   {% endfor %}
 
+  {% include "paginator.html" %}
+
   {% block bootstrap_js_loaded %}
     <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>
   {% endblock bootstrap_js_loaded %}

@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, View
 
+from core.constants import AMOUNT_OF_LISTS_PER_PAGE
 from questions.models import QuestionList
 
 
@@ -12,6 +13,7 @@ from questions.models import QuestionList
 class UserListsView(LoginRequiredMixin, ListView):
     model = QuestionList
     template_name = 'user_lists.html'
+    paginate_by = AMOUNT_OF_LISTS_PER_PAGE
 
     def get_queryset(self):
         username = self.kwargs['username']

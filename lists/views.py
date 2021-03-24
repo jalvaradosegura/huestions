@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
 
 from core.constants import (
+    AMOUNT_OF_LISTS_PER_PAGE,
     LIST_CREATED_SUCCESSFULLY,
     LIST_DELETED_SUCCESSFULLY,
     LIST_EDITED_SUCCESSFULLY,
@@ -26,6 +27,7 @@ from .models import QuestionList
 class QuestionsListView(LoginRequiredMixin, ListView):
     queryset = QuestionList.activated_lists.all().select_related('owner')
     template_name = 'lists.html'
+    paginate_by = AMOUNT_OF_LISTS_PER_PAGE
 
 
 @method_decorator(verified_email_required, name='dispatch')
