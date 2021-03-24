@@ -57,14 +57,14 @@ class ListResultsView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         questions = self.object.questions.all()
 
-        if not self.shared_by:
-            user_alternatives = []
-            for q in questions:
-                user_alternatives.append(
-                    [q, q.get_user_voted_alternative(self.request.user)]
-                )
-            context['questions_and_user_alternatives'] = user_alternatives
-        else:
+        user_alternatives = []
+        for q in questions:
+            user_alternatives.append(
+                [q, q.get_user_voted_alternative(self.request.user)]
+            )
+        context['questions_and_user_alternatives'] = user_alternatives
+
+        if self.shared_by:
             shared_by = CustomUser.objects.get(username=self.shared_by)
             if self.object.get_amount_of_unanswered_questions(shared_by) == 0:
                 shared_alternatives = []
