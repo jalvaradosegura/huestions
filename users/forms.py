@@ -10,7 +10,7 @@ class MyCustomSignupForm(SignupForm):
     check = forms.BooleanField(
         label=mark_safe(
             _(
-                'Please accept '
+                'I acknowledge that I have read and agree to the '
                 '<a href="%(url)s" target="_blank">Terms and Conditions</a>'
                 ) % {'url': reverse('terms_and_conditions')}
         )
