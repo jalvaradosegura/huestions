@@ -7,11 +7,13 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     {% with url_name=request.resolver_match.url_name %}
+      {% if user.is_authenticated %}
       <div class="navbar-nav mr-auto">
         <a class="nav-item nav-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
 	<a class="nav-item nav-link {% if url_name == 'questions_list' %}active{% endif %}" href="{% url 'questions_list' %}">{% trans "Lists" %}</a>
       </div>
-      <div class="navbar-nav">
+      {% endif %}
+      <div class="navbar-nav ml-auto">
         {% if user.is_authenticated %}
 	  <span class="navbar-text">{% trans "Hi" %}, {{ user }}👋</span>
 	  <a class="nav-item nav-link {% if url_name == 'create_list' %}active{% endif %}" href="{% url 'create_list' %}">{% trans "Create a list" %}</a>
