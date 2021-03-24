@@ -32,3 +32,4 @@ SPECIAL_CHARS_ERROR = _('Do not use special chars')
 
 # Global variables
 AMOUNT_OF_LISTS_PER_PAGE = 5
+AMOUNT_OF_DAYS_FOR_POPULARITY = 10

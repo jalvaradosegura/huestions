@@ -1,14 +1,19 @@
+import datetime
+
 from allauth.account.decorators import verified_email_required
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models import Count
 from django.shortcuts import redirect, render, reverse
+from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
 
 from core.constants import (
     AMOUNT_OF_LISTS_PER_PAGE,
+    AMOUNT_OF_DAYS_FOR_POPULARITY,
     LIST_CREATED_SUCCESSFULLY,
     LIST_DELETED_SUCCESSFULLY,
     LIST_EDITED_SUCCESSFULLY,
@@ -25,9 +30,20 @@ from .models import QuestionList
 
 @method_decorator(verified_email_required, name='dispatch')
 class QuestionsListView(LoginRequiredMixin, ListView):
-    queryset = QuestionList.activated_lists.all().select_related('owner')
     template_name = 'lists.html'
     paginate_by = AMOUNT_OF_LISTS_PER_PAGE
+
+    def get_queryset(self):
+        date_to_compare_against = timezone.now() - datetime.timedelta(
+            days=AMOUNT_OF_DAYS_FOR_POPULARITY
+        )
+        return (
+            QuestionList.objects.filter(
+                votes__created__gte=date_to_compare_against
+            )
+            .annotate(votes_amount=Count('id'))
+            .order_by('-votes_amount')
+        ).select_related('owner')
 
 
 @method_decorator(verified_email_required, name='dispatch')
