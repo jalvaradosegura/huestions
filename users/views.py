@@ -14,6 +14,7 @@ class UserListsView(LoginRequiredMixin, ListView):
     model = QuestionList
     template_name = 'user_lists.html'
     paginate_by = AMOUNT_OF_LISTS_PER_PAGE
+    ordering = '-id'
 
     def get_queryset(self):
         username = self.kwargs['username']

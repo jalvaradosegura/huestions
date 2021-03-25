@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:32-0300\n"
-"PO-Revision-Date: 2021-03-24 02:33+0000\n"
+"POT-Creation-Date: 2021-03-24 23:06-0300\n"
+"PO-Revision-Date: 2021-03-25 02:06+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,57 +19,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.5\n"
 
-#: core/constants.py:4
+#: core/constants.py:5
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 "La lista necesita al menos 1 pregunta con 2 alternativas para estar completa"
 
-#: core/constants.py:7
+#: core/constants.py:8
 msgid "The list you are trying to see is incomplete"
 msgstr "La lista que estás intentado acceder está incompleta"
 
-#: core/constants.py:9
+#: core/constants.py:10
 msgid "List was created successfully"
 msgstr "Lista creada con éxito"
 
-#: core/constants.py:10
+#: core/constants.py:11
 msgid "List was edited successfully"
 msgstr "Lista editada con éxito"
 
-#: core/constants.py:11
+#: core/constants.py:12
 msgid "List was deleted successfully"
 msgstr "Lista eliminada con éxito"
 
-#: core/constants.py:12
+#: core/constants.py:13
 msgid "List was published successfully"
 msgstr "Lista publicada con éxito"
 
-#: core/constants.py:13
+#: core/constants.py:14
 msgid "The list reached the limit of questions"
 msgstr "La lista alcanzó el límite de preguntas"
 
-#: core/constants.py:14
+#: core/constants.py:15
 msgid "Question was created successfully"
 msgstr "Pregunta creada con éxito"
 
-#: core/constants.py:15
+#: core/constants.py:16
 msgid "Question was edited successfully"
 msgstr "Pregunta editada con éxito"
 
-#: core/constants.py:16
+#: core/constants.py:17
 msgid "Question was deleted successfully"
 msgstr "Pregunta eliminada con éxito"
 
-#: core/constants.py:18
+#: core/constants.py:19
 msgid "You already answered all the questions for this list"
 msgstr "Ya respondiste todas las preguntas de esta lista"
 
-#: core/constants.py:21
+#: core/constants.py:22
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 "Debes responder todas las preguntas de la lista antes de ver los resultados"
 
-#: core/constants.py:24
+#: core/constants.py:25
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so"
 " you won't be able to see that person answers. Tell the user to answer all "
@@ -79,7 +79,7 @@ msgstr ""
 " por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
 "todas las preguntas"
 
-#: core/constants.py:30
+#: core/constants.py:31
 msgid "Do not use special chars"
 msgstr "No uses caracteres especiales"
 
@@ -244,7 +244,7 @@ msgstr ""
 "fue usado. Por favor solicitar <a href=\"%(passwd_reset_url)s\"> nuevo "
 "reseteo de contraseña"
 
-#: templates/account/password_reset_from_key.html:18 templates/navbar.html:24
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:26
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -292,7 +292,7 @@ msgstr "Compartir lista"
 msgid "Answer"
 msgstr "Responder"
 
-#: templates/create_list.html:8 templates/navbar.html:17
+#: templates/create_list.html:8 templates/navbar.html:19
 msgid "Create a list"
 msgstr "Crear una lista"
 
@@ -385,43 +385,47 @@ msgstr "Tu voto"
 msgid "%(shared_user)s's vote"
 msgstr "Voto de %(shared_user)s"
 
-#: templates/lists.html:8 templates/navbar.html:12
+#: templates/lists.html:8 templates/navbar.html:13
 msgid "Lists"
 msgstr "Listas"
 
 #: templates/lists.html:13
-msgid "by"
-msgstr "por"
+msgid "votes in the last few days"
+msgstr "votos en los últimos días"
 
 #: templates/lists.html:14
 msgid "Created:"
 msgstr "Creada"
 
+#: templates/lists.html:14
+msgid "by"
+msgstr "por"
+
 #: templates/lists.html:20 templates/user_lists.html:21
 msgid "Go"
 msgstr "Ir"
 
-#: templates/navbar.html:16
+#: templates/navbar.html:18
 msgid "Hi"
 msgstr "Hola"
 
-#: templates/navbar.html:18
+#: templates/navbar.html:20
 msgid "Your Lists"
 msgstr "Tus listas"
 
-#: templates/navbar.html:23 templates/user_stats.html:7
+#: templates/navbar.html:25 templates/user_stats.html:7
 msgid "Your stats"
 msgstr "Tus estadísticas"
 
-#: templates/navbar.html:26
+#: templates/navbar.html:28
 msgid "Log out"
 msgstr "Cerrar sesión"
 
-#: templates/navbar.html:30
+#: templates/navbar.html:32
 msgid "Log in"
 msgstr "Iniciar sesión"
 
-#: templates/navbar.html:31
+#: templates/navbar.html:33
 msgid "Sign up"
 msgstr "Registrarse"
 
@@ -447,8 +451,6 @@ msgstr "Preguntas respondidas"
 
 #: users/forms.py:13
 #, python-format
-#| msgid ""
-#| "Please accept <a href=\"%(url)s\" target=\"_blank\">Terms and Conditions</a>"
 msgid ""
 "I acknowledge that I have read and agree to the <a href=\"%(url)s\" "
 "target=\"_blank\">Terms and Conditions</a>"

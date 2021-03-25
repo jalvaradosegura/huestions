@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-23 23:32-0300\n"
+"POT-Creation-Date: 2021-03-24 23:06-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,62 +18,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/constants.py:4
+#: core/constants.py:5
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 
-#: core/constants.py:7
+#: core/constants.py:8
 msgid "The list you are trying to see is incomplete"
 msgstr ""
 
-#: core/constants.py:9
+#: core/constants.py:10
 msgid "List was created successfully"
 msgstr ""
 
-#: core/constants.py:10
+#: core/constants.py:11
 msgid "List was edited successfully"
 msgstr ""
 
-#: core/constants.py:11
+#: core/constants.py:12
 msgid "List was deleted successfully"
 msgstr ""
 
-#: core/constants.py:12
+#: core/constants.py:13
 msgid "List was published successfully"
 msgstr ""
 
-#: core/constants.py:13
+#: core/constants.py:14
 msgid "The list reached the limit of questions"
 msgstr ""
 
-#: core/constants.py:14
+#: core/constants.py:15
 msgid "Question was created successfully"
 msgstr ""
 
-#: core/constants.py:15
+#: core/constants.py:16
 msgid "Question was edited successfully"
 msgstr ""
 
-#: core/constants.py:16
+#: core/constants.py:17
 msgid "Question was deleted successfully"
 msgstr ""
 
-#: core/constants.py:18
+#: core/constants.py:19
 msgid "You already answered all the questions for this list"
 msgstr ""
 
-#: core/constants.py:21
+#: core/constants.py:22
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 
-#: core/constants.py:24
+#: core/constants.py:25
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so "
 "you won't be able to see that person answers. Tell the user to answer all "
 "the questions"
 msgstr ""
 
-#: core/constants.py:30
+#: core/constants.py:31
 msgid "Do not use special chars"
 msgstr ""
 
@@ -222,7 +222,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:18 templates/navbar.html:24
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:26
 msgid "Change password"
 msgstr ""
 
@@ -266,7 +266,7 @@ msgstr ""
 msgid "Answer"
 msgstr ""
 
-#: templates/create_list.html:8 templates/navbar.html:17
+#: templates/create_list.html:8 templates/navbar.html:19
 msgid "Create a list"
 msgstr ""
 
@@ -359,43 +359,47 @@ msgstr ""
 msgid "%(shared_user)s's vote"
 msgstr ""
 
-#: templates/lists.html:8 templates/navbar.html:12
+#: templates/lists.html:8 templates/navbar.html:13
 msgid "Lists"
 msgstr ""
 
 #: templates/lists.html:13
-msgid "by"
+msgid "votes in the last few days"
 msgstr ""
 
 #: templates/lists.html:14
 msgid "Created:"
 msgstr ""
 
+#: templates/lists.html:14
+msgid "by"
+msgstr ""
+
 #: templates/lists.html:20 templates/user_lists.html:21
 msgid "Go"
 msgstr ""
 
-#: templates/navbar.html:16
+#: templates/navbar.html:18
 msgid "Hi"
 msgstr ""
 
-#: templates/navbar.html:18
+#: templates/navbar.html:20
 msgid "Your Lists"
 msgstr ""
 
-#: templates/navbar.html:23 templates/user_stats.html:7
+#: templates/navbar.html:25 templates/user_stats.html:7
 msgid "Your stats"
 msgstr ""
 
-#: templates/navbar.html:26
+#: templates/navbar.html:28
 msgid "Log out"
 msgstr ""
 
-#: templates/navbar.html:30
+#: templates/navbar.html:32
 msgid "Log in"
 msgstr ""
 
-#: templates/navbar.html:31
+#: templates/navbar.html:33
 msgid "Sign up"
 msgstr ""
 
