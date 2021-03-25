@@ -11,16 +11,13 @@ from questions.models import QuestionList
 
 @method_decorator(verified_email_required, name='dispatch')
 class UserListsView(LoginRequiredMixin, ListView):
-    model = QuestionList
     template_name = 'user_lists.html'
     paginate_by = AMOUNT_OF_LISTS_PER_PAGE
-    ordering = '-id'
 
     def get_queryset(self):
         username = self.kwargs['username']
         user_id = get_user_model().objects.get(username=username).id
-
-        return super().get_queryset().filter(owner=user_id)
+        return QuestionList.objects.filter(owner=user_id).prefetch_related('tags').order_by('-id')
 
 
 @method_decorator(verified_email_required, name='dispatch')

@@ -11,7 +11,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ question_list.title }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{% trans "Created" %}: {{ question_list.created|date:"M d, Y" }}</h6>
-        <p class="card-text">{{ question_list.description }}</p>
+	<p class="card-text">{% for tag in question_list.tags.all %}#{{ tag }} {% endfor %}</p>
         {% if question_list.active %}
 	  <p>Published</p>
 	  {% url 'answer_list' question_list.slug user as list_url %}

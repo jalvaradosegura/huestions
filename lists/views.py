@@ -117,6 +117,7 @@ def create_list(request):
         if form.is_valid():
             question_list = form.save(commit=False)
             question_list.save()
+            form.save_m2m()  # django-taggit
             messages.add_message(
                 request, messages.SUCCESS, LIST_CREATED_SUCCESSFULLY
             )

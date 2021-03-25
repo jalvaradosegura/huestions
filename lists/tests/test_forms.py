@@ -47,27 +47,23 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
         self.create_login_and_verify_user()
 
         form = CreateQuestionListForm(
-            data={
-                'title': 'Super List',
-                'description': 'some cool description',
-            },
+            data={'title': 'Super List', 'tags': 'fun, yay'},
             owner=self.user,
         )
         form.save()
         question_list = QuestionList.objects.last()
 
         self.assertEqual(question_list.__str__(), 'Super List')
-        self.assertEqual(question_list.description, 'some cool description')
 
     def test_create_two_question_lists(self):
         self.create_login_and_verify_user()
 
         form = CreateQuestionListForm(
-            data={'title': 'Super List 1'}, owner=self.user
+            data={'title': 'Super List 1', 'tags': 'fun, yay'}, owner=self.user
         )
         form.save()
         form = CreateQuestionListForm(
-            data={'title': 'Super List 2'}, owner=self.user
+            data={'title': 'Super List 2', 'tags': 'fun, yay'}, owner=self.user
         )
         form.save()
 
@@ -76,7 +72,7 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
     def test_user_gets_added_to_list_after_creating_one(self):
         self.create_login_and_verify_user()
         form = CreateQuestionListForm(
-            data={'title': 'Super List 1'}, owner=self.user
+            data={'title': 'Super List 1', 'tags': 'fun, yay'}, owner=self.user
         )
         form.save()
 
@@ -90,7 +86,6 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
         form = CreateQuestionListForm(
             data={
                 'title': 'abc',
-                'description': 'some cool description',
             },
             owner=self.user,
         )
@@ -105,7 +100,6 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
         form = CreateQuestionListForm(
             data={
                 'title': '%%%%%%',
-                'description': 'some cool description',
             },
             owner=self.user,
         )
@@ -118,7 +112,6 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
         form = CreateQuestionListForm(
             data={
                 'title': 'emoji 😁',
-                'description': 'some cool description',
             },
             owner=self.user,
         )
@@ -128,7 +121,7 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
 
 class EditListFormTests(TestCase):
     def test_create_list_with_form(self):
-        form = EditListForm(data={'title': 'Is this working'})
+        form = EditListForm(data={'title': 'Is this working', 'tags': 'cool, yay'})
         form.save()
         question_list = QuestionList.objects.last()
 

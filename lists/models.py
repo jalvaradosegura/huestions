@@ -3,7 +3,8 @@ from django.db import models
 from django.db.models import Q
 from django.urls import reverse
 from django.utils.text import slugify
-from django.utils.translation import gettext_lazy as _
+
+from taggit.managers import TaggableManager
 
 from core.models import TitleAndTimeStampedModel
 
@@ -19,9 +20,7 @@ class QuestionList(TitleAndTimeStampedModel):
         related_name='lists',
     )
     active = models.BooleanField(default=False)
-    description = models.TextField(
-        verbose_name=_('description'), max_length=200, blank=True
-    )
+    tags = TaggableManager()
 
     objects = models.Manager()
     activated_lists = ActivatedListManager()

@@ -184,7 +184,7 @@ class CreateListViewTests(TestViewsMixin, TestCase):
 
     def test_post_success(self):
         response = self.client.post(
-            self.base_url, data={'title': 'super list'}
+            self.base_url, data={'title': 'super list', 'tags': 'cool, fun'}
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -245,7 +245,7 @@ class EditListViewTests(TestViewsMixin, TestCase):
 
     def test_post_change_name_success(self):
         response = self.client.post(
-            self.base_url, data={'title': 'another title'}
+            self.base_url, data={'title': 'another title', 'tags': 'tag, cool'}
         )
         question_list = QuestionList.objects.last()
 

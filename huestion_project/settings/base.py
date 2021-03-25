@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'crispy_forms',
     'rosetta',
+    'taggit',
 ]
 LOCAL_APPS = [
     'questions.apps.QuestionsConfig',

@@ -16,7 +16,7 @@ class CreateQuestionListForm(forms.ModelForm):
 
     class Meta:
         model = QuestionList
-        fields = ['title', 'description']
+        fields = ['title', 'tags']
 
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner')
@@ -57,7 +57,7 @@ class EditListForm(forms.ModelForm):
 
     class Meta:
         model = QuestionList
-        fields = ['title']
+        fields = ['title', 'tags']
 
     def save(self, *args, **kwargs):
         self.instance.slug = self.instance._generate_unique_slug_if_needed()

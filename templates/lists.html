@@ -12,7 +12,7 @@
       <div class="card-body">
 	<h5 class="card-title">{{ question_list.title }} &middot <small>{% trans "votes in the last few days" %}: {{ question_list.votes_amount }}</small></h5>
 	<h6 class="card-subtitle mb-2 text-muted">{% trans "Created:" %} {{ question_list.created|date:"M d, Y" }} &middot {% trans "by" %} {{ question_list.owner }}</h6>
-	<p class="card-text">{{ question_list.description }}</p>
+	<p class="card-text">{% for tag in question_list.tags.all %}#{{ tag }} {% endfor %}</p>
 	{% url 'answer_list' question_list.slug user as list_url %}
 	{% with domain_url=request.get_host %}
 	  <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="btn btn-outline-secondary">{% trans "Share list" %}</button>
