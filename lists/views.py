@@ -43,7 +43,7 @@ class QuestionsListView(LoginRequiredMixin, ListView):
             )
             .annotate(votes_amount=Count('id'))
             .order_by('-votes_amount')
-        ).select_related('owner')
+        ).select_related('owner').prefetch_related('tags')
 
 
 @method_decorator(verified_email_required, name='dispatch')
@@ -158,6 +158,7 @@ class EditListView(
 
     def post(self, request, *args, **kwargs):
         question_list = self.get_object()
+        self.object = question_list
 
         if 'title' not in request.POST:
             complete_list_form = CompleteListForm(question_list=question_list)
@@ -174,7 +175,11 @@ class EditListView(
             )
             return redirect(self.get_success_url())
 
-        return super().post(request, *args, **kwargs)
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 @method_decorator(verified_email_required, name='dispatch')
