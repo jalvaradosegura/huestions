@@ -5,15 +5,15 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.shortcuts import redirect, render, reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
 
 from core.constants import (
-    AMOUNT_OF_LISTS_PER_PAGE,
     AMOUNT_OF_DAYS_FOR_POPULARITY,
+    AMOUNT_OF_LISTS_PER_PAGE,
     LIST_CREATED_SUCCESSFULLY,
     LIST_DELETED_SUCCESSFULLY,
     LIST_EDITED_SUCCESSFULLY,
@@ -38,12 +38,16 @@ class QuestionsListView(LoginRequiredMixin, ListView):
             days=AMOUNT_OF_DAYS_FOR_POPULARITY
         )
         return (
-            QuestionList.objects.filter(
-                votes__created__gte=date_to_compare_against
+            (
+                QuestionList.objects.filter(
+                    votes__created__gte=date_to_compare_against
+                )
+                .annotate(votes_amount=Count('id'))
+                .order_by('-votes_amount')
             )
-            .annotate(votes_amount=Count('id'))
-            .order_by('-votes_amount')
-        ).select_related('owner').prefetch_related('tags')
+            .select_related('owner')
+            .prefetch_related('tags')
+        )
 
 
 @method_decorator(verified_email_required, name='dispatch')
@@ -198,3 +202,26 @@ class DeleteListView(
             self.request, messages.SUCCESS, LIST_DELETED_SUCCESSFULLY
         )
         return response
+
+
+@method_decorator(verified_email_required, name='dispatch')
+class SearchListsView(LoginRequiredMixin, ListView):
+    context_object_name = 'lists'
+    template_name = 'search_results.html'
+    paginate_by = AMOUNT_OF_LISTS_PER_PAGE
+
+    def get_queryset(self):
+        self.q = self.request.GET.get('q')
+        return (
+            QuestionList.activated_lists.filter(
+                Q(title__icontains=self.q) | Q(tags__name__icontains=self.q)
+            )
+            .order_by('-id')
+            .prefetch_related('tags')
+            .select_related('owner')
+        )
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.q
+        return context

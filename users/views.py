@@ -17,7 +17,11 @@ class UserListsView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         username = self.kwargs['username']
         user_id = get_user_model().objects.get(username=username).id
-        return QuestionList.objects.filter(owner=user_id).prefetch_related('tags').order_by('-id')
+        return (
+            QuestionList.objects.filter(owner=user_id)
+            .prefetch_related('tags')
+            .order_by('-id')
+        )
 
 
 @method_decorator(verified_email_required, name='dispatch')

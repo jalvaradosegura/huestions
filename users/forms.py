@@ -1,9 +1,8 @@
+from allauth.account.forms import SignupForm
 from django import forms
 from django.shortcuts import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
-
-from allauth.account.forms import SignupForm
 
 
 class MyCustomSignupForm(SignupForm):

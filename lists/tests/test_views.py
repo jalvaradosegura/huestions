@@ -20,6 +20,7 @@ from ..views import (
     EditListView,
     ListResultsView,
     QuestionsListView,
+    SearchListsView,
     create_list,
 )
 
@@ -327,3 +328,27 @@ class DeleteListViewTests(TestViewsMixin, TestCase):
             response['Location'],
             reverse('lists', kwargs={'username': self.user.username}),
         )
+
+
+class SearchListsViewTests(TestViewsMixin, TestCase):
+    def setUp(self):
+        self.create_login_and_verify_user()
+        self.base_url = reverse('search_lists')
+
+    def test_view_get(self):
+        response = self.client.get(self.base_url, data={'q': 'something'})
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_question_list_url_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(
+            found.func.__name__, SearchListsView.as_view().__name__
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(self.base_url, data={'q': 'something'})
+
+        self.assertTemplateUsed(response, SearchListsView.template_name)
+        self.assertEqual(response.status_code, HTTPStatus.OK)

@@ -3,7 +3,6 @@ from django.db import models
 from django.db.models import Q
 from django.urls import reverse
 from django.utils.text import slugify
-
 from taggit.managers import TaggableManager
 
 from core.models import TitleAndTimeStampedModel

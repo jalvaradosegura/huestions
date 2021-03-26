@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-24 23:06-0300\n"
-"PO-Revision-Date: 2021-03-25 02:06+0000\n"
+"POT-Creation-Date: 2021-03-26 00:14-0300\n"
+"PO-Revision-Date: 2021-03-26 03:16+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -87,17 +87,13 @@ msgstr "No uses caracteres especiales"
 msgid "title"
 msgstr "título"
 
-#: huestion_project/settings/base.py:153
+#: huestion_project/settings/base.py:154
 msgid "English"
 msgstr "Inglés"
 
-#: huestion_project/settings/base.py:154
+#: huestion_project/settings/base.py:155
 msgid "Spanish"
 msgstr "Español"
-
-#: lists/models.py:23
-msgid "description"
-msgstr "descripción"
 
 #: questions/forms.py:19
 msgid "Alternatives"
@@ -244,7 +240,7 @@ msgstr ""
 "fue usado. Por favor solicitar <a href=\"%(passwd_reset_url)s\"> nuevo "
 "reseteo de contraseña"
 
-#: templates/account/password_reset_from_key.html:18 templates/navbar.html:26
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:32
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -284,7 +280,8 @@ msgstr ""
 "de los próximos minutos."
 
 #: templates/answer_question.html:11 templates/list_results.html:12
-#: templates/lists.html:18 templates/user_lists.html:19
+#: templates/lists.html:18 templates/search_results.html:21
+#: templates/user_lists.html:19
 msgid "Share list"
 msgstr "Compartir lista"
 
@@ -292,7 +289,7 @@ msgstr "Compartir lista"
 msgid "Answer"
 msgstr "Responder"
 
-#: templates/create_list.html:8 templates/navbar.html:19
+#: templates/create_list.html:8 templates/navbar.html:25
 msgid "Create a list"
 msgstr "Crear una lista"
 
@@ -393,41 +390,59 @@ msgstr "Listas"
 msgid "votes in the last few days"
 msgstr "votos en los últimos días"
 
-#: templates/lists.html:14
+#: templates/lists.html:14 templates/search_results.html:17
 msgid "Created:"
 msgstr "Creada"
 
-#: templates/lists.html:14
+#: templates/lists.html:14 templates/search_results.html:17
 msgid "by"
 msgstr "por"
 
-#: templates/lists.html:20 templates/user_lists.html:21
+#: templates/lists.html:20 templates/search_results.html:23
+#: templates/user_lists.html:21
 msgid "Go"
 msgstr "Ir"
 
-#: templates/navbar.html:18
+#: templates/navbar.html:18 templates/navbar.html:19
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/navbar.html:24
 msgid "Hi"
 msgstr "Hola"
 
-#: templates/navbar.html:20
+#: templates/navbar.html:26
 msgid "Your Lists"
 msgstr "Tus listas"
 
-#: templates/navbar.html:25 templates/user_stats.html:7
+#: templates/navbar.html:31 templates/user_stats.html:7
 msgid "Your stats"
 msgstr "Tus estadísticas"
 
-#: templates/navbar.html:28
+#: templates/navbar.html:34
 msgid "Log out"
 msgstr "Cerrar sesión"
 
-#: templates/navbar.html:32
+#: templates/navbar.html:38
 msgid "Log in"
 msgstr "Iniciar sesión"
 
-#: templates/navbar.html:33
+#: templates/navbar.html:39
 msgid "Sign up"
 msgstr "Registrarse"
+
+#: templates/search_results.html:8
+msgid "Search Results for"
+msgstr "Resultados de búsqueda para"
+
+#: templates/search_results.html:10
+msgid "Found"
+msgstr "Encontró"
+
+#: templates/search_results.html:10
+#| msgid "results"
+msgid "result"
+msgstr "resultado"
 
 #: templates/user_lists.html:8
 msgid "Your lists"
@@ -457,3 +472,6 @@ msgid ""
 msgstr ""
 "Reconozco que he leído y acepto los <a href=\"%(url)s\" "
 "target=\"_blank\">Términos y Condiciones</a>"
+
+#~ msgid "description"
+#~ msgstr "descripción"

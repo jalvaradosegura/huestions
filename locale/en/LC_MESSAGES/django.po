@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-24 23:06-0300\n"
+"POT-Creation-Date: 2021-03-26 00:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,16 +81,12 @@ msgstr ""
 msgid "title"
 msgstr ""
 
-#: huestion_project/settings/base.py:153
+#: huestion_project/settings/base.py:154
 msgid "English"
 msgstr ""
 
-#: huestion_project/settings/base.py:154
+#: huestion_project/settings/base.py:155
 msgid "Spanish"
-msgstr ""
-
-#: lists/models.py:23
-msgid "description"
 msgstr ""
 
 #: questions/forms.py:19
@@ -222,7 +218,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:18 templates/navbar.html:26
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:32
 msgid "Change password"
 msgstr ""
 
@@ -258,7 +254,8 @@ msgid ""
 msgstr ""
 
 #: templates/answer_question.html:11 templates/list_results.html:12
-#: templates/lists.html:18 templates/user_lists.html:19
+#: templates/lists.html:18 templates/search_results.html:21
+#: templates/user_lists.html:19
 msgid "Share list"
 msgstr ""
 
@@ -266,7 +263,7 @@ msgstr ""
 msgid "Answer"
 msgstr ""
 
-#: templates/create_list.html:8 templates/navbar.html:19
+#: templates/create_list.html:8 templates/navbar.html:25
 msgid "Create a list"
 msgstr ""
 
@@ -367,40 +364,57 @@ msgstr ""
 msgid "votes in the last few days"
 msgstr ""
 
-#: templates/lists.html:14
+#: templates/lists.html:14 templates/search_results.html:17
 msgid "Created:"
 msgstr ""
 
-#: templates/lists.html:14
+#: templates/lists.html:14 templates/search_results.html:17
 msgid "by"
 msgstr ""
 
-#: templates/lists.html:20 templates/user_lists.html:21
+#: templates/lists.html:20 templates/search_results.html:23
+#: templates/user_lists.html:21
 msgid "Go"
 msgstr ""
 
-#: templates/navbar.html:18
+#: templates/navbar.html:18 templates/navbar.html:19
+msgid "Search"
+msgstr ""
+
+#: templates/navbar.html:24
 msgid "Hi"
 msgstr ""
 
-#: templates/navbar.html:20
+#: templates/navbar.html:26
 msgid "Your Lists"
 msgstr ""
 
-#: templates/navbar.html:25 templates/user_stats.html:7
+#: templates/navbar.html:31 templates/user_stats.html:7
 msgid "Your stats"
 msgstr ""
 
-#: templates/navbar.html:28
+#: templates/navbar.html:34
 msgid "Log out"
 msgstr ""
 
-#: templates/navbar.html:32
+#: templates/navbar.html:38
 msgid "Log in"
 msgstr ""
 
-#: templates/navbar.html:33
+#: templates/navbar.html:39
 msgid "Sign up"
+msgstr ""
+
+#: templates/search_results.html:8
+msgid "Search Results for"
+msgstr ""
+
+#: templates/search_results.html:10
+msgid "Found"
+msgstr ""
+
+#: templates/search_results.html:10
+msgid "result"
 msgstr ""
 
 #: templates/user_lists.html:8

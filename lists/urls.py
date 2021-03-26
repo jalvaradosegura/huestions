@@ -33,4 +33,9 @@ urlpatterns = [
         view=views.DeleteListView.as_view(),
         name='delete_list',
     ),
+    path(
+        route='lists/search/',
+        view=views.SearchListsView.as_view(),
+        name='search_lists',
+    ),
 ]

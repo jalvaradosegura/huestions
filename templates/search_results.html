@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block main %}
+
+  <h2>{% trans "Search Results for" %} "{{ query }}"</h2>
+  {% with lists_found=page_obj.paginator.count %}
+    <h4>{% trans "Found" %} {{ lists_found }} {% trans "result" %}{{ lists_found|pluralize }}</h4>
+  {% endwith %}
+
+  {% for list in lists %}
+    <div class="card" style="">
+      <div class="card-body">
+	<h5 class="card-title">{{ list.title }}</h5>
+	<h6 class="card-subtitle mb-2 text-muted">{% trans "Created:" %} {{ list.created|date:"M d, Y" }} &middot {% trans "by" %} {{ list.owner }}</h6>
+	<p class="card-text">{% for tag in list.tags.all %}#{{ tag }} {% endfor %}</p>
+	{% url 'answer_list' list.slug user as list_url %}
+	{% with domain_url=request.get_host %}
+	  <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="btn btn-outline-secondary">{% trans "Share list" %}</button>
+	{% endwith %}
+	<a id="button_to_select" href="{{ list.get_absolute_url }}" class="btn btn-success">{% trans "Go" %}!</a>
+      </div>
+    </div>
+    <br>
+  {% endfor %}
+
+  {% include "paginator.html" %}
+
+{% endblock main %}
+

@@ -121,7 +121,9 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
 
 class EditListFormTests(TestCase):
     def test_create_list_with_form(self):
-        form = EditListForm(data={'title': 'Is this working', 'tags': 'cool, yay'})
+        form = EditListForm(
+            data={'title': 'Is this working', 'tags': 'cool, yay'}
+        )
         form.save()
         question_list = QuestionList.objects.last()
 
