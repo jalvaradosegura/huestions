@@ -1,31 +1,59 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
+
+{% load widget_tweaks %}
 
 {% block main %}
 
-<h2 class="text-center">{% trans "List" %}: {{ questionlist}}</h2>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="{% url 'lists' user.username %}">{% trans "Your Lists" %}</a></li>
+    <li class="is-active"><a href="#" aria-current="page">{{ questionlist.title }}</a></li>
+  </ul>
+</nav>
 
-<form id="form1" action="" method="post">
-  {% csrf_token %}
-  {{ form|crispy }}
+<form id="form1" action="" method="post">{% csrf_token %}
+
+  <div class="field">
+    <div class="control">
+      {% if form.title.errors %}
+        {% render_field form.title class+="input is-danger" placeholder=form.title.label %}
+	{% for error in form.title.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field form.title class+="input" placeholder=form.title.label %}
+	<p class="help">{{ form.title.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
 </form>
 
-<form id="form2" action="" method="post">
-  {% csrf_token %}
+<form id="form2" action="" method="post">{% csrf_token %}
   {{ complete_list_form }}
 </form>
 
-<button form="form1" class="btn btn-outline-success" type="submit" id="edit_list_button">{% trans "Change name" %}</button>
-{% trans "or" %}
-<button form="form2" class="btn btn-success" id="complete_button">{% trans "Publish list" %}</button>
+<div class="field is-grouped mt-2">
+
+  <div class="control">
+    <button form="form1" class="button is-success is-outlined" type="submit" id="edit_list_button">{% trans "Change name" %}</button>
+  </div>
+
+  <div class="control">
+    <button form="form2" class="button is-success" id="complete_button">{% trans "Publish list" %}</button>
+  </div>
+
+</div>
 <p class="text-muted mt-2"><b>{% trans "Note" %}:</b> {% trans "once published you can neither edit nor delete the list." %}</p>
+
 
 <hr>
 
-<h2 class="text-center">{% trans "Current questions" %} <small>({% trans "Maximum of 20 questions" %})</small></h2>
-<a class="btn btn-primary mb-2" href="{% url 'add_question' questionlist.slug %}" id="add_question">{% trans "Add a question" %}</a>
+<h3 class="title is-3">{% trans "Current questions" %}</h3>
+<h3 class="subtitle">({% trans "Maximum of 20 questions" %})</h3>
+<a class="button is-success mb-2" href="{% url 'add_question' questionlist.slug %}" id="add_question">{% trans "Add a question" %}</a>
 
 {% for question in sorted_questions %}
   {% if forloop.first %}<div class="row mb-3">{% endif %}

@@ -1,44 +1,73 @@
 {% load i18n %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Huestions</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="https://bulma.io">
+      <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+    </a>
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu">
     {% with url_name=request.resolver_match.url_name %}
+
+    <div class="navbar-start">
+      <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">Home</a>
+      <a class="navbar-item {% if url_name == 'questions_list' %}is-active{% endif %}" href="{% url 'questions_list' %}">{% trans "Lists" %}</a>
+      <div class="navbar-item">
+
+	<form class="" action="{% url 'search_lists' %}">
+
+	  <div class="field is-grouped">
+	    <div class="control">
+	      <input name="q" class="input" type="text" placeholder="{% trans "Search" %}...">
+	    </div>
+
+	    <div class="control">
+	      <button class="button is-success is-outlined">{% trans "Search" %}</button>
+	    </div>
+	  </div>
+
+	</form>
+
+      </div>
+    </div> <!--navar-start-->
+
+    <div class="navbar-end">
+      
       {% if user.is_authenticated %}
-      <div class="navbar-nav mr-auto">
-        <a class="nav-item nav-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
-	<a class="nav-item nav-link {% if url_name == 'questions_list' %}active{% endif %}" href="{% url 'questions_list' %}">{% trans "Lists" %}</a>
-      </div>
-      {% endif %}
-      <div class="navbar-nav mr-auto ml-auto">
-	<form class="form-inline my-2 my-lg-0" action="{% url 'search_lists' %}">
-	  <input name="q" class="form-control mr-sm-2" type="search" placeholder="{% trans "Search" %}" aria-label="Search">
-	  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
-	  </form>
-      </div>
-      <div class="navbar-nav ml-auto">
-        {% if user.is_authenticated %}
-	  <span class="navbar-text">{% trans "Hi" %}, {{ user }}👋</span>
-	  <a class="nav-item nav-link {% if url_name == 'create_list' %}active{% endif %}" href="{% url 'create_list' %}">{% trans "Create a list" %}</a>
-	  <a class="nav-item nav-link {% if url_name == 'lists' %}active{% endif %}" href="{% url 'lists' user.username %}">{% trans "Your Lists" %}</a>
-	  <li class="nav-item dropdown ml-3">
-            <a class="nav-link dropdown-toggle {% if url_name in 'stats, account_change_password, account_logout' %}active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="navbar-item {% if url_name == 'create_list' %}is-active{% endif %}" href="{% url 'create_list' %}">{% trans "Create a list" %}</a>
+        <a class="navbar-item {% if url_name == 'lists' %}is-active{% endif %}" href="{% url 'lists' user.username %}">{% trans "Your Lists" %}</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">More</a>
+
+          <div class="navbar-dropdown is-right">
+            <a class="navbar-item {% if url_name == 'stats' %}is-active{% endif %}" href="{% url 'stats' user.username %}">{% trans "Your stats" %}</a>
+            <a class="navbar-item {% if url_name == 'account_change_password' %}is-active{% endif %}" href="{% url 'account_change_password' %}">{% trans "Change password" %}</a>
+            <hr class="navbar-divider">
+            <a class="navbar-item {% if url_name == 'account_logout' %}is-active{% endif %}" href="{% url 'account_logout' %}">{% trans "Log out" %}</a>
+          </div>
+        </div> <!--dropdown-->
+
+      {% else %}
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary">
+              <strong>Sign up</strong>
             </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-	      <a class="dropdown-item {% if url_name == 'stats' %}active{% endif %}" href="{% url 'stats' user.username %}">{% trans "Your stats" %}</a>
-	      <a class="dropdown-item {% if url_name == 'account_change_password' %}active{% endif %}" href="{% url 'account_change_password' %}">{% trans "Change password" %}</a>
-              <div class="dropdown-divider"></div>
-	      <a class="dropdown-item {% if url_name == 'account_logout' %}active{% endif %}" href="{% url 'account_logout' %}">{% trans "Log out" %}</a>
-            </div>
-	  </li>
-        {% else %}
-	  <a class="nav-item nav-link {% if url_name == 'account_login' %}active{% endif %}" href="{% url 'account_login' %}">{% trans "Log in" %}</a>
-	  <a class="nav-item nav-link {% if url_name == 'account_signup' %}active{% endif %}" href="{% url 'account_signup' %}">{% trans "Sign up" %}</a>
-        {% endif %}
-      </div>
+            <a class="button is-light">Log in</a>
+          </div>
+        </div>
+      {% endif %}
+
+    </div> <!--navbar-end-->
+
     {% endwith %}
+
   </div>
 </nav>

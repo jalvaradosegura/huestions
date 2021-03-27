@@ -2,7 +2,6 @@ from allauth.account.decorators import verified_email_required
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import redirect, render, reverse
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
@@ -148,7 +147,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
                 'question_form': question_form,
                 'complete_list_form': complete_list_form,
                 'alternatives_form': alternatives_form,
-                'question_list_slug': question_list.slug,
+                'question_list': question_list,
             },
         )
 
@@ -187,7 +186,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
             'question_form': question_form,
             'complete_list_form': complete_list_form,
             'alternatives_form': alternatives_form,
-            'question_list_slug': question_list.slug,
+            'question_list': question_list,
         }
         return render(request, self.template_name, context)
 

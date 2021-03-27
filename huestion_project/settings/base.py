@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'rosetta',
     'taggit',
+    'widget_tweaks',
 ]
 LOCAL_APPS = [
     'questions.apps.QuestionsConfig',

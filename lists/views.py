@@ -117,6 +117,7 @@ class ListResultsView(LoginRequiredMixin, DetailView):
 def create_list(request):
     if request.method == 'POST':
         form = CreateQuestionListForm(request.POST, owner=request.user)
+        
 
         if form.is_valid():
             question_list = form.save(commit=False)
@@ -129,6 +130,10 @@ def create_list(request):
         return render(request, 'create_list.html', {'form': form})
 
     form = CreateQuestionListForm(owner=request.user)
+    print('form:', form.__dict__)
+    print('form 2:', form.fields['title'].__dict__)
+    print('form 3:', form.fields['tags'].__dict__)
+
     return render(request, 'create_list.html', {'form': form})
 
 

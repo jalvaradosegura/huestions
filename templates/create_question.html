@@ -1,16 +1,63 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
+
+{% load widget_tweaks %}
 
 {% block main %}
 
-<h1>{% trans "Create a question" %}</h1>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="{% url 'edit_list' question_list.slug %}">{{ question_list.title }}</a></li>
+    <li class="is-active"><a href="#" aria-current="page">{% trans "Create a question" %}</a></li>
+  </ul>
+</nav>
 
 <form id="form1" action="" method="post">
   {% csrf_token %}
-  {{ question_form|crispy }}
-  {{ alternatives_form|crispy }}
+
+  <div class="field">
+    <div class="control">
+      {% if question_form.title.errors %}
+        {% render_field question_form.title class+="input is-danger" placeholder=question_form.title.label %}
+	{% for error in question_form.title.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field question_form.title class+="input" placeholder=question_form.title.label %}
+	<p class="help">{{ question_form.title.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      {% if alternatives_form.alternative_1.errors %}
+        {% render_field alternatives_form.alternative_1 class+="input is-danger" placeholder=alternatives_form.alternative_1.label %}
+	{% for error in alternatives_form.alternative_1.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field alternatives_form.alternative_1 class+="input" placeholder=alternatives_form.alternative_1.label %}
+	<p class="help">{{ alternatives_form.alternative_1.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      {% if alternatives_form.alternative_2.errors %}
+        {% render_field alternatives_form.alternative_2 class+="input is-danger" placeholder=alternatives_form.alternative_2.label %}
+	{% for error in alternatives_form.alternative_2.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field alternatives_form.alternative_2 class+="input" placeholder=alternatives_form.alternative_2.label %}
+	<p class="help">{{ alternatives_form.alternative_2.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
 </form>
 
 <form id="form2" action="" method="post">
@@ -18,11 +65,19 @@
   {{ complete_list_form }}
 </form>
 
-<input form="form1" class="btn btn-success" type="submit" id="create_question_and_add_another_button" name="create_and_add_another" value="{% trans "Create & add another" %}">
-<input form="form1" class="btn btn-success" type="submit" id="create_question_and_publish" name="create_and_publish" value="{% trans "Create & publish the list" %}">
-<input form="form1" class="btn btn-success" type="submit" id="complete_button" name="create_and_go_back" value="{% trans "Create & go back" %}">
+<div class="field is-grouped mt-2">
 
-<br>
-<a class="btn btn-link" href="{% url 'edit_list' question_list_slug %}" id="view_list">{% trans "Go back to the list" %}</a>
+  <div class="control">
+    <input form="form1" class="button is-success" type="submit" id="create_question_and_add_another_button" name="create_and_add_another" value="{% trans "Create & add another" %}">
+  </div>
+
+  <div class="control">
+    <input form="form1" class="button is-success" type="submit" id="create_question_and_publish" name="create_and_publish" value="{% trans "Create & publish the list" %}">
+  </div>
+
+  <div class="control">
+    <input form="form1" class="button is-success" type="submit" id="complete_button" name="create_and_go_back" value="{% trans "Create & go back" %}">
+  </div>
+</div>
 
 {% endblock main %}
