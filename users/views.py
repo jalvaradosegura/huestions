@@ -31,11 +31,13 @@ class UserStatsView(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request, *args, **kwargs):
         user = request.user
         lists_created = user.get_amount_of_lists_created()
+        lists_published = user.lists.filter(active=True).count()
         questions_answered = user.get_amount_of_questions_answered()
 
         context = {
             'lists_created': lists_created,
             'questions_answered': questions_answered,
+            'lists_published': lists_published,
         }
 
         return render(request, self.template_name, context)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-26 23:57-0300\n"
+"POT-Creation-Date: 2021-03-27 03:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,11 +89,11 @@ msgstr ""
 msgid "title"
 msgstr ""
 
-#: huestion_project/settings/base.py:154
+#: huestion_project/settings/base.py:155
 msgid "English"
 msgstr ""
 
-#: huestion_project/settings/base.py:155
+#: huestion_project/settings/base.py:156
 msgid "Spanish"
 msgstr ""
 
@@ -226,7 +226,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:18 templates/navbar.html:32
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:51
 msgid "Change password"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgid ""
 "contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: templates/answer_question.html:11 templates/list_results.html:12
+#: templates/answer_question.html:11 templates/list_results.html:18
 #: templates/lists.html:18 templates/search_results.html:20
 #: templates/user_lists.html:19
 msgid "Share list"
@@ -271,32 +271,28 @@ msgstr ""
 msgid "Answer"
 msgstr ""
 
-#: templates/create_list.html:8 templates/navbar.html:25
+#: templates/create_list.html:9 templates/navbar.html:44
 msgid "Create a list"
 msgstr ""
 
-#: templates/create_list.html:12
+#: templates/create_list.html:41
 msgid "Create"
 msgstr ""
 
-#: templates/create_question.html:8
+#: templates/create_question.html:12
 msgid "Create a question"
 msgstr ""
 
-#: templates/create_question.html:21
+#: templates/create_question.html:71
 msgid "Create & add another"
 msgstr ""
 
-#: templates/create_question.html:22
+#: templates/create_question.html:75
 msgid "Create & publish the list"
 msgstr ""
 
-#: templates/create_question.html:23
+#: templates/create_question.html:79
 msgid "Create & go back"
-msgstr ""
-
-#: templates/create_question.html:26
-msgid "Go back to the list"
 msgstr ""
 
 #: templates/delete_list.html:8
@@ -311,39 +307,35 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: templates/edit_list.html:8
-msgid "List"
+#: templates/edit_list.html:11 templates/navbar.html:45
+msgid "Your Lists"
 msgstr ""
 
-#: templates/edit_list.html:20
+#: templates/edit_list.html:41
 msgid "Change name"
 msgstr ""
 
-#: templates/edit_list.html:21
-msgid "or"
-msgstr ""
-
-#: templates/edit_list.html:22
+#: templates/edit_list.html:45
 msgid "Publish list"
 msgstr ""
 
-#: templates/edit_list.html:23
+#: templates/edit_list.html:49
 msgid "Note"
 msgstr ""
 
-#: templates/edit_list.html:23
+#: templates/edit_list.html:49
 msgid "once published you can neither edit nor delete the list."
 msgstr ""
 
-#: templates/edit_list.html:27
+#: templates/edit_list.html:54
 msgid "Current questions"
 msgstr ""
 
-#: templates/edit_list.html:27
+#: templates/edit_list.html:55
 msgid "Maximum of 20 questions"
 msgstr ""
 
-#: templates/edit_list.html:28
+#: templates/edit_list.html:56
 msgid "Add a question"
 msgstr ""
 
@@ -351,21 +343,22 @@ msgstr ""
 msgid "Apply changes"
 msgstr ""
 
+#: templates/list_results.html:11 templates/lists.html:8
+#: templates/navbar.html:21
+msgid "Lists"
+msgstr ""
+
 #: templates/list_results.html:12
 msgid "results"
 msgstr ""
 
-#: templates/list_results.html:34
+#: templates/list_results.html:47
 msgid "Your vote"
 msgstr ""
 
-#: templates/list_results.html:36
+#: templates/list_results.html:49
 #, python-format
 msgid "%(shared_user)s's vote"
-msgstr ""
-
-#: templates/lists.html:8 templates/navbar.html:13
-msgid "Lists"
 msgstr ""
 
 #: templates/lists.html:13
@@ -385,32 +378,16 @@ msgstr ""
 msgid "Go"
 msgstr ""
 
-#: templates/navbar.html:18 templates/navbar.html:19
+#: templates/navbar.html:28 templates/navbar.html:32
 msgid "Search"
 msgstr ""
 
-#: templates/navbar.html:24
-msgid "Hi"
-msgstr ""
-
-#: templates/navbar.html:26
-msgid "Your Lists"
-msgstr ""
-
-#: templates/navbar.html:31 templates/user_stats.html:7
+#: templates/navbar.html:50 templates/user_stats.html:7
 msgid "Your stats"
 msgstr ""
 
-#: templates/navbar.html:34
+#: templates/navbar.html:53
 msgid "Log out"
-msgstr ""
-
-#: templates/navbar.html:38
-msgid "Log in"
-msgstr ""
-
-#: templates/navbar.html:39
-msgid "Sign up"
 msgstr ""
 
 #: templates/search_results.html:8
@@ -437,11 +414,15 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: templates/user_stats.html:20
+#: templates/user_stats.html:13
 msgid "Lists created"
 msgstr ""
 
-#: templates/user_stats.html:33
+#: templates/user_stats.html:19
+msgid "Lists published"
+msgstr ""
+
+#: templates/user_stats.html:25
 msgid "Questions Answered"
 msgstr ""
 

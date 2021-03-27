@@ -41,7 +41,7 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
         response = self.client.get(reverse('create_list'))
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertContains(response, '<label for="id_title"')
+        self.assertContains(response, 'name="title"')
 
     def test_create_question_list_with_form(self):
         self.create_login_and_verify_user()

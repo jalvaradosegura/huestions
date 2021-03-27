@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-26 23:57-0300\n"
-"PO-Revision-Date: 2021-03-27 02:58+0000\n"
+"POT-Creation-Date: 2021-03-27 03:32-0300\n"
+"PO-Revision-Date: 2021-03-27 06:33+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -88,7 +88,6 @@ msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr "100 caracteres máximo y 5 mínimo. Tampoco uses caracteres especiales."
 
 #: core/constants.py:37
-#| msgid "Do not use special chars"
 msgid "100 characters max. Also don't use special chars."
 msgstr "100 caracteres máximo. Tampoco uses caracteres especiales."
 
@@ -96,11 +95,11 @@ msgstr "100 caracteres máximo. Tampoco uses caracteres especiales."
 msgid "title"
 msgstr "título"
 
-#: huestion_project/settings/base.py:154
+#: huestion_project/settings/base.py:155
 msgid "English"
 msgstr "Inglés"
 
-#: huestion_project/settings/base.py:155
+#: huestion_project/settings/base.py:156
 msgid "Spanish"
 msgstr "Español"
 
@@ -249,7 +248,7 @@ msgstr ""
 "fue usado. Por favor solicitar <a href=\"%(passwd_reset_url)s\"> nuevo "
 "reseteo de contraseña"
 
-#: templates/account/password_reset_from_key.html:18 templates/navbar.html:32
+#: templates/account/password_reset_from_key.html:18 templates/navbar.html:51
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -288,7 +287,7 @@ msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
 
-#: templates/answer_question.html:11 templates/list_results.html:12
+#: templates/answer_question.html:11 templates/list_results.html:18
 #: templates/lists.html:18 templates/search_results.html:20
 #: templates/user_lists.html:19
 msgid "Share list"
@@ -298,33 +297,29 @@ msgstr "Compartir lista"
 msgid "Answer"
 msgstr "Responder"
 
-#: templates/create_list.html:8 templates/navbar.html:25
+#: templates/create_list.html:9 templates/navbar.html:44
 msgid "Create a list"
 msgstr "Crear una lista"
 
-#: templates/create_list.html:12
+#: templates/create_list.html:41
 msgid "Create"
 msgstr "Crear"
 
-#: templates/create_question.html:8
+#: templates/create_question.html:12
 msgid "Create a question"
 msgstr "Crea una pregunta"
 
-#: templates/create_question.html:21
+#: templates/create_question.html:71
 msgid "Create & add another"
 msgstr "Crear y agregrar otra"
 
-#: templates/create_question.html:22
+#: templates/create_question.html:75
 msgid "Create & publish the list"
 msgstr "Crear y publicar lista"
 
-#: templates/create_question.html:23
+#: templates/create_question.html:79
 msgid "Create & go back"
 msgstr "Crear y volver"
-
-#: templates/create_question.html:26
-msgid "Go back to the list"
-msgstr "Volver a lista"
 
 #: templates/delete_list.html:8
 msgid "Are you sure you want to delete"
@@ -338,39 +333,35 @@ msgstr "Volver"
 msgid "Delete"
 msgstr "Borrar"
 
-#: templates/edit_list.html:8
-msgid "List"
-msgstr "Lista"
+#: templates/edit_list.html:11 templates/navbar.html:45
+msgid "Your Lists"
+msgstr "Tus listas"
 
-#: templates/edit_list.html:20
+#: templates/edit_list.html:41
 msgid "Change name"
 msgstr "Cambiar nombre"
 
-#: templates/edit_list.html:21
-msgid "or"
-msgstr "o"
-
-#: templates/edit_list.html:22
+#: templates/edit_list.html:45
 msgid "Publish list"
 msgstr "Publicar lista"
 
-#: templates/edit_list.html:23
+#: templates/edit_list.html:49
 msgid "Note"
 msgstr "Nota"
 
-#: templates/edit_list.html:23
+#: templates/edit_list.html:49
 msgid "once published you can neither edit nor delete the list."
 msgstr "Una vez publicada no puedes editar ni borrar la lista"
 
-#: templates/edit_list.html:27
+#: templates/edit_list.html:54
 msgid "Current questions"
 msgstr "Preguntas actuales"
 
-#: templates/edit_list.html:27
+#: templates/edit_list.html:55
 msgid "Maximum of 20 questions"
 msgstr "Máximo de 20 preguntas"
 
-#: templates/edit_list.html:28
+#: templates/edit_list.html:56
 msgid "Add a question"
 msgstr "Agregar una pregunta"
 
@@ -378,22 +369,23 @@ msgstr "Agregar una pregunta"
 msgid "Apply changes"
 msgstr "Aplicar cambios"
 
+#: templates/list_results.html:11 templates/lists.html:8
+#: templates/navbar.html:21
+msgid "Lists"
+msgstr "Listas"
+
 #: templates/list_results.html:12
 msgid "results"
 msgstr "resultados"
 
-#: templates/list_results.html:34
+#: templates/list_results.html:47
 msgid "Your vote"
 msgstr "Tu voto"
 
-#: templates/list_results.html:36
+#: templates/list_results.html:49
 #, python-format
 msgid "%(shared_user)s's vote"
 msgstr "Voto de %(shared_user)s"
-
-#: templates/lists.html:8 templates/navbar.html:13
-msgid "Lists"
-msgstr "Listas"
 
 #: templates/lists.html:13
 msgid "votes in the last few days"
@@ -412,33 +404,17 @@ msgstr "por"
 msgid "Go"
 msgstr "Ir"
 
-#: templates/navbar.html:18 templates/navbar.html:19
+#: templates/navbar.html:28 templates/navbar.html:32
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/navbar.html:24
-msgid "Hi"
-msgstr "Hola"
-
-#: templates/navbar.html:26
-msgid "Your Lists"
-msgstr "Tus listas"
-
-#: templates/navbar.html:31 templates/user_stats.html:7
+#: templates/navbar.html:50 templates/user_stats.html:7
 msgid "Your stats"
 msgstr "Tus estadísticas"
 
-#: templates/navbar.html:34
+#: templates/navbar.html:53
 msgid "Log out"
 msgstr "Cerrar sesión"
-
-#: templates/navbar.html:38
-msgid "Log in"
-msgstr "Iniciar sesión"
-
-#: templates/navbar.html:39
-msgid "Sign up"
-msgstr "Registrarse"
 
 #: templates/search_results.html:8
 msgid "Search Results for"
@@ -464,11 +440,16 @@ msgstr "Creada"
 msgid "Edit"
 msgstr "Editar"
 
-#: templates/user_stats.html:20
+#: templates/user_stats.html:13
 msgid "Lists created"
 msgstr "Listas creadas"
 
-#: templates/user_stats.html:33
+#: templates/user_stats.html:19
+#| msgid "List was published successfully"
+msgid "Lists published"
+msgstr "Listas publicadas"
+
+#: templates/user_stats.html:25
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
 
@@ -480,6 +461,24 @@ msgid ""
 msgstr ""
 "Reconozco que he leído y acepto los <a href=\"%(url)s\" "
 "target=\"_blank\">Términos y Condiciones</a>"
+
+#~ msgid "Go back to the list"
+#~ msgstr "Volver a lista"
+
+#~ msgid "List"
+#~ msgstr "Lista"
+
+#~ msgid "or"
+#~ msgstr "o"
+
+#~ msgid "Hi"
+#~ msgstr "Hola"
+
+#~ msgid "Log in"
+#~ msgstr "Iniciar sesión"
+
+#~ msgid "Sign up"
+#~ msgstr "Registrarse"
 
 #~ msgid "description"
 #~ msgstr "descripción"
