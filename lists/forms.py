@@ -1,17 +1,22 @@
 from django import forms
 from django.core.validators import MinLengthValidator, RegexValidator
 
-from core.constants import LIST_COMPLETION_ERROR_MESSAGE, SPECIAL_CHARS_ERROR
+from core.constants import (
+    LIST_COMPLETION_ERROR_MESSAGE,
+    MAX_AND_MIN_LENGTH,
+    SPECIAL_CHARS_ERROR,
+)
 
 from .models import QuestionList
 
 
 class CreateQuestionListForm(forms.ModelForm):
     title = forms.CharField(
+        help_text=MAX_AND_MIN_LENGTH,
         validators=[
             RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
             MinLengthValidator(5),
-        ]
+        ],
     )
 
     class Meta:
@@ -49,10 +54,11 @@ class CompleteListForm(forms.Form):
 
 class EditListForm(forms.ModelForm):
     title = forms.CharField(
+        help_text=MAX_AND_MIN_LENGTH,
         validators=[
             RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
             MinLengthValidator(5),
-        ]
+        ],
     )
 
     class Meta:

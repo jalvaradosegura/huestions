@@ -8,6 +8,8 @@ from django.utils.translation import gettext_lazy as _
 
 from core.constants import (
     LIST_REACHED_MAXIMUM_OF_QUESTION,
+    MAX_AND_MIN_LENGTH,
+    MAX_AND_SPECIAL_CHARS,
     SPECIAL_CHARS_ERROR,
 )
 
@@ -31,10 +33,11 @@ class AnswerQuestionForm(forms.Form):
 
 class CreateQuestionForm(forms.ModelForm):
     title = forms.CharField(
+        help_text=MAX_AND_MIN_LENGTH,
         validators=[
             RegexValidator(r'^[0-9a-zA-Z\\? ]*$', SPECIAL_CHARS_ERROR),
             MinLengthValidator(5),
-        ]
+        ],
     )
     questions_amount_limit = 20
 
@@ -67,6 +70,7 @@ class CreateQuestionForm(forms.ModelForm):
 class AddAlternativesForm(forms.Form):
     alternative_1 = forms.CharField(
         label=_('Alternative 1'),
+        help_text=MAX_AND_SPECIAL_CHARS,
         validators=[
             RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
             MaxLengthValidator(limit_value=100),
@@ -74,6 +78,7 @@ class AddAlternativesForm(forms.Form):
     )
     alternative_2 = forms.CharField(
         label=_('Alternative 2'),
+        help_text=MAX_AND_SPECIAL_CHARS,
         validators=[
             RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
             MaxLengthValidator(limit_value=100),

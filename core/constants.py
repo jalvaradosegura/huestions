@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 
-# Messages
+# === Messages ===
 LIST_COMPLETION_ERROR_MESSAGE = _(
     'The list needs at least 1 question with 2 alternatives to be completed'
 )
@@ -27,9 +27,15 @@ USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT = _(
     "user to answer all the questions"
 )
 
-# Related to forms
+# === Related to forms ===
+# Errors
 SPECIAL_CHARS_ERROR = _('Do not use special chars')
+# Help text
+MAX_AND_MIN_LENGTH = _(
+    "100 characters max and 5 min. Also don't use special chars."
+)
+MAX_AND_SPECIAL_CHARS = _("100 characters max. Also don't use special chars.")
 
-# Global variables
+# === Global variables ===
 AMOUNT_OF_LISTS_PER_PAGE = 5
 AMOUNT_OF_DAYS_FOR_POPULARITY = 10

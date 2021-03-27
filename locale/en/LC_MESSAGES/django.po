@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-26 00:14-0300\n"
+"POT-Creation-Date: 2021-03-26 23:57-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,8 +73,16 @@ msgid ""
 "the questions"
 msgstr ""
 
-#: core/constants.py:31
+#: core/constants.py:32
 msgid "Do not use special chars"
+msgstr ""
+
+#: core/constants.py:35
+msgid "100 characters max and 5 min. Also don't use special chars."
+msgstr ""
+
+#: core/constants.py:37
+msgid "100 characters max. Also don't use special chars."
 msgstr ""
 
 #: core/models.py:24
@@ -89,15 +97,15 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: questions/forms.py:19
+#: questions/forms.py:21
 msgid "Alternatives"
 msgstr ""
 
-#: questions/forms.py:69
+#: questions/forms.py:72
 msgid "Alternative 1"
 msgstr ""
 
-#: questions/forms.py:76
+#: questions/forms.py:80
 msgid "Alternative 2"
 msgstr ""
 
@@ -254,7 +262,7 @@ msgid ""
 msgstr ""
 
 #: templates/answer_question.html:11 templates/list_results.html:12
-#: templates/lists.html:18 templates/search_results.html:21
+#: templates/lists.html:18 templates/search_results.html:20
 #: templates/user_lists.html:19
 msgid "Share list"
 msgstr ""
@@ -364,15 +372,15 @@ msgstr ""
 msgid "votes in the last few days"
 msgstr ""
 
-#: templates/lists.html:14 templates/search_results.html:17
+#: templates/lists.html:14 templates/search_results.html:16
 msgid "Created:"
 msgstr ""
 
-#: templates/lists.html:14 templates/search_results.html:17
+#: templates/lists.html:14 templates/search_results.html:16
 msgid "by"
 msgstr ""
 
-#: templates/lists.html:20 templates/search_results.html:23
+#: templates/lists.html:20 templates/search_results.html:22
 #: templates/user_lists.html:21
 msgid "Go"
 msgstr ""
@@ -437,7 +445,7 @@ msgstr ""
 msgid "Questions Answered"
 msgstr ""
 
-#: users/forms.py:13
+#: users/forms.py:12
 #, python-format
 msgid ""
 "I acknowledge that I have read and agree to the <a href=\"%(url)s\" target="
