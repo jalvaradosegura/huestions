@@ -6,45 +6,58 @@
 
 {% block main %}
 
-{{ shared_alternatives }}
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="{% url 'lists' user.username %}">{% trans "Lists" %}</a></li>
+    <li class="is-active"><a href="#" aria-current="page">{{ questionlist.title }} &middot {% trans "results" %}!</a></li>
+  </ul>
+</nav>
+
 {% url 'answer_list' questionlist.slug user as list_url %}
 {% with domain_url=request.get_host %}
-  <h1 class="text-center">{{ questionlist }} - {% trans "results" %}! <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="btn btn-outline-secondary btn-sm">{% trans "Share list" %}</button></h1>
+  <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="button is-primary is-outlined mb-2">{% trans "Share list" %}</button>
 {% endwith %}
 
 {% localize off %}
-<div class="row">
   {% for i in questions_and_user_alternatives %}
     {% with question=i.0 user_alternative=i.1 %}
+      {% if forloop.first %}<div class="columns">{% endif %}
 
-    <div class="card mr-1 mt-1" style="">
-        <div class="card-body">
-	  <h5 class="card-title">{{ forloop.counter }}) {{ question.title }}</h5>
-	  <h6 class="card-subtitle mb-2 text-muted">{{  question.get_amount_of_users_that_have_voted }} vote{{ question.get_amount_of_users_that_have_voted|pluralize }}</h6>
-	  <div class="progress">
-            {% with  question.alternatives.all.0 as alternative_1 %}
-              <div class="progress-bar bg-success" role="progressbar" style="width: {{ alternative_1.get_votes_percentage }}%;" aria-valuenow="{{ alternative_1.get_votes_percentage }}" aria-valuemin="0" aria-valuemax="100">{{ alternative_1 }} &middot {{ alternative_1.get_votes_percentage }}%</div>
-            {% endwith %}
-          </div>
-	  <div class="progress mt-1">
-            {% with  question.alternatives.all.1 as alternative_2 %}
-              <div class="progress-bar bg-success" role="progressbar" style="width: {{ alternative_2.get_votes_percentage }}%;" aria-valuenow="{{ alternative_2.get_votes_percentage }}" aria-valuemin="0" aria-valuemax="100">{{ alternative_2 }} &middot {{ alternative_2.get_votes_percentage }}%</div>
-            {% endwith %}
-          </div>
-	  <p><strong>{% trans "Your vote" %}:</strong> {{ user_alternative }}</p>
-	  {% if shared_user %}
-	    <p><strong>{% blocktrans %}{{ shared_user }}'s vote{% endblocktrans %}:</strong> {{ i.2 }}</p>
-	  {% endif %}
+	<div class="column is-6">
+          <div class="card">
 
-        </div>
-    </div>
+            <header class="card-header">
+              <p class="card-header-title">
+	        {{ question }}
+              </p>
+            </header>
 
+            <div class="card-content">
+              <div class="content">
+	        {% with alternative_1=question.alternatives.all.0  alternative_2=question.alternatives.all.1  %}
+	          {{ alternative_1 }} &middot {{ alternative_1.get_votes_percentage }}%
+	          <progress class="progress is-primary" value="{{ alternative_1.get_votes_percentage }}" max="100">15%</progress>
+	          {{ alternative_2 }} &middot {{ alternative_2.get_votes_percentage }}%
+	          <progress class="progress is-primary" value="{{ alternative_2.get_votes_percentage }}" max="100">15%</progress>
+	        {% endwith %}
+              </div>
+            </div>
+
+            <footer class="card-footer">
+	      <p class="card-footer-item">{% trans "Your vote" %}: {{ user_alternative }}</p>
+	      {% if shared_user %}
+	        <p class="card-footer-item">{% blocktrans %}{{ shared_user }}'s vote{% endblocktrans %}: {{ i.2 }}</p>
+	      {% endif %}
+
+            </footer>
+
+	  </div>  <!-- card -->
+	</div>  <!-- col is-6 -->
+	{% if forloop.counter|divisibleby:2 %}</div><div class="columns">{% endif %}
+	{% if forloop.last %}</div>{% endif %}
     {% endwith %}
-
-    <br>
-
   {% endfor %}
-</div>
+
 {% endlocalize %}
 
 {% block bootstrap_js_loaded %}

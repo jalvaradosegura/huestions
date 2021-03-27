@@ -4,39 +4,22 @@
 
 {% block main %}
 
-<h1>{% trans "Your stats" %}</h1>
+<h2 class="title is-2">{% trans "Your stats" %}</h2>
 
 <br>
-
-<div class="row">
-
-  <div class="col-6">
-
-    <div class="card text-center" style="">
-      <div class="card-body">
-        <p class="card-text" style="font-size:50px">{{ lists_created }}</p>
-      </div>
-      <div class="card-footer">
-        <h6>{% trans "Lists created" %}</h6>
-      </div>
+<nav class="level">
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">{% trans "Lists created" %}</p>
+      <p class="title">{{ lists_created }}</p>
     </div>
-
   </div>
-
-  <div class="col-6">
-
-    <div class="card text-center" style="">
-      <div class="card-body">
-        <p class="card-text" style="font-size:50px">{{ questions_answered }}</p>
-      </div>
-      <div class="card-footer">
-          <h6>{% trans "Questions Answered" %}</h6>
-        </div>
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">{% trans "Questions Answered" %}</p>
+      <p class="title">{{ questions_answered }}</p>
     </div>
-
   </div>
-
-</div>
-
+</nav>
 
 {% endblock main %}
