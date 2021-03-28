@@ -38,6 +38,20 @@
     </div>
   </div>
 
+  <div class="field">
+    <div class="control">
+      {% if form.check.errors %}
+        {% render_field form.check class+="checkbox is-danger" placeholder=form.check.label %}
+	{% for error in form.check.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field form.check class+="checkbox"%}
+	{{ form.check.label_tag }}
+      {% endif %}
+    </div>
+  </div>
+
   {% if redirect_field_value %}
   	<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}

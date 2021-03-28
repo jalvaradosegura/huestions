@@ -70,7 +70,7 @@ class NewVisitorTests(FunctionalTestsBase):
         self.browser.get(f'{self.live_server_url}/')
 
         # Javi sees a Home Page title
-        welcome = self.browser.find_element_by_tag_name('h1').text
+        welcome = self.browser.find_element_by_tag_name('h2').text
         self.assertEqual(welcome, 'Home Page')
 
 
@@ -101,7 +101,7 @@ class QuestionListsTests(FunctionalTestsBase):
 
     def test_can_visit_a_list_of_question_page_and_vote(self):
         # Javi visits a page that show a list of list questions
-        self.browser.get(f'{self.live_server_url}/lists/')
+        self.browser.get(f'{self.live_server_url}/lists/?filter=all')
 
         time.sleep(3)
         # She sees a big title that says something abouth the lists
@@ -145,16 +145,18 @@ class CreateListTests(FunctionalTestsBase):
         self.browser.get(f'{self.live_server_url}/lists/create/')
 
         # There is a title that invites her to create a question list
-        title = self.browser.find_element_by_tag_name('h1').text
+        title = self.browser.find_element_by_tag_name('h2').text
         self.assertIn('Create', title)
 
         # She fill the form and create a question list
         title_input = self.browser.find_element_by_id('id_title')
         title_input.send_keys('An amazing list')
+        title_input = self.browser.find_element_by_id('id_tags')
+        title_input.send_keys('one tag, another tag')
         self.browser.find_element_by_id('create_list_button').click()
 
         # Check for flash message
-        message = self.browser.find_element_by_class_name('alert').text
+        message = self.browser.find_element_by_class_name('message-body').text
         self.assertIn(str(LIST_CREATED_SUCCESSFULLY), message)
 
         # Check that the question list got created
@@ -167,7 +169,7 @@ class CreateListTests(FunctionalTestsBase):
         )
 
         # There is a title that invites her to create a question
-        title = self.browser.find_element_by_tag_name('h1').text
+        title = self.browser.find_element_by_class_name('breadcrumb').text
         self.assertIn('Create a question', title)
 
         # She fill the form and create a question
@@ -187,7 +189,8 @@ class CreateListTests(FunctionalTestsBase):
         create_question_button.click()
 
         # Check for flash message
-        message = self.browser.find_element_by_class_name('alert').text
+        message = self.browser.find_element_by_class_name('message-body').text
+
         self.assertIn(str(QUESTION_CREATED_SUCCESSFULLY), message)
 
         # She is redirected to the same page
@@ -240,7 +243,7 @@ class CreateListTests(FunctionalTestsBase):
 
         # Javi goes to the lists view
         self.sign_up('javi@email.com', 'super_password_123')
-        self.browser.get(f'{self.live_server_url}/lists/')
+        self.browser.get(f'{self.live_server_url}/lists/?filter=all')
 
         # She only sees one of the lists (the activated one)
         html_ul_list = self.browser.find_element_by_class_name(
@@ -263,7 +266,7 @@ class CreateListTests(FunctionalTestsBase):
 
         # She sees a message, it says she is attempting to see an incomplete
         # view
-        error_message = self.browser.find_element_by_class_name('alert').text
+        error_message = self.browser.find_element_by_class_name('message-body').text
 
         self.assertIn(
             str(ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE), error_message
@@ -306,19 +309,23 @@ class UserProfileTests(FunctionalTestsBase):
             f'{self.live_server_url}/lists/my-first-list/edit/',
         )
 
-        # There is a form inviting here to change the title of the list
+        # There is a form inviting here to change the title of the list and
+        # also the tags
         title_input = self.browser.find_element_by_id('id_title')
+        tags_input = self.browser.find_element_by_id('id_tags')
 
         # Check for the text of the input of the list title
         self.assertEqual(title_input.get_attribute('value'), 'my first list')
 
         # She writes a new title for the list
         title_input.clear()
+        tags_input.clear()
         title_input.send_keys('new name for my list')
+        tags_input.send_keys('awesome')
         self.browser.find_element_by_id('edit_list_button').click()
 
         # Check for flash message
-        message = self.browser.find_element_by_class_name('alert').text
+        message = self.browser.find_element_by_class_name('message-body').text
         self.assertIn(str(LIST_EDITED_SUCCESSFULLY), message)
 
         # Check she is back to her lists
@@ -371,7 +378,7 @@ class UserProfileTests(FunctionalTestsBase):
         self.browser.find_element_by_id('edit_question_button').click()
 
         # Check for flash message
-        message = self.browser.find_element_by_class_name('alert').text
+        message = self.browser.find_element_by_class_name('message-body').text
         self.assertIn(str(QUESTION_EDITED_SUCCESSFULLY), message)
 
         # She is back to the edit list view
@@ -402,7 +409,7 @@ class UserProfileTests(FunctionalTestsBase):
         complete_button.click()
 
         # Check for flash message
-        message = self.browser.find_element_by_class_name('alert').text
+        message = self.browser.find_element_by_class_name('message-body').text
         self.assertIn(str(LIST_PUBLISHED_SUCCESSFULLY), message)
 
         # She is back to her lists after clicking it
@@ -430,7 +437,7 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/my-first-list/edit/',
         )
-        error_message = self.browser.find_element_by_class_name('alert').text
+        error_message = self.browser.find_element_by_class_name('message-body').text
         self.assertIn(str(LIST_COMPLETION_ERROR_MESSAGE), error_message)
 
     def test_user_delete_a_list(self):
@@ -455,7 +462,7 @@ class UserProfileTests(FunctionalTestsBase):
         self.browser.find_element_by_id('delete_button').click()
 
         # Check for flash message
-        message = self.browser.find_element_by_class_name('alert').text
+        message = self.browser.find_element_by_class_name('message-body').text
         self.assertIn(str(LIST_DELETED_SUCCESSFULLY), message)
 
         # She is redirected to her lists
@@ -478,7 +485,7 @@ class UserProfileTests(FunctionalTestsBase):
         self.browser.find_element_by_id('delete_0').click()
 
         # Check for flash message
-        message = self.browser.find_element_by_class_name('alert').text
+        message = self.browser.find_element_by_class_name('message-body').text
         self.assertIn(str(QUESTION_DELETED_SUCCESSFULLY), message)
 
         # She is redirected to the same edit list view
