@@ -34,20 +34,28 @@ class QuestionsListView(LoginRequiredMixin, ListView):
     paginate_by = AMOUNT_OF_LISTS_PER_PAGE
 
     def get_queryset(self):
-        date_to_compare_against = timezone.now() - datetime.timedelta(
-            days=AMOUNT_OF_DAYS_FOR_POPULARITY
-        )
-        return (
-            (
+        filter_by = self.request.GET.get('filter')
+
+        if filter_by == 'all':
+            return (
+                QuestionList.activated_lists.all()
+                .order_by('-id')
+                .select_related('owner')
+                .prefetch_related('tags')
+            )
+        else:
+            date_to_compare_against = timezone.now() - datetime.timedelta(
+                days=AMOUNT_OF_DAYS_FOR_POPULARITY
+            )
+            return (
                 QuestionList.objects.filter(
                     votes__created__gte=date_to_compare_against
                 )
                 .annotate(votes_amount=Count('id'))
                 .order_by('-votes_amount')
+                .select_related('owner')
+                .prefetch_related('tags')
             )
-            .select_related('owner')
-            .prefetch_related('tags')
-        )
 
 
 @method_decorator(verified_email_required, name='dispatch')

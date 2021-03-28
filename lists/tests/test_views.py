@@ -43,6 +43,12 @@ class QuestionsListViewTests(TestViewsMixin, TestCase):
         self.assertTemplateUsed(response, QuestionsListView.template_name)
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
+    def test_returns_correct_html_with_get_parameter(self):
+        response = self.client.get(self.base_url + '?filter=all')
+
+        self.assertTemplateUsed(response, QuestionsListView.template_name)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
 
 class ListResultsViewTests(TestViewsMixin, TestCase):
     def setUp(self):
