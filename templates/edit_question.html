@@ -1,15 +1,58 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
+
+{% load widget_tweaks %}
+
 
 {% block main %}
 
-<form action="" method="post">
-  {% csrf_token %}
-  {{ form|crispy }}
-  {{ alternatives_form|crispy }}
-  <button type="submit" id="edit_question_button" class="btn btn-success">{% trans "Apply changes" %}</button>
+<form action="" method="post">{% csrf_token %}
+
+  <div class="field">
+    <div class="control">
+      {% if form.title.errors %}
+        {% render_field form.title class+="input is-danger" placeholder=form.title.label %}
+	{% for error in form.title.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field form.title class+="input" placeholder=form.title.label %}
+	<p class="help">{{ form.title.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      {% if alternatives_form.alternative_1.errors %}
+        {% render_field alternatives_form.alternative_1 class+="input is-danger" placeholder=alternatives_form.alternative_1.label %}
+	{% for error in alternatives_form.alternative_1.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field alternatives_form.alternative_1 class+="input" placeholder=alternatives_form.alternative_1.label %}
+	<p class="help">{{ alternatives_form.alternative_1.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      {% if alternatives_form.alternative_2.errors %}
+        {% render_field alternatives_form.alternative_2 class+="input is-danger" placeholder=alternatives_form.alternative_2.label %}
+	{% for error in alternatives_form.alternative_2.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field alternatives_form.alternative_2 class+="input" placeholder=alternatives_form.alternative_2.label %}
+	<p class="help">{{ alternatives_form.alternative_2.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+
+  <button type="submit" id="edit_question_button" class="button is-success">{% trans "Apply changes" %}</button>
 </form>
 
 {% endblock main %}

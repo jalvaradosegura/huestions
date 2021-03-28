@@ -8,7 +8,7 @@
   <p>{% trans "Are you sure you want to delete" %} "{{ object }}"?</p>
 </form>
 
-<a class="btn btn-link" href="{% url 'lists' user %}">{% trans "Go back" %}</a>
-<input form="form1" id="delete_button" type="submit" value="{% trans "Delete" %}" class="btn btn-danger">
+<a class="button is-ghost" href="{% url 'lists' user %}">{% trans "Go back" %}</a>
+<input form="form1" id="delete_button" type="submit" value="{% trans "Delete" %}" class="button is-danger">
 
 {% endblock main %}

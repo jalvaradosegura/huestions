@@ -5,28 +5,42 @@
 
 {% block main %}
 
-  <h1>{% trans "Your lists" %}</h1>
+  <h2 class="title is-2">{% trans "Your lists" %}</h2>
+  
   {% for question_list in object_list %}
-    <div class="card" style="">
-      <div class="card-body">
-        <h5 class="card-title">{{ question_list.title }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{% trans "Created" %}: {{ question_list.created|date:"M d, Y" }}</h6>
-	<p class="card-text">{% for tag in question_list.tags.all %}#{{ tag }} {% endfor %}</p>
-        {% if question_list.active %}
-	  <p>Published</p>
-	  {% url 'answer_list' question_list.slug user as list_url %}
-	  {% with domain_url=request.get_host %}
-	    <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="btn btn-outline-secondary">{% trans "Share list" %}</button>
-	  {% endwith %}
-	  <a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="btn btn-success">{% trans "Go" %}!</a>
+    {% if forloop.first %}<div class="columns">{% endif %}
+      <div class="column is-6">
+        <div class="card">
 
-        {% else %}
-	  <a href="{% url 'edit_list' question_list.slug %}" class="btn btn-outline-primary" id="edit_{{ forloop.counter0 }}">{% trans "Edit" %}</a>
-	  <a href="{% url 'delete_list' question_list.slug %}" class="btn btn-danger" id="delete_{{ forloop.counter0 }}">{% trans "Delete" %}</a>
-        {% endif %}
-      </div>
-    </div>
-    <br>
+	  <header class="card-header">
+	    <p class="card-header-title">{{ question_list }}</p>
+	  </header>
+
+	  <div class="card-content">
+	    <div class="content">
+	      <p class="subtitle is-6">{% trans "Created:" %} {{ question_list.created|date:"M d, Y" }}</p>
+	      {% for tag in question_list.tags.all %}
+	        <span class="tag">#{{ tag }}</span>
+	      {% endfor %}
+	    </div>
+	  </div>
+
+	  <footer class="card-footer">
+	    {% if question_list.active %}
+	      {% with domain_url=request.get_host %}
+	        <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="card-footer-item button is-light">{% trans "Share list" %}</button>
+	      {% endwith %}
+	      <a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="card-footer-item button is-success">{% trans "Go" %}!</a>
+	    {% else %}
+	      <a href="{% url 'edit_list' question_list.slug %}" class="card-footer-item button is-light" id="edit_{{ forloop.counter0 }}">{% trans "Edit" %}</a>
+	      <a href="{% url 'delete_list' question_list.slug %}" class="card-footer-item button is-danger" id="delete_{{ forloop.counter0 }}">{% trans "Delete" %}</a>
+	    {% endif %}
+	  </footer>
+
+        </div>  <!-- card -->
+      </div>  <!-- col is-6 -->
+      {% if forloop.counter|divisibleby:2 %}</div><div class="columns">{% endif %}
+      {% if forloop.last %}</div>{% endif %}
   {% endfor %}
 
   {% include "paginator.html" %}
