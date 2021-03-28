@@ -27,6 +27,7 @@
 
 	  <footer class="card-footer">
 	    {% if question_list.active %}
+	      {% url 'answer_list' question_list.slug user as list_url %}
 	      {% with domain_url=request.get_host %}
 	        <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="card-footer-item button is-light">{% trans "Share list" %}</button>
 	      {% endwith %}
