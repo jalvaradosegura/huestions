@@ -17,25 +17,27 @@
     {% with url_name=request.resolver_match.url_name %}
 
     <div class="navbar-start">
-      <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">Home</a>
-      <a class="navbar-item {% if url_name == 'questions_list' %}is-active{% endif %}" href="{% url 'questions_list' %}">{% trans "Lists" %}</a>
-      <div class="navbar-item">
+      {% if user.is_authenticated %}
+        <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">Home</a>
+        <a class="navbar-item {% if url_name == 'questions_list' %}is-active{% endif %}" href="{% url 'questions_list' %}">{% trans "Lists" %}</a>
+        <div class="navbar-item">
 
-	<form class="" action="{% url 'search_lists' %}">
-
-	  <div class="field is-grouped">
-	    <div class="control">
-	      <input name="q" class="input" type="text" placeholder="{% trans "Search" %}...">
+	  <form class="" action="{% url 'search_lists' %}">
+ 
+	    <div class="field is-grouped">
+	      <div class="control">
+	        <input name="q" class="input" type="text" placeholder="{% trans "Search" %}...">
+	      </div>
+ 
+	      <div class="control">
+	        <button class="button is-success is-outlined">{% trans "Search" %}</button>
+	      </div>
 	    </div>
 
-	    <div class="control">
-	      <button class="button is-success is-outlined">{% trans "Search" %}</button>
-	    </div>
-	  </div>
+	  </form>
 
-	</form>
-
-      </div>
+        </div>
+      {% endif %}
     </div> <!--navar-start-->
 
     <div class="navbar-end">
@@ -57,10 +59,10 @@
       {% else %}
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
-              <strong>Sign up</strong>
+            <a class="button is-primary" href="{% url 'account_signup' %}">
+              <strong>{% trans "Sign Up" %}</strong>
             </a>
-            <a class="button is-light">Log in</a>
+            <a class="button is-light" href="{% url 'account_login' %}">{% trans "Log In" %}</a>
           </div>
         </div>
       {% endif %}

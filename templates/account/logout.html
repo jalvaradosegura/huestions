@@ -4,7 +4,7 @@
 
 {% block main %}
 
-<h1>{% trans "Sign Out" %} 😢</h1>
+<h2 class="title is-2">{% trans "Sign Out" %} 😢</h2>
 
 <p>{% trans "Are you sure you want to sign out" %}?</p>
 
@@ -13,7 +13,7 @@
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
   {% endif %}
-  <button class="btn btn-danger" type="submit">{% trans "Sign Out" %}</button>
+  <button class="button is-danger" type="submit">{% trans "Sign Out" %}</button>
 </form>
 
 {% endblock main %}

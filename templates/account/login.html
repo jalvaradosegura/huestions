@@ -1,29 +1,52 @@
 {% extends "base.html" %}
 
 {% load i18n %}
-{% load crispy_forms_tags %}
+
+{% load widget_tweaks %}
 
 {% block main %}
 
-<h1>{% trans "Log In" %} 😁</h1>
+<h2 class="title is-2">{% trans "Log In" %} 😁</h2>
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
-  {% csrf_token %}
-  {{ form|crispy }}
+<form class="login" method="POST" action="{% url 'account_login' %}">{% csrf_token %}
+
+  <div class="field">
+    <div class="control">
+      {% if form.login.errors %}
+        {% render_field form.login class+="input is-danger" placeholder=form.login.label %}
+	{% for error in form.login.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field form.login class+="input" placeholder=form.login.label %}
+	<p class="help">{{ form.login.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      {% if form.password.errors %}
+        {% render_field form.password class+="input is-danger" placeholder=form.password.label %}
+	{% for error in form.password.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field form.password class+="input" placeholder=form.password.label %}
+	<p class="help">{{ form.password.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
   {% if redirect_field_value %}
   	<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button class="btn btn-success" type="submit">{% trans "Log In" %}</button>
+  <button class="button is-success" type="submit">{% trans "Log In" %}</button>
 </form>
 
-<div class="border-top pt-1 mt-2">
-  <small class="text-muted">
-    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password" %}?</a>
-  </small>
-  <br>
-  <small class="text-muted">
-    <a class="button secondaryAction" id="dont_have_an_account" href="{% url 'account_signup' %}">{% trans "Don't have an account yet" %}?</a>
-  </small>
-</div>
+<hr>
+<a class="" href="{% url 'account_reset_password' %}">{% trans "Forgot Password" %}?</a>
+<br>
+<a class="" id="dont_have_an_account" href="{% url 'account_signup' %}">{% trans "Don't have an account yet" %}?</a>
 
 {% endblock main %}
