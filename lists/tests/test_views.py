@@ -263,6 +263,13 @@ class EditListViewTests(TestViewsMixin, TestCase):
         )
         self.assertEqual(question_list.slug, 'another-title')
 
+    def test_post_change_name_fail(self):
+        response = self.client.post(
+            self.base_url, data={'title': 'another title'}
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
     def test_post_publish_list_success(self):
         response = self.client.post(self.base_url, data={})
         modified_list = QuestionList.objects.get(slug=self.question_list.slug)
