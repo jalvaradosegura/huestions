@@ -37,5 +37,5 @@ MAX_AND_MIN_LENGTH = _(
 MAX_AND_SPECIAL_CHARS = _("100 characters max. Also don't use special chars.")
 
 # === Global variables ===
-AMOUNT_OF_LISTS_PER_PAGE = 5
+AMOUNT_OF_LISTS_PER_PAGE = 6
 AMOUNT_OF_DAYS_FOR_POPULARITY = 10
