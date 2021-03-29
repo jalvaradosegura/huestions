@@ -7,7 +7,17 @@
   <!-- Bootstrap -->
   <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+  </style>
 
 </head>
 <body>
@@ -15,10 +25,10 @@
   {% include "navbar.html" %}
   <br>
 
-  <div class="container mb-5">
-  {% include "flash_messages.html" %}
-  {% block main %}
-  {% endblock main %}
+  <div class="section container">
+    {% include "flash_messages.html" %}
+    {% block main %}
+    {% endblock main %}
   </div>
 
   <!-- Bootstrap -->
