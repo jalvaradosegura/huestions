@@ -1,16 +1,19 @@
+{% load i18n %}
+
+<hr>
 <nav class="pagination is-centered" role="navigation" aria-label="pagination">
 
   {% with url_name=request.resolver_match.url_name %}
     {% if url_name == 'search_lists' %}
       {% if page_obj.has_previous %}
-        <a class="pagination-previous" href="?q={{ query }}&page={{ page_obj.previous_page_number }}">Previous</a>
+        <a class="pagination-previous" href="?q={{ query }}&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
       {% endif %}
       {% if page_obj.has_next %}
-        <a class="pagination-next" href="?q={{ query }}&page={{ page_obj.next_page_number }}">Next</a>
+        <a class="pagination-next" href="?q={{ query }}&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
       {% endif %}
     
       <ul class="pagination-list">
-        <li><a class="pagination-link" href="?q={{ query }}&page=1">First</a></li>
+        <li><a class="pagination-link" href="?q={{ query }}&page=1">{% trans "First" %}</a></li>
     
         {% for num in page_obj.paginator.page_range %}
           {% if page_obj.number == num %}
@@ -20,18 +23,18 @@
           {% endif %}
         {% endfor %}
     
-        <li><a class="pagination-link" href="?q={{ query }}&page={{ page_obj.paginator.num_pages }}">Last</a></li>
+        <li><a class="pagination-link" href="?q={{ query }}&page={{ page_obj.paginator.num_pages }}">{% trans "Last" %}</a></li>
       </ul>
     {% elif request.GET.filter == 'all' %}
       {% if page_obj.has_previous %}
-        <a class="pagination-previous" href="?filter=all&page={{ page_obj.previous_page_number }}">Previous</a>
+        <a class="pagination-previous" href="?filter=all&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
       {% endif %}
       {% if page_obj.has_next %}
-        <a class="pagination-next" href="?filter=all&page={{ page_obj.next_page_number }}">Next</a>
+        <a class="pagination-next" href="?filter=all&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
       {% endif %}
 
       <ul class="pagination-list">
-        <li><a class="pagination-link" href="?filter=all&page=1">First</a></li>
+        <li><a class="pagination-link" href="?filter=all&page=1">{% trans "First" %}</a></li>
 
         {% for num in page_obj.paginator.page_range %}
           {% if page_obj.number == num %}
@@ -41,18 +44,18 @@
           {% endif %}
         {% endfor %}
 
-        <li><a class="pagination-link" href="?filter=all&page={{ page_obj.paginator.num_pages }}">Last</a></li>
+        <li><a class="pagination-link" href="?filter=all&page={{ page_obj.paginator.num_pages }}">{% trans "Last" %}</a></li>
       </ul>
     {% else %}
       {% if page_obj.has_previous %}
-        <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
       {% endif %}
       {% if page_obj.has_next %}
-        <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="pagination-next" href="?page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
       {% endif %}
 
       <ul class="pagination-list">
-        <li><a class="pagination-link" href="?page=1">First</a></li>
+        <li><a class="pagination-link" href="?page=1">{% trans "First" %}</a></li>
 
         {% for num in page_obj.paginator.page_range %}
           {% if page_obj.number == num %}
@@ -62,7 +65,7 @@
           {% endif %}
         {% endfor %}
 
-        <li><a class="pagination-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+        <li><a class="pagination-link" href="?page={{ page_obj.paginator.num_pages }}">{% trans "Last" %}</a></li>
       </ul>
     {% endif %}
   {% endwith %}

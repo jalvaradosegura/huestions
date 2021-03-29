@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:11-0300\n"
-"PO-Revision-Date: 2021-03-28 23:50+0000\n"
+"POT-Creation-Date: 2021-03-29 00:32-0300\n"
+"PO-Revision-Date: 2021-03-29 03:33+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -71,12 +71,12 @@ msgstr ""
 
 #: core/constants.py:25
 msgid ""
-"The user that shared this list with you haven't answer all its questions, so "
-"you won't be able to see that person answers. Tell the user to answer all "
+"The user that shared this list with you haven't answer all its questions, so"
+" you won't be able to see that person answers. Tell the user to answer all "
 "the questions"
 msgstr ""
-"La persona que compartió esta lista contigo, no ha respondido sus preguntas, "
-"por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
+"La persona que compartió esta lista contigo, no ha respondido sus preguntas,"
+" por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
 "todas las preguntas"
 
 #: core/constants.py:32
@@ -132,13 +132,11 @@ msgstr ""
 #: templates/account/email/email_confirmation_message.txt:5
 #, python-format
 msgid ""
-"You're receiving this e-mail because user %(user_display)s has given your e-"
-"mail address to register an account on %(site_domain)s.\n"
+"You're receiving this e-mail because user %(user_display)s has given your e-mail address to register an account on %(site_domain)s.\n"
 "\n"
 "To confirm this is correct, go to %(activate_url)s"
 msgstr ""
-"Has recibido este correo porque el usuario %(user_display)s ha indicado este "
-"correo para registrar su cuenta en %(site_domain)s.\n"
+"Has recibido este correo porque el usuario %(user_display)s ha indicado este correo para registrar su cuenta en %(site_domain)s.\n"
 "\n"
 "Para confirmar que esto es correcto, ir a %(activate_url)s"
 
@@ -163,11 +161,11 @@ msgstr "Confirmar"
 #: templates/account/email_confirm.html:27
 #, python-format
 msgid ""
-"This e-mail confirmation link expired or is invalid. Please <a href="
-"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+"This e-mail confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
-"Este link de confirmación de correo expiró o es inválido. Por favor  <a href="
-"\"%(email_url)s\"> emitir un nuevo correo de confirmación."
+"Este link de confirmación de correo expiró o es inválido. Por favor  <a "
+"href=\"%(email_url)s\"> emitir un nuevo correo de confirmación."
 
 #: templates/account/login.html:9 templates/account/login.html:44
 #: templates/navbar.html:65
@@ -213,8 +211,8 @@ msgstr "Restablece la contraseña"
 
 #: templates/account/password_reset.html:17
 msgid ""
-"Forgotten your password? Enter your e-mail address below, and we'll send you "
-"an e-mail allowing you to reset it."
+"Forgotten your password? Enter your e-mail address below, and we'll send you"
+" an e-mail allowing you to reset it."
 msgstr ""
 "Olvidaste tu contraseña? Ingresa tu dirección de correo a continuación y "
 "nosotros te enviaremos un correo para restablecerla."
@@ -244,8 +242,8 @@ msgstr "Token erróneo"
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
-"a>."
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password "
+"reset</a>."
 msgstr ""
 "El link para resetear la contraseña no era válido, posiblemente porque ya "
 "fue usado. Por favor solicitar <a href=\"%(passwd_reset_url)s\"> nuevo "
@@ -429,6 +427,26 @@ msgstr "Tus estadísticas"
 msgid "Log out"
 msgstr "Cerrar sesión"
 
+#: templates/paginator.html:8 templates/paginator.html:29
+#: templates/paginator.html:50
+msgid "Previous"
+msgstr "Anterior"
+
+#: templates/paginator.html:11 templates/paginator.html:32
+#: templates/paginator.html:53
+msgid "Next"
+msgstr "Siguiente"
+
+#: templates/paginator.html:15 templates/paginator.html:36
+#: templates/paginator.html:57
+msgid "First"
+msgstr "Primera"
+
+#: templates/paginator.html:25 templates/paginator.html:46
+#: templates/paginator.html:67
+msgid "Last"
+msgstr "Última"
+
 #: templates/search_results.html:8
 msgid "Search Results for"
 msgstr "Resultados de búsqueda para"
@@ -464,11 +482,11 @@ msgstr "Preguntas respondidas"
 #: users/forms.py:12
 #, python-format
 msgid ""
-"I acknowledge that I have read and agree to the <a href=\"%(url)s\" target="
-"\"_blank\">Terms and Conditions</a>"
+"I acknowledge that I have read and agree to the <a href=\"%(url)s\" "
+"target=\"_blank\">Terms and Conditions</a>"
 msgstr ""
-"Reconozco que he leído y acepto los <a href=\"%(url)s\" target=\"_blank"
-"\">Términos y Condiciones</a>"
+"Reconozco que he leído y acepto los <a href=\"%(url)s\" "
+"target=\"_blank\">Términos y Condiciones</a>"
 
 #~ msgid "Change name"
 #~ msgstr "Cambiar nombre"

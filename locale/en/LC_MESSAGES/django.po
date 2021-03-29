@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-28 21:11-0300\n"
+"POT-Creation-Date: 2021-03-29 00:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -399,6 +399,26 @@ msgstr ""
 
 #: templates/navbar.html:55
 msgid "Log out"
+msgstr ""
+
+#: templates/paginator.html:8 templates/paginator.html:29
+#: templates/paginator.html:50
+msgid "Previous"
+msgstr ""
+
+#: templates/paginator.html:11 templates/paginator.html:32
+#: templates/paginator.html:53
+msgid "Next"
+msgstr ""
+
+#: templates/paginator.html:15 templates/paginator.html:36
+#: templates/paginator.html:57
+msgid "First"
+msgstr ""
+
+#: templates/paginator.html:25 templates/paginator.html:46
+#: templates/paginator.html:67
+msgid "Last"
 msgstr ""
 
 #: templates/search_results.html:8
