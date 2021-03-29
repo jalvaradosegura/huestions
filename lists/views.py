@@ -227,6 +227,7 @@ class SearchListsView(LoginRequiredMixin, ListView):
             .order_by('-id')
             .prefetch_related('tags')
             .select_related('owner')
+            .distinct()
         )
 
     def get_context_data(self, *, object_list=None, **kwargs):

@@ -9,8 +9,8 @@
 
   <div class="tabs">
     <ul>
-      <li class="{% if request.GET.filter != 'all' %}is-active{% endif %}"><a href="{% url 'questions_list' %}">Popular</a></li>
-      <li class="{% if request.GET.filter == 'all' %}is-active{% endif %}"><a href="{% url 'questions_list' %}?filter=all">All</a></li>
+      <li class="{% if request.GET.filter != 'all' %}is-active{% endif %}"><a href="{% url 'questions_list' %}">{% trans "Popular lists" %}</a></li>
+      <li class="{% if request.GET.filter == 'all' %}is-active{% endif %}"><a href="{% url 'questions_list' %}?filter=all">{% trans "All lists" %}</a></li>
     </ul>
   </div>
 
@@ -27,7 +27,7 @@
 	    <div class="content">
 	      <p class="subtitle is-6">{% trans "Created:" %} {{ question_list.created|date:"M d, Y" }} &middot {% trans "by" %} {{ question_list.owner }}</p>
 	      {% if request.GET.filter != 'all' %}
-	        <p class="subtitle is-6">{% trans "votes in the last few days" %}: {{ question_list.votes_amount }}</p>
+	        <p class="subtitle is-6">{% trans "Votes in the last few days" %}: {{ question_list.votes_amount }}</p>
 	      {% endif %}
 	      {% for tag in question_list.tags.all %}
 	        <span class="tag">#{{ tag }}</span>
