@@ -1,5 +1,6 @@
 from django import forms
 from django.core.validators import MinLengthValidator, RegexValidator
+from django.utils.translation import gettext_lazy as _
 
 from core.constants import (
     LIST_COMPLETION_ERROR_MESSAGE,
@@ -12,6 +13,7 @@ from .models import QuestionList
 
 class CreateQuestionListForm(forms.ModelForm):
     title = forms.CharField(
+        label=_('Title'),
         help_text=MAX_AND_MIN_LENGTH,
         validators=[
             RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),

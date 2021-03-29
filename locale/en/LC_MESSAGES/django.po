@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 00:32-0300\n"
+"POT-Creation-Date: 2021-03-29 11:27-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,15 +97,19 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
+#: lists/forms.py:17 questions/forms.py:36
+msgid "Title"
+msgstr ""
+
 #: questions/forms.py:21
 msgid "Alternatives"
 msgstr ""
 
-#: questions/forms.py:72
+#: questions/forms.py:73
 msgid "Alternative 1"
 msgstr ""
 
-#: questions/forms.py:80
+#: questions/forms.py:81
 msgid "Alternative 2"
 msgstr ""
 
@@ -263,13 +267,13 @@ msgid ""
 "contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: templates/answer_question.html:11 templates/list_results.html:18
+#: templates/answer_question.html:15 templates/list_results.html:18
 #: templates/lists.html:41 templates/search_results.html:33
 #: templates/user_lists.html:32
 msgid "Share list"
 msgstr ""
 
-#: templates/answer_question.html:32
+#: templates/answer_question.html:42
 msgid "Answer"
 msgstr ""
 
@@ -401,23 +405,23 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: templates/paginator.html:8 templates/paginator.html:29
-#: templates/paginator.html:50
+#: templates/paginator.html:11 templates/paginator.html:32
+#: templates/paginator.html:53
 msgid "Previous"
 msgstr ""
 
-#: templates/paginator.html:11 templates/paginator.html:32
-#: templates/paginator.html:53
+#: templates/paginator.html:14 templates/paginator.html:35
+#: templates/paginator.html:56
 msgid "Next"
 msgstr ""
 
-#: templates/paginator.html:15 templates/paginator.html:36
-#: templates/paginator.html:57
+#: templates/paginator.html:18 templates/paginator.html:39
+#: templates/paginator.html:60
 msgid "First"
 msgstr ""
 
-#: templates/paginator.html:25 templates/paginator.html:46
-#: templates/paginator.html:67
+#: templates/paginator.html:28 templates/paginator.html:49
+#: templates/paginator.html:70
 msgid "Last"
 msgstr ""
 
