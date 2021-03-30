@@ -1,9 +1,9 @@
 from django.contrib import messages
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic.base import TemplateView
 from django.views.generic import View
+from django.views.generic.base import TemplateView
 
 from .constants import INVALID_HEADER_ON_EMAIL
 from .forms import ContactForm

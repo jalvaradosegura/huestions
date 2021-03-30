@@ -266,7 +266,9 @@ class CreateListTests(FunctionalTestsBase):
 
         # She sees a message, it says she is attempting to see an incomplete
         # view
-        error_message = self.browser.find_element_by_class_name('message-body').text
+        error_message = self.browser.find_element_by_class_name(
+            'message-body'
+        ).text
 
         self.assertIn(
             str(ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE), error_message
@@ -335,7 +337,9 @@ class UserProfileTests(FunctionalTestsBase):
         )
 
         # Check that the list has the new name
-        lists =self.browser.find_element_by_class_name('card-header-title').text
+        lists = self.browser.find_element_by_class_name(
+            'card-header-title'
+        ).text
         self.assertIn('new name for my list', lists)
 
         # She tries to edit the same list again
@@ -437,7 +441,9 @@ class UserProfileTests(FunctionalTestsBase):
             self.browser.current_url,
             f'{self.live_server_url}/lists/my-first-list/edit/',
         )
-        error_message = self.browser.find_element_by_class_name('message-body').text
+        error_message = self.browser.find_element_by_class_name(
+            'message-body'
+        ).text
         self.assertIn(str(LIST_COMPLETION_ERROR_MESSAGE), error_message)
 
     def test_user_delete_a_list(self):

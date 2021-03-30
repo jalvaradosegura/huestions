@@ -8,9 +8,9 @@ from django.urls import resolve, reverse
 from ..constants import INVALID_HEADER_ON_EMAIL
 from ..views import (
     AboutView,
-    ContactView,
     ContactSuccessView,
-    TermsAndConditionsView
+    ContactView,
+    TermsAndConditionsView,
 )
 
 
@@ -38,9 +38,7 @@ class AboutViewTests(TestCase):
     def test_question_list_url_resolves_to_view(self):
         found = resolve(self.base_url)
 
-        self.assertEqual(
-            found.func.__name__, AboutView.as_view().__name__
-        )
+        self.assertEqual(found.func.__name__, AboutView.as_view().__name__)
 
     def test_returns_correct_html(self):
         response = self.client.get(self.base_url)
@@ -55,9 +53,7 @@ class ContactViewTests(TestCase):
     def test_question_list_url_resolves_to_view(self):
         found = resolve(self.base_url)
 
-        self.assertEqual(
-            found.func.__name__, ContactView.as_view().__name__
-        )
+        self.assertEqual(found.func.__name__, ContactView.as_view().__name__)
 
     def test_returns_correct_html(self):
         response = self.client.get(self.base_url)
@@ -70,8 +66,8 @@ class ContactViewTests(TestCase):
             data={
                 'from_email': 'test@email.com',
                 'subject': 'test',
-                'message': 'awesome'
-            }
+                'message': 'awesome',
+            },
         )
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -83,8 +79,8 @@ class ContactViewTests(TestCase):
             data={
                 'from_email': 'testemail.com',
                 'subject': 'test',
-                'message': 'awesome'
-            }
+                'message': 'awesome',
+            },
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
@@ -98,7 +94,7 @@ class ContactViewTests(TestCase):
             data={
                 'from_email': 'test@email.com',
                 'subject': 'test',
-                'message': 'awesome'
+                'message': 'awesome',
             },
         )
         request = response.wsgi_request
