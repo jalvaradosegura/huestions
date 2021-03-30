@@ -1,9 +1,36 @@
+{% load i18n %}
+
 <footer class="footer mt-5">
-    <div class="content has-text-centered">
-      <p>
-        <strong>Huestions</strong> by <a href="https://www.linkedin.com/in/j-alvarado-segura/" target=_blank">Jorge Alvarado</a>. The source code is licensed
-        <a href="">to be determined (something restrictive)</a>. The website content
-        is licensed <a href="">to be determined (something restrictive)</a>.
-      </p>
+  <div class="columns">
+
+    <div class="column is-8">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Huestions</strong> by <a href="https://www.linkedin.com/in/j-alvarado-segura/" target=_blank">Jorge Alvarado</a>. The source code is licensed
+          <a href="">to be determined (something restrictive)</a>. The website content is licensed <a href="">to be determined (something restrictive)</a>.
+        </p>
+      </div>
     </div>
-  </footer>
+
+    <div class="column is-2">
+      <aside class="menu">
+        <p class="menu-label">Huestions</p>
+        <ul class="menu-list">
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a>Contact</a></li>
+	  <li><a href="{% url 'terms_and_conditions' %}">Terms</a></li>
+        </ul>
+      </aside>
+    </div>
+    <div class="column is-2">
+      <aside class="menu">
+        <p class="menu-label">Have fun!</p>
+        <ul class="menu-list">
+	  <li><a href="{% url 'questions_list' %}">{% trans "Lists" %}</a></li>
+          <li><a href="{% url 'create_list' %}">{% trans "Create a list" %}</a></li>
+        </ul>
+      </aside>
+    </div>
+
+  </div>
+</footer>
