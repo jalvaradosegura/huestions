@@ -35,6 +35,7 @@ MAX_AND_MIN_LENGTH = _(
     "100 characters max and 5 min. Also don't use special chars."
 )
 MAX_AND_SPECIAL_CHARS = _("100 characters max. Also don't use special chars.")
+INVALID_HEADER_ON_EMAIL = _('Invalid header found.')
 
 # === Global variables ===
 AMOUNT_OF_LISTS_PER_PAGE = 6

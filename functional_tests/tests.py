@@ -299,7 +299,7 @@ class UserProfileTests(FunctionalTestsBase):
         self.browser.get(f'{self.live_server_url}/users/javi/lists/')
 
         # There is a message welcoming her to her lists
-        title = self.browser.find_element_by_tag_name('h1').text
+        title = self.browser.find_element_by_tag_name('h2').text
         self.assertIn('Your lists', title)
 
         # She tries to edit one of the lists
@@ -335,7 +335,7 @@ class UserProfileTests(FunctionalTestsBase):
         )
 
         # Check that the list has the new name
-        lists = self.browser.find_element_by_tag_name('h5').text
+        lists =self.browser.find_element_by_class_name('card-header-title').text
         self.assertIn('new name for my list', lists)
 
         # She tries to edit the same list again

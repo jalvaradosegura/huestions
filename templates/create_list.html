@@ -7,8 +7,7 @@
 {% block main %}
 
 <h2 class="title is-2">{% trans "Create a list" %}</h2>
-<form action="" method="post">
-  {% csrf_token %}
+<form action="" method="post">{% csrf_token %}
 
   <div class="field">
     <div class="control">

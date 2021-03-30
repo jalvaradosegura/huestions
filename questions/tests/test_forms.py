@@ -46,9 +46,8 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         )
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertContains(
-            response, '<label for="id_alternatives_0">Alternatives:'
-        )
+        self.assertContains(response, 'id="id_alternatives_0"')
+        self.assertContains(response, 'id="id_alternatives_1"')
 
     def test_post_success_and_adds_user_to_alternative(self):
         question_list = QuestionListFactory(title='awesome list')

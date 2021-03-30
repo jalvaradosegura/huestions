@@ -13,4 +13,14 @@ urlpatterns = [
         view=views.AboutView.as_view(),
         name='about',
     ),
+    path(
+        route='contact/',
+        view=views.ContactView.as_view(),
+        name='contact',
+    ),
+    path(
+        route='contact/success/',
+        view=views.ContactSuccessView.as_view(),
+        name='contact_success',
+    ),
 ]
