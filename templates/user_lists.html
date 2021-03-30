@@ -6,6 +6,14 @@
 {% block main %}
 
   <h2 class="title is-2">{% trans "Your lists" %}</h2>
+
+  <div class="tabs">
+    <ul>
+      <li class="{% if request.GET.filter != 'published' and request.GET.filter != 'unpublished' %}is-active{% endif %}"><a href="{% url 'lists' user %}">{% trans "All your lists" %}</a></li>
+      <li class="{% if request.GET.filter == 'published' %}is-active{% endif %}"><a href="{% url 'lists' user %}?filter=published">{% trans "Published" %}</a></li>
+      <li class="{% if request.GET.filter == 'unpublished' %}is-active{% endif %}"><a href="{% url 'lists' user %}?filter=unpublished">{% trans "Unpublished" %}</a></li>
+    </ul>
+  </div>
   
   {% for question_list in object_list %}
     {% if forloop.first %}<div class="columns">{% endif %}

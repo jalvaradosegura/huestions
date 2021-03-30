@@ -42,6 +42,36 @@ class UserListsViewTests(TestViewsMixin, TestCase):
         self.assertNotRegex(html_1, 'list 3')
         self.assertRegex(html_2, 'list 3')
 
+    def test_filter_parameters_published(self):
+        question_list_1 = QuestionListFactory(
+            title='published list', owner=self.user, active=True
+        )
+        question_list_2 = QuestionListFactory(
+            title='not published', owner=self.user
+        )
+
+        response = self.client.get(self.base_url + '?filter=published')
+        html = response.content.decode('utf-8')
+
+        self.assertRegex(html, question_list_1.title)
+        self.assertNotRegex(html, question_list_2.title)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_filter_parameters_unpublished(self):
+        question_list_1 = QuestionListFactory(
+            title='published list', owner=self.user, active=True
+        )
+        question_list_2 = QuestionListFactory(
+            title='not published', owner=self.user
+        )
+
+        response = self.client.get(self.base_url + '?filter=unpublished')
+        html = response.content.decode('utf-8')
+
+        self.assertRegex(html, question_list_2.title)
+        self.assertNotRegex(html, question_list_1.title)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
 
 class UserStatsViewTests(TestViewsMixin, TestCase):
     def setUp(self):

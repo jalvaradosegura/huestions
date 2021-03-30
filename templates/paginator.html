@@ -48,6 +48,48 @@
 
           <li><a class="pagination-link" href="?filter=all&page={{ page_obj.paginator.num_pages }}">{% trans "Last" %}</a></li>
         </ul>
+      {% elif request.GET.filter == 'published' %}
+        {% if page_obj.has_previous %}
+          <a class="pagination-previous" href="?filter=published&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+          <a class="pagination-next" href="?filter=published&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
+        {% endif %}
+
+        <ul class="pagination-list">
+          <li><a class="pagination-link" href="?filter=published&page=1">{% trans "First" %}</a></li>
+
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <li><a class="pagination-link is-current" href="?filter=published&page={{ num }}">{{ num }}</a></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li><a class="pagination-link" href="?filter=published&page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+
+          <li><a class="pagination-link" href="?filter=published&page={{ page_obj.paginator.num_pages }}">{% trans "Last" %}</a></li>
+        </ul>
+      {% elif request.GET.filter == 'unpublished' %}
+        {% if page_obj.has_previous %}
+          <a class="pagination-previous" href="?filter=unpublished&page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>
+        {% endif %}
+        {% if page_obj.has_next %}
+          <a class="pagination-next" href="?filter=unpublished&page={{ page_obj.next_page_number }}">{% trans "Next" %}</a>
+        {% endif %}
+
+        <ul class="pagination-list">
+          <li><a class="pagination-link" href="?filter=unpublished&page=1">{% trans "First" %}</a></li>
+
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <li><a class="pagination-link is-current" href="?filter=unpublished&page={{ num }}">{{ num }}</a></li>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <li><a class="pagination-link" href="?filter=unpublished&page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+
+          <li><a class="pagination-link" href="?filter=unpublished&page={{ page_obj.paginator.num_pages }}">{% trans "Last" %}</a></li>
+        </ul>
       {% else %}
         {% if page_obj.has_previous %}
           <a class="pagination-previous" href="?page={{ page_obj.previous_page_number }}">{% trans "Previous" %}</a>

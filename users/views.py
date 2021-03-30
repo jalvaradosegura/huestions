@@ -1,6 +1,7 @@
 from allauth.account.decorators import verified_email_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Count, Q
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, View
@@ -17,11 +18,26 @@ class UserListsView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         username = self.kwargs['username']
         user_id = get_user_model().objects.get(username=username).id
-        return (
-            QuestionList.objects.filter(owner=user_id)
-            .prefetch_related('tags')
-            .order_by('-id')
-        )
+
+        filter_by = self.request.GET.get('filter')
+        if filter_by == 'published':
+            return (
+                QuestionList.objects.filter(Q(owner=user_id) & Q(active=True))
+                .prefetch_related('tags')
+                .order_by('-id')
+            )
+        elif filter_by == 'unpublished':
+            return (
+                QuestionList.objects.filter(Q(owner=user_id) & Q(active=False))
+                .prefetch_related('tags')
+                .order_by('-id')
+            )
+        else:
+            return (
+                QuestionList.objects.filter(owner=user_id)
+                .prefetch_related('tags')
+                .order_by('-id')
+            )
 
 
 @method_decorator(verified_email_required, name='dispatch')
