@@ -25,8 +25,11 @@
 	  <form class="" action="{% url 'search_lists' %}">
  
 	    <div class="field is-grouped">
-	      <div class="control">
+	      <div class="control has-icons-left">
 	        <input name="q" class="input" type="text" placeholder="{% trans "Search" %}...">
+		<span class="icon is-small is-left">
+                  <i class="fas fa-search"></i>
+                </span>
 	      </div>
  
 	      <div class="control">
@@ -49,10 +52,25 @@
 	  <a class="navbar-link">{% trans "More" %}</a>
 
           <div class="navbar-dropdown is-right">
-            <a class="navbar-item {% if url_name == 'stats' %}is-active{% endif %}" href="{% url 'stats' user.username %}">{% trans "Your stats" %}</a>
-            <a class="navbar-item {% if url_name == 'account_change_password' %}is-active{% endif %}" href="{% url 'account_change_password' %}">{% trans "Change password" %}</a>
+            <a class="navbar-item {% if url_name == 'stats' %}is-active{% endif %}" href="{% url 'stats' user.username %}">
+	      <span class="icon">
+		<i class="fas fa-signal"></i>
+	      </span>
+	      <span>{% trans "Your stats" %}</span>
+	    </a>
+            <a class="navbar-item {% if url_name == 'account_change_password' %}is-active{% endif %}" href="{% url 'account_change_password' %}">
+	      <span class="icon">
+		<i class="fas fa-key"></i>
+	      </span>
+	      <span>{% trans "Change password" %}</span>
+	    </a>
             <hr class="navbar-divider">
-            <a class="navbar-item {% if url_name == 'account_logout' %}is-active{% endif %}" href="{% url 'account_logout' %}">{% trans "Log out" %}</a>
+            <a class="navbar-item {% if url_name == 'account_logout' %}is-active{% endif %}" href="{% url 'account_logout' %}">
+	      <span class="icon">
+		<i class="fas fa-toggle-off"></i>
+	      </span>
+	      <span>{% trans "Log out" %}</span>
+	    </a>
           </div>
         </div> <!--dropdown-->
 
