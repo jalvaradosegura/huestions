@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
+{% load i18n %}
+
 {% load widget_tweaks %}
 
 {% block main %}
-<h1 class="title is-1">Contact Us</h1>
+<h1 class="title is-1">{% trans "Contact Us" %}</h1>
 <form method="post">{% csrf_token %}
 
     <div class="field">
@@ -50,7 +52,7 @@
 
 
     <div class="form-actions">
-      <button class="button is-success"type="submit">Send</button>
+      <button class="button is-success"type="submit">{% trans "Send" %}</button>
     </div>
 
 </form>

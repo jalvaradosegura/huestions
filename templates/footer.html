@@ -22,7 +22,7 @@
                 <span class="icon">
                   <i class="fab fa-instagram"></i>
                 </span>
-                <span>Developer</span>
+                <span>Dev</span>
               </span>
 	    </a>
 	  </li>
@@ -32,7 +32,7 @@
                 <span class="icon">
                   <i class="fab fa-instagram"></i>
                 </span>
-                <span>Artist</span>
+		<span>{% trans "Artist" %}</span>
               </span>
 	    </a>
 	  </li>
@@ -44,9 +44,9 @@
       <aside class="menu">
         <p class="menu-label">Huestions</p>
         <ul class="menu-list">
-          <li><a href="{% url 'about' %}">About</a></li>
-          <li><a href="{% url 'contact' %}">Contact</a></li>
-	  <li><a href="{% url 'terms_and_conditions' %}">Terms</a></li>
+	  <li><a href="{% url 'about' %}">{% trans "About" %}</a></li>
+	  <li><a href="{% url 'contact' %}">{% trans "Contact" %}</a></li>
+	  <li><a href="{% url 'terms_and_conditions' %}">{% trans "Terms" %}</a></li>
         </ul>
       </aside>
     </div>

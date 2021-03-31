@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-29 11:27-0300\n"
+"POT-Creation-Date: 2021-03-31 07:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,6 +85,22 @@ msgstr ""
 msgid "100 characters max. Also don't use special chars."
 msgstr ""
 
+#: core/constants.py:38
+msgid "Invalid header found."
+msgstr ""
+
+#: core/forms.py:6
+msgid "Your email"
+msgstr ""
+
+#: core/forms.py:7
+msgid "Subject"
+msgstr ""
+
+#: core/forms.py:9
+msgid "Message"
+msgstr ""
+
 #: core/models.py:24
 msgid "title"
 msgstr ""
@@ -97,7 +113,7 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: lists/forms.py:17 questions/forms.py:36
+#: lists/forms.py:16 questions/forms.py:36
 msgid "Title"
 msgstr ""
 
@@ -111,6 +127,10 @@ msgstr ""
 
 #: questions/forms.py:81
 msgid "Alternative 2"
+msgstr ""
+
+#: templates/about.html:7
+msgid "About us"
 msgstr ""
 
 #: templates/account/email/base_message.txt:1
@@ -158,7 +178,7 @@ msgid ""
 msgstr ""
 
 #: templates/account/login.html:9 templates/account/login.html:44
-#: templates/navbar.html:65
+#: templates/navbar.html:83
 msgid "Log In"
 msgstr ""
 
@@ -231,7 +251,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:53
+#: templates/account/password_reset_from_key.html:46 templates/navbar.html:65
 msgid "Change password"
 msgstr ""
 
@@ -241,7 +261,7 @@ msgid "Your password is now changed."
 msgstr ""
 
 #: templates/account/signup.html:9 templates/account/signup.html:58
-#: templates/navbar.html:63
+#: templates/navbar.html:81
 msgid "Sign Up"
 msgstr ""
 
@@ -269,7 +289,7 @@ msgstr ""
 
 #: templates/answer_question.html:15 templates/list_results.html:18
 #: templates/lists.html:41 templates/search_results.html:33
-#: templates/user_lists.html:32
+#: templates/user_lists.html:40
 msgid "Share list"
 msgstr ""
 
@@ -277,11 +297,20 @@ msgstr ""
 msgid "Answer"
 msgstr ""
 
-#: templates/create_list.html:9 templates/navbar.html:46
+#: templates/contact.html:8
+msgid "Contact Us"
+msgstr ""
+
+#: templates/contact.html:55
+msgid "Send"
+msgstr ""
+
+#: templates/create_list.html:9 templates/footer.html:59
+#: templates/navbar.html:49
 msgid "Create a list"
 msgstr ""
 
-#: templates/create_list.html:41
+#: templates/create_list.html:40
 msgid "Create"
 msgstr ""
 
@@ -309,11 +338,11 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
-#: templates/delete_list.html:12 templates/user_lists.html:37
+#: templates/delete_list.html:12 templates/user_lists.html:45
 msgid "Delete"
 msgstr ""
 
-#: templates/edit_list.html:11 templates/navbar.html:47
+#: templates/edit_list.html:11 templates/navbar.html:50
 msgid "Your Lists"
 msgstr ""
 
@@ -345,8 +374,24 @@ msgstr ""
 msgid "Add a question"
 msgstr ""
 
-#: templates/list_results.html:11 templates/lists.html:8
-#: templates/navbar.html:22
+#: templates/footer.html:35
+msgid "Artist"
+msgstr ""
+
+#: templates/footer.html:47
+msgid "About"
+msgstr ""
+
+#: templates/footer.html:48
+msgid "Contact"
+msgstr ""
+
+#: templates/footer.html:49
+msgid "Terms"
+msgstr ""
+
+#: templates/footer.html:58 templates/list_results.html:11
+#: templates/lists.html:8 templates/navbar.html:22
 msgid "Lists"
 msgstr ""
 
@@ -372,7 +417,7 @@ msgid "All lists"
 msgstr ""
 
 #: templates/lists.html:28 templates/search_results.html:23
-#: templates/user_lists.html:21
+#: templates/user_lists.html:29
 msgid "Created:"
 msgstr ""
 
@@ -385,43 +430,47 @@ msgid "Votes in the last few days"
 msgstr ""
 
 #: templates/lists.html:43 templates/search_results.html:35
-#: templates/user_lists.html:34
+#: templates/user_lists.html:42
 msgid "Go"
 msgstr ""
 
-#: templates/navbar.html:29 templates/navbar.html:33
+#: templates/navbar.html:29 templates/navbar.html:36
 msgid "Search"
 msgstr ""
 
-#: templates/navbar.html:49
+#: templates/navbar.html:52
 msgid "More"
 msgstr ""
 
-#: templates/navbar.html:52 templates/user_stats.html:7
+#: templates/navbar.html:59 templates/user_stats.html:7
 msgid "Your stats"
 msgstr ""
 
-#: templates/navbar.html:55
+#: templates/navbar.html:72
 msgid "Log out"
 msgstr ""
 
 #: templates/paginator.html:11 templates/paginator.html:32
-#: templates/paginator.html:53
+#: templates/paginator.html:53 templates/paginator.html:74
+#: templates/paginator.html:95
 msgid "Previous"
 msgstr ""
 
 #: templates/paginator.html:14 templates/paginator.html:35
-#: templates/paginator.html:56
+#: templates/paginator.html:56 templates/paginator.html:77
+#: templates/paginator.html:98
 msgid "Next"
 msgstr ""
 
 #: templates/paginator.html:18 templates/paginator.html:39
-#: templates/paginator.html:60
+#: templates/paginator.html:60 templates/paginator.html:81
+#: templates/paginator.html:102
 msgid "First"
 msgstr ""
 
 #: templates/paginator.html:28 templates/paginator.html:49
-#: templates/paginator.html:70
+#: templates/paginator.html:70 templates/paginator.html:91
+#: templates/paginator.html:112
 msgid "Last"
 msgstr ""
 
@@ -437,11 +486,27 @@ msgstr ""
 msgid "result"
 msgstr ""
 
+#: templates/terms_and_conditions.html:7
+msgid "Terms and Conditions"
+msgstr ""
+
 #: templates/user_lists.html:8
 msgid "Your lists"
 msgstr ""
 
-#: templates/user_lists.html:36
+#: templates/user_lists.html:12
+msgid "All your lists"
+msgstr ""
+
+#: templates/user_lists.html:13
+msgid "Published"
+msgstr ""
+
+#: templates/user_lists.html:14
+msgid "Unpublished"
+msgstr ""
+
+#: templates/user_lists.html:44
 msgid "Edit"
 msgstr ""
 
