@@ -49,7 +49,6 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
-    'crispy_forms',
     'rosetta',
     'taggit',
     'widget_tweaks',
@@ -173,8 +172,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
-
-# django-crispy-forms
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MESSAGE_TAGS = {messages.ERROR: 'danger'}
