@@ -15,7 +15,7 @@
 
 {% url 'answer_list' questionlist.slug user as list_url %}
 {% with domain_url=request.get_host %}
-  <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="button is-primary is-outlined mb-2">{% trans "Share list" %}</button>
+  <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="button is-light mb-2">{% trans "Share list" %}</button>
 {% endwith %}
 
 {% localize off %}

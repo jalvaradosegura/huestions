@@ -96,7 +96,10 @@ class QuestionListsTests(FunctionalTestsBase):
             title='another question', child_of=self.question_list
         )
         AlternativeFactory(
-            title='some alternative', question=self.another_question
+            title='some alternative 1', question=self.another_question
+        )
+        AlternativeFactory(
+            title='some alternative 2', question=self.another_question
         )
 
     def test_can_visit_a_list_of_question_page_and_vote(self):

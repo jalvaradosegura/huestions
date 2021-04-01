@@ -11,8 +11,14 @@
 
   {% url 'answer_list' questionlist.slug user as list_url %}
   {% with domain_url=request.get_host %}
-    <h2 class="title is-2">{{ questionlist.title }}</h2>
-    <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="button is-light mb-2">{% trans "Share list" %}</button>
+    <div class="field is-grouped">
+      <div class="control">
+        <h2 class="title is-2">{{ questionlist.title }}</h2>
+      </div>
+      <div class="control">
+        <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="button is-light mb-2">{% trans "Share list" %}</button>
+      </div>
+    </div>
   {% endwith %}
 
   {% localize off %}
@@ -23,6 +29,15 @@
   {% endlocalize %}
 
   <h3 class="title is-3">{{ question.title }}</h3>
+
+  <figure type="submit" class="image is-clickable is-128x128">
+    <img class="is-rounded" src="{{ form.img_1_url }}">
+  </figure>
+
+  <figure type="submit" class="image is-clickable is-128x128">
+    <img class="is-rounded" src="{{ form.img_2_url }}">
+  </figure>
+
   <form action="" method="post"> {% csrf_token %}
 
     <div class="field">

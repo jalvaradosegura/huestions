@@ -21,14 +21,17 @@ from ..models import Alternative, Question
 class AnswerQuestionFormTests(TestCase):
     def test_generate_the_form_with_choices(self):
         question = QuestionFactory(title='What is this question')
-        only_alternative = AlternativeFactory(
-            title='Only alternative', question=question
-        )
+        alternative_1 = AlternativeFactory(title='a1', question=question)
+        alternative_2 = AlternativeFactory(title='a2', question=question)
 
         form = AnswerQuestionForm(question.id)
 
-        for alternative in form.fields['alternatives'].choices:
-            self.assertEqual(only_alternative.__str__(), alternative[1])
+        self.assertEqual(
+            alternative_1.__str__(), form.fields['alternatives'].choices[0][1]
+        )
+        self.assertEqual(
+            alternative_2.__str__(), form.fields['alternatives'].choices[1][1]
+        )
 
 
 class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):

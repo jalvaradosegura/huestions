@@ -25,10 +25,15 @@ class AnswerQuestionForm(forms.Form):
         super().__init__(*args, **kwargs)
 
         question = Question.objects.get(id=question_id)
+        alternative_1, alternative_2 = question.alternatives.all()
 
         self.fields['alternatives'].choices = [
-            (x.id, x.title) for x in question.alternatives.all()
+            (alternative_1.id, alternative_1.title),
+            (alternative_2.id, alternative_2.title)
         ]
+
+        self.img_1_url = alternative_1.image.url
+        self.img_2_url = alternative_2.image.url
 
 
 class CreateQuestionForm(forms.ModelForm):
