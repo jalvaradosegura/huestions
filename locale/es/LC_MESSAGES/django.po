@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 07:10-0300\n"
-"PO-Revision-Date: 2021-03-31 10:13+0000\n"
+"POT-Creation-Date: 2021-04-01 12:36-0300\n"
+"PO-Revision-Date: 2021-04-01 15:37+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -96,7 +96,6 @@ msgid "Invalid header found."
 msgstr "Se encontró un header inválido"
 
 #: core/forms.py:6
-#| msgid "Your vote"
 msgid "Your email"
 msgstr "Tu email"
 
@@ -120,7 +119,7 @@ msgstr "Inglés"
 msgid "Spanish"
 msgstr "Español"
 
-#: lists/forms.py:16 questions/forms.py:36
+#: lists/forms.py:16 questions/forms.py:41
 msgid "Title"
 msgstr "Título"
 
@@ -128,11 +127,11 @@ msgstr "Título"
 msgid "Alternatives"
 msgstr "Alternativas"
 
-#: questions/forms.py:73
+#: questions/forms.py:78
 msgid "Alternative 1"
 msgstr "Alternativa 1"
 
-#: questions/forms.py:81
+#: questions/forms.py:86
 msgid "Alternative 2"
 msgstr "Alternativa 2"
 
@@ -193,7 +192,7 @@ msgstr ""
 "href=\"%(email_url)s\"> emitir un nuevo correo de confirmación."
 
 #: templates/account/login.html:9 templates/account/login.html:44
-#: templates/navbar.html:83
+#: templates/navbar.html:84
 msgid "Log In"
 msgstr "Iniciar sesión"
 
@@ -274,7 +273,7 @@ msgstr ""
 "fue usado. Por favor solicitar <a href=\"%(passwd_reset_url)s\"> nuevo "
 "reseteo de contraseña"
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:65
+#: templates/account/password_reset_from_key.html:46 templates/navbar.html:66
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -284,7 +283,7 @@ msgid "Your password is now changed."
 msgstr "Tu contraseña ha sido cambiada."
 
 #: templates/account/signup.html:9 templates/account/signup.html:58
-#: templates/navbar.html:81
+#: templates/navbar.html:82
 msgid "Sign Up"
 msgstr "Registrarse"
 
@@ -314,13 +313,13 @@ msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
 
-#: templates/answer_question.html:15 templates/list_results.html:18
+#: templates/answer_question.html:19 templates/list_results.html:18
 #: templates/lists.html:41 templates/search_results.html:33
 #: templates/user_lists.html:40
 msgid "Share list"
 msgstr "Compartir lista"
 
-#: templates/answer_question.html:42
+#: templates/answer_question.html:57
 msgid "Answer"
 msgstr "Responder"
 
@@ -333,7 +332,7 @@ msgid "Send"
 msgstr "Enviar"
 
 #: templates/create_list.html:9 templates/footer.html:59
-#: templates/navbar.html:49
+#: templates/navbar.html:50
 msgid "Create a list"
 msgstr "Crear una lista"
 
@@ -369,7 +368,7 @@ msgstr "Volver"
 msgid "Delete"
 msgstr "Borrar"
 
-#: templates/edit_list.html:11 templates/navbar.html:50
+#: templates/edit_list.html:11 templates/navbar.html:51
 msgid "Your Lists"
 msgstr "Tus listas"
 
@@ -465,15 +464,19 @@ msgstr "Ir"
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/navbar.html:52
+#: templates/navbar.html:49
+msgid "Hi"
+msgstr "Hola"
+
+#: templates/navbar.html:53
 msgid "More"
 msgstr "Más"
 
-#: templates/navbar.html:59 templates/user_stats.html:7
+#: templates/navbar.html:60 templates/user_stats.html:7
 msgid "Your stats"
 msgstr "Tus estadísticas"
 
-#: templates/navbar.html:72
+#: templates/navbar.html:73
 msgid "Log out"
 msgstr "Cerrar sesión"
 
@@ -522,17 +525,14 @@ msgid "Your lists"
 msgstr "Tus listas"
 
 #: templates/user_lists.html:12
-#| msgid "All lists"
 msgid "All your lists"
 msgstr "Todas tus listas"
 
 #: templates/user_lists.html:13
-#| msgid "Lists published"
 msgid "Published"
 msgstr "Publicadas"
 
 #: templates/user_lists.html:14
-#| msgid "Lists published"
 msgid "Unpublished"
 msgstr "No publicadas"
 
@@ -579,9 +579,6 @@ msgstr ""
 
 #~ msgid "or"
 #~ msgstr "o"
-
-#~ msgid "Hi"
-#~ msgstr "Hola"
 
 #~ msgid "Log in"
 #~ msgstr "Iniciar sesión"

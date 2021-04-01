@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 07:10-0300\n"
+"POT-Creation-Date: 2021-04-01 12:36-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: lists/forms.py:16 questions/forms.py:36
+#: lists/forms.py:16 questions/forms.py:41
 msgid "Title"
 msgstr ""
 
@@ -121,11 +121,11 @@ msgstr ""
 msgid "Alternatives"
 msgstr ""
 
-#: questions/forms.py:73
+#: questions/forms.py:78
 msgid "Alternative 1"
 msgstr ""
 
-#: questions/forms.py:81
+#: questions/forms.py:86
 msgid "Alternative 2"
 msgstr ""
 
@@ -178,7 +178,7 @@ msgid ""
 msgstr ""
 
 #: templates/account/login.html:9 templates/account/login.html:44
-#: templates/navbar.html:83
+#: templates/navbar.html:84
 msgid "Log In"
 msgstr ""
 
@@ -251,7 +251,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:65
+#: templates/account/password_reset_from_key.html:46 templates/navbar.html:66
 msgid "Change password"
 msgstr ""
 
@@ -261,7 +261,7 @@ msgid "Your password is now changed."
 msgstr ""
 
 #: templates/account/signup.html:9 templates/account/signup.html:58
-#: templates/navbar.html:81
+#: templates/navbar.html:82
 msgid "Sign Up"
 msgstr ""
 
@@ -287,13 +287,13 @@ msgid ""
 "contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: templates/answer_question.html:15 templates/list_results.html:18
+#: templates/answer_question.html:19 templates/list_results.html:18
 #: templates/lists.html:41 templates/search_results.html:33
 #: templates/user_lists.html:40
 msgid "Share list"
 msgstr ""
 
-#: templates/answer_question.html:42
+#: templates/answer_question.html:57
 msgid "Answer"
 msgstr ""
 
@@ -306,7 +306,7 @@ msgid "Send"
 msgstr ""
 
 #: templates/create_list.html:9 templates/footer.html:59
-#: templates/navbar.html:49
+#: templates/navbar.html:50
 msgid "Create a list"
 msgstr ""
 
@@ -342,7 +342,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: templates/edit_list.html:11 templates/navbar.html:50
+#: templates/edit_list.html:11 templates/navbar.html:51
 msgid "Your Lists"
 msgstr ""
 
@@ -438,15 +438,19 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: templates/navbar.html:52
+#: templates/navbar.html:49
+msgid "Hi"
+msgstr ""
+
+#: templates/navbar.html:53
 msgid "More"
 msgstr ""
 
-#: templates/navbar.html:59 templates/user_stats.html:7
+#: templates/navbar.html:60 templates/user_stats.html:7
 msgid "Your stats"
 msgstr ""
 
-#: templates/navbar.html:72
+#: templates/navbar.html:73
 msgid "Log out"
 msgstr ""
 

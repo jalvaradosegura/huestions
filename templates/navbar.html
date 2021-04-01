@@ -46,6 +46,7 @@
     <div class="navbar-end">
       
       {% if user.is_authenticated %}
+	<div class="navbar-item">{% trans "Hi" %} {{ user }}👋</div>
         <a class="navbar-item {% if url_name == 'create_list' %}is-active{% endif %}" href="{% url 'create_list' %}">{% trans "Create a list" %}</a>
         <a class="navbar-item {% if url_name == 'lists' %}is-active{% endif %}" href="{% url 'lists' user.username %}">{% trans "Your Lists" %}</a>
         <div class="navbar-item has-dropdown is-hoverable">
