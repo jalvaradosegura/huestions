@@ -1,5 +1,6 @@
 import factory
 
+from core.constants import TEST_FOLDER_TO_STORE_IMAGES
 from lists.factories import QuestionListFactory
 
 
@@ -17,4 +18,6 @@ class AlternativeFactory(factory.django.DjangoModelFactory):
 
     title = factory.Iterator(['Roger Federer', 'Rafael Nadal'])
     question = factory.SubFactory(QuestionFactory)
-    image = factory.django.ImageField(color='blue')
+    image = factory.django.ImageField(
+        filename=TEST_FOLDER_TO_STORE_IMAGES / 'example.jpg', color='blue'
+    )

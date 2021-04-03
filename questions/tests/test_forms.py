@@ -1,13 +1,18 @@
 from http import HTTPStatus
+from io import BytesIO
+from pathlib import Path
 
+from django.conf import settings
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.test import TestCase
 from django.urls import reverse
+from PIL import Image
 
 from core.constants import (
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     SPECIAL_CHARS_ERROR,
 )
-from core.mixins import LoginUserMixin
+from core.mixins import DeleteTestImagesOfAlternativesMixin, LoginUserMixin
 
 from ..factories import (
     AlternativeFactory,
@@ -18,7 +23,7 @@ from ..forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
 from ..models import Alternative, Question
 
 
-class AnswerQuestionFormTests(TestCase):
+class AnswerQuestionFormTests(DeleteTestImagesOfAlternativesMixin, TestCase):
     def test_generate_the_form_with_choices(self):
         question = QuestionFactory(title='What is this question')
         alternative_1 = AlternativeFactory(title='a1', question=question)
@@ -34,7 +39,9 @@ class AnswerQuestionFormTests(TestCase):
         )
 
 
-class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
+class AnswerQuestionFormViewTests(
+    LoginUserMixin, DeleteTestImagesOfAlternativesMixin, TestCase
+):
     def test_get_success(self):
         question_list = QuestionListFactory(title='awesome list', active=True)
         question = QuestionFactory(
@@ -189,11 +196,24 @@ class CreateQuestionFormTests(LoginUserMixin, TestCase):
 
 
 class AddAlternativesFormTests(LoginUserMixin, TestCase):
+    NAME_FOR_IMAGE_1 = 'IFT1_image_for_testing_123.jpg'
+    NAME_FOR_IMAGE_2 = 'IFT2_image_for_testing_223.jpg'
+
     def setUp(self):
         self.question_list = QuestionListFactory(title='an awesome list')
         self.question = QuestionFactory(
             title='Is this hard?', child_of=self.question_list
         )
+        image_1 = Path(
+            settings.MEDIA_ROOT / 'alternative_pics' / self.NAME_FOR_IMAGE_1
+        )
+        image_2 = Path(
+            settings.MEDIA_ROOT / 'alternative_pics' / self.NAME_FOR_IMAGE_2
+        )
+        if image_1.is_file():
+            image_1.unlink()
+        if image_2.is_file():
+            image_2.unlink()
 
     def test_get_form_success(self):
         self.create_login_and_verify_user()
@@ -250,3 +270,49 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
 
         self.assertIn(SPECIAL_CHARS_ERROR, form.errors['alternative_1'])
         self.assertIn(SPECIAL_CHARS_ERROR, form.errors['alternative_2'])
+
+    def test_add_alternatives_with_form_and_with_image(self):
+        im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
+        im_io = BytesIO()  # a BytesIO object for saving image
+        im.save(im_io, 'JPEG')  # save the image to im_io
+        im_io.seek(0)  # seek to the beginning
+        image_1 = InMemoryUploadedFile(
+            im_io,
+            None,
+            self.NAME_FOR_IMAGE_1,
+            'image/jpeg',
+            len(im_io.getvalue()),
+            None,
+        )
+        image_2 = InMemoryUploadedFile(
+            im_io,
+            None,
+            self.NAME_FOR_IMAGE_2,
+            'image/jpeg',
+            len(im_io.getvalue()),
+            None,
+        )
+        form = AddAlternativesForm(
+            data={
+                'alternative_1': 'Yes',
+                'alternative_2': 'No',
+            },
+            files={'image_1': image_1, 'image_2': image_2},
+        )
+
+        if form.is_valid():
+            form.save(question=self.question)
+        firt_alternative = Alternative.objects.first()
+        last_alternative = Alternative.objects.last()
+
+        self.assertEqual(firt_alternative.__str__(), 'Yes')
+        self.assertEqual(
+            firt_alternative.image.name,
+            f'alternative_pics/{self.NAME_FOR_IMAGE_1}',
+        )
+        self.assertEqual(last_alternative.__str__(), 'No')
+        self.assertEqual(
+            last_alternative.image.name,
+            f'alternative_pics/{self.NAME_FOR_IMAGE_2}',
+        )
+        self.assertTrue(form.is_valid())

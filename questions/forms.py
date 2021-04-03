@@ -29,7 +29,7 @@ class AnswerQuestionForm(forms.Form):
 
         self.fields['alternatives'].choices = [
             (alternative_1.id, alternative_1.title),
-            (alternative_2.id, alternative_2.title)
+            (alternative_2.id, alternative_2.title),
         ]
 
         self.img_1_url = alternative_1.image.url
@@ -74,6 +74,7 @@ class CreateQuestionForm(forms.ModelForm):
 
 
 class AddAlternativesForm(forms.Form):
+    image_1 = forms.ImageField(required=False)
     alternative_1 = forms.CharField(
         label=_('Alternative 1'),
         help_text=MAX_AND_SPECIAL_CHARS,
@@ -82,6 +83,7 @@ class AddAlternativesForm(forms.Form):
             MaxLengthValidator(limit_value=100),
         ],
     )
+    image_2 = forms.ImageField(required=False)
     alternative_2 = forms.CharField(
         label=_('Alternative 2'),
         help_text=MAX_AND_SPECIAL_CHARS,
@@ -112,10 +114,12 @@ class AddAlternativesForm(forms.Form):
                 [
                     Alternative(
                         title=cleaned_data.get('alternative_1'),
+                        image=cleaned_data.get('image_1'),
                         question=question,
                     ),
                     Alternative(
                         title=cleaned_data.get('alternative_2'),
+                        image=cleaned_data.get('image_2'),
                         question=question,
                     ),
                 ]

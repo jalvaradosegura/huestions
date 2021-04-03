@@ -1,9 +1,12 @@
+import shutil
 from http import HTTPStatus
 
 from allauth.account.models import EmailAddress
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin
 
+from core.constants import TEST_FOLDER_TO_STORE_IMAGES
 from lists.models import QuestionList
 
 
@@ -67,3 +70,13 @@ class CustomUserPassesTestMixin(UserPassesTestMixin):
         ):
             return True
         return False
+
+
+class DeleteTestImagesOfAlternativesMixin:
+    def tearDown(self):
+        COMPLETE_PATH_TO_TEST_IMGS_FOLDER = (
+            settings.MEDIA_ROOT
+            / 'alternative_pics'
+            / TEST_FOLDER_TO_STORE_IMAGES
+        )
+        shutil.rmtree(COMPLETE_PATH_TO_TEST_IMGS_FOLDER, ignore_errors=True)

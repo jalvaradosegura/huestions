@@ -9,7 +9,7 @@ from core.constants import (
     MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS,
     USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT,
 )
-from core.mixins import TestViewsMixin
+from core.mixins import DeleteTestImagesOfAlternativesMixin, TestViewsMixin
 from questions.factories import AlternativeFactory, QuestionFactory
 from users.factories import UserFactory
 
@@ -50,7 +50,9 @@ class QuestionsListViewTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
 
-class ListResultsViewTests(TestViewsMixin, TestCase):
+class ListResultsViewTests(
+    DeleteTestImagesOfAlternativesMixin, TestViewsMixin, TestCase
+):
     def setUp(self):
         self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(title='an awesome list')
@@ -207,7 +209,9 @@ class CreateListViewTests(TestViewsMixin, TestCase):
         self.assertTemplateUsed(response, 'create_list.html')
 
 
-class EditListViewTests(TestViewsMixin, TestCase):
+class EditListViewTests(
+    DeleteTestImagesOfAlternativesMixin, TestViewsMixin, TestCase
+):
     def setUp(self):
         self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(

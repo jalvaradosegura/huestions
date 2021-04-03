@@ -8,7 +8,7 @@ from core.constants import (
     ALREADY_ANSWERED_ALL_THE_QUESTIONS,
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
 )
-from core.mixins import TestViewsMixin
+from core.mixins import DeleteTestImagesOfAlternativesMixin, TestViewsMixin
 from lists.models import QuestionList
 from users.factories import UserFactory
 from votes.models import Vote
@@ -79,7 +79,9 @@ class LogoutPageTests(TestViewsMixin, TestCase):
         pass
 
 
-class AnswerQuestionViewTests(TestViewsMixin, TestCase):
+class AnswerQuestionViewTests(
+    DeleteTestImagesOfAlternativesMixin, TestViewsMixin, TestCase
+):
     def setUp(self):
         self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
@@ -378,7 +380,9 @@ class AddQuestionViewTests(TestViewsMixin, TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
 
-class EditQuestionViewTests(TestViewsMixin, TestCase):
+class EditQuestionViewTests(
+    DeleteTestImagesOfAlternativesMixin, TestViewsMixin, TestCase
+):
     def setUp(self):
         self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(

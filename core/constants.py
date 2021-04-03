@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from django.utils.translation import gettext_lazy as _
 
 # === Messages ===
@@ -40,3 +42,6 @@ INVALID_HEADER_ON_EMAIL = _('Invalid header found.')
 # === Global variables ===
 AMOUNT_OF_LISTS_PER_PAGE = 6
 AMOUNT_OF_DAYS_FOR_POPULARITY = 10
+
+# === Tests ===
+TEST_FOLDER_TO_STORE_IMAGES = Path('for_tests')

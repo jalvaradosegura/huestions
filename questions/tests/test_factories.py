@@ -1,5 +1,7 @@
 from django.test import TestCase
 
+from core.mixins import DeleteTestImagesOfAlternativesMixin
+
 from ..factories import AlternativeFactory, QuestionFactory
 from ..models import Alternative, Question
 
@@ -21,7 +23,7 @@ class QuestionFactoryTests(TestCase):
         self.assertEqual(amount_of_questions, 2)
 
 
-class AlternativeFactoryTests(TestCase):
+class AlternativeFactoryTests(DeleteTestImagesOfAlternativesMixin, TestCase):
     def setUp(self):
         self.alternative = AlternativeFactory(title='Hello')
 
