@@ -30,32 +30,46 @@
 
   <h3 class="title is-3">{{ question.title }}</h3>
 
-  <figure type="submit" class="image is-clickable is-128x128">
-    <img class="is-rounded" src="{{ form.img_1_url }}">
-  </figure>
+  {% for choice in form.fields.alternatives.choices %}
+    {% if forloop.first %}<div class="columns">{% endif %}
+      <div class="column is-6">
 
-  <figure type="submit" class="image is-clickable is-128x128">
-    <img class="is-rounded" src="{{ form.img_2_url }}">
-  </figure>
+	<form id="form{{ forloop.counter }}" action="" method="post">{% csrf_token %}
+          <input type="hidden" name="list_slug" value="{{ questionlist.slug }}">
+          <input id="id_alternatives_{{ forloop.counter0 }}" type="hidden" name="alternatives" value="{{ choice.0 }}">
+        </form>
 
-  <form action="" method="post"> {% csrf_token %}
+        <div class="card">
 
-    <div class="field">
-      <div class="control">
-        {% if form.alternatives.errors %}
-          {% render_field form.alternatives class+="radio is-danger"%}
-	  {% for error in form.alternatives.errors %}
-	    <p class="help is-danger">{{ error }}</p>
-	  {% endfor %}
-        {% else %}
-          {% render_field form.alternatives class+="radio"%}
-        {% endif %}
-      </div>
-    </div>
+          <header class="card-header">
+	    <p class="card-header-title is-centered">{{ choice.1 }}</p>
+          </header>
 
-    <input type="hidden" name="list_slug" value="{{ questionlist.slug }}">
-    <button id="button_to_vote" class="button is-success">{% trans "Answer" %}</button>
-  </form>
+	  <div class="card-content">
+
+            <div class="columns is-flex is-centered">
+              <figure class="image">
+                {% if forloop.first %}
+                  <img class="is-rounded" src="{{ form.img_1_url }}" alt="Placeholder image">
+                {% else %}
+                  <img class="is-rounded" src="{{ form.img_2_url }}" alt="Placeholder image">
+                {% endif %}
+              </figure>
+            </div>
+
+          </div> <!-- card content-->
+
+          <footer class="card-footer">
+	    <button id="button_alternative_{{ forloop.counter0}}" form="form{{ forloop.counter }}" class="card-footer-item button is-success is-large" name="alternative_{{ forloop.counter0}}_chosen">Vote</button>
+          </footer>
+
+	</div> <!-- card -->
+
+      </div> <!-- col is-6 -->
+      {% if forloop.counter|divisibleby:2 %}</div><div class="columns">{% endif %}
+      {% if forloop.last %}</div>{% endif %}
+
+  {% endfor %}
 
   {% block bootstrap_js_loaded %}
     <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>

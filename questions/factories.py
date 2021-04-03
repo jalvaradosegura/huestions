@@ -17,3 +17,4 @@ class AlternativeFactory(factory.django.DjangoModelFactory):
 
     title = factory.Iterator(['Roger Federer', 'Rafael Nadal'])
     question = factory.SubFactory(QuestionFactory)
+    image = factory.django.ImageField(color='blue')

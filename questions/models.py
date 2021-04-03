@@ -78,14 +78,14 @@ class Alternative(TitleAndTimeStampedModel):
         path = r'{}'.format(self.image.path)  # Fix weird bug
         front_img = Image.open(path)
 
-        bg_output_size = (300, 300)
+        bg_output_size = (200, 200)
         bg_img = front_img.resize(bg_output_size)
         bg_img = bg_img.filter(ImageFilter.GaussianBlur(5))
 
-        front_output_size = (300, 300)
+        front_output_size = (200, 200)
         front_img.thumbnail(front_output_size)
         x, y = front_img.size
-        size = max(300, x, y)
+        size = max(200, x, y)
 
         bg_img.paste(front_img, (int((size - x) / 2), int((size - y) / 2)))
 

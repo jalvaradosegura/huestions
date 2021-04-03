@@ -24,16 +24,6 @@ from questions.models import Question
 from votes.models import Vote
 
 
-def vote_for_an_alternative(browser, selected_alternative):
-    # She selects one alternative of the form
-    selected_alternative = browser.find_element_by_id(selected_alternative)
-    selected_alternative.click()
-
-    # She votes for it by clicking the vote button
-    button_to_vote = browser.find_element_by_id('button_to_vote')
-    button_to_vote.click()
-
-
 class FunctionalTestsBase(LiveServerTestCase):
     def tearDown(self):
         self.browser.quit()
@@ -122,14 +112,20 @@ class QuestionListsTests(FunctionalTestsBase):
         )
 
         # She answer the first question
-        vote_for_an_alternative(self.browser, 'id_alternatives_0')
+        button_to_vote = self.browser.find_element_by_id(
+            'button_alternative_0'
+        )
+        button_to_vote.click()
         self.assertEqual(
             self.browser.current_url,
             f'{self.live_server_url}/lists/some-cool-title/',
         )
 
         # She answer the next question
-        vote_for_an_alternative(self.browser, 'id_alternatives_0')
+        button_to_vote = self.browser.find_element_by_id(
+            'button_alternative_0'
+        )
+        button_to_vote.click()
 
         # Check that a vote record got created
         vote = Vote.objects.last()
