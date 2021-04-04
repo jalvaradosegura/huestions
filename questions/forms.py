@@ -14,6 +14,7 @@ from core.constants import (
 )
 
 from .models import Alternative, Question
+from .validators import file_size_validator
 
 
 class AnswerQuestionForm(forms.Form):
@@ -74,7 +75,9 @@ class CreateQuestionForm(forms.ModelForm):
 
 
 class AddAlternativesForm(forms.Form):
-    image_1 = forms.ImageField(required=False)
+    image_1 = forms.ImageField(
+        required=False, validators=[file_size_validator]
+    )
     alternative_1 = forms.CharField(
         label=_('Alternative 1'),
         help_text=MAX_AND_SPECIAL_CHARS,
@@ -83,7 +86,9 @@ class AddAlternativesForm(forms.Form):
             MaxLengthValidator(limit_value=100),
         ],
     )
-    image_2 = forms.ImageField(required=False)
+    image_2 = forms.ImageField(
+        required=False, validators=[file_size_validator]
+    )
     alternative_2 = forms.CharField(
         label=_('Alternative 2'),
         help_text=MAX_AND_SPECIAL_CHARS,

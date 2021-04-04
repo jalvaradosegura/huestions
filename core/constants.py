@@ -42,6 +42,7 @@ INVALID_HEADER_ON_EMAIL = _('Invalid header found.')
 # === Global variables ===
 AMOUNT_OF_LISTS_PER_PAGE = 6
 AMOUNT_OF_DAYS_FOR_POPULARITY = 10
+MAX_IMAGE_SIZE = 2 * 1024 * 1024
 
 # === Tests ===
 TEST_FOLDER_TO_STORE_IMAGES = Path('for_tests')

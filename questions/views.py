@@ -158,7 +158,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
         question_form = CreateQuestionForm(
             request.POST, question_list=question_list
         )
-        alternatives_form = AddAlternativesForm(request.POST)
+        alternatives_form = AddAlternativesForm(request.POST, request.FILES)
         complete_list_form = CompleteListForm(question_list=question_list)
 
         if question_form.is_valid() and alternatives_form.is_valid():

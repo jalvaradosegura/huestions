@@ -1,5 +1,6 @@
 from http import HTTPStatus
 from io import BytesIO
+from unittest.mock import patch
 from pathlib import Path
 
 from django.conf import settings
@@ -292,6 +293,7 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
             len(im_io.getvalue()),
             None,
         )
+
         form = AddAlternativesForm(
             data={
                 'alternative_1': 'Yes',
@@ -299,7 +301,6 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
             },
             files={'image_1': image_1, 'image_2': image_2},
         )
-
         if form.is_valid():
             form.save(question=self.question)
         firt_alternative = Alternative.objects.first()
@@ -316,3 +317,31 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
             f'alternative_pics/{self.NAME_FOR_IMAGE_2}',
         )
         self.assertTrue(form.is_valid())
+
+    @patch('questions.validators.MAX_IMAGE_SIZE', 0)
+    def test_add_alternatives_with_form_and_with_image_too_big(self):
+        im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
+        im_io = BytesIO()  # a BytesIO object for saving image
+        im.save(im_io, 'JPEG')  # save the image to im_io
+        im_io.seek(0)  # seek to the beginning
+        image_1 = InMemoryUploadedFile(
+            im_io,
+            None,
+            self.NAME_FOR_IMAGE_1,
+            'image/jpeg',
+            len(im_io.getvalue()),
+            None,
+        )
+
+        form = AddAlternativesForm(
+            data={
+                'alternative_1': 'Yes',
+                'alternative_2': 'No',
+            },
+            files={'image_1': image_1},
+        )
+
+        self.assertEqual(
+            form.errors['image_1'],
+            ['File too large. Size should not exceed 2 MiB.']
+        )

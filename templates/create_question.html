@@ -13,12 +13,21 @@
   </ul>
 </nav>
 
-<form id="form1" action="" method="post">
-  {% csrf_token %}
+<form enctype="multipart/form-data" id="form1" action="" method="post">{% csrf_token %}
 
   <div class="field">
     <div class="control">
-      {% if question_form.title.errors %}
+      {% if question_form.non_field_errors %}
+	{% for error in question_form.non_field_errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      {% if question_form.title.errors or question_form.non_field_errors %}
         {% render_field question_form.title class+="input is-danger" placeholder=question_form.title.label %}
 	{% for error in question_form.title.errors %}
 	  <p class="help is-danger">{{ error }}</p>
@@ -26,6 +35,20 @@
       {% else %}
         {% render_field question_form.title class+="input" placeholder=question_form.title.label %}
 	<p class="help">{{ question_form.title.help_text }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      {% if alternatives_form.image_1.errors %}
+        {% render_field alternatives_form.image_1 %}
+	{% for error in alternatives_form.image_1.errors %}
+	  <p class="help is-danger">{{ error }}</p>
+	{% endfor %}
+      {% else %}
+        {% render_field alternatives_form.image_1 %}
+	<p class="help">{{ alternatives_form.image_1.help_text }}</p>
       {% endif %}
     </div>
   </div>
@@ -59,6 +82,7 @@
   </div>
 
 </form>
+
 
 <form id="form2" action="" method="post">
   {% csrf_token %}
