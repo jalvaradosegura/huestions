@@ -10,7 +10,8 @@ from django.urls import reverse
 from PIL import Image
 
 from core.constants import (
-    FILE_TOO_LARGE,
+    FILE_EXTENSION_ERROR,
+    FILE_TOO_LARGE_ERROR,
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     SPECIAL_CHARS_ERROR,
 )
@@ -326,7 +327,7 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
         self.assertTrue(form.is_valid())
 
     @patch('questions.validators.MAX_IMAGE_SIZE', 0)
-    def test_add_alternatives_with_form_and_with_image_too_big(self):
+    def test_add_alternatives_with_form_with_image_too_big(self):
         im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
         im_io = BytesIO()  # a BytesIO object for saving image
         im.save(im_io, 'JPEG')  # save the image to im_io
@@ -348,4 +349,29 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
             files={'image_1': image_1},
         )
 
-        self.assertEqual(form.errors['image_1'], [FILE_TOO_LARGE])
+        self.assertEqual(form.errors['image_1'], [FILE_TOO_LARGE_ERROR])
+
+    @patch('questions.validators.IMAGE_VALID_EXTENSIONS', ['.png'])
+    def test_add_alternatives_with_form_with_invalid_image_extension(self):
+        im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
+        im_io = BytesIO()  # a BytesIO object for saving image
+        im.save(im_io, 'JPEG')  # save the image to im_io
+        im_io.seek(0)  # seek to the beginning
+        image_1 = InMemoryUploadedFile(
+            im_io,
+            None,
+            self.NAME_FOR_IMAGE_1,
+            'image/jpeg',
+            len(im_io.getvalue()),
+            None,
+        )
+
+        form = AddAlternativesForm(
+            data={
+                'alternative_1': 'Yes',
+                'alternative_2': 'No',
+            },
+            files={'image_1': image_1},
+        )
+
+        self.assertEqual(form.errors['image_1'], [FILE_EXTENSION_ERROR])

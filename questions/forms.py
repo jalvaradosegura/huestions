@@ -20,7 +20,7 @@ from core.constants import (
 
 from .models import Alternative, Question
 from .utils import reshape_img_to_square_with_blurry_bg
-from .validators import file_size_validator
+from .validators import file_extension_validator, file_size_validator
 
 
 class AnswerQuestionForm(forms.Form):
@@ -83,7 +83,7 @@ class CreateQuestionForm(forms.ModelForm):
 class AddAlternativesForm(forms.Form):
     image_1 = forms.ImageField(
         required=False,
-        validators=[file_size_validator],
+        validators=[file_size_validator, file_extension_validator],
         help_text=FILE_TOO_LARGE_HELPER,
     )
     alternative_1 = forms.CharField(

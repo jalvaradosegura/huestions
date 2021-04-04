@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 12:36-0300\n"
+"POT-Creation-Date: 2021-04-04 12:41-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,75 +18,87 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/constants.py:5
+#: core/constants.py:13
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 
-#: core/constants.py:8
+#: core/constants.py:16
 msgid "The list you are trying to see is incomplete"
 msgstr ""
 
-#: core/constants.py:10
+#: core/constants.py:18
 msgid "List was created successfully"
 msgstr ""
 
-#: core/constants.py:11
+#: core/constants.py:19
 msgid "List was edited successfully"
 msgstr ""
 
-#: core/constants.py:12
+#: core/constants.py:20
 msgid "List was deleted successfully"
 msgstr ""
 
-#: core/constants.py:13
+#: core/constants.py:21
 msgid "List was published successfully"
 msgstr ""
 
-#: core/constants.py:14
+#: core/constants.py:22
 msgid "The list reached the limit of questions"
 msgstr ""
 
-#: core/constants.py:15
+#: core/constants.py:23
 msgid "Question was created successfully"
 msgstr ""
 
-#: core/constants.py:16
+#: core/constants.py:24
 msgid "Question was edited successfully"
 msgstr ""
 
-#: core/constants.py:17
+#: core/constants.py:25
 msgid "Question was deleted successfully"
 msgstr ""
 
-#: core/constants.py:19
+#: core/constants.py:27
 msgid "You already answered all the questions for this list"
 msgstr ""
 
-#: core/constants.py:22
+#: core/constants.py:30
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 
-#: core/constants.py:25
+#: core/constants.py:33
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so "
 "you won't be able to see that person answers. Tell the user to answer all "
 "the questions"
 msgstr ""
 
-#: core/constants.py:32
-msgid "Do not use special chars"
+#: core/constants.py:40
+msgid "Do not use special chars."
 msgstr ""
 
-#: core/constants.py:35
+#: core/constants.py:42
+msgid "File too large. Size should not exceed 2 MB."
+msgstr ""
+
+#: core/constants.py:45
+msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
+msgstr ""
+
+#: core/constants.py:50
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:37
+#: core/constants.py:52
 msgid "100 characters max. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:38
+#: core/constants.py:53
 msgid "Invalid header found."
+msgstr ""
+
+#: core/constants.py:55
+msgid "Picture must have a size under 2 MB."
 msgstr ""
 
 #: core/forms.py:6
@@ -113,19 +125,19 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: lists/forms.py:16 questions/forms.py:41
+#: lists/forms.py:16 questions/forms.py:48
 msgid "Title"
 msgstr ""
 
-#: questions/forms.py:21
+#: questions/forms.py:28
 msgid "Alternatives"
 msgstr ""
 
-#: questions/forms.py:78
+#: questions/forms.py:90
 msgid "Alternative 1"
 msgstr ""
 
-#: questions/forms.py:86
+#: questions/forms.py:103
 msgid "Alternative 2"
 msgstr ""
 
@@ -293,10 +305,6 @@ msgstr ""
 msgid "Share list"
 msgstr ""
 
-#: templates/answer_question.html:57
-msgid "Answer"
-msgstr ""
-
 #: templates/contact.html:8
 msgid "Contact Us"
 msgstr ""
@@ -314,19 +322,32 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: templates/create_question.html:12
+#: templates/create_question.html:14
 msgid "Create a question"
 msgstr ""
 
-#: templates/create_question.html:71
+#: templates/create_question.html:72 templates/create_question.html:92
+msgid "Choose a picture for Alternative 1"
+msgstr ""
+
+#: templates/create_question.html:76 templates/create_question.html:96
+#: templates/create_question.html:140 templates/create_question.html:160
+msgid "No file uploaded"
+msgstr ""
+
+#: templates/create_question.html:136 templates/create_question.html:156
+msgid "Choose a picture for Alternative 2"
+msgstr ""
+
+#: templates/create_question.html:183
 msgid "Create & add another"
 msgstr ""
 
-#: templates/create_question.html:75
+#: templates/create_question.html:187
 msgid "Create & publish the list"
 msgstr ""
 
-#: templates/create_question.html:79
+#: templates/create_question.html:191
 msgid "Create & go back"
 msgstr ""
 

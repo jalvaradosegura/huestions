@@ -2,6 +2,12 @@ from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
 
+# === Global variables ===
+AMOUNT_OF_LISTS_PER_PAGE = 6
+AMOUNT_OF_DAYS_FOR_POPULARITY = 10
+MAX_IMAGE_SIZE = 2 * 1000 * 1000
+IMAGE_VALID_EXTENSIONS = ['.jpg', '.jpeg', '.png']
+
 # === Messages ===
 LIST_COMPLETION_ERROR_MESSAGE = _(
     'The list needs at least 1 question with 2 alternatives to be completed'
@@ -31,9 +37,13 @@ USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT = _(
 
 # === Related to forms ===
 # Errors
-SPECIAL_CHARS_ERROR = _('Do not use special chars')
+SPECIAL_CHARS_ERROR = _('Do not use special chars.')
 # Note: related to MAX_IMAGE_SIZE
-FILE_TOO_LARGE = _('File too large. Size should not exceed 2 MB.')
+FILE_TOO_LARGE_ERROR = _('File too large. Size should not exceed 2 MB.')
+# Note: related to IMAGE_VALID_EXTENSIONS
+FILE_EXTENSION_ERROR = _(
+    'File extension not valid. Allowed extensions: .jpg, .jpeg, .png.'
+)
 
 # Help text
 MAX_AND_MIN_LENGTH = _(
@@ -42,12 +52,7 @@ MAX_AND_MIN_LENGTH = _(
 MAX_AND_SPECIAL_CHARS = _("100 characters max. Also don't use special chars.")
 INVALID_HEADER_ON_EMAIL = _('Invalid header found.')
 # Note: related to MAX_IMAGE_SIZE
-FILE_TOO_LARGE_HELPER = _('Picture must have a size under 2 MB')
-
-# === Global variables ===
-AMOUNT_OF_LISTS_PER_PAGE = 6
-AMOUNT_OF_DAYS_FOR_POPULARITY = 10
-MAX_IMAGE_SIZE = 2 * 1000 * 1000
+FILE_TOO_LARGE_HELPER = _('Picture must have a size under 2 MB.')
 
 # === Tests ===
 TEST_FOLDER_TO_STORE_IMAGES = Path('for_tests')
