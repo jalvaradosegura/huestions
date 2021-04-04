@@ -8,6 +8,7 @@ from PIL import Image, ImageFilter
 
 from core.models import TitleAndTimeStampedModel
 from lists.models import QuestionList
+from .utils import reshape_img_to_square_with_blurry_bg
 
 
 class Question(TitleAndTimeStampedModel):
@@ -73,21 +74,7 @@ class Alternative(TitleAndTimeStampedModel):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
-        path = r'{}'.format(self.image.path)  # Fix weird bug
-        front_img = Image.open(path)
-
-        bg_output_size = (200, 200)
-        bg_img = front_img.resize(bg_output_size)
-        bg_img = bg_img.filter(ImageFilter.GaussianBlur(5))
-
-        front_output_size = (200, 200)
-        front_img.thumbnail(front_output_size)
-        x, y = front_img.size
-        size = max(200, x, y)
-
-        bg_img.paste(front_img, (int((size - x) / 2), int((size - y) / 2)))
-
+        bg_img = reshape_img_to_square_with_blurry_bg(self.image.path)
         bg_img.save(self.image.path)
 
     def get_votes_amount(self):

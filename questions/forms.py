@@ -1,4 +1,8 @@
+from io import BytesIO
+
 from django import forms
+from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import (
     MaxLengthValidator,
     MinLengthValidator,
@@ -7,6 +11,7 @@ from django.core.validators import (
 from django.utils.translation import gettext_lazy as _
 
 from core.constants import (
+    FILE_TOO_LARGE_HELPER,
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     MAX_AND_MIN_LENGTH,
     MAX_AND_SPECIAL_CHARS,
@@ -14,6 +19,7 @@ from core.constants import (
 )
 
 from .models import Alternative, Question
+from .utils import reshape_img_to_square_with_blurry_bg
 from .validators import file_size_validator
 
 
@@ -76,7 +82,9 @@ class CreateQuestionForm(forms.ModelForm):
 
 class AddAlternativesForm(forms.Form):
     image_1 = forms.ImageField(
-        required=False, validators=[file_size_validator]
+        required=False,
+        validators=[file_size_validator],
+        help_text=FILE_TOO_LARGE_HELPER,
     )
     alternative_1 = forms.CharField(
         label=_('Alternative 1'),
@@ -87,7 +95,9 @@ class AddAlternativesForm(forms.Form):
         ],
     )
     image_2 = forms.ImageField(
-        required=False, validators=[file_size_validator]
+        required=False,
+        validators=[file_size_validator],
+        help_text=FILE_TOO_LARGE_HELPER
     )
     alternative_2 = forms.CharField(
         label=_('Alternative 2'),
@@ -145,3 +155,25 @@ class AddAlternativesForm(forms.Form):
         first_char_upper = first_char.upper()
 
         return first_char_upper + alternative_2[1:]
+
+    def clean_image_1(self):
+        img_1 = self.cleaned_data['image_1']
+        if img_1:
+            reshaped_img = reshape_img_to_square_with_blurry_bg(img_1)
+            reshaped_img_io = BytesIO()
+            reshaped_img.save(fp=reshaped_img_io, format='JPEG')
+            something = ContentFile(reshaped_img_io.getvalue())
+            return InMemoryUploadedFile(
+                something, None, img_1.name, 'image/jpeg', something.tell, None
+            )
+
+    def clean_image_2(self):
+        img_2 = self.cleaned_data['image_2']
+        if img_2:
+            reshaped_img = reshape_img_to_square_with_blurry_bg(img_2)
+            reshaped_img_io = BytesIO()
+            reshaped_img.save(fp=reshaped_img_io, format='JPEG')
+            something = ContentFile(reshaped_img_io.getvalue())
+            return InMemoryUploadedFile(
+                something, None, img_2.name, 'image/jpeg', something.tell, None
+            )

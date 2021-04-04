@@ -10,6 +10,7 @@ from django.urls import reverse
 from PIL import Image
 
 from core.constants import (
+    FILE_TOO_LARGE,
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     SPECIAL_CHARS_ERROR,
 )
@@ -285,6 +286,11 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
             len(im_io.getvalue()),
             None,
         )
+
+        im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
+        im_io = BytesIO()  # a BytesIO object for saving image
+        im.save(im_io, 'JPEG')  # save the image to im_io
+        im_io.seek(0)  # seek to the beginning
         image_2 = InMemoryUploadedFile(
             im_io,
             None,
@@ -303,6 +309,7 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
         )
         if form.is_valid():
             form.save(question=self.question)
+
         firt_alternative = Alternative.objects.first()
         last_alternative = Alternative.objects.last()
 
@@ -341,7 +348,4 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
             files={'image_1': image_1},
         )
 
-        self.assertEqual(
-            form.errors['image_1'],
-            ['File too large. Size should not exceed 2 MiB.']
-        )
+        self.assertEqual(form.errors['image_1'], [FILE_TOO_LARGE])
