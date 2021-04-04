@@ -125,20 +125,31 @@ class AddAlternativesForm(forms.Form):
                 [alternative_1, alternative_2], ['title']
             )
         else:
-            Alternative.objects.bulk_create(
-                [
-                    Alternative(
-                        title=cleaned_data.get('alternative_1'),
-                        image=cleaned_data.get('image_1'),
-                        question=question,
-                    ),
-                    Alternative(
-                        title=cleaned_data.get('alternative_2'),
-                        image=cleaned_data.get('image_2'),
-                        question=question,
-                    ),
-                ]
-            )
+            if cleaned_data.get('image_1'):
+                alternative_1 = Alternative(
+                    title=cleaned_data.get('alternative_1'),
+                    image=cleaned_data.get('image_1'),
+                    question=question,
+                )
+            else:
+                alternative_1 = Alternative(
+                    title=cleaned_data.get('alternative_1'),
+                    question=question,
+                )
+
+            if cleaned_data.get('image_2'):
+                alternative_2 = Alternative(
+                    title=cleaned_data.get('alternative_2'),
+                    image=cleaned_data.get('image_2'),
+                    question=question,
+                )
+            else:
+                alternative_2 = Alternative(
+                    title=cleaned_data.get('alternative_2'),
+                    question=question,
+                )
+
+            Alternative.objects.bulk_create([alternative_1, alternative_2])
 
     def clean_alternative_1(self):
         alternative_1 = self.cleaned_data['alternative_1']

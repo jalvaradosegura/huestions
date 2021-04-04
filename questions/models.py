@@ -4,8 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
-from PIL import Image, ImageFilter
 
+from core.constants import DEFAULT_IMAGE_NAME
 from core.models import TitleAndTimeStampedModel
 from lists.models import QuestionList
 from .utils import reshape_img_to_square_with_blurry_bg
@@ -69,7 +69,7 @@ class Alternative(TitleAndTimeStampedModel):
         Question, on_delete=models.CASCADE, related_name='alternatives'
     )
     image = models.ImageField(
-        default='default_alternative.jpg', upload_to='alternative_pics'
+        default=DEFAULT_IMAGE_NAME, upload_to='alternative_pics'
     )
 
     def save(self, *args, **kwargs):

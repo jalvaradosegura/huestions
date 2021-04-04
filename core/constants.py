@@ -7,6 +7,7 @@ AMOUNT_OF_LISTS_PER_PAGE = 6
 AMOUNT_OF_DAYS_FOR_POPULARITY = 10
 MAX_IMAGE_SIZE = 2 * 1000 * 1000
 IMAGE_VALID_EXTENSIONS = ['.jpg', '.jpeg', '.png']
+DEFAULT_IMAGE_NAME = 'default_alternative.jpg'
 
 # === Messages ===
 LIST_COMPLETION_ERROR_MESSAGE = _(

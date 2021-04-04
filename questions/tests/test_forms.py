@@ -1,17 +1,15 @@
 from http import HTTPStatus
-from io import BytesIO
 from unittest.mock import patch
 from pathlib import Path
 
 from django.conf import settings
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.test import TestCase
 from django.urls import reverse
-from PIL import Image
 
 from core.constants import (
     FILE_EXTENSION_ERROR,
     FILE_TOO_LARGE_ERROR,
+    DEFAULT_IMAGE_NAME,
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     SPECIAL_CHARS_ERROR,
 )
@@ -24,6 +22,7 @@ from ..factories import (
 )
 from ..forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
 from ..models import Alternative, Question
+from ..utils import create_an_img_ready_for_models
 
 
 class AnswerQuestionFormTests(DeleteTestImagesOfAlternativesMixin, TestCase):
@@ -275,31 +274,8 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
         self.assertIn(SPECIAL_CHARS_ERROR, form.errors['alternative_2'])
 
     def test_add_alternatives_with_form_and_with_image(self):
-        im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
-        im_io = BytesIO()  # a BytesIO object for saving image
-        im.save(im_io, 'JPEG')  # save the image to im_io
-        im_io.seek(0)  # seek to the beginning
-        image_1 = InMemoryUploadedFile(
-            im_io,
-            None,
-            self.NAME_FOR_IMAGE_1,
-            'image/jpeg',
-            len(im_io.getvalue()),
-            None,
-        )
-
-        im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
-        im_io = BytesIO()  # a BytesIO object for saving image
-        im.save(im_io, 'JPEG')  # save the image to im_io
-        im_io.seek(0)  # seek to the beginning
-        image_2 = InMemoryUploadedFile(
-            im_io,
-            None,
-            self.NAME_FOR_IMAGE_2,
-            'image/jpeg',
-            len(im_io.getvalue()),
-            None,
-        )
+        image_1 = create_an_img_ready_for_models(self.NAME_FOR_IMAGE_1)
+        image_2 = create_an_img_ready_for_models(self.NAME_FOR_IMAGE_2)
 
         form = AddAlternativesForm(
             data={
@@ -326,20 +302,65 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
         )
         self.assertTrue(form.is_valid())
 
+    def test_add_alternatives_with_form_alternative_2_no_image(self):
+        image_1 = create_an_img_ready_for_models(self.NAME_FOR_IMAGE_1)
+
+        form = AddAlternativesForm(
+            data={
+                'alternative_1': 'Yes',
+                'alternative_2': 'No',
+            },
+            files={'image_1': image_1},
+        )
+        if form.is_valid():
+            form.save(question=self.question)
+
+        firt_alternative = Alternative.objects.first()
+        last_alternative = Alternative.objects.last()
+
+        self.assertEqual(firt_alternative.__str__(), 'Yes')
+        self.assertEqual(
+            firt_alternative.image.name,
+            f'alternative_pics/{self.NAME_FOR_IMAGE_1}',
+        )
+        self.assertEqual(last_alternative.__str__(), 'No')
+        self.assertEqual(
+            last_alternative.image.name,
+            DEFAULT_IMAGE_NAME,
+        )
+        self.assertTrue(form.is_valid())
+
+    def test_add_alternatives_with_form_alternative_1_no_image(self):
+        image_2 = create_an_img_ready_for_models(self.NAME_FOR_IMAGE_2)
+
+        form = AddAlternativesForm(
+            data={
+                'alternative_1': 'Yes',
+                'alternative_2': 'No',
+            },
+            files={'image_2': image_2},
+        )
+        if form.is_valid():
+            form.save(question=self.question)
+
+        firt_alternative = Alternative.objects.first()
+        last_alternative = Alternative.objects.last()
+
+        self.assertEqual(firt_alternative.__str__(), 'Yes')
+        self.assertEqual(
+            firt_alternative.image.name,
+            DEFAULT_IMAGE_NAME,
+        )
+        self.assertEqual(last_alternative.__str__(), 'No')
+        self.assertEqual(
+            last_alternative.image.name,
+            f'alternative_pics/{self.NAME_FOR_IMAGE_2}',
+        )
+        self.assertTrue(form.is_valid())
+
     @patch('questions.validators.MAX_IMAGE_SIZE', 0)
     def test_add_alternatives_with_form_with_image_too_big(self):
-        im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
-        im_io = BytesIO()  # a BytesIO object for saving image
-        im.save(im_io, 'JPEG')  # save the image to im_io
-        im_io.seek(0)  # seek to the beginning
-        image_1 = InMemoryUploadedFile(
-            im_io,
-            None,
-            self.NAME_FOR_IMAGE_1,
-            'image/jpeg',
-            len(im_io.getvalue()),
-            None,
-        )
+        image_1 = create_an_img_ready_for_models(self.NAME_FOR_IMAGE_1)
 
         form = AddAlternativesForm(
             data={
@@ -353,18 +374,7 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
 
     @patch('questions.validators.IMAGE_VALID_EXTENSIONS', ['.png'])
     def test_add_alternatives_with_form_with_invalid_image_extension(self):
-        im = Image.new(mode='RGB', size=(1, 1))  # create a new image using PIL
-        im_io = BytesIO()  # a BytesIO object for saving image
-        im.save(im_io, 'JPEG')  # save the image to im_io
-        im_io.seek(0)  # seek to the beginning
-        image_1 = InMemoryUploadedFile(
-            im_io,
-            None,
-            self.NAME_FOR_IMAGE_1,
-            'image/jpeg',
-            len(im_io.getvalue()),
-            None,
-        )
+        image_1 = create_an_img_ready_for_models(self.NAME_FOR_IMAGE_1)
 
         form = AddAlternativesForm(
             data={
