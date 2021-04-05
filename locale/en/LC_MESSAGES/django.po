@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-04 12:41-0400\n"
+"POT-Creation-Date: 2021-04-05 01:52-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,86 +18,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/constants.py:13
+#: core/constants.py:14
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 
-#: core/constants.py:16
+#: core/constants.py:17
 msgid "The list you are trying to see is incomplete"
 msgstr ""
 
-#: core/constants.py:18
+#: core/constants.py:19
 msgid "List was created successfully"
 msgstr ""
 
-#: core/constants.py:19
+#: core/constants.py:20
 msgid "List was edited successfully"
 msgstr ""
 
-#: core/constants.py:20
+#: core/constants.py:21
 msgid "List was deleted successfully"
 msgstr ""
 
-#: core/constants.py:21
+#: core/constants.py:22
 msgid "List was published successfully"
 msgstr ""
 
-#: core/constants.py:22
+#: core/constants.py:23
 msgid "The list reached the limit of questions"
 msgstr ""
 
-#: core/constants.py:23
+#: core/constants.py:24
 msgid "Question was created successfully"
 msgstr ""
 
-#: core/constants.py:24
+#: core/constants.py:25
 msgid "Question was edited successfully"
 msgstr ""
 
-#: core/constants.py:25
+#: core/constants.py:26
 msgid "Question was deleted successfully"
 msgstr ""
 
-#: core/constants.py:27
+#: core/constants.py:28
 msgid "You already answered all the questions for this list"
 msgstr ""
 
-#: core/constants.py:30
+#: core/constants.py:31
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 
-#: core/constants.py:33
+#: core/constants.py:34
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so "
 "you won't be able to see that person answers. Tell the user to answer all "
 "the questions"
 msgstr ""
 
-#: core/constants.py:40
+#: core/constants.py:41
 msgid "Do not use special chars."
 msgstr ""
 
-#: core/constants.py:42
+#: core/constants.py:43
 msgid "File too large. Size should not exceed 2 MB."
 msgstr ""
 
-#: core/constants.py:45
+#: core/constants.py:46
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 
-#: core/constants.py:50
+#: core/constants.py:51
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:52
+#: core/constants.py:53
 msgid "100 characters max. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:53
+#: core/constants.py:54
 msgid "Invalid header found."
 msgstr ""
 
-#: core/constants.py:55
+#: core/constants.py:56
 msgid "Picture must have a size under 2 MB."
 msgstr ""
 
@@ -299,7 +299,7 @@ msgid ""
 "contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: templates/answer_question.html:19 templates/list_results.html:18
+#: templates/answer_question.html:19 templates/list_results.html:23
 #: templates/lists.html:41 templates/search_results.html:33
 #: templates/user_lists.html:40
 msgid "Share list"
@@ -416,15 +416,15 @@ msgstr ""
 msgid "Lists"
 msgstr ""
 
-#: templates/list_results.html:12
-msgid "results"
+#: templates/list_results.html:20
+msgid "Results"
 msgstr ""
 
-#: templates/list_results.html:47
+#: templates/list_results.html:73
 msgid "Your vote"
 msgstr ""
 
-#: templates/list_results.html:49
+#: templates/list_results.html:75
 #, python-format
 msgid "%(shared_user)s's vote"
 msgstr ""

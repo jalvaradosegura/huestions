@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-04 12:41-0400\n"
-"PO-Revision-Date: 2021-04-04 16:41+0000\n"
+"POT-Creation-Date: 2021-04-05 01:52-0400\n"
+"PO-Revision-Date: 2021-04-05 05:52+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,57 +19,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.5\n"
 
-#: core/constants.py:13
+#: core/constants.py:14
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 "La lista necesita al menos 1 pregunta con 2 alternativas para estar completa"
 
-#: core/constants.py:16
+#: core/constants.py:17
 msgid "The list you are trying to see is incomplete"
 msgstr "La lista que estás intentado acceder está incompleta"
 
-#: core/constants.py:18
+#: core/constants.py:19
 msgid "List was created successfully"
 msgstr "Lista creada con éxito"
 
-#: core/constants.py:19
+#: core/constants.py:20
 msgid "List was edited successfully"
 msgstr "Lista editada con éxito"
 
-#: core/constants.py:20
+#: core/constants.py:21
 msgid "List was deleted successfully"
 msgstr "Lista eliminada con éxito"
 
-#: core/constants.py:21
+#: core/constants.py:22
 msgid "List was published successfully"
 msgstr "Lista publicada con éxito"
 
-#: core/constants.py:22
+#: core/constants.py:23
 msgid "The list reached the limit of questions"
 msgstr "La lista alcanzó el límite de preguntas"
 
-#: core/constants.py:23
+#: core/constants.py:24
 msgid "Question was created successfully"
 msgstr "Pregunta creada con éxito"
 
-#: core/constants.py:24
+#: core/constants.py:25
 msgid "Question was edited successfully"
 msgstr "Pregunta editada con éxito"
 
-#: core/constants.py:25
+#: core/constants.py:26
 msgid "Question was deleted successfully"
 msgstr "Pregunta eliminada con éxito"
 
-#: core/constants.py:27
+#: core/constants.py:28
 msgid "You already answered all the questions for this list"
 msgstr "Ya respondiste todas las preguntas de esta lista"
 
-#: core/constants.py:30
+#: core/constants.py:31
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 "Debes responder todas las preguntas de la lista antes de ver los resultados"
 
-#: core/constants.py:33
+#: core/constants.py:34
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so"
 " you won't be able to see that person answers. Tell the user to answer all "
@@ -79,35 +79,32 @@ msgstr ""
 " por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
 "todas las preguntas"
 
-#: core/constants.py:40
-#| msgid "Do not use special chars"
+#: core/constants.py:41
 msgid "Do not use special chars."
 msgstr "No uses caracteres especiales."
 
-#: core/constants.py:42
+#: core/constants.py:43
 msgid "File too large. Size should not exceed 2 MB."
 msgstr "Archivo demasiado grande. El tamaño no debe exceder de 2 MB."
 
-#: core/constants.py:45
-#| msgid ""
-#| "File extension not valid. Allowed extensions: .jpg, .jpeg, .png"
+#: core/constants.py:46
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 "Extensión de archivo no válida. Extensiones permitidas: .jpg, .jpeg, .png."
 
-#: core/constants.py:50
+#: core/constants.py:51
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr "100 caracteres máximo y 5 mínimo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:52
+#: core/constants.py:53
 msgid "100 characters max. Also don't use special chars."
 msgstr "100 caracteres máximo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:53
+#: core/constants.py:54
 msgid "Invalid header found."
 msgstr "Se encontró un header inválido"
 
-#: core/constants.py:55
+#: core/constants.py:56
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
@@ -329,7 +326,7 @@ msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
 
-#: templates/answer_question.html:19 templates/list_results.html:18
+#: templates/answer_question.html:19 templates/list_results.html:23
 #: templates/lists.html:41 templates/search_results.html:33
 #: templates/user_lists.html:40
 msgid "Share list"
@@ -446,15 +443,16 @@ msgstr "Términos"
 msgid "Lists"
 msgstr "Listas"
 
-#: templates/list_results.html:12
-msgid "results"
-msgstr "resultados"
+#: templates/list_results.html:20
+#| msgid "results"
+msgid "Results"
+msgstr "Resultados"
 
-#: templates/list_results.html:47
+#: templates/list_results.html:73
 msgid "Your vote"
 msgstr "Tu voto"
 
-#: templates/list_results.html:49
+#: templates/list_results.html:75
 #, python-format
 msgid "%(shared_user)s's vote"
 msgstr "Voto de %(shared_user)s"

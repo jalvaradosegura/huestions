@@ -83,10 +83,12 @@ class Alternative(TitleAndTimeStampedModel):
     def get_votes_percentage(self):
         if self.question.get_amount_of_users_that_have_voted() == 0:
             return 0
-        return (
-            self.get_votes_amount()
-            / self.question.get_amount_of_users_that_have_voted()
-            * 100
+        return float(
+            "{:.2f}".format(
+                self.get_votes_amount()
+                / self.question.get_amount_of_users_that_have_voted()
+                * 100
+            )
         )
 
     def vote_for_this_alternative(self, user):

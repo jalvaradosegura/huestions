@@ -9,14 +9,21 @@
 <nav class="breadcrumb" aria-label="breadcrumbs">
   <ul>
     <li><a href="{% url 'questions_list' %}">{% trans "Lists" %}</a></li>
-    <li class="is-active"><a href="#" aria-current="page">{{ questionlist.title }} &middot {% trans "results" %}!</a></li>
+    <li class="is-active"><a href="#" aria-current="page">{{ questionlist.title }}</a></li>
   </ul>
 </nav>
 
 {% url 'answer_list' questionlist.slug user as list_url %}
-{% with domain_url=request.get_host %}
-  <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="button is-light mb-2">{% trans "Share list" %}</button>
-{% endwith %}
+  {% with domain_url=request.get_host %}
+    <div class="field is-grouped">
+      <div class="control">
+	<h2 class="title is-2">{% trans "Results" %}</h2>
+      </div>
+      <div class="control">
+        <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="button is-light mb-2">{% trans "Share list" %}</button>
+      </div>
+    </div>
+  {% endwith %}
 
 {% localize off %}
   {% for i in questions_and_user_alternatives %}
@@ -33,14 +40,33 @@
             </header>
 
             <div class="card-content">
-              <div class="content">
 	        {% with alternative_1=question.alternatives.all.0  alternative_2=question.alternatives.all.1  %}
-	          {{ alternative_1 }} &middot {{ alternative_1.get_votes_percentage }}%
-	          <progress class="progress is-primary" value="{{ alternative_1.get_votes_percentage }}" max="100">15%</progress>
-	          {{ alternative_2 }} &middot {{ alternative_2.get_votes_percentage }}%
-	          <progress class="progress is-primary" value="{{ alternative_2.get_votes_percentage }}" max="100">15%</progress>
+
+		  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-96x96">
+		          <img class="is-rounded" src="{{ alternative_1.image.url }}" alt="Placeholder image">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      {{ alternative_1 }} &middot {{ alternative_1.get_votes_percentage }}%
+		      <progress class="progress is-primary" value="{{ alternative_1.get_votes_percentage }}" max="100">15%</progress>
+                    </div>
+                  </div>
+
+		  <div class="media">
+                    <div class="media-left">
+                      <figure class="image is-96x96">
+		          <img class="is-rounded" src="{{ alternative_2.image.url }}" alt="Placeholder image">
+                      </figure>
+                    </div>
+                    <div class="media-content">
+                      {{ alternative_2 }} &middot {{ alternative_2.get_votes_percentage }}%
+		      <progress class="progress is-primary" value="{{ alternative_2.get_votes_percentage }}" max="100">15%</progress>
+                    </div>
+                  </div>
+
 	        {% endwith %}
-              </div>
             </div>
 
             <footer class="card-footer">
