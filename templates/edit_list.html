@@ -81,14 +81,21 @@
 	  </header>
 
 	  <div class="card-content">
-	    <div class="content">
-	      <ul>
-	        {% for alternative in question.alternatives.all %}
-	          <li>{{ alternative }}</li>
-	        {% endfor %}
-	      </ul>
-	    </div>
-	  </div>
+
+	    <div class="media">
+	      {% for alternative in question.alternatives.all %}
+              <div class="media-left">
+                <figure class="image is-48x48">
+		  <img class="is-rounded" src="{{ alternative.image.url }}" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="media-content">
+		<p class="title is-4">{{ alternative }}</p>
+              </div>
+	      {% endfor %}
+            </div>
+
+	  </div> <!-- card-content -->
 
 	  <footer class="card-footer">
 	    <a href="{{ question.get_absolute_url }}" class="card-footer-item button is-light" id="edit_question_{{ forloop.counter0 }}">Edit</a>
