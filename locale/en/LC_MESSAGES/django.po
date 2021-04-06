@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 01:52-0400\n"
+"POT-Creation-Date: 2021-04-06 00:15-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -299,9 +299,8 @@ msgid ""
 "contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: templates/answer_question.html:19 templates/list_results.html:23
-#: templates/lists.html:41 templates/search_results.html:33
-#: templates/user_lists.html:40
+#: templates/answer_question.html:19 templates/lists.html:41
+#: templates/search_results.html:33 templates/user_lists.html:40
 msgid "Share list"
 msgstr ""
 
@@ -339,15 +338,15 @@ msgstr ""
 msgid "Choose a picture for Alternative 2"
 msgstr ""
 
-#: templates/create_question.html:183
+#: templates/create_question.html:177
 msgid "Create & add another"
 msgstr ""
 
-#: templates/create_question.html:187
+#: templates/create_question.html:181
 msgid "Create & publish the list"
 msgstr ""
 
-#: templates/create_question.html:191
+#: templates/create_question.html:185
 msgid "Create & go back"
 msgstr ""
 
@@ -420,11 +419,23 @@ msgstr ""
 msgid "Results"
 msgstr ""
 
-#: templates/list_results.html:73
+#: templates/list_results.html:23
+msgid "Copied to clipboard"
+msgstr ""
+
+#: templates/list_results.html:23
+msgid "Copy list link"
+msgstr ""
+
+#: templates/list_results.html:30
+msgid "Share on WhatsApp"
+msgstr ""
+
+#: templates/list_results.html:81
 msgid "Your vote"
 msgstr ""
 
-#: templates/list_results.html:75
+#: templates/list_results.html:83
 #, python-format
 msgid "%(shared_user)s's vote"
 msgstr ""

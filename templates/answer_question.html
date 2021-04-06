@@ -16,7 +16,15 @@
         <h2 class="title is-2">{{ questionlist.title }}</h2>
       </div>
       <div class="control">
-        <button data-toggle="tooltip" onclick="copyToClipboard('{{ domain_url }}{{ list_url }}')" class="button is-light mb-2">{% trans "Share list" %}</button>
+	<button data-toggle="tooltip" onclick="copyToClipboard('{{ request.scheme }}://{{ domain_url }}{{ list_url }}')" title="{% trans "Copied to clipboard" %}!" class="button is-light mb-2">{% trans "Copy list link" %}</button>
+      </div>
+      <div class="control">
+	<a class="button" href="https://wa.me/?text={{ request.scheme }}://{{ domain_url }}{{ list_url}}" target="_blank" style="background-color:#25D366;color:white">
+          <span class="icon">
+            <i class="fab fa-whatsapp"></i>
+          </span>
+	  <span>{% trans "Share on WhatsApp" %}</span>
+        </a>
       </div>
     </div>
   {% endwith %}

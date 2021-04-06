@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-05 01:52-0400\n"
-"PO-Revision-Date: 2021-04-05 05:52+0000\n"
+"POT-Creation-Date: 2021-04-06 00:15-0400\n"
+"PO-Revision-Date: 2021-04-06 04:16+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -326,9 +326,8 @@ msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
 
-#: templates/answer_question.html:19 templates/list_results.html:23
-#: templates/lists.html:41 templates/search_results.html:33
-#: templates/user_lists.html:40
+#: templates/answer_question.html:19 templates/lists.html:41
+#: templates/search_results.html:33 templates/user_lists.html:40
 msgid "Share list"
 msgstr "Compartir lista"
 
@@ -366,15 +365,15 @@ msgstr "No hay ningún archivo"
 msgid "Choose a picture for Alternative 2"
 msgstr "Elige una foto para la Alternativa 2"
 
-#: templates/create_question.html:183
+#: templates/create_question.html:177
 msgid "Create & add another"
 msgstr "Crear y agregrar otra"
 
-#: templates/create_question.html:187
+#: templates/create_question.html:181
 msgid "Create & publish the list"
 msgstr "Crear y publicar lista"
 
-#: templates/create_question.html:191
+#: templates/create_question.html:185
 msgid "Create & go back"
 msgstr "Crear y volver"
 
@@ -444,15 +443,26 @@ msgid "Lists"
 msgstr "Listas"
 
 #: templates/list_results.html:20
-#| msgid "results"
 msgid "Results"
 msgstr "Resultados"
 
-#: templates/list_results.html:73
+#: templates/list_results.html:23
+msgid "Copied to clipboard"
+msgstr "Copiado al portapapeles"
+
+#: templates/list_results.html:23
+msgid "Copy list link"
+msgstr "Copiar link de la lista"
+
+#: templates/list_results.html:30
+msgid "Share on WhatsApp"
+msgstr "Compartir en WhatsApp"
+
+#: templates/list_results.html:81
 msgid "Your vote"
 msgstr "Tu voto"
 
-#: templates/list_results.html:75
+#: templates/list_results.html:83
 #, python-format
 msgid "%(shared_user)s's vote"
 msgstr "Voto de %(shared_user)s"

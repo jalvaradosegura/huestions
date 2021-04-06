@@ -10,7 +10,6 @@ function copyToClipboard(urlToCopy){
 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip({
-        title: 'Copied to clipboard!',
         trigger: 'click',
     });
 });
