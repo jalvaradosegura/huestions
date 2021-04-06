@@ -7,6 +7,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
 from lists.models import QuestionList
+from core import views as error_views
 
 info_dict = {
     'queryset': QuestionList.objects.all(),
@@ -28,6 +29,10 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap',
     ),
 ]
+
+handler403 = error_views.handler403
+handler404 = error_views.handler404
+handler500 = error_views.handler500
 
 
 if settings.DEBUG:

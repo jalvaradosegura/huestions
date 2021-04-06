@@ -2,6 +2,7 @@ from http import HTTPStatus
 from unittest.mock import patch
 
 from django.contrib.messages import get_messages
+from django.http import HttpResponse
 from django.test import TestCase
 from django.urls import resolve, reverse
 
@@ -121,3 +122,55 @@ class ContactSuccessViewTests(TestCase):
         response = self.client.get(self.base_url)
 
         self.assertTemplateUsed(response, ContactSuccessView.template_name)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+
+class Handler500ViewTests(TestCase):
+    def test_response(self):
+        response = HttpResponse(status=500)
+
+        self.assertEqual(
+            response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(reverse('500'))
+
+        self.assertTemplateUsed(response, 'errors/500.html')
+        self.assertEqual(
+            response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR
+        )
+
+
+class Handler403ViewTests(TestCase):
+    def test_response(self):
+        response = HttpResponse(status=403)
+
+        self.assertEqual(
+            response.status_code, HTTPStatus.FORBIDDEN
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(reverse('403'))
+
+        self.assertTemplateUsed(response, 'errors/403.html')
+        self.assertEqual(
+            response.status_code, HTTPStatus.FORBIDDEN
+        )
+
+
+class Handler404ViewTests(TestCase):
+    def test_response(self):
+        response = HttpResponse(status=404)
+
+        self.assertEqual(
+            response.status_code, HTTPStatus.NOT_FOUND
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(reverse('404'))
+
+        self.assertTemplateUsed(response, 'errors/404.html')
+        self.assertEqual(
+            response.status_code, HTTPStatus.NOT_FOUND
+        )
