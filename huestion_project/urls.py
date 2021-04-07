@@ -6,8 +6,8 @@ from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
-from lists.models import QuestionList
 from core import views as error_views
+from lists.models import QuestionList
 
 info_dict = {
     'queryset': QuestionList.objects.all(),

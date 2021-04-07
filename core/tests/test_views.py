@@ -146,31 +146,23 @@ class Handler403ViewTests(TestCase):
     def test_response(self):
         response = HttpResponse(status=403)
 
-        self.assertEqual(
-            response.status_code, HTTPStatus.FORBIDDEN
-        )
+        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
     def test_returns_correct_html(self):
         response = self.client.get(reverse('403'))
 
         self.assertTemplateUsed(response, 'errors/403.html')
-        self.assertEqual(
-            response.status_code, HTTPStatus.FORBIDDEN
-        )
+        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
 
 class Handler404ViewTests(TestCase):
     def test_response(self):
         response = HttpResponse(status=404)
 
-        self.assertEqual(
-            response.status_code, HTTPStatus.NOT_FOUND
-        )
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
     def test_returns_correct_html(self):
         response = self.client.get(reverse('404'))
 
         self.assertTemplateUsed(response, 'errors/404.html')
-        self.assertEqual(
-            response.status_code, HTTPStatus.NOT_FOUND
-        )
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)

@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from core.constants import DEFAULT_IMAGE_NAME
 from core.models import TitleAndTimeStampedModel
 from lists.models import QuestionList
+
 from .utils import reshape_img_to_square_with_blurry_bg
 
 

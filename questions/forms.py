@@ -97,7 +97,7 @@ class AddAlternativesForm(forms.Form):
     image_2 = forms.ImageField(
         required=False,
         validators=[file_size_validator],
-        help_text=FILE_TOO_LARGE_HELPER
+        help_text=FILE_TOO_LARGE_HELPER,
     )
     alternative_2 = forms.CharField(
         label=_('Alternative 2'),

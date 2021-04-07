@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 # === Global variables ===
@@ -9,7 +10,7 @@ MAX_IMAGE_SIZE = 2 * 1000 * 1000
 IMAGE_VALID_EXTENSIONS = ['.jpg', '.jpeg', '.png']
 DEFAULT_IMAGE_NAME = 'default_alternative.jpg'
 
-# === Messages ===
+# === Flash Messages ===
 LIST_COMPLETION_ERROR_MESSAGE = _(
     'The list needs at least 1 question with 2 alternatives to be completed'
 )
@@ -57,3 +58,16 @@ FILE_TOO_LARGE_HELPER = _('Picture must have a size under 2 MB.')
 
 # === Tests ===
 TEST_FOLDER_TO_STORE_IMAGES = Path('for_tests')
+COMPLETE_PATH_TO_TEST_IMGS_FOLDER = (
+    settings.MEDIA_ROOT / 'alternative_pics' / TEST_FOLDER_TO_STORE_IMAGES
+)
+
+# === Commands ===
+# delete_test_images_folder
+COMMAND_ERROR_MESSAGE = (
+    'Path does not exist: %s' % COMPLETE_PATH_TO_TEST_IMGS_FOLDER
+)
+COMMAND_HELP_TEXT = 'Delete the folder used by tests to store images'
+COMMAND_SUCCESS_MESSAGE = (
+    'Path was deleted: %s' % COMPLETE_PATH_TO_TEST_IMGS_FOLDER
+)

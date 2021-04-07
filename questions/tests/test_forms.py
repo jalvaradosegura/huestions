@@ -1,15 +1,15 @@
 from http import HTTPStatus
-from unittest.mock import patch
 from pathlib import Path
+from unittest.mock import patch
 
 from django.conf import settings
 from django.test import TestCase
 from django.urls import reverse
 
 from core.constants import (
+    DEFAULT_IMAGE_NAME,
     FILE_EXTENSION_ERROR,
     FILE_TOO_LARGE_ERROR,
-    DEFAULT_IMAGE_NAME,
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     SPECIAL_CHARS_ERROR,
 )
