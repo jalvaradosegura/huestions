@@ -2,16 +2,14 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
 
-from core.mixins import DeleteTestImagesOfAlternativesMixin, TestModelStrMixin
+from core.mixins import TestModelStrMixin
 from users.factories import UserFactory
 
 from ..factories import AlternativeFactory, QuestionFactory
 from ..models import Question
 
 
-class QuestionModelTests(
-    DeleteTestImagesOfAlternativesMixin, TestModelStrMixin, TestCase
-):
+class QuestionModelTests(TestModelStrMixin, TestCase):
     model_factory = QuestionFactory
 
     def setUp(self):
@@ -96,9 +94,7 @@ class QuestionModelTests(
         self.assertEqual(question.get_user_voted_alternative(user), None)
 
 
-class AlternativeModelTests(
-    DeleteTestImagesOfAlternativesMixin, TestModelStrMixin, TestCase
-):
+class AlternativeModelTests(TestModelStrMixin, TestCase):
     model_factory = AlternativeFactory
 
     def setUp(self):

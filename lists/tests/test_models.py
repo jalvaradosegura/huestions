@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from core.mixins import DeleteTestImagesOfAlternativesMixin, TestModelStrMixin
+from core.mixins import TestModelStrMixin
 from questions.factories import AlternativeFactory, QuestionFactory
 from users.factories import UserFactory
 
@@ -9,9 +9,7 @@ from ..factories import QuestionListFactory
 from ..models import QuestionList
 
 
-class QuestionListModelTests(
-    DeleteTestImagesOfAlternativesMixin, TestModelStrMixin, TestCase
-):
+class QuestionListModelTests(TestModelStrMixin, TestCase):
     model_factory = QuestionListFactory
 
     def test_generate_unique_slug_if_needed(self):

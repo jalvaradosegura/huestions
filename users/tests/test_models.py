@@ -1,13 +1,12 @@
 from django.test import TestCase
 
-from core.mixins import DeleteTestImagesOfAlternativesMixin
 from lists.factories import QuestionListFactory
 from questions.factories import AlternativeFactory
 
 from ..factories import UserFactory
 
 
-class CustomUserModelTests(DeleteTestImagesOfAlternativesMixin, TestCase):
+class CustomUserModelTests(TestCase):
     def test_get_amount_of_lists_created(self):
         user = UserFactory(username='random')
         QuestionListFactory(owner=user)

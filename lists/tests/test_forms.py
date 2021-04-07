@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from core.constants import LIST_COMPLETION_ERROR_MESSAGE, SPECIAL_CHARS_ERROR
-from core.mixins import DeleteTestImagesOfAlternativesMixin, LoginUserMixin
+from core.mixins import LoginUserMixin
 from questions.factories import AlternativeFactory, QuestionFactory
 
 from ..factories import QuestionListFactory
@@ -12,7 +12,7 @@ from ..forms import CompleteListForm, CreateQuestionListForm, EditListForm
 from ..models import QuestionList
 
 
-class CompleteListFormTests(DeleteTestImagesOfAlternativesMixin, TestCase):
+class CompleteListFormTests(TestCase):
     def test_complete_list_with_form_fail(self):
         question_list = QuestionListFactory(title='an awesome list')
 

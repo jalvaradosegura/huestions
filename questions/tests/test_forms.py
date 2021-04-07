@@ -13,7 +13,7 @@ from core.constants import (
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     SPECIAL_CHARS_ERROR,
 )
-from core.mixins import DeleteTestImagesOfAlternativesMixin, LoginUserMixin
+from core.mixins import LoginUserMixin
 
 from ..factories import (
     AlternativeFactory,
@@ -25,7 +25,7 @@ from ..models import Alternative, Question
 from ..utils import create_an_img_ready_for_models
 
 
-class AnswerQuestionFormTests(DeleteTestImagesOfAlternativesMixin, TestCase):
+class AnswerQuestionFormTests(TestCase):
     def test_generate_the_form_with_choices(self):
         question = QuestionFactory(title='What is this question')
         alternative_1 = AlternativeFactory(title='a1', question=question)
@@ -41,9 +41,7 @@ class AnswerQuestionFormTests(DeleteTestImagesOfAlternativesMixin, TestCase):
         )
 
 
-class AnswerQuestionFormViewTests(
-    LoginUserMixin, DeleteTestImagesOfAlternativesMixin, TestCase
-):
+class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
     def test_get_success(self):
         question_list = QuestionListFactory(title='awesome list', active=True)
         question = QuestionFactory(

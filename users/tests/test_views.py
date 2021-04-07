@@ -3,7 +3,7 @@ from http import HTTPStatus
 from django.test import TestCase
 from django.urls import resolve, reverse
 
-from core.mixins import DeleteTestImagesOfAlternativesMixin, TestViewsMixin
+from core.mixins import TestViewsMixin
 from lists.factories import QuestionListFactory
 from questions.factories import AlternativeFactory
 
@@ -11,9 +11,7 @@ from ..factories import UserFactory
 from ..views import UserListsView, UserStatsView
 
 
-class UserListsViewTests(
-    DeleteTestImagesOfAlternativesMixin, TestViewsMixin, TestCase
-):
+class UserListsViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_login_and_verify_user()
         self.base_url = reverse('lists', args=[self.user.username])
@@ -75,9 +73,7 @@ class UserListsViewTests(
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
 
-class UserStatsViewTests(
-    DeleteTestImagesOfAlternativesMixin, TestViewsMixin, TestCase
-):
+class UserStatsViewTests(TestViewsMixin, TestCase):
     def setUp(self):
         self.create_login_and_verify_user()
         self.base_url = reverse('stats', args=[self.user.username])

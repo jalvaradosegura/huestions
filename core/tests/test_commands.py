@@ -12,14 +12,16 @@ from core.constants import (
 
 
 class DeleteTestImagesFolderCommandTests(TestCase):
+    folder_path = Path(COMPLETE_PATH_TO_TEST_IMGS_FOLDER)
+
     def test_command_fail(self):
+        if self.folder_path.is_dir():
+            call_command('delete_test_images_folder')
         with self.assertRaises(CommandError):
             call_command('delete_test_images_folder')
 
     def test_command_success(self):
-        Path(COMPLETE_PATH_TO_TEST_IMGS_FOLDER).mkdir(
-            parents=True, exist_ok=True
-        )
+        self.folder_path.mkdir(parents=True, exist_ok=True)
         out = io.StringIO()
         call_command('delete_test_images_folder', stdout=out)
         self.assertIn(COMMAND_SUCCESS_MESSAGE, out.getvalue())
