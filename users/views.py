@@ -1,17 +1,18 @@
 from allauth.account.decorators import verified_email_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import Count, Q
+from django.db.models import Q
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, View
 
 from core.constants import AMOUNT_OF_LISTS_PER_PAGE
+from core.mixins import CustomUserPassesTestMixin
 from questions.models import QuestionList
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class UserListsView(LoginRequiredMixin, ListView):
+class UserListsView(LoginRequiredMixin, CustomUserPassesTestMixin, ListView):
     template_name = 'user_lists.html'
     paginate_by = AMOUNT_OF_LISTS_PER_PAGE
 

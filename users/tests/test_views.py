@@ -27,20 +27,27 @@ class UserListsViewTests(TestViewsMixin, TestCase):
         self.assertTemplateUsed(response, 'user_lists.html')
 
     def test_contains_only_user_lists(self):
-        user_2 = UserFactory(username='jorge')
         QuestionListFactory(title='list 1', owner=self.user)
         QuestionListFactory(title='list 2', owner=self.user)
-        QuestionListFactory(title='list 3', owner=user_2)
 
         response_1 = self.client.get(self.base_url)
         html_1 = response_1.content.decode('utf-8')
-        response_2 = self.client.get(reverse('lists', args=[user_2.username]))
+
+        self.create_login_and_verify_user(email='jorge@email.com')
+        QuestionListFactory(title='list 3', owner=self.user)
+        response_2 = self.client.get(
+            reverse('lists', args=[self.user.username])
+        )
+        response_2_denied = self.client.get(self.base_url)
         html_2 = response_2.content.decode('utf-8')
 
         self.assertRegex(html_1, 'list 1')
         self.assertRegex(html_1, 'list 2')
         self.assertNotRegex(html_1, 'list 3')
         self.assertRegex(html_2, 'list 3')
+        self.assertNotRegex(html_2, 'list 1')
+        self.assertNotRegex(html_2, 'list 2')
+        self.assertEqual(response_2_denied.status_code, HTTPStatus.FORBIDDEN)
 
     def test_filter_parameters_published(self):
         question_list_1 = QuestionListFactory(
