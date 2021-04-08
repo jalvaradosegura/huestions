@@ -39,6 +39,9 @@ black:
 isort:
 	isort .  -m 3 --color
 
+remove-test-folder:
+	python manage.py delete_test_images_folder --settings=huestion_project.settings.local
+
 help:
 	@echo "==Commands==="
 	@echo "run"
