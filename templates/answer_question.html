@@ -43,7 +43,6 @@
       <div class="column is-6">
 
 	<form id="form{{ forloop.counter }}" action="" method="post">{% csrf_token %}
-          <input type="hidden" name="list_slug" value="{{ questionlist.slug }}">
           <input id="id_alternatives_{{ forloop.counter0 }}" type="hidden" name="alternatives" value="{{ choice.0 }}">
         </form>
 

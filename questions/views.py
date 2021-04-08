@@ -89,14 +89,10 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
     def post(self, request, *args, **kwargs):
         selected_alternative = (
             Alternative.objects.all()
-            .select_related('question')
+            .select_related('question__child_of')
             .get(id=request.POST['alternatives'])
         )
-        question_list = (
-            QuestionList.objects.all()
-            .prefetch_related('questions__alternatives__users')
-            .get(slug=request.POST['list_slug'])
-        )
+        question_list = selected_alternative.question.child_of
 
         if not selected_alternative.question.has_the_user_already_voted(
             self.request.user
