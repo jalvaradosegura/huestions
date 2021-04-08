@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-06 00:15-0400\n"
-"PO-Revision-Date: 2021-04-06 04:16+0000\n"
+"POT-Creation-Date: 2021-04-08 13:03-0400\n"
+"PO-Revision-Date: 2021-04-08 17:03+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,57 +19,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.5\n"
 
-#: core/constants.py:14
+#: core/constants.py:15
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 "La lista necesita al menos 1 pregunta con 2 alternativas para estar completa"
 
-#: core/constants.py:17
+#: core/constants.py:18
 msgid "The list you are trying to see is incomplete"
 msgstr "La lista que estás intentado acceder está incompleta"
 
-#: core/constants.py:19
+#: core/constants.py:20
 msgid "List was created successfully"
 msgstr "Lista creada con éxito"
 
-#: core/constants.py:20
+#: core/constants.py:21
 msgid "List was edited successfully"
 msgstr "Lista editada con éxito"
 
-#: core/constants.py:21
+#: core/constants.py:22
 msgid "List was deleted successfully"
 msgstr "Lista eliminada con éxito"
 
-#: core/constants.py:22
+#: core/constants.py:23
 msgid "List was published successfully"
 msgstr "Lista publicada con éxito"
 
-#: core/constants.py:23
+#: core/constants.py:24
 msgid "The list reached the limit of questions"
 msgstr "La lista alcanzó el límite de preguntas"
 
-#: core/constants.py:24
+#: core/constants.py:25
 msgid "Question was created successfully"
 msgstr "Pregunta creada con éxito"
 
-#: core/constants.py:25
+#: core/constants.py:26
 msgid "Question was edited successfully"
 msgstr "Pregunta editada con éxito"
 
-#: core/constants.py:26
+#: core/constants.py:27
 msgid "Question was deleted successfully"
 msgstr "Pregunta eliminada con éxito"
 
-#: core/constants.py:28
+#: core/constants.py:29
 msgid "You already answered all the questions for this list"
 msgstr "Ya respondiste todas las preguntas de esta lista"
 
-#: core/constants.py:31
+#: core/constants.py:32
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 "Debes responder todas las preguntas de la lista antes de ver los resultados"
 
-#: core/constants.py:34
+#: core/constants.py:35
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so"
 " you won't be able to see that person answers. Tell the user to answer all "
@@ -79,32 +79,32 @@ msgstr ""
 " por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
 "todas las preguntas"
 
-#: core/constants.py:41
+#: core/constants.py:42
 msgid "Do not use special chars."
 msgstr "No uses caracteres especiales."
 
-#: core/constants.py:43
+#: core/constants.py:44
 msgid "File too large. Size should not exceed 2 MB."
 msgstr "Archivo demasiado grande. El tamaño no debe exceder de 2 MB."
 
-#: core/constants.py:46
+#: core/constants.py:47
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 "Extensión de archivo no válida. Extensiones permitidas: .jpg, .jpeg, .png."
 
-#: core/constants.py:51
+#: core/constants.py:52
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr "100 caracteres máximo y 5 mínimo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:53
+#: core/constants.py:54
 msgid "100 characters max. Also don't use special chars."
 msgstr "100 caracteres máximo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:54
+#: core/constants.py:55
 msgid "Invalid header found."
 msgstr "Se encontró un header inválido"
 
-#: core/constants.py:56
+#: core/constants.py:57
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
@@ -148,9 +148,65 @@ msgstr "Alternativa 1"
 msgid "Alternative 2"
 msgstr "Alternativa 2"
 
-#: templates/about.html:7
-msgid "About us"
-msgstr "Acerca de nosotros"
+#: templates/about.html:9 templates/footer.html:47
+#| msgid "About"
+msgid "About of"
+msgstr "Acerca de"
+
+#: templates/about.html:10
+msgid "I've always made a lot of questions to myself."
+msgstr "Siempre me hecho muchas preguntas."
+
+#: templates/about.html:11
+msgid ""
+"Every time I finished a TV show, I wondered which character is the favorite "
+"one for the viewers? If you have to pick between the first and last season "
+"which one do you choose? If you could save a character between 2 that you "
+"like a lot, which one do you save?"
+msgstr ""
+"Cada vez que terminaba una serie de televisión, me preguntaba, ¿Cuál será el"
+" personaje favorito de los espectadores? Si tuvieras que elegir entre la "
+"primera y la última temporada, ¿Cuál eliges? Si pudieras salvar a un "
+"personaje entre 2 que te gustan mucho ¿A cuál salvas?"
+
+#: templates/about.html:12
+msgid ""
+"Sometimes I wonder, if you have to choose a food to eat for the rest of your"
+" life (and you can only eat that), which one do you pick? and if your "
+"alternatives are this or that, which one do you pick?"
+msgstr ""
+"A veces me pregunto, si tienes que elegir una comida para comerla por el "
+"resto de tu vida (y solo puedes comer eso), ¿Cuál eliges? y si tus "
+"alternatives fueran esta o aquella, ¿Cuál eliges?"
+
+#: templates/about.html:13
+msgid ""
+"After watching a superhero movie...which superpower would people prefer to "
+"have? super strength, super speed, invisibility and so on."
+msgstr ""
+"Después de ver una película de super heroes...¿Cuál super poder prefería la "
+"gente tener? super fuerza, super velocidad, invisibilidad, etc"
+
+#: templates/about.html:14
+msgid ""
+"Also, I’ve always thought that it would be fun to see what people would "
+"answer to weird or deep questions. What would my friends answer to this or "
+"that?"
+msgstr ""
+"También, siempre he pensado que seria entretenido saber qué respondería la "
+"gente a preguntas extrañas o profundas. ¿Qué responderían mis amigos a esto "
+"o aquello?"
+
+#: templates/about.html:15
+msgid ""
+"That’s how Huestions was born. A place where you can see the answer to this "
+"questions and you can share them with your friends, with your family or with"
+" anyone and see what they answer to the questions you've always wonder."
+msgstr ""
+"Así fue como nació Huestions. Un lugar en donde puedes ver las respuestas a "
+"todo este tipo de preguntas y puedes compartirlas con tus amigos, familiares"
+" o con cualquier persona y ver qué es lo que responden a las preguntas que "
+"siempre has cuestionado."
 
 #: templates/account/email/base_message.txt:1
 #, python-format
@@ -326,10 +382,21 @@ msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
 
-#: templates/answer_question.html:19 templates/lists.html:41
-#: templates/search_results.html:33 templates/user_lists.html:40
-msgid "Share list"
-msgstr "Compartir lista"
+#: templates/answer_question.html:19 templates/list_results.html:23
+#: templates/lists.html:41 templates/search_results.html:33
+#: templates/user_lists.html:40
+msgid "Copied to clipboard"
+msgstr "Copiado al portapapeles"
+
+#: templates/answer_question.html:19 templates/list_results.html:23
+#: templates/lists.html:41 templates/search_results.html:33
+#: templates/user_lists.html:40
+msgid "Copy list link"
+msgstr "Copiar link de la lista"
+
+#: templates/answer_question.html:26 templates/list_results.html:30
+msgid "Share on WhatsApp"
+msgstr "Compartir en WhatsApp"
 
 #: templates/contact.html:8
 msgid "Contact Us"
@@ -425,10 +492,6 @@ msgstr "Agregar una pregunta"
 msgid "Artist"
 msgstr "Artista"
 
-#: templates/footer.html:47
-msgid "About"
-msgstr "Acerca"
-
 #: templates/footer.html:48
 msgid "Contact"
 msgstr "Contacto"
@@ -445,18 +508,6 @@ msgstr "Listas"
 #: templates/list_results.html:20
 msgid "Results"
 msgstr "Resultados"
-
-#: templates/list_results.html:23
-msgid "Copied to clipboard"
-msgstr "Copiado al portapapeles"
-
-#: templates/list_results.html:23
-msgid "Copy list link"
-msgstr "Copiar link de la lista"
-
-#: templates/list_results.html:30
-msgid "Share on WhatsApp"
-msgstr "Compartir en WhatsApp"
 
 #: templates/list_results.html:81
 msgid "Your vote"
@@ -488,7 +539,7 @@ msgstr "por"
 msgid "Votes in the last few days"
 msgstr "Votos en los últimos días"
 
-#: templates/lists.html:43 templates/search_results.html:35
+#: templates/lists.html:43 templates/search_results.html:36
 #: templates/user_lists.html:42
 msgid "Go"
 msgstr "Ir"
@@ -549,7 +600,7 @@ msgstr "Encontró"
 msgid "result"
 msgstr "resultado"
 
-#: templates/terms_and_conditions.html:7
+#: templates/terms_and_conditions.html:9
 msgid "Terms and Conditions"
 msgstr "Términos y Condiciones"
 
@@ -593,6 +644,12 @@ msgid ""
 msgstr ""
 "Reconozco que he leído y acepto los <a href=\"%(url)s\" "
 "target=\"_blank\">Términos y Condiciones</a>"
+
+#~ msgid "About us"
+#~ msgstr "Acerca de nosotros"
+
+#~ msgid "Share list"
+#~ msgstr "Compartir lista"
 
 #~ msgid "Answer"
 #~ msgstr "Responder"
