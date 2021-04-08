@@ -4,7 +4,37 @@
 
 {% block main %}
 
-  <h1 class="title is-1">{% trans "Terms and Conditions" %}</h1>
-  <p>These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and Termly Inc (“we,” “us” or “our”), concerning your access to and use of the https://localhost.com website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”). You agree that by accessing the Site, you have read, understood, and agree to be bound by all of these Terms of Use. If you do not agree with all of these terms of use, then you are expressly prohibited from using the site and you must discontinue use immediately.</p>
+<div class="content">
 
+  <h1 class="title is-1">{% trans "Terms and Conditions" %}</h1>
+  <p class="has-text-justified">We may change this Policy from time to time so please check this page occasionally to ensure that you’re happy with any changes. By using our website, you’are agreeing to be bound by this Policy. The most current version of the <a href="{% url 'terms_and_conditions' %}">Terms</a>, will govern our relationship with you.</p>
+
+  <h2 class="title is-2">Limits on liability</h2>
+  <p class="has-text-justified">We work hard to provide the best services we can and to specify clear guidelines for everyone who uses them. Our services, however, are provided "as is", and we make no guarantees that they always will be safe, secure, or error-free, or that they will function without disruptions, delays, or imperfections. To the extent permitted by law, we also disclaim all warranties, whether express or implied, including the implied warranties of merchantability, fitness for a particular purpose, title, and non-infringement. We do not control or direct what people and others do or say, and we are not responsible for their actions or conduct (whether online or offline) or any content they share (including offensive, inappropriate, obscene, unlawful, and other objectionable content).</p>
+  <p class="has-text-justified">We cannot predict when issues might arise with our services. Under no circumstance will we be liable to you for any lost profits, revenues, information, or data, or consequential, special, indirect, exemplary, punitive, or incidental damages arising out of or related to these Terms or Huestions services, even if we have been advised of the possibility of such damages.</p>
+
+  <h2 class="title is-2">Third-Party Content</h2>
+  <p class="has-text-justified">Huestions services may contain links to third-party websites, products, or services, which may be posted by advertisers, our affiliates, our partners, or other users. Third-Party Content is not under our control, and we are not responsible for any of their websites, products, or services. Your use of Third-Party Content is at your own risk and you should make any investigation you feel necessary before proceeding with any transaction in connection with such Third-Party Content.</p>
+  <p class="has-text-justified">The Services may also contain sponsored Third-Party Content or advertisements. The type, degree, and targeting of advertisements are subject to change, and you acknowledge and agree that we may place advertisements in connection with the display of any Content or information on the Services, including your Content</p>
+
+  <h2 class="title is-2">Your Account</h2>
+  <p class="has-text-justified">You may need to create an account to use some of our Services. You are responsible for safeguarding your account, so use a strong password and limit its use to this account. We cannot and will not be liable for any loss or damage arising from your failure to comply with the above.</p>
+
+  <h2 class="title is-2">Advices Or Similar Within Content Shared By Users</h2>
+  <p class="has-text-justified">Within the content shared by users, there may be suggestions, indications, preferences and similar, we are not responsible for any of that. You should make any investigation you feel necessary regarding something you read online.</p>
+
+  <h2 class="title is-2">Contact us</h2>
+  <p class="has-text-justified">Huestions welcomes comments, questions, concerns or suggestions. You can contact us by using this <a href="{% url 'contact' %}">form</a></p>
+
+  <h2 class="title is-2">Suggestions</h2>
+  <p class="has-text-justified">Any feedback, comments, or suggestions you may provide regarding Huestions, or the Services is entirely voluntary, and we will be free to use such feedback, comments, suggestions or similar as we see fit and without any obligation to you.</p>
+
+  <h2 class="title is-2">Termination Clause</h2>
+  <p class="has-text-justified">On becoming aware of any potential violation of these Terms, Huestions reserves the right (but shall have no obligation) to decide whether the content complies with the terms requirements and may remove such content and/or terminate a User's access for uploading content which is in violation of these Terms at any time, without prior notice and at its sole discretion.</p>
+
+  <h2 class="title is-2">How long we retain your data</h2>
+  <p class="has-text-justified">If you create a list, a question, alternatives or anything that our services allow, that data and its metadata are retained indefinitely.</p>
+  <p class="has-text-justified">For users that register on our website, we also store the personal information they provide in their user profile.</p>
+
+</div>
 {% endblock main %}
