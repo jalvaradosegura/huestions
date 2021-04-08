@@ -15,8 +15,8 @@ class DeleteTestImagesFolderCommandTests(TestCase):
     folder_path = Path(COMPLETE_PATH_TO_TEST_IMGS_FOLDER)
 
     def test_command_fail(self):
-        if self.folder_path.is_dir():
-            call_command('delete_test_images_folder')
+        self.folder_path.mkdir(parents=True, exist_ok=True)
+        call_command('delete_test_images_folder')
         with self.assertRaises(CommandError):
             call_command('delete_test_images_folder')
 
