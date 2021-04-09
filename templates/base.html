@@ -27,6 +27,9 @@
   {% include "navbar.html" %}
   <br>
 
+  {% block borderless %}
+  {% endblock borderless %}
+
   <div class="section container">
     {% include "flash_messages.html" %}
     {% block main %}

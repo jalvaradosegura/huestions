@@ -1,1 +1,15 @@
-Custom error 403
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block borderless %}
+  <div>
+    <figure class="image is-fullwidth">
+      <img src="{% static 'images/403.png' %}">
+    </figure>
+  </div>
+{% endblock borderless %}
+{% block main %}
+  <h2 class="title is-2 is-italic">"There are millions of ways trying to enter this link, but only in 1 way, you actually enter"</h2>
+  {% endblock main %}
+
