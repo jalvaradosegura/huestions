@@ -1,7 +1,5 @@
 from allauth.account.decorators import verified_email_required
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, reverse
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
@@ -24,14 +22,13 @@ from .forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
 from .models import Alternative, Question
 
 
-@login_required
 @verified_email_required
 def home(request):
     return render(request, 'home.html')
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class AnswerQuestionView(LoginRequiredMixin, DetailView):
+class AnswerQuestionView(DetailView):
     template_name = 'answer_question.html'
 
     def get_queryset(self):
@@ -125,7 +122,7 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
+class AddQuestionView(CustomUserPassesTestMixin, View):
     template_name = 'create_question.html'
     instance = None
 
@@ -188,11 +185,7 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class EditQuestionView(
-    LoginRequiredMixin,
-    CustomUserPassesTestMixin,
-    UpdateView,
-):
+class EditQuestionView(CustomUserPassesTestMixin, UpdateView):
     model = Question
     template_name = 'edit_question.html'
     pk_url_kwarg = 'question_id'
@@ -242,9 +235,7 @@ class EditQuestionView(
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class DeleteQuestionView(
-    LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView
-):
+class DeleteQuestionView(CustomUserPassesTestMixin, DeleteView):
     model = Question
     pk_url_kwarg = 'id'
 

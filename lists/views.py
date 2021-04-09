@@ -2,8 +2,6 @@ import datetime
 
 from allauth.account.decorators import verified_email_required
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, Q
 from django.shortcuts import redirect, render, reverse
@@ -29,7 +27,7 @@ from .models import QuestionList
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class QuestionsListView(LoginRequiredMixin, ListView):
+class QuestionsListView(ListView):
     template_name = 'lists.html'
     paginate_by = AMOUNT_OF_LISTS_PER_PAGE
 
@@ -59,7 +57,7 @@ class QuestionsListView(LoginRequiredMixin, ListView):
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class ListResultsView(LoginRequiredMixin, DetailView):
+class ListResultsView(DetailView):
     template_name = 'list_results.html'
 
     def get_queryset(self):
@@ -120,7 +118,6 @@ class ListResultsView(LoginRequiredMixin, DetailView):
         return context
 
 
-@login_required
 @verified_email_required
 def create_list(request):
     if request.method == 'POST':
@@ -142,7 +139,6 @@ def create_list(request):
 
 @method_decorator(verified_email_required, name='dispatch')
 class EditListView(
-    LoginRequiredMixin,
     CustomUserPassesTestMixin,
     SuccessMessageMixin,
     UpdateView,
@@ -195,9 +191,7 @@ class EditListView(
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class DeleteListView(
-    LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView
-):
+class DeleteListView(CustomUserPassesTestMixin, DeleteView):
     model = QuestionList
     template_name = 'delete_list.html'
 
@@ -213,7 +207,7 @@ class DeleteListView(
 
 
 @method_decorator(verified_email_required, name='dispatch')
-class SearchListsView(LoginRequiredMixin, ListView):
+class SearchListsView(ListView):
     context_object_name = 'lists'
     template_name = 'search_results.html'
     paginate_by = AMOUNT_OF_LISTS_PER_PAGE
