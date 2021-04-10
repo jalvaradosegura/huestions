@@ -45,5 +45,4 @@ def redirect_and_check_if_list_was_shared(
 ):
     if 'username' in kwargs:
         return redirect(reverse(view_name, args=[target_list.slug, username]))
-    else:
-        return redirect(reverse(view_name, args=[target_list.slug]))
+    return redirect(reverse(view_name, args=[target_list.slug]))

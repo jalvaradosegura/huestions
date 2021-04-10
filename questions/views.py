@@ -49,20 +49,13 @@ class AnswerQuestionView(DetailView):
                 context = self.get_context_data(object=self.object)
                 return self.render_to_response(context)
 
-            messages.add_message(
-                request, messages.INFO, ALREADY_ANSWERED_ALL_THE_QUESTIONS
+            messages.info(request, ALREADY_ANSWERED_ALL_THE_QUESTIONS)
+            username = self.kwargs.get('username')
+            return redirect_and_check_if_list_was_shared(
+                kwargs, 'list_results', self.object, username
             )
-            if 'username' in kwargs:
-                return redirect(
-                    'list_results', self.object.slug, self.kwargs['username']
-                )
-            return redirect('list_results', self.object.slug)
 
-        messages.add_message(
-            request,
-            messages.WARNING,
-            ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
-        )
+        messages.warning(request, ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE)
         return redirect('questions_list')
 
     def get_context_data(self, **kwargs):
@@ -173,16 +166,12 @@ class AddQuestionView(CustomUserPassesTestMixin, View):
             question = question_form.save(commit=False)
             question.save()
             alternatives_form.save(question=question)
-            messages.add_message(
-                request, messages.SUCCESS, QUESTION_CREATED_SUCCESSFULLY
-            )
+            messages.success(request, QUESTION_CREATED_SUCCESSFULLY)
 
             if 'create_and_publish' in request.POST:
                 if complete_list_form.is_valid():
                     complete_list_form.save()
-                    messages.add_message(
-                        request, messages.SUCCESS, LIST_PUBLISHED_SUCCESSFULLY
-                    )
+                    messages.success(request, LIST_PUBLISHED_SUCCESSFULLY)
 
                 return redirect('lists', request.user)
             elif 'create_and_add_another' in request.POST:
@@ -259,7 +248,5 @@ class DeleteQuestionView(CustomUserPassesTestMixin, DeleteView):
 
     def delete(self, request, *args, **kwargs):
         response = super().delete(request, *args, **kwargs)
-        messages.add_message(
-            self.request, messages.SUCCESS, QUESTION_DELETED_SUCCESSFULLY
-        )
+        messages.success(self.request, QUESTION_DELETED_SUCCESSFULLY)
         return response
