@@ -1,10 +1,10 @@
+from allauth.account.decorators import verified_email_required
 from django.contrib import messages
 from django.shortcuts import redirect, render, reverse
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, UpdateView, View
 
-from allauth.account.decorators import verified_email_required
 from core.constants import (
     ALREADY_ANSWERED_ALL_THE_QUESTIONS,
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
