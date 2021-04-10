@@ -20,6 +20,7 @@ from core.constants import (
     USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT,
 )
 from core.mixins import CustomUserPassesTestMixin
+from core.utils import redirect_and_check_if_list_was_shared
 from users.models import CustomUser
 
 from .forms import CompleteListForm, CreateQuestionListForm, EditListForm
@@ -67,7 +68,6 @@ class ListResultsView(DetailView):
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
-        list_slug = self.object.slug
 
         if self.object.get_amount_of_unanswered_questions(request.user) == 0:
             self.shared_by = kwargs.get('username', '')
@@ -77,9 +77,9 @@ class ListResultsView(DetailView):
         messages.add_message(
             request, messages.INFO, MUST_COMPLETE_LIST_BEFORE_SEING_RESULTS
         )
-        if 'username' in kwargs:
-            return redirect('answer_list', list_slug, self.kwargs['username'])
-        return redirect('answer_list', list_slug)
+        return redirect_and_check_if_list_was_shared(
+            kwargs, 'answer_list', self.object, self.kwargs.get('username')
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

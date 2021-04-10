@@ -1,7 +1,6 @@
 from io import BytesIO
 
 from django.core.files.uploadedfile import InMemoryUploadedFile
-from django.shortcuts import redirect, reverse
 from PIL import Image, ImageFilter
 
 
@@ -38,11 +37,3 @@ def create_an_img_ready_for_models(img_name):
         len(im_io.getvalue()),
         None,
     )
-
-
-def redirect_and_check_if_list_was_shared(
-    kwargs, view_name, target_list, username
-):
-    if 'username' in kwargs:
-        return redirect(reverse(view_name, args=[target_list.slug, username]))
-    return redirect(reverse(view_name, args=[target_list.slug]))

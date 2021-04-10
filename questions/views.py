@@ -15,13 +15,13 @@ from core.constants import (
     QUESTION_EDITED_SUCCESSFULLY,
 )
 from core.mixins import CustomUserPassesTestMixin
+from core.utils import redirect_and_check_if_list_was_shared
 from lists.forms import CompleteListForm
 from lists.models import QuestionList
 from votes.models import Vote
 
 from .forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
 from .models import Alternative, Question
-from .utils import redirect_and_check_if_list_was_shared
 
 
 @verified_email_required
