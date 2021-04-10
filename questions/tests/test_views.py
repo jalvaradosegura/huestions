@@ -7,6 +7,7 @@ from django.urls import resolve, reverse
 from core.constants import (
     ALREADY_ANSWERED_ALL_THE_QUESTIONS,
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
+    DONT_TRY_WEIRD_STUFF,
 )
 from core.mixins import TestViewsMixin
 from lists.models import QuestionList
@@ -265,6 +266,136 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
             reverse('answer_list', args=[question_list.slug, user]),
         )
         self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
+
+    def test_post_fail_try_to_vote_for_an_external_alternative(self):
+        question_list = QuestionListFactory(title='post list', owner=self.user)
+        question = QuestionFactory(
+            title='post question', child_of=question_list
+        )
+        AlternativeFactory(title='post alternative 1', question=question)
+        AlternativeFactory(
+            title='post alternative 2', question=question
+        )
+        another_list = QuestionListFactory(title='another', owner=self.user)
+        another_question = QuestionFactory(
+            title='post question', child_of=another_list
+        )
+        another_alternative = AlternativeFactory(
+            title='post alternative 2', question=another_question
+        )
+
+        response = self.client.post(
+            reverse('answer_list', args=[question_list.slug]),
+            data={
+                'alternatives': another_alternative.id
+            },
+        )
+        request = response.wsgi_request
+        storage = get_messages(request)
+        message = [message.message for message in storage][0]
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('answer_list', args=[question_list.slug]),
+        )
+        self.assertEqual(message, DONT_TRY_WEIRD_STUFF)
+
+    def test_post_fail_try_to_vote_for_an_external_alternative_list_shared(
+        self
+    ):
+        question_list = QuestionListFactory(title='post list', owner=self.user)
+        question = QuestionFactory(
+            title='post question', child_of=question_list
+        )
+        AlternativeFactory(title='post alternative 1', question=question)
+        AlternativeFactory(
+            title='post alternative 2', question=question
+        )
+        another_list = QuestionListFactory(title='another', owner=self.user)
+        another_question = QuestionFactory(
+            title='post question', child_of=another_list
+        )
+        another_alternative = AlternativeFactory(
+            title='post alternative 2', question=another_question
+        )
+        another_user = UserFactory(username='Jorge', email='jorge@email.com')
+
+        response = self.client.post(
+            reverse('answer_list', args=[question_list.slug, another_user]),
+            data={
+                'alternatives': another_alternative.id
+            },
+        )
+        request = response.wsgi_request
+        storage = get_messages(request)
+        message = [message.message for message in storage][0]
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('answer_list', args=[question_list.slug, another_user]),
+        )
+        self.assertEqual(message, DONT_TRY_WEIRD_STUFF)
+
+    def test_post_fail_try_to_vote_for_a_non_existent_alternative(self):
+        question_list = QuestionListFactory(title='post list', owner=self.user)
+        question = QuestionFactory(
+            title='post question', child_of=question_list
+        )
+        AlternativeFactory(title='post alternative 1', question=question)
+        AlternativeFactory(
+            title='post alternative 2', question=question
+        )
+        non_existent_id = Alternative.objects.last().id + 1_000
+
+        response = self.client.post(
+            reverse('answer_list', args=[question_list.slug]),
+            data={
+                'alternatives': non_existent_id
+            },
+        )
+        request = response.wsgi_request
+        storage = get_messages(request)
+        message = [message.message for message in storage][0]
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('answer_list', args=[question_list.slug]),
+        )
+        self.assertEqual(message, DONT_TRY_WEIRD_STUFF)
+
+    def test_post_fail_try_to_vote_for_a_non_existent_alternative_list_shared(
+        self
+    ):
+        question_list = QuestionListFactory(title='post list', owner=self.user)
+        question = QuestionFactory(
+            title='post question', child_of=question_list
+        )
+        AlternativeFactory(title='post alternative 1', question=question)
+        AlternativeFactory(
+            title='post alternative 2', question=question
+        )
+        non_existent_id = Alternative.objects.last().id + 1_000
+        another_user = UserFactory(username='Jorge', email='jorge@email.com')
+
+        response = self.client.post(
+            reverse('answer_list', args=[question_list.slug, another_user]),
+            data={
+                'alternatives': non_existent_id
+            },
+        )
+        request = response.wsgi_request
+        storage = get_messages(request)
+        message = [message.message for message in storage][0]
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response['Location'],
+            reverse('answer_list', args=[question_list.slug, another_user]),
+        )
+        self.assertEqual(message, DONT_TRY_WEIRD_STUFF)
 
 
 class AddQuestionViewTests(TestViewsMixin, TestCase):

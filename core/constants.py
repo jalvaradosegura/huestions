@@ -36,6 +36,7 @@ USER_THAT_SHARED_LIST_HAVENT_COMPLETED_IT = _(
     "questions, so you won't be able to see that person answers. Tell the "
     "user to answer all the questions"
 )
+DONT_TRY_WEIRD_STUFF = _('Please do not try to do weird stuff with the site')
 
 # === Related to forms ===
 # Errors

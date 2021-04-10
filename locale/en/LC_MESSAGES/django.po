@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 13:03-0400\n"
+"POT-Creation-Date: 2021-04-09 19:59-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,31 +73,35 @@ msgid ""
 "the questions"
 msgstr ""
 
-#: core/constants.py:42
+#: core/constants.py:39
+msgid "Please do not try to do weird stuff with the site"
+msgstr ""
+
+#: core/constants.py:43
 msgid "Do not use special chars."
 msgstr ""
 
-#: core/constants.py:44
+#: core/constants.py:45
 msgid "File too large. Size should not exceed 2 MB."
 msgstr ""
 
-#: core/constants.py:47
+#: core/constants.py:48
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 
-#: core/constants.py:52
+#: core/constants.py:53
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:54
+#: core/constants.py:55
 msgid "100 characters max. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:55
+#: core/constants.py:56
 msgid "Invalid header found."
 msgstr ""
 
-#: core/constants.py:57
+#: core/constants.py:58
 msgid "Picture must have a size under 2 MB."
 msgstr ""
 

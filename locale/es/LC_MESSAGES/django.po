@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-08 13:03-0400\n"
-"PO-Revision-Date: 2021-04-08 17:03+0000\n"
+"POT-Creation-Date: 2021-04-09 19:59-0400\n"
+"PO-Revision-Date: 2021-04-10 00:00+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -79,32 +79,36 @@ msgstr ""
 " por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
 "todas las preguntas"
 
-#: core/constants.py:42
+#: core/constants.py:39
+msgid "Please do not try to do weird stuff with the site"
+msgstr "Por favor no intentes hacer cosas extrañas en la página"
+
+#: core/constants.py:43
 msgid "Do not use special chars."
 msgstr "No uses caracteres especiales."
 
-#: core/constants.py:44
+#: core/constants.py:45
 msgid "File too large. Size should not exceed 2 MB."
 msgstr "Archivo demasiado grande. El tamaño no debe exceder de 2 MB."
 
-#: core/constants.py:47
+#: core/constants.py:48
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 "Extensión de archivo no válida. Extensiones permitidas: .jpg, .jpeg, .png."
 
-#: core/constants.py:52
+#: core/constants.py:53
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr "100 caracteres máximo y 5 mínimo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:54
+#: core/constants.py:55
 msgid "100 characters max. Also don't use special chars."
 msgstr "100 caracteres máximo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:55
+#: core/constants.py:56
 msgid "Invalid header found."
 msgstr "Se encontró un header inválido"
 
-#: core/constants.py:57
+#: core/constants.py:58
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
@@ -149,7 +153,6 @@ msgid "Alternative 2"
 msgstr "Alternativa 2"
 
 #: templates/about.html:9 templates/footer.html:47
-#| msgid "About"
 msgid "About of"
 msgstr "Acerca de"
 

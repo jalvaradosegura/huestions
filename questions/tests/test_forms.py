@@ -68,8 +68,10 @@ class AnswerQuestionFormViewTests(LoginUserMixin, TestCase):
         another_question = QuestionFactory(
             title='another awesome question', child_of=question_list
         )
-        AlternativeFactory(title='awesome alternative', question=question)
         alternative = AlternativeFactory(
+            title='awesome alternative', question=question
+        )
+        AlternativeFactory(
             title='another alternative', question=another_question
         )
         self.create_login_and_verify_user()

@@ -1,13 +1,14 @@
-from allauth.account.decorators import verified_email_required
 from django.contrib import messages
 from django.shortcuts import redirect, render, reverse
 from django.template.response import TemplateResponse
 from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, UpdateView, View
 
+from allauth.account.decorators import verified_email_required
 from core.constants import (
     ALREADY_ANSWERED_ALL_THE_QUESTIONS,
     ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE,
+    DONT_TRY_WEIRD_STUFF,
     LIST_PUBLISHED_SUCCESSFULLY,
     QUESTION_CREATED_SUCCESSFULLY,
     QUESTION_DELETED_SUCCESSFULLY,
@@ -20,6 +21,7 @@ from votes.models import Vote
 
 from .forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
 from .models import Alternative, Question
+from .utils import redirect_and_check_if_list_was_shared
 
 
 @verified_email_required
@@ -84,12 +86,34 @@ class AnswerQuestionView(DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        selected_alternative = (
-            Alternative.objects.all()
-            .select_related('question__child_of')
-            .get(id=request.POST['alternatives'])
-        )
+
+        target_list = QuestionList.objects.get(slug=self.kwargs.get('slug'))
+        target_question = target_list.get_unanswered_questions(
+            self.request.user
+        )[0]
+        username = self.kwargs.get('username')
+
+        try:
+            selected_alternative = (
+                Alternative.objects.all()
+                .select_related('question__child_of')
+                .get(id=request.POST['alternatives'])
+            )
+        except Alternative.DoesNotExist:
+            messages.error(self.request, DONT_TRY_WEIRD_STUFF)
+            return redirect_and_check_if_list_was_shared(
+                kwargs, 'answer_list', target_list, username
+            )
+
         question_list = selected_alternative.question.child_of
+
+        if not target_question.alternatives.filter(
+            id__in=[selected_alternative.id]
+        ).exists():
+            messages.error(self.request, DONT_TRY_WEIRD_STUFF)
+            return redirect_and_check_if_list_was_shared(
+                kwargs, 'answer_list', target_list, username
+            )
 
         if not selected_alternative.question.has_the_user_already_voted(
             self.request.user
@@ -103,22 +127,13 @@ class AnswerQuestionView(DetailView):
             )
 
         if question_list.get_amount_of_unanswered_questions(request.user) == 0:
-            if 'username' in kwargs:
-                return redirect(
-                    'list_results', question_list.slug, self.kwargs['username']
-                )
-            else:
-                return redirect('list_results', question_list.slug)
-
-        if 'username' in kwargs:
-            return redirect(
-                reverse(
-                    'answer_list',
-                    args=[question_list.slug, self.kwargs['username']],
-                )
+            return redirect_and_check_if_list_was_shared(
+                kwargs, 'list_results', target_list, username
             )
-        else:
-            return redirect(reverse('answer_list', args=[question_list.slug]))
+
+        return redirect_and_check_if_list_was_shared(
+            kwargs, 'answer_list', target_list, username
+        )
 
 
 @method_decorator(verified_email_required, name='dispatch')
