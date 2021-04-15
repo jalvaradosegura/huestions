@@ -1,1 +1,16 @@
-Custom error 404
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block borderless %}
+  <div>
+    <figure class="image is-fullwidth">
+      <img src="{% static 'images/404.png' %}">
+    </figure>
+  </div>
+{% endblock borderless %}
+
+{% block main %}
+  <h2 class="title is-2 is-italic">"Maybe this link existed at some point in time... Now it does not. Maybe is an error in our matrix..."</h2>
+  
+{% endblock main %}

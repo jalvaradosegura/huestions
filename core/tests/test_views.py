@@ -134,12 +134,10 @@ class Handler500ViewTests(TestCase):
         )
 
     def test_returns_correct_html(self):
-        response = self.client.get(reverse('500'))
+        response = self.client.get(reverse('look_500'))
 
         self.assertTemplateUsed(response, 'errors/500.html')
-        self.assertEqual(
-            response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR
-        )
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
 
 class Handler403ViewTests(TestCase):
@@ -149,10 +147,10 @@ class Handler403ViewTests(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
     def test_returns_correct_html(self):
-        response = self.client.get(reverse('403'))
+        response = self.client.get(reverse('look_403'))
 
         self.assertTemplateUsed(response, 'errors/403.html')
-        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
 
 class Handler404ViewTests(TestCase):
@@ -162,7 +160,7 @@ class Handler404ViewTests(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
     def test_returns_correct_html(self):
-        response = self.client.get(reverse('404'))
+        response = self.client.get(reverse('look_404'))
 
         self.assertTemplateUsed(response, 'errors/404.html')
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
