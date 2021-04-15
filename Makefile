@@ -42,6 +42,12 @@ isort:
 remove-test-folder:
 	python manage.py delete_test_images_folder --settings=huestion_project.settings.local
 
+start_cloud_sql-proxy:
+	./cloud_sql_proxy -instances="testing-h-for-the-first-time:southamerica-east1:h-instance"=tcp:5432
+
+static-to-prd:
+	gsutil rsync -R static_prd/ gs://my-h-static-bucket/static
+
 help:
 	@echo "==Commands==="
 	@echo "run"
