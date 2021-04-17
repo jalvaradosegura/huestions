@@ -8,6 +8,11 @@ from .base import *  # noqa
 ALLOWED_HOSTS = ['*']
 DEBUG = True
 
+# Security
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+
 if os.getenv('GAE_APPLICATION', None):
     # Running on production App Engine, so connect to Google Cloud SQL using
     # the unix socket at /cloudsql/<your-cloudsql-connection string>

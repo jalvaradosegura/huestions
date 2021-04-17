@@ -48,6 +48,9 @@ start_cloud_sql-proxy:
 static-to-prd:
 	gsutil rsync -R static_prd/ gs://my-h-static-bucket/static
 
+check-deploy:
+	python manage.py check --deploy --settings=huestion_project.settings.prd
+
 help:
 	@echo "==Commands==="
 	@echo "run"
