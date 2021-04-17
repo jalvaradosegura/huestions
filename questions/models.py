@@ -1,5 +1,6 @@
 import datetime
 
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -9,7 +10,10 @@ from core.constants import DEFAULT_IMAGE_NAME
 from core.models import TitleAndTimeStampedModel
 from lists.models import QuestionList
 
-from .utils import reshape_img_to_square_with_blurry_bg
+from .utils import (
+    reshape_img_to_square_with_blurry_bg,
+    reshape_img_to_square_with_blurry_bg_gcp
+)
 
 
 class Question(TitleAndTimeStampedModel):
@@ -75,9 +79,11 @@ class Alternative(TitleAndTimeStampedModel):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        # print('save method on alternative model...')
-        # bg_img = reshape_img_to_square_with_blurry_bg(self.image.path)
-        # bg_img.save(self.image.path)
+        if settings.STORE_IN_BUCKET:
+            reshape_img_to_square_with_blurry_bg_gcp(self.image.name)
+        else:
+            bg_img = reshape_img_to_square_with_blurry_bg(self.image.path)
+            bg_img.save(self.image.path)
 
     def get_votes_amount(self):
         return self.users.all().count()

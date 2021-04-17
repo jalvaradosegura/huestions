@@ -1,6 +1,8 @@
 from io import BytesIO
+import os
 
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.storage import default_storage as storage
 from PIL import Image, ImageFilter
 
 
@@ -22,6 +24,30 @@ def reshape_img_to_square_with_blurry_bg(img):
 
     bg_img.paste(front_img, (int((size - x) / 2), int((size - y) / 2)))
     return bg_img
+
+
+def reshape_img_to_square_with_blurry_bg_gcp(img_path):
+    img_read = storage.open(img_path, 'r')
+    img = Image.open(img_read)
+    extension_no_dot = os.path.splitext(img_path)[1][1:]
+
+    output_size = (200, 200)
+    bg_img = img.resize(output_size)
+    bg_img = bg_img.filter(ImageFilter.GaussianBlur(5))
+
+    front_output_size = (200, 200)
+    img.thumbnail(front_output_size)
+    x, y = img.size
+    size = max(200, x, y)
+    bg_img.paste(img, (int((size - x) / 2), int((size - y) / 2)))
+
+    in_mem_file = BytesIO()
+    bg_img.save(in_mem_file, format=extension_no_dot.upper())
+    img_write = storage.open(img_path, 'w+')
+    img_write.write(in_mem_file.getvalue())
+    img_write.close()
+
+    img_read.close()
 
 
 def create_an_img_ready_for_models(img_name):

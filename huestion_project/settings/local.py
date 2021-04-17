@@ -16,3 +16,6 @@ MIDDLEWARE += [
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+# When uploading files, where to store them
+STORE_IN_BUCKET = False

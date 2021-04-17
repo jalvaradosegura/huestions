@@ -35,3 +35,7 @@ GS_BUCKET_NAME = 'testing-h-for-the-first-time-media'
 MEDIA_ROOT = Path('media/')
 UPLOAD_ROOT = 'media/uploads/'
 MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
+GS_FILE_OVERWRITE = False
+
+# When uploading files, where to store them
+STORE_IN_BUCKET = True
