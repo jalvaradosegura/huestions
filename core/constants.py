@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from django.conf import settings
@@ -62,6 +63,11 @@ TEST_FOLDER_TO_STORE_IMAGES = Path('for_tests')
 COMPLETE_PATH_TO_TEST_IMGS_FOLDER = (
     settings.MEDIA_ROOT / 'alternative_pics' / TEST_FOLDER_TO_STORE_IMAGES
 )
+'''
+COMPLETE_PATH_TO_TEST_IMGS_FOLDER = os.path.join(
+    settings.MEDIA_ROOT, 'alternative_pics', TEST_FOLDER_TO_STORE_IMAGES
+)
+'''
 
 # === Commands ===
 # delete_test_images_folder

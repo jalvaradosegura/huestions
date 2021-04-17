@@ -75,8 +75,9 @@ class Alternative(TitleAndTimeStampedModel):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        bg_img = reshape_img_to_square_with_blurry_bg(self.image.path)
-        bg_img.save(self.image.path)
+        # print('save method on alternative model...')
+        # bg_img = reshape_img_to_square_with_blurry_bg(self.image.path)
+        # bg_img.save(self.image.path)
 
     def get_votes_amount(self):
         return self.users.all().count()
