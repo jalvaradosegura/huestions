@@ -1,3 +1,5 @@
+import os
+
 from django.contrib import messages
 from django.core.mail import BadHeaderError, send_mail
 from django.shortcuts import redirect, render
@@ -30,11 +32,16 @@ class ContactView(View):
         if form.is_valid():
             subject = form.cleaned_data['subject']
             from_email = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
+            message = f'sender: {from_email}\n' + form.cleaned_data['message']
             try:
-                if FOR_TESTING:
+                if FOR_TESTING:  # only used when testing
                     from_email = 'wrong@email.com\n'
-                send_mail(subject, message, from_email, ['admin@example.com'])
+                send_mail(
+                    subject,
+                    message,
+                    os.getenv('DEFAULT_FROM_EMAIL'),
+                    [os.getenv('CONTACT_FORM_RECEIVER')]
+                )
             except BadHeaderError:
                 messages.error(self.request, INVALID_HEADER_ON_EMAIL)
                 return render(request, self.template_name, {'form': form})
