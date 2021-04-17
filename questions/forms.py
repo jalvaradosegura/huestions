@@ -126,30 +126,28 @@ class AddAlternativesForm(forms.Form):
             )
         else:
             if cleaned_data.get('image_1'):
-                alternative_1 = Alternative(
+                alternative_1 = Alternative.objects.create(
                     title=cleaned_data.get('alternative_1'),
                     image=cleaned_data.get('image_1'),
                     question=question,
                 )
             else:
-                alternative_1 = Alternative(
+                alternative_1 = Alternative.objects.create(
                     title=cleaned_data.get('alternative_1'),
                     question=question,
                 )
 
             if cleaned_data.get('image_2'):
-                alternative_2 = Alternative(
+                alternative_2 = Alternative.objects.create(
                     title=cleaned_data.get('alternative_2'),
                     image=cleaned_data.get('image_2'),
                     question=question,
                 )
             else:
-                alternative_2 = Alternative(
+                alternative_2 = Alternative.objects.create(
                     title=cleaned_data.get('alternative_2'),
                     question=question,
                 )
-
-            Alternative.objects.bulk_create([alternative_1, alternative_2])
 
     def clean_alternative_1(self):
         alternative_1 = self.cleaned_data['alternative_1']
@@ -166,25 +164,3 @@ class AddAlternativesForm(forms.Form):
         first_char_upper = first_char.upper()
 
         return first_char_upper + alternative_2[1:]
-
-    def clean_image_1(self):
-        img_1 = self.cleaned_data['image_1']
-        if img_1:
-            reshaped_img = reshape_img_to_square_with_blurry_bg(img_1)
-            reshaped_img_io = BytesIO()
-            reshaped_img.save(fp=reshaped_img_io, format='JPEG')
-            something = ContentFile(reshaped_img_io.getvalue())
-            return InMemoryUploadedFile(
-                something, None, img_1.name, 'image/jpeg', something.tell, None
-            )
-
-    def clean_image_2(self):
-        img_2 = self.cleaned_data['image_2']
-        if img_2:
-            reshaped_img = reshape_img_to_square_with_blurry_bg(img_2)
-            reshaped_img_io = BytesIO()
-            reshaped_img.save(fp=reshaped_img_io, format='JPEG')
-            something = ContentFile(reshaped_img_io.getvalue())
-            return InMemoryUploadedFile(
-                something, None, img_2.name, 'image/jpeg', something.tell, None
-            )

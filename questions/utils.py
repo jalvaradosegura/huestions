@@ -31,6 +31,9 @@ def reshape_img_to_square_with_blurry_bg_gcp(img_path):
     img = Image.open(img_read)
     extension_no_dot = os.path.splitext(img_path)[1][1:]
 
+    if extension_no_dot == 'jpg':
+        extension_no_dot = 'jpeg'
+
     output_size = (200, 200)
     bg_img = img.resize(output_size)
     bg_img = bg_img.filter(ImageFilter.GaussianBlur(5))
