@@ -3,6 +3,9 @@
 run:
 	python manage.py runserver --settings=huestion_project.settings.local
 
+gcp-run:
+	python manage.py runserver --settings=huestion_project.settings.local_gcp
+
 tests:
 	python manage.py test --settings=huestion_project.settings.local
 

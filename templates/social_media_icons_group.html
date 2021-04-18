@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<div class="field is-grouped">
+
+  <div class="control level-item">
+    <p class="subtitle is-5">
+      Share on:
+    </p>
+  </div>
+  
+  <p class="control level-item">
+    <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.scheme }}://{{ domain_url }}{{ list_url }}')" title="{% trans "Copied to clipboard" %}!" class="button is-light">
+      <span class="icon">
+        <i class="fas fa-clipboard"></i>
+      </span>
+    </button>
+  </p>
+  
+  <p class="control level-item">
+    <a class="button is-light" href="https://wa.me/?text={{ request.scheme }}://{{ domain_url }}{{ list_url}}" target="_blank">
+      <span class="icon">
+        <i class="fab fa-whatsapp"></i>
+      </span>
+    </a>
+  </p>
+  
+  <p class="control level-item">
+    <a target="_blank" class="button is-light" href="https://twitter.com/intent/tweet?text=Take%20a%20look%20at%20this%20list&amp;url=https://www.{{ domain_url }}{{ list_url }}&amp;via=eljorgeas">
+      <span class="icon">
+        <i class="fab fa-twitter"></i>
+      </span>
+    </a>
+  </p>
+  
+  <p class="control level-item">
+    <a target="_blank" class="button is-light" href="https://www.facebook.com/sharer/sharer.php?u=https://www.t13.cl/noticia/mundo/bbc/por-que-putin-pretende-mas-asustar-a-occidente-que-invadir-ucrania">
+      <span class="icon">
+        <i class="fab fa-facebook"></i>
+      </span>
+    </a>
+  </p>
+  
+</div> <!-- group -->

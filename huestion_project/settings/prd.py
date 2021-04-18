@@ -6,7 +6,7 @@ from google.oauth2 import service_account
 from .base import *  # noqa
 
 ALLOWED_HOSTS = ['*']
-DEBUG = True
+DEBUG = False
 
 # Security
 # SECURE_SSL_REDIRECT = True
