@@ -13,6 +13,11 @@ def reshape_img_to_square_with_blurry_bg(img):
     else:
         front_img = Image.open(img)
 
+    # Palette images with Transparency expressed in bytes should be converted
+    # to RGBA images
+    if front_img.mode == 'P':
+        front_img = front_img.convert('RGBA')
+
     bg_output_size = (200, 200)
     bg_img = front_img.resize(bg_output_size)
     bg_img = bg_img.filter(ImageFilter.GaussianBlur(5))
