@@ -4,6 +4,8 @@
 
 {% load widget_tweaks %}
 
+{% block head_title %}Contact us{% endblock %}
+
 {% block main %}
 <h1 class="title is-1">{% trans "Contact Us" %}</h1>
 <form method="post">{% csrf_token %}
