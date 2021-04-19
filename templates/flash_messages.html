@@ -1,8 +1,10 @@
+{% load i18n %}
+
 {% if messages %}
   {% for message in messages %}
     <article class="message is-{{ message.tags }}">
       <div class="message-header">
-        <p>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% else %}{{ message.tags|title }}{% endif %}!</p>
+	<p>{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Error{% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}{% trans "Success" %}{% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}{% trans "Warning" %}{% else %}{{ message.tags|title }}{% endif %}!</p>
         <button id="close_button" class="delete" aria-label="delete"></button>
       </div>
       <div class="message-body">{{ message }}</div>

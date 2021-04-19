@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-09 19:59-0400\n"
+"POT-Creation-Date: 2021-04-19 11:12-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,90 +18,90 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/constants.py:15
+#: core/constants.py:16
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 
-#: core/constants.py:18
+#: core/constants.py:19
 msgid "The list you are trying to see is incomplete"
 msgstr ""
 
-#: core/constants.py:20
+#: core/constants.py:21
 msgid "List was created successfully"
 msgstr ""
 
-#: core/constants.py:21
+#: core/constants.py:22
 msgid "List was edited successfully"
 msgstr ""
 
-#: core/constants.py:22
+#: core/constants.py:23
 msgid "List was deleted successfully"
 msgstr ""
 
-#: core/constants.py:23
+#: core/constants.py:24
 msgid "List was published successfully"
 msgstr ""
 
-#: core/constants.py:24
+#: core/constants.py:25
 msgid "The list reached the limit of questions"
 msgstr ""
 
-#: core/constants.py:25
+#: core/constants.py:26
 msgid "Question was created successfully"
 msgstr ""
 
-#: core/constants.py:26
+#: core/constants.py:27
 msgid "Question was edited successfully"
 msgstr ""
 
-#: core/constants.py:27
+#: core/constants.py:28
 msgid "Question was deleted successfully"
 msgstr ""
 
-#: core/constants.py:29
+#: core/constants.py:30
 msgid "You already answered all the questions for this list"
 msgstr ""
 
-#: core/constants.py:32
+#: core/constants.py:33
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 
-#: core/constants.py:35
+#: core/constants.py:36
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so "
 "you won't be able to see that person answers. Tell the user to answer all "
 "the questions"
 msgstr ""
 
-#: core/constants.py:39
+#: core/constants.py:40
 msgid "Please do not try to do weird stuff with the site"
 msgstr ""
 
-#: core/constants.py:43
+#: core/constants.py:44
 msgid "Do not use special chars."
 msgstr ""
 
-#: core/constants.py:45
+#: core/constants.py:46
 msgid "File too large. Size should not exceed 2 MB."
 msgstr ""
 
-#: core/constants.py:48
+#: core/constants.py:49
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 
-#: core/constants.py:53
+#: core/constants.py:54
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:55
+#: core/constants.py:56
 msgid "100 characters max. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:56
+#: core/constants.py:57
 msgid "Invalid header found."
 msgstr ""
 
-#: core/constants.py:58
+#: core/constants.py:59
 msgid "Picture must have a size under 2 MB."
 msgstr ""
 
@@ -145,15 +145,15 @@ msgstr ""
 msgid "Alternative 2"
 msgstr ""
 
-#: templates/about.html:9 templates/footer.html:47
+#: templates/about.html:11 templates/footer.html:57
 msgid "About of"
 msgstr ""
 
-#: templates/about.html:10
+#: templates/about.html:12
 msgid "I've always made a lot of questions to myself."
 msgstr ""
 
-#: templates/about.html:11
+#: templates/about.html:13
 msgid ""
 "Every time I finished a TV show, I wondered which character is the favorite "
 "one for the viewers? If you have to pick between the first and last season "
@@ -161,27 +161,27 @@ msgid ""
 "like a lot, which one do you save?"
 msgstr ""
 
-#: templates/about.html:12
+#: templates/about.html:14
 msgid ""
 "Sometimes I wonder, if you have to choose a food to eat for the rest of your "
 "life (and you can only eat that), which one do you pick? and if your "
 "alternatives are this or that, which one do you pick?"
 msgstr ""
 
-#: templates/about.html:13
+#: templates/about.html:15
 msgid ""
 "After watching a superhero movie...which superpower would people prefer to "
 "have? super strength, super speed, invisibility and so on."
 msgstr ""
 
-#: templates/about.html:14
+#: templates/about.html:16
 msgid ""
 "Also, I’ve always thought that it would be fun to see what people would "
 "answer to weird or deep questions. What would my friends answer to this or "
 "that?"
 msgstr ""
 
-#: templates/about.html:15
+#: templates/about.html:17
 msgid ""
 "That’s how Huestions was born. A place where you can see the answer to this "
 "questions and you can share them with your friends, with your family or with "
@@ -233,7 +233,7 @@ msgid ""
 msgstr ""
 
 #: templates/account/login.html:9 templates/account/login.html:44
-#: templates/navbar.html:84
+#: templates/navbar.html:87
 msgid "Log In"
 msgstr ""
 
@@ -306,7 +306,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:66
+#: templates/account/password_reset_from_key.html:46 templates/navbar.html:69
 msgid "Change password"
 msgstr ""
 
@@ -316,7 +316,7 @@ msgid "Your password is now changed."
 msgstr ""
 
 #: templates/account/signup.html:9 templates/account/signup.html:58
-#: templates/navbar.html:82
+#: templates/navbar.html:85
 msgid "Sign Up"
 msgstr ""
 
@@ -342,185 +342,244 @@ msgid ""
 "contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: templates/answer_question.html:19 templates/list_results.html:23
-#: templates/lists.html:41 templates/search_results.html:33
-#: templates/user_lists.html:40
-msgid "Copied to clipboard"
-msgstr ""
-
-#: templates/answer_question.html:19 templates/list_results.html:23
-#: templates/lists.html:41 templates/search_results.html:33
-#: templates/user_lists.html:40
-msgid "Copy list link"
-msgstr ""
-
-#: templates/answer_question.html:26 templates/list_results.html:30
-msgid "Share on WhatsApp"
-msgstr ""
-
-#: templates/contact.html:8
+#: templates/contact.html:10
 msgid "Contact Us"
 msgstr ""
 
-#: templates/contact.html:55
+#: templates/contact.html:57
 msgid "Send"
 msgstr ""
 
-#: templates/create_list.html:9 templates/footer.html:59
-#: templates/navbar.html:50
+#: templates/create_list.html:11 templates/footer.html:70
+#: templates/navbar.html:53
 msgid "Create a list"
 msgstr ""
 
-#: templates/create_list.html:40
+#: templates/create_list.html:42
 msgid "Create"
 msgstr ""
 
-#: templates/create_question.html:14
+#: templates/create_question.html:16
 msgid "Create a question"
 msgstr ""
 
-#: templates/create_question.html:72 templates/create_question.html:92
+#: templates/create_question.html:74 templates/create_question.html:94
 msgid "Choose a picture for Alternative 1"
 msgstr ""
 
-#: templates/create_question.html:76 templates/create_question.html:96
-#: templates/create_question.html:140 templates/create_question.html:160
+#: templates/create_question.html:78 templates/create_question.html:98
+#: templates/create_question.html:142 templates/create_question.html:162
 msgid "No file uploaded"
 msgstr ""
 
-#: templates/create_question.html:136 templates/create_question.html:156
+#: templates/create_question.html:138 templates/create_question.html:158
 msgid "Choose a picture for Alternative 2"
 msgstr ""
 
-#: templates/create_question.html:177
+#: templates/create_question.html:179
 msgid "Create & add another"
 msgstr ""
 
-#: templates/create_question.html:181
+#: templates/create_question.html:183
 msgid "Create & publish the list"
 msgstr ""
 
-#: templates/create_question.html:185
+#: templates/create_question.html:187
 msgid "Create & go back"
 msgstr ""
 
-#: templates/delete_list.html:8
+#: templates/delete_list.html:10
 msgid "Are you sure you want to delete"
 msgstr ""
 
-#: templates/delete_list.html:11
+#: templates/delete_list.html:13
 msgid "Go back"
 msgstr ""
 
-#: templates/delete_list.html:12 templates/user_lists.html:45
+#: templates/delete_list.html:14 templates/user_lists.html:47
 msgid "Delete"
 msgstr ""
 
-#: templates/edit_list.html:11 templates/navbar.html:51
+#: templates/edit_list.html:13 templates/navbar.html:54
 msgid "Your Lists"
 msgstr ""
 
-#: templates/edit_list.html:55 templates/edit_question.html:62
+#: templates/edit_list.html:57 templates/edit_question.html:63
 msgid "Apply changes"
 msgstr ""
 
-#: templates/edit_list.html:59
+#: templates/edit_list.html:61
 msgid "Publish list"
 msgstr ""
 
-#: templates/edit_list.html:63
+#: templates/edit_list.html:65
 msgid "Note"
 msgstr ""
 
-#: templates/edit_list.html:63
+#: templates/edit_list.html:65
 msgid "once published you can neither edit nor delete the list."
 msgstr ""
 
-#: templates/edit_list.html:68
+#: templates/edit_list.html:70
 msgid "Current questions"
 msgstr ""
 
-#: templates/edit_list.html:69
+#: templates/edit_list.html:71
 msgid "Maximum of 20 questions"
 msgstr ""
 
-#: templates/edit_list.html:70
+#: templates/edit_list.html:72
 msgid "Add a question"
+msgstr ""
+
+#: templates/flash_messages.html:7
+msgid "Success"
+msgstr ""
+
+#: templates/flash_messages.html:7
+msgid "Warning"
 msgstr ""
 
 #: templates/footer.html:35
 msgid "Artist"
 msgstr ""
 
-#: templates/footer.html:48
+#: templates/footer.html:45
+msgid "Logo Artist"
+msgstr ""
+
+#: templates/footer.html:58
 msgid "Contact"
 msgstr ""
 
-#: templates/footer.html:49
+#: templates/footer.html:59
 msgid "Terms"
 msgstr ""
 
-#: templates/footer.html:58 templates/list_results.html:11
-#: templates/lists.html:8 templates/navbar.html:22
+#: templates/footer.html:67
+msgid "Have fun"
+msgstr ""
+
+#: templates/footer.html:69 templates/list_results.html:13
+#: templates/lists.html:10 templates/navbar.html:23
 msgid "Lists"
 msgstr ""
 
-#: templates/list_results.html:20
+#: templates/hidden_red_panda.html:12
+msgid "Red Panda Story"
+msgstr ""
+
+#: templates/hidden_red_panda.html:22
+msgid "Nice, you just found a hidden link!"
+msgstr ""
+
+#: templates/hidden_red_panda.html:23
+msgid ""
+"We wanted a cute main character. So we were between a Sloth and a Red Panda. "
+"After a few tries of making them both, we decided for the Sloth. But we "
+"didn't want leave Red Panda out, so we including him as well every time we "
+"can."
+msgstr ""
+
+#: templates/hidden_red_panda.html:24
+msgid ""
+"At first, picking Sloth instead of Red Panda, affected their friendship..."
+msgstr ""
+
+#: templates/home.html:12
+msgid "Welcome to"
+msgstr ""
+
+#: templates/home.html:13
+msgid "Answer fun, hard and cool questions."
+msgstr ""
+
+#: templates/home.html:14
+msgid "Create lists of questions with things you've always wondered."
+msgstr ""
+
+#: templates/home.html:15
+msgid "Share with your friends or anyone you like."
+msgstr ""
+
+#: templates/home.html:16
+msgid "We try to add cool things every time we can."
+msgstr ""
+
+#: templates/home.html:19
+#, python-format
+msgid ""
+"You will need to <a href=\"%(signup)s\">create an account</a> to access all "
+"this fun. Remember to also read our <a href=\"%(terms)s\">terms</a>, by "
+"using this website you agree to the terms of services."
+msgstr ""
+
+#: templates/list_results.html:26
 msgid "Results"
 msgstr ""
 
-#: templates/list_results.html:81
+#: templates/list_results.html:84
 msgid "Your vote"
 msgstr ""
 
-#: templates/list_results.html:83
+#: templates/list_results.html:86
 #, python-format
 msgid "%(shared_user)s's vote"
 msgstr ""
 
-#: templates/lists.html:12
+#: templates/lists.html:14
 msgid "Popular lists"
 msgstr ""
 
-#: templates/lists.html:13
+#: templates/lists.html:15
 msgid "All lists"
 msgstr ""
 
-#: templates/lists.html:28 templates/search_results.html:23
-#: templates/user_lists.html:29
+#: templates/lists.html:30 templates/search_results.html:25
+#: templates/user_lists.html:31
 msgid "Created:"
 msgstr ""
 
-#: templates/lists.html:28 templates/search_results.html:23
+#: templates/lists.html:30 templates/search_results.html:25
 msgid "by"
 msgstr ""
 
-#: templates/lists.html:30
+#: templates/lists.html:32
 msgid "Votes in the last few days"
 msgstr ""
 
-#: templates/lists.html:43 templates/search_results.html:36
+#: templates/lists.html:43 templates/search_results.html:35
+#: templates/social_media_icons_group.html:12 templates/user_lists.html:42
+msgid "Copied to clipboard"
+msgstr ""
+
+#: templates/lists.html:43 templates/search_results.html:35
 #: templates/user_lists.html:42
+msgid "Copy list link"
+msgstr ""
+
+#: templates/lists.html:45 templates/search_results.html:38
+#: templates/user_lists.html:44
 msgid "Go"
 msgstr ""
 
-#: templates/navbar.html:29 templates/navbar.html:36
+#: templates/navbar.html:30 templates/navbar.html:37
 msgid "Search"
 msgstr ""
 
-#: templates/navbar.html:49
+#: templates/navbar.html:52
 msgid "Hi"
 msgstr ""
 
-#: templates/navbar.html:53
+#: templates/navbar.html:56
 msgid "More"
 msgstr ""
 
-#: templates/navbar.html:60 templates/user_stats.html:7
+#: templates/navbar.html:63 templates/user_stats.html:9
 msgid "Your stats"
 msgstr ""
 
-#: templates/navbar.html:73
+#: templates/navbar.html:76
 msgid "Log out"
 msgstr ""
 
@@ -548,51 +607,47 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
-#: templates/search_results.html:8
+#: templates/search_results.html:10
 msgid "Search Results for"
 msgstr ""
 
-#: templates/search_results.html:10
+#: templates/search_results.html:12
 msgid "Found"
 msgstr ""
 
-#: templates/search_results.html:10
+#: templates/search_results.html:12
 msgid "result"
 msgstr ""
 
-#: templates/terms_and_conditions.html:9
-msgid "Terms and Conditions"
-msgstr ""
-
-#: templates/user_lists.html:8
+#: templates/user_lists.html:10
 msgid "Your lists"
 msgstr ""
 
-#: templates/user_lists.html:12
+#: templates/user_lists.html:14
 msgid "All your lists"
 msgstr ""
 
-#: templates/user_lists.html:13
+#: templates/user_lists.html:15
 msgid "Published"
 msgstr ""
 
-#: templates/user_lists.html:14
+#: templates/user_lists.html:16
 msgid "Unpublished"
 msgstr ""
 
-#: templates/user_lists.html:44
+#: templates/user_lists.html:46
 msgid "Edit"
 msgstr ""
 
-#: templates/user_stats.html:13
+#: templates/user_stats.html:15
 msgid "Lists created"
 msgstr ""
 
-#: templates/user_stats.html:19
+#: templates/user_stats.html:21
 msgid "Lists published"
 msgstr ""
 
-#: templates/user_stats.html:25
+#: templates/user_stats.html:27
 msgid "Questions Answered"
 msgstr ""
 
