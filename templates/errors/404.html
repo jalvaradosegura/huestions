@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block head_title %}Cool 404 view{% endblock %}
+
 {% block borderless %}
   <div>
     <figure class="image is-fullwidth">
@@ -11,6 +13,7 @@
 {% endblock borderless %}
 
 {% block main %}
-  <h2 class="title is-2 is-italic">"Maybe this link existed at some point in time... Now it does not. Maybe is an error in our matrix..."</h2>
+  <h2 class="title is-2 is-italic">"This link may have existed at some point in time... Now it does not... or maybe, it's an error in the matrix..."</h2>
+  <a href="{% url 'hidden_red_panda' %}" hidden>hidden link</a>
   
 {% endblock main %}

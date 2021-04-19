@@ -47,13 +47,14 @@
 	  <li><a href="{% url 'about' %}">{% trans "About of" %}</a></li>
 	  <li><a href="{% url 'contact' %}">{% trans "Contact" %}</a></li>
 	  <li><a href="{% url 'terms_and_conditions' %}">{% trans "Terms" %}</a></li>
+	  <li><a href="{% url 'django.contrib.sitemaps.views.sitemap' %}">Sitemap</a></li>
         </ul>
       </aside>
     </div>
 
     <div class="column is-2">
       <aside class="menu">
-        <p class="menu-label">Have fun!</p>
+	<p class="menu-label">{% trans "Have fun" %}!</p>
         <ul class="menu-list">
 	  <li><a href="{% url 'questions_list' %}">{% trans "Lists" %}</a></li>
           <li><a href="{% url 'create_list' %}">{% trans "Create a list" %}</a></li>

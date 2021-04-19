@@ -197,3 +197,11 @@ class Error404ViewTests(TestCase):
 
         self.assertTemplateUsed(response, 'errors/404.html')
         self.assertEqual(response.status_code, HTTPStatus.OK)
+
+
+class HiddenRedPandaViewTests(TestCase):
+    def test_returns_correct_html(self):
+        response = self.client.get(reverse('hidden_red_panda'))
+
+        self.assertTemplateUsed(response, 'hidden_red_panda.html')
+        self.assertEqual(response.status_code, HTTPStatus.OK)

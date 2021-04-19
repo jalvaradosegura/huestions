@@ -38,4 +38,9 @@ urlpatterns = [
         view=views.Error500View.as_view(),
         name='500',
     ),
+    path(
+        route='a-very-hidden-link-super-hard-to-find/',
+        view=views.HiddenRedPandaView.as_view(),
+        name='hidden_red_panda',
+    ),
 ]

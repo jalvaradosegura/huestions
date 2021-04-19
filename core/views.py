@@ -75,3 +75,7 @@ class Error404View(TemplateView):
 
 class Error500View(TemplateView):
     template_name = 'errors/500.html'
+
+
+class HiddenRedPandaView(TemplateView):
+    template_name = 'hidden_red_panda.html'
