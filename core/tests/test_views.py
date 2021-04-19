@@ -4,6 +4,7 @@ from unittest.mock import patch
 from django.contrib.messages import get_messages
 from django.http import HttpResponse
 from django.test import TestCase
+from django.test.client import RequestFactory
 from django.urls import resolve, reverse
 
 from ..constants import INVALID_HEADER_ON_EMAIL
@@ -11,6 +12,9 @@ from ..views import (
     AboutView,
     ContactSuccessView,
     ContactView,
+    handler403,
+    handler404,
+    handler500,
     TermsAndConditionsView,
 )
 
@@ -133,13 +137,19 @@ class Handler500ViewTests(TestCase):
             response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR
         )
 
+    def test_call_handler_directly(self):
+        factory = RequestFactory()
+        request = factory.get('/')
+        response = handler500(request)
+        self.assertEqual(response.status_code, 500)
+
+
+class Error500ViewTests(TestCase):
     def test_returns_correct_html(self):
         response = self.client.get(reverse('500'))
 
         self.assertTemplateUsed(response, 'errors/500.html')
-        self.assertEqual(
-            response.status_code, HTTPStatus.INTERNAL_SERVER_ERROR
-        )
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
 
 class Handler403ViewTests(TestCase):
@@ -148,11 +158,19 @@ class Handler403ViewTests(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
 
+    def test_call_handler_directly(self):
+        factory = RequestFactory()
+        request = factory.get('/')
+        response = handler403(request)
+        self.assertEqual(response.status_code, 403)
+
+
+class Error403ViewTests(TestCase):
     def test_returns_correct_html(self):
         response = self.client.get(reverse('403'))
 
         self.assertTemplateUsed(response, 'errors/403.html')
-        self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
 
 class Handler404ViewTests(TestCase):
@@ -161,8 +179,21 @@ class Handler404ViewTests(TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
 
+    def test_visit_url_that_does_not_exist(self):
+        response = self.client.get('this-url-will-never-exist')
+
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+
+    def test_call_handler_directly(self):
+        factory = RequestFactory()
+        request = factory.get('/')
+        response = handler404(request)
+        self.assertEqual(response.status_code, 404)
+
+
+class Error404ViewTests(TestCase):
     def test_returns_correct_html(self):
         response = self.client.get(reverse('404'))
 
         self.assertTemplateUsed(response, 'errors/404.html')
-        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
+        self.assertEqual(response.status_code, HTTPStatus.OK)

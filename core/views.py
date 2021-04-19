@@ -63,3 +63,15 @@ def handler404(request, exception=Exception):
 
 def handler500(request):
     return render(request, 'errors/500.html', status=500)
+
+
+class Error403View(TemplateView):
+    template_name = 'errors/403.html'
+
+
+class Error404View(TemplateView):
+    template_name = 'errors/404.html'
+
+
+class Error500View(TemplateView):
+    template_name = 'errors/500.html'

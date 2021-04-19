@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.urls import path
 
 from . import views
@@ -26,17 +25,17 @@ urlpatterns = [
     ),
     path(
         route='403/',
-        view=views.handler403,
+        view=views.Error403View.as_view(),
         name='403',
     ),
     path(
         route='404/',
-        view=views.handler404,
+        view=views.Error404View.as_view(),
         name='404',
     ),
     path(
         route='500/',
-        view=views.handler500,
+        view=views.Error500View.as_view(),
         name='500',
     ),
 ]
