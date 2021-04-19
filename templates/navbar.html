@@ -19,7 +19,7 @@
 
     <div class="navbar-start">
       {% if user.is_authenticated %}
-        <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">Home</a>
+        <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">{% trans "Home" %}</a>
         <a class="navbar-item {% if url_name == 'questions_list' %}is-active{% endif %}" href="{% url 'questions_list' %}">{% trans "Lists" %}</a>
         <div class="navbar-item">
 
@@ -42,7 +42,7 @@
 
         </div>
       {% else %}
-        <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">Home</a>
+      <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">{% trans "Home" %}</a>
       {% endif %}
     </div> <!--navar-start-->
 

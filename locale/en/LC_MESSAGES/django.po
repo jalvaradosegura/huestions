@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 11:12-0400\n"
+"POT-Creation-Date: 2021-04-19 11:16-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -561,6 +561,10 @@ msgstr ""
 #: templates/lists.html:45 templates/search_results.html:38
 #: templates/user_lists.html:44
 msgid "Go"
+msgstr ""
+
+#: templates/navbar.html:22 templates/navbar.html:45
+msgid "Home"
 msgstr ""
 
 #: templates/navbar.html:30 templates/navbar.html:37
