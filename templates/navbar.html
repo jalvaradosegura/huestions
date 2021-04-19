@@ -12,7 +12,7 @@
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
-</div>
+  </div>
 
   <div id="navbarBasicExample" class="navbar-menu">
     {% with url_name=request.resolver_match.url_name %}
@@ -41,6 +41,8 @@
 	  </form>
 
         </div>
+      {% else %}
+        <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">Home</a>
       {% endif %}
     </div> <!--navar-start-->
 

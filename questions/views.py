@@ -24,7 +24,6 @@ from .forms import AddAlternativesForm, AnswerQuestionForm, CreateQuestionForm
 from .models import Alternative, Question
 
 
-@verified_email_required
 def home(request):
     return render(request, 'home.html')
 

@@ -30,11 +30,8 @@ from ..views import (
 )
 
 
-class HomePageViewTests(TestViewsMixin, TestCase):
+class HomePageViewTests(TestCase):
     base_url = reverse('home')
-
-    def setUp(self):
-        self.create_login_and_verify_user()
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve(self.base_url)
