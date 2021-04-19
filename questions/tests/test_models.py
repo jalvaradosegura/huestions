@@ -1,5 +1,7 @@
+from unittest.mock import patch
+
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from core.mixins import TestModelStrMixin
@@ -127,3 +129,10 @@ class AlternativeModelTests(TestModelStrMixin, TestCase):
                 for alternative in self.user.alternatives_chosen.all()
             ],
         )
+
+    @override_settings(STORE_IN_BUCKET=True)
+    @patch('questions.models.reshape_img_to_square_with_blurry_bg_gcp')
+    def test_store_alternative_in_bucket(self, mock):
+        mock.return_value = True
+        alternative = AlternativeFactory(title='awesome alternative')
+        self.assertEqual(alternative.title, 'awesome alternative')

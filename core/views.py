@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView
 from .constants import INVALID_HEADER_ON_EMAIL
 from .forms import ContactForm
 
-FOR_TESTING = ''
+FOR_TESTING = False
 
 
 class TermsAndConditionsView(TemplateView):
@@ -35,7 +35,7 @@ class ContactView(View):
             message = f'sender: {from_email}\n' + form.cleaned_data['message']
             try:
                 if FOR_TESTING:  # only used when testing
-                    from_email = 'wrong@email.com\n'
+                    raise BadHeaderError
                 send_mail(
                     subject,
                     message,
