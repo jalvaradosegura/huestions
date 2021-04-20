@@ -5,19 +5,128 @@
 
 {% block head_title %}Huestions, have fun!{% endblock %}
 
+{% block borderless %}
+<section class="hero is-primary is-bold has-bg-img">
+  <div class="hero-body">
+
+    <div class="columns">
+
+      <div class="column is-8">
+        <p class="title has-text-centered">
+          Answer, Create & Share 🦥
+        </p>
+        <p class="subtitle has-text-centered">
+          Let's get some fun
+        </p>
+        <p class="subtitle has-text-centered">
+          <button class="button is-link is-large">Go!</button>
+        </p>
+      </div>
+
+      <div class="column is-4">
+        <p class="title has-text-centered">
+	  Add a cool picture here
+        </p>
+        <p class="subtitle has-text-centered">
+          Something
+        </p>
+      </div>
+
+    </div>
+
+  </div> <!--hero body-->
+
+</section>
+
+
+{% endblock borderless %}
+
 {% block main %}
+<section class="">
+  <h2 class="title is-2 has-text-centered">{% trans "Welcome to" %} Huestions 👋</h2>
 
-<div class="content">
+  <div class="columns">
 
-  <h2 class="title is-2">{% trans "Welcome to" %} Huestions 👋</h2>
-  <p class="has-text-justified">😁 {% trans "Answer fun, hard and cool questions." %}</p>
-  <p class="has-text-justified">🧐 {% trans "Create lists of questions with things you've always wondered." %}</p>
-  <p class="has-text-justified">🙏 {% trans "Share with your friends or anyone you like." %}</p>
-  <p class="has-text-justified">✅ {% trans "We try to add cool things every time we can." %}</p>
-  {% url 'account_signup' as signup %}
-  {% url 'terms_and_conditions' as terms %}
-  <p class="has-text-justified">{% blocktrans %}You will need to <a href="{{ signup }}">create an account</a> to access all this fun. Remember to also read our <a href="{{ terms }}">terms</a>, by using this website you agree to the terms of services.{% endblocktrans %}</p>
+    <div class="column">
+      <div class="card">
+	<div class="card-content">
+	  <div class="has-text-centered">
+	    <p class="title is-3">😁</p>
+	  </div>
+	  <h3 class="title is-3 has-text-centered" id="card-product-description">Answer</h3>
+	  <p class="has-text-centered">
+	    {% trans "Answer fun, hard and cool questions." %}
+	  </p>
+	</div>
+      </div>
+    </div>
 
-</div>
+    <div class="column">
+      <div class="card">
+	<div class="card-content">
+	  <div class="has-text-centered">
+	    <p class="title is-3">🧐</p>
+	  </div>
+	  <h3 class="title is-3 has-text-centered" id="card-product-description">Create</h3>
+	  <p class="has-text-centered">
+	    {% trans "Create lists of questions with things you've always wondered." %}
+	  </p>
+	</div>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+	<div class="card-content">
+	  <div class="has-text-centered">
+	    <p class="title is-3">🙏</p>
+	  </div>
+	  <h3 class="title is-3 has-text-centered" id="card-product-description">Share</h3>
+	  <p class="has-text-centered">
+	    {% trans "Share with your friends or anyone you like." %}
+	  </p>
+	</div>
+      </div>
+    </div>
+
+  </div> <!-- columns -->
+</section>
+
+<br>
+<hr>
+
+<section class="hero">
+  <div class="hero-body has-text-centered">
+
+    <div class="columns">
+
+      <div class="column">
+        <p class="title">
+	  Join us 🤝
+        </p>
+        <p class="subtitle">
+	  Create an account to get full access
+        </p>
+	<p class="subtitle has-text-centered">
+          <button class="button is-link is-medium">Take me there</button>
+        </p>
+      </div>
+
+      <div class="column">
+        <p class="title">
+	  Popular 🔥
+        </p>
+        <p class="subtitle">
+	  Check the most popular lists
+        </p>
+	<p class="subtitle has-text-centered">
+          <button class="button is-link is-medium">Take me there</button>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
 
 {% endblock main %}
