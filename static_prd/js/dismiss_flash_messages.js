@@ -1,4 +1,5 @@
-var close_button = document.getElementById("close_button");
-close_button.addEventListener("click", function() {
-    this.parentElement.parentElement.style.display = 'none';
+var boxes = document.querySelectorAll("#close_button");
+var boxes_array = [...boxes]; // expand boxes, similar to python *
+boxes_array.forEach(box => {
+  box.addEventListener("click", function() { this.parentElement.parentElement.style.display = 'none'; });
 });
