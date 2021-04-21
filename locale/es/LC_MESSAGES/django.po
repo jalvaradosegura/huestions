@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 11:16-0400\n"
-"PO-Revision-Date: 2021-04-19 15:16+0000\n"
+"POT-Creation-Date: 2021-04-21 18:33-0400\n"
+"PO-Revision-Date: 2021-04-21 22:44+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -128,11 +128,11 @@ msgstr "Mensaje"
 msgid "title"
 msgstr "título"
 
-#: huestion_project/settings/base.py:155
+#: huestion_project/settings/base.py:154
 msgid "English"
 msgstr "Inglés"
 
-#: huestion_project/settings/base.py:156
+#: huestion_project/settings/base.py:155
 msgid "Spanish"
 msgstr "Español"
 
@@ -263,24 +263,25 @@ msgstr ""
 "Este link de confirmación de correo expiró o es inválido. Por favor  <a "
 "href=\"%(email_url)s\"> emitir un nuevo correo de confirmación."
 
-#: templates/account/login.html:9 templates/account/login.html:44
-#: templates/navbar.html:87
+#: templates/account/login.html:7 templates/account/login.html:15
+#: templates/account/login.html:50 templates/navbar.html:87
 msgid "Log In"
 msgstr "Iniciar sesión"
 
-#: templates/account/login.html:48
+#: templates/account/login.html:54
 msgid "Forgot Password"
 msgstr "Olvidaste la contraseña"
 
-#: templates/account/login.html:50
+#: templates/account/login.html:56
 msgid "Don't have an account yet"
 msgstr "Todavía no tienes cuenta"
 
-#: templates/account/logout.html:7 templates/account/logout.html:16
+#: templates/account/logout.html:5 templates/account/logout.html:9
+#: templates/account/logout.html:18
 msgid "Sign Out"
 msgstr "Cerrar sesión"
 
-#: templates/account/logout.html:9
+#: templates/account/logout.html:11
 msgid "Are you sure you want to sign out"
 msgstr "Realmente quieres cerrar sesión"
 
@@ -354,12 +355,12 @@ msgstr "Cambiar contraseña"
 msgid "Your password is now changed."
 msgstr "Tu contraseña ha sido cambiada."
 
-#: templates/account/signup.html:9 templates/account/signup.html:58
-#: templates/navbar.html:85
+#: templates/account/signup.html:7 templates/account/signup.html:16
+#: templates/account/signup.html:66 templates/navbar.html:85
 msgid "Sign Up"
 msgstr "Registrarse"
 
-#: templates/account/signup.html:62
+#: templates/account/signup.html:70
 msgid "Already have an account"
 msgstr "Ya tienes una cuenta"
 
@@ -394,11 +395,11 @@ msgid "Send"
 msgstr "Enviar"
 
 #: templates/create_list.html:11 templates/footer.html:70
-#: templates/navbar.html:53
+#: templates/home.html:94 templates/navbar.html:53
 msgid "Create a list"
 msgstr "Crear una lista"
 
-#: templates/create_list.html:42
+#: templates/create_list.html:42 templates/home.html:143
 msgid "Create"
 msgstr "Crear"
 
@@ -533,36 +534,135 @@ msgid ""
 "At first, picking Sloth instead of Red Panda, affected their friendship..."
 msgstr "Al comienzo, elegir a Sloth en vez de Red Panda, afectó su amistad..."
 
-#: templates/home.html:12
-msgid "Welcome to"
-msgstr "Bienvenido a"
+#: templates/home.html:18
+msgid "Hard questions for everyone"
+msgstr "Preguntas difíciles para todos"
 
-#: templates/home.html:13
+#: templates/home.html:21
+msgid ""
+"Dare to answer the hardest questions that been hunting us for decades. Pizza"
+" or burger? Soccer or basketball?"
+msgstr ""
+"Atrévete a responder las preguntas más difíciles que nos hemos cuestionado "
+"siempre. ¿Pizza o hamburguesa? ¿Fútbol o Basketball?"
+
+#: templates/home.html:23
+msgid "Play as guest"
+msgstr "Jugar como invitado"
+
+#: templates/home.html:24
+#| msgid "Already have an account"
+msgid "Create an account"
+msgstr "Crear una cuenta"
+
+#: templates/home.html:25
+msgid "I know how cool Huestions is"
+msgstr "Sé lo genial que es Huestions"
+
+#: templates/home.html:25
+msgid "I want to login"
+msgstr "Quiero iniciar sesión"
+
+#: templates/home.html:51
+msgid "Lists of the month"
+msgstr "Listas del mes"
+
+#: templates/home.html:54
+#| msgid "Votes in the last few days"
+msgid "Most voted lists in the last few days"
+msgstr "Listas más votadas en los últimos días"
+
+#: templates/home.html:56
+msgid "Take me there"
+msgstr "Llévenme ahí"
+
+#: templates/home.html:82
+msgid "Newest lists"
+msgstr "Listas más nuevas"
+
+#: templates/home.html:83 templates/home.html:95 templates/home.html:107
+#: templates/lists.html:45 templates/search_results.html:38
+#: templates/user_lists.html:44
+msgid "Go"
+msgstr "Ir"
+
+#: templates/home.html:106 templates/navbar.html:63
+#: templates/user_stats.html:9
+msgid "Your stats"
+msgstr "Tus estadísticas"
+
+#: templates/home.html:129
+msgid "Answer"
+msgstr "Responder"
+
+#: templates/home.html:131
 msgid "Answer fun, hard and cool questions."
 msgstr "Responde preguntas divertidas, difíciles y geniales."
 
-#: templates/home.html:14
+#: templates/home.html:145
 msgid "Create lists of questions with things you've always wondered."
 msgstr "Crea listas de preguntas con cosas que siempre te has preguntado."
 
-#: templates/home.html:15
+#: templates/home.html:157
+#| msgid "Share list"
+msgid "Share"
+msgstr "Compartir"
+
+#: templates/home.html:159
 msgid "Share with your friends or anyone you like."
 msgstr "Comparte con tus amigos o con quien quieras."
 
-#: templates/home.html:16
-msgid "We try to add cool things every time we can."
-msgstr "Intentamos agregar cosas geniales cada vez que podemos."
+#: templates/home.html:175
+msgid "How does it work?"
+msgstr "¿Cómo funciona?"
 
-#: templates/home.html:19
-#, python-format
-msgid ""
-"You will need to <a href=\"%(signup)s\">create an account</a> to access all "
-"this fun. Remember to also read our <a href=\"%(terms)s\">terms</a>, by "
-"using this website you agree to the terms of services."
-msgstr ""
-"Necesitarás <a href=\"%(signup)s\">crear una cuenta</a> para acceder a toda "
-"esta diversión. Recuerda también leer <a href=\"%(terms)s\">nuestros "
-"términos</a>, al usar la página aceptas los términos del servicio."
+#: templates/home.html:181
+#| msgid "Create a question"
+msgid "Create a list of questions"
+msgstr "Crea una lista de preguntas"
+
+#: templates/home.html:183
+msgid "Pick a cool name for your list"
+msgstr "Elige un nombre genial para tu lista"
+
+#: templates/home.html:184
+msgid "Add fun questions and alternatives to the list"
+msgstr "Agrega preguntas y alternativas divertidas a la lista"
+
+#: templates/home.html:185 templates/home.html:195
+msgid "Share with everybody"
+msgstr "Comparte con todos"
+
+#: templates/home.html:190
+#| msgid "Answer fun, hard and cool questions."
+msgid "Answer a list of questions"
+msgstr "Responde una lista de preguntas"
+
+#: templates/home.html:192
+#| msgid "Create a list"
+msgid "Select a list"
+msgstr "Selecciona una lista"
+
+#: templates/home.html:193
+#| msgid "Answer fun, hard and cool questions."
+msgid "Answer it's fun questions"
+msgstr "Responde sus preguntas divertidas"
+
+#: templates/home.html:194
+msgid "See and compare results"
+msgstr "Ve y compara resultados"
+
+#: templates/home.html:215
+msgid "Join us"
+msgstr "Únetenos"
+
+#: templates/home.html:216
+msgid "Create an account to get full access. It's free"
+msgstr "Crea una cuenta para tener acceso total. Es gratis"
+
+#: templates/home.html:217
+msgid "I would love to"
+msgstr "Me encantaría"
 
 #: templates/list_results.html:26
 msgid "Results"
@@ -608,11 +708,6 @@ msgstr "Copiado al portapapeles"
 msgid "Copy list link"
 msgstr "Copiar link de la lista"
 
-#: templates/lists.html:45 templates/search_results.html:38
-#: templates/user_lists.html:44
-msgid "Go"
-msgstr "Ir"
-
 #: templates/navbar.html:22 templates/navbar.html:45
 msgid "Home"
 msgstr "Inicio"
@@ -628,10 +723,6 @@ msgstr "Hola"
 #: templates/navbar.html:56
 msgid "More"
 msgstr "Más"
-
-#: templates/navbar.html:63 templates/user_stats.html:9
-msgid "Your stats"
-msgstr "Tus estadísticas"
 
 #: templates/navbar.html:76
 msgid "Log out"
@@ -705,14 +796,29 @@ msgstr "Listas publicadas"
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
 
-#: users/forms.py:12
+#~ msgid "Welcome to"
+#~ msgstr "Bienvenido a"
+
+#~ msgid "We try to add cool things every time we can."
+#~ msgstr "Intentamos agregar cosas geniales cada vez que podemos."
+
 #, python-format
-msgid ""
-"I acknowledge that I have read and agree to the <a href=\"%(url)s\" "
-"target=\"_blank\">Terms and Conditions</a>"
-msgstr ""
-"Reconozco que he leído y acepto los <a href=\"%(url)s\" "
-"target=\"_blank\">Términos y Condiciones</a>"
+#~ msgid ""
+#~ "You will need to <a href=\"%(signup)s\">create an account</a> to access all "
+#~ "this fun. Remember to also read our <a href=\"%(terms)s\">terms</a>, by "
+#~ "using this website you agree to the terms of services."
+#~ msgstr ""
+#~ "Necesitarás <a href=\"%(signup)s\">crear una cuenta</a> para acceder a toda "
+#~ "esta diversión. Recuerda también leer <a href=\"%(terms)s\">nuestros "
+#~ "términos</a>, al usar la página aceptas los términos del servicio."
+
+#, python-format
+#~ msgid ""
+#~ "I acknowledge that I have read and agree to the <a href=\"%(url)s\" "
+#~ "target=\"_blank\">Terms and Conditions</a>"
+#~ msgstr ""
+#~ "Reconozco que he leído y acepto los <a href=\"%(url)s\" "
+#~ "target=\"_blank\">Términos y Condiciones</a>"
 
 #~ msgid "Characters Artist"
 #~ msgstr "Artista de personajes"
@@ -725,12 +831,6 @@ msgstr ""
 
 #~ msgid "About us"
 #~ msgstr "Acerca de nosotros"
-
-#~ msgid "Share list"
-#~ msgstr "Compartir lista"
-
-#~ msgid "Answer"
-#~ msgstr "Responder"
 
 #~ msgid "Change name"
 #~ msgstr "Cambiar nombre"

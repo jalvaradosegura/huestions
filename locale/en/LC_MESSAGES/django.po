@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-19 11:16-0400\n"
+"POT-Creation-Date: 2021-04-21 18:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,11 +121,11 @@ msgstr ""
 msgid "title"
 msgstr ""
 
-#: huestion_project/settings/base.py:155
+#: huestion_project/settings/base.py:154
 msgid "English"
 msgstr ""
 
-#: huestion_project/settings/base.py:156
+#: huestion_project/settings/base.py:155
 msgid "Spanish"
 msgstr ""
 
@@ -232,24 +232,25 @@ msgid ""
 "\"%(email_url)s\">issue a new e-mail confirmation request</a>."
 msgstr ""
 
-#: templates/account/login.html:9 templates/account/login.html:44
-#: templates/navbar.html:87
+#: templates/account/login.html:7 templates/account/login.html:15
+#: templates/account/login.html:50 templates/navbar.html:87
 msgid "Log In"
 msgstr ""
 
-#: templates/account/login.html:48
+#: templates/account/login.html:54
 msgid "Forgot Password"
 msgstr ""
 
-#: templates/account/login.html:50
+#: templates/account/login.html:56
 msgid "Don't have an account yet"
 msgstr ""
 
-#: templates/account/logout.html:7 templates/account/logout.html:16
+#: templates/account/logout.html:5 templates/account/logout.html:9
+#: templates/account/logout.html:18
 msgid "Sign Out"
 msgstr ""
 
-#: templates/account/logout.html:9
+#: templates/account/logout.html:11
 msgid "Are you sure you want to sign out"
 msgstr ""
 
@@ -315,12 +316,12 @@ msgstr ""
 msgid "Your password is now changed."
 msgstr ""
 
-#: templates/account/signup.html:9 templates/account/signup.html:58
-#: templates/navbar.html:85
+#: templates/account/signup.html:7 templates/account/signup.html:16
+#: templates/account/signup.html:66 templates/navbar.html:85
 msgid "Sign Up"
 msgstr ""
 
-#: templates/account/signup.html:62
+#: templates/account/signup.html:70
 msgid "Already have an account"
 msgstr ""
 
@@ -351,11 +352,11 @@ msgid "Send"
 msgstr ""
 
 #: templates/create_list.html:11 templates/footer.html:70
-#: templates/navbar.html:53
+#: templates/home.html:94 templates/navbar.html:53
 msgid "Create a list"
 msgstr ""
 
-#: templates/create_list.html:42
+#: templates/create_list.html:42 templates/home.html:143
 msgid "Create"
 msgstr ""
 
@@ -486,32 +487,124 @@ msgid ""
 "At first, picking Sloth instead of Red Panda, affected their friendship..."
 msgstr ""
 
-#: templates/home.html:12
-msgid "Welcome to"
+#: templates/home.html:18
+msgid "Hard questions for everyone"
 msgstr ""
 
-#: templates/home.html:13
+#: templates/home.html:21
+msgid ""
+"Dare to answer the hardest questions that been hunting us for decades. Pizza "
+"or burger? Soccer or basketball?"
+msgstr ""
+
+#: templates/home.html:23
+msgid "Play as guest"
+msgstr ""
+
+#: templates/home.html:24
+msgid "Create an account"
+msgstr ""
+
+#: templates/home.html:25
+msgid "I know how cool Huestions is"
+msgstr ""
+
+#: templates/home.html:25
+msgid "I want to login"
+msgstr ""
+
+#: templates/home.html:51
+msgid "Lists of the month"
+msgstr ""
+
+#: templates/home.html:54
+msgid "Most voted lists in the last few days"
+msgstr ""
+
+#: templates/home.html:56
+msgid "Take me there"
+msgstr ""
+
+#: templates/home.html:82
+msgid "Newest lists"
+msgstr ""
+
+#: templates/home.html:83 templates/home.html:95 templates/home.html:107
+#: templates/lists.html:45 templates/search_results.html:38
+#: templates/user_lists.html:44
+msgid "Go"
+msgstr ""
+
+#: templates/home.html:106 templates/navbar.html:63 templates/user_stats.html:9
+msgid "Your stats"
+msgstr ""
+
+#: templates/home.html:129
+msgid "Answer"
+msgstr ""
+
+#: templates/home.html:131
 msgid "Answer fun, hard and cool questions."
 msgstr ""
 
-#: templates/home.html:14
+#: templates/home.html:145
 msgid "Create lists of questions with things you've always wondered."
 msgstr ""
 
-#: templates/home.html:15
+#: templates/home.html:157
+msgid "Share"
+msgstr ""
+
+#: templates/home.html:159
 msgid "Share with your friends or anyone you like."
 msgstr ""
 
-#: templates/home.html:16
-msgid "We try to add cool things every time we can."
+#: templates/home.html:175
+msgid "How does it work?"
 msgstr ""
 
-#: templates/home.html:19
-#, python-format
-msgid ""
-"You will need to <a href=\"%(signup)s\">create an account</a> to access all "
-"this fun. Remember to also read our <a href=\"%(terms)s\">terms</a>, by "
-"using this website you agree to the terms of services."
+#: templates/home.html:181
+msgid "Create a list of questions"
+msgstr ""
+
+#: templates/home.html:183
+msgid "Pick a cool name for your list"
+msgstr ""
+
+#: templates/home.html:184
+msgid "Add fun questions and alternatives to the list"
+msgstr ""
+
+#: templates/home.html:185 templates/home.html:195
+msgid "Share with everybody"
+msgstr ""
+
+#: templates/home.html:190
+msgid "Answer a list of questions"
+msgstr ""
+
+#: templates/home.html:192
+msgid "Select a list"
+msgstr ""
+
+#: templates/home.html:193
+msgid "Answer it's fun questions"
+msgstr ""
+
+#: templates/home.html:194
+msgid "See and compare results"
+msgstr ""
+
+#: templates/home.html:215
+msgid "Join us"
+msgstr ""
+
+#: templates/home.html:216
+msgid "Create an account to get full access. It's free"
+msgstr ""
+
+#: templates/home.html:217
+msgid "I would love to"
 msgstr ""
 
 #: templates/list_results.html:26
@@ -558,11 +651,6 @@ msgstr ""
 msgid "Copy list link"
 msgstr ""
 
-#: templates/lists.html:45 templates/search_results.html:38
-#: templates/user_lists.html:44
-msgid "Go"
-msgstr ""
-
 #: templates/navbar.html:22 templates/navbar.html:45
 msgid "Home"
 msgstr ""
@@ -577,10 +665,6 @@ msgstr ""
 
 #: templates/navbar.html:56
 msgid "More"
-msgstr ""
-
-#: templates/navbar.html:63 templates/user_stats.html:9
-msgid "Your stats"
 msgstr ""
 
 #: templates/navbar.html:76
@@ -653,11 +737,4 @@ msgstr ""
 
 #: templates/user_stats.html:27
 msgid "Questions Answered"
-msgstr ""
-
-#: users/forms.py:12
-#, python-format
-msgid ""
-"I acknowledge that I have read and agree to the <a href=\"%(url)s\" target="
-"\"_blank\">Terms and Conditions</a>"
 msgstr ""
