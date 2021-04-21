@@ -3,33 +3,29 @@
 {% load static %}
 {% load i18n %}
 
-{% block head_title %}Huestions, have fun!{% endblock %}
+{% block head_title %}Huestions | Hard Questions | Have fun answering{% endblock %}
 
 {% block borderless %}
-<section class="hero is-primary is-bold has-bg-img">
-  <div class="hero-body">
+<section class="hero is-link is-bold is-fullheight">
+  <div class="hero-body container">
 
     <div class="columns">
 
-      <div class="column is-8">
-        <p class="title has-text-centered">
-          Answer, Create & Share 🦥
-        </p>
-        <p class="subtitle has-text-centered">
-          Let's get some fun
-        </p>
-        <p class="subtitle has-text-centered">
-          <button class="button is-link is-large">Go!</button>
-        </p>
+      <div class="column">
+          <h2 class="title is-spaced has-text-left is-2">
+	    Hard questions for everyone
+          </h2>
+          <h2 class="subtitle is-3 has-text-left">
+	    Dare to answer the hardest questions that been hunting us for decades. Pizza or burger? Soccer or basketball?
+          </h2>
+	  <a class="button is-success is-medium mr-2 mb-2" href="">👀 Play as guest</a>
+	  <a class="button is-light is-medium is-outlined" href="">🤝 Create an account</a>
       </div>
 
-      <div class="column is-4">
-        <p class="title has-text-centered">
-	  Add a cool picture here
-        </p>
-        <p class="subtitle has-text-centered">
-          Something
-        </p>
+
+      <div class="column has-text-centered">
+	  <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png" width="200" height="200"/>
+	  <p> <small><a href=""><u>Pikachu the Pokemon</u></a> happy as he knows.</small> </p>
       </div>
 
     </div>
@@ -38,12 +34,10 @@
 
 </section>
 
-
 {% endblock borderless %}
 
 {% block main %}
 <section class="">
-  <h2 class="title is-2 has-text-centered">{% trans "Welcome to" %} Huestions 👋</h2>
 
   <div class="columns">
 
@@ -51,7 +45,7 @@
       <div class="card">
 	<div class="card-content">
 	  <div class="has-text-centered">
-	    <p class="title is-3">😁</p>
+	    <p class="title is-1">🤯😁🤣</p>
 	  </div>
 	  <h3 class="title is-3 has-text-centered" id="card-product-description">Answer</h3>
 	  <p class="has-text-centered">
@@ -65,7 +59,7 @@
       <div class="card">
 	<div class="card-content">
 	  <div class="has-text-centered">
-	    <p class="title is-3">🧐</p>
+	    <p class="title is-1">✏️🧐📐</p>
 	  </div>
 	  <h3 class="title is-3 has-text-centered" id="card-product-description">Create</h3>
 	  <p class="has-text-centered">
@@ -79,7 +73,7 @@
       <div class="card">
 	<div class="card-content">
 	  <div class="has-text-centered">
-	    <p class="title is-3">🙏</p>
+	    <p class="title is-1">📤👻🙏</p>
 	  </div>
 	  <h3 class="title is-3 has-text-centered" id="card-product-description">Share</h3>
 	  <p class="has-text-centered">
@@ -98,35 +92,51 @@
 <section class="hero">
   <div class="hero-body has-text-centered">
 
+    <h3 class="title is-3 has-text-centered" id="card-product-description">How does it work?</h3>
+
     <div class="columns">
 
       <div class="column">
-        <p class="title">
-	  Join us 🤝
+        <p class="title is-4 has-text-center">
+	  Create a list of questions
         </p>
-        <p class="subtitle">
-	  Create an account to get full access
-        </p>
-	<p class="subtitle has-text-centered">
-          <button class="button is-link is-medium">Take me there</button>
-        </p>
+	<p class="is-5 has-text-left">1️⃣ Pick a cool name for your list.</p>
+	<p class="is-5 has-text-left">2️⃣ Add fun questions and alternatives to the list.</p>
+	<p class="is-5 has-text-left">3️⃣ Share with to everyone you can.</p>
       </div>
 
       <div class="column">
-        <p class="title">
-	  Popular 🔥
+        <p class="title is-4 has-text-center">
+	  Answer a list of questions
         </p>
-        <p class="subtitle">
-	  Check the most popular lists
-        </p>
-	<p class="subtitle has-text-centered">
-          <button class="button is-link is-medium">Take me there</button>
-        </p>
+	<p class="is-5 has-text-left">1️⃣ Select a list.</p>
+	<p class="is-5 has-text-left">2️⃣ Answer it's fun questions.</p>
+	<p class="is-5 has-text-left">3️⃣ See and compare results.</p>
+	<p class="is-5 has-text-left">4️⃣ Share with to everyone you can.</p>
       </div>
 
-    </div>
 
-  </div>
+    </div> <!-- columns -->
+
+  </div> <!-- hero body-->
 </section>
 
 {% endblock main %}
+
+{% block borderless2 %}
+<section class="hero is-primary is-bold is-small">
+  <div class="hero-body has-text-centered">
+    <div class="columns">
+
+      <div class="column">
+        <p class="title">Join us</p>
+        <p class="subtitle">Create an account to get full access. It's free</p>
+	<button class="button is-link is-medium">❤️ I would love to</button>
+      </div>
+
+    </div> <!-- columns -->
+
+  </div> <!--hero body-->
+</section>
+
+{% endblock borderless2 %}
