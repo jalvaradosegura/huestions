@@ -39,106 +39,186 @@
 {% endblock borderless %}
 
 {% block main %}
-<section class="">
+{% if user.is_authenticated %}
+  <section class="hero">
+    <div class="hero-body">
 
-  <div class="columns">
+      <div class="columns">
 
-    <div class="column">
-      <div class="card">
-	<div class="card-content">
-	  <div class="has-text-centered">
-	    <p class="title is-1">🤯😁🤣</p>
-	  </div>
-	  <h3 class="title is-3 has-text-centered" id="card-product-description">Answer</h3>
-	  <p class="has-text-centered">
-	    {% trans "Answer fun, hard and cool questions." %}
-	  </p>
-	</div>
-      </div>
-    </div>
+        <div class="column">
+	  <h2 class="title is-spaced has-text-left is-2">
+	    🏆 Lists of the month
+	  </h2>
+	  <h2 class="subtitle is-3 has-text-left">
+	    Most voted lists in the last few days
+	  </h2>
+	  <a class="button is-link is-medium mr-2 mb-2" href="{% url 'questions_list' %}">🔥 Take me there</a>
+        </div>
 
-    <div class="column">
-      <div class="card">
-	<div class="card-content">
-	  <div class="has-text-centered">
-	    <p class="title is-1">✏️🧐📐</p>
-	  </div>
-	  <h3 class="title is-3 has-text-centered" id="card-product-description">Create</h3>
-	  <p class="has-text-centered">
-	    {% trans "Create lists of questions with things you've always wondered." %}
-	  </p>
-	</div>
-      </div>
-    </div>
+  
+        <div class="column has-text-centered">
+	  <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png" width="200" height="200"/>
+	  <p> <small><a href=""><u>Pikachu the Pokemon</u></a> happy as he knows.</small> </p>
+        </div>
 
-    <div class="column">
-      <div class="card">
-	<div class="card-content">
-	  <div class="has-text-centered">
-	    <p class="title is-1">📤🌎🙏</p>
-	  </div>
-	  <h3 class="title is-3 has-text-centered" id="card-product-description">Share</h3>
-	  <p class="has-text-centered">
-	    {% trans "Share with your friends or anyone you like." %}
-	  </p>
-	</div>
-      </div>
-    </div>
+      </div> <!--columns-->
 
-  </div> <!-- columns -->
-</section>
+    </div> <!--hero body-->
 
-<br>
-<hr>
+  </section>
 
-<section class="hero">
-  <div class="hero-body has-text-centered">
-
-    <h3 class="title is-3 has-text-centered" id="card-product-description">How does it work?</h3>
+  <!-- 3 cards -->
+  <section class="">
 
     <div class="columns">
 
       <div class="column">
-        <p class="title is-4 has-text-center">
-	  Create a list of questions
-        </p>
-	<p class="is-5 has-text-left">1️⃣ Pick a cool name for your list.</p>
-	<p class="is-5 has-text-left">2️⃣ Add fun questions and alternatives to the list.</p>
-	<p class="is-5 has-text-left">3️⃣ Share with everybody!</p>
+        <div class="card">
+	  <div class="card-content has-text-centered">
+	    <div class="">
+	      <p class="title is-1">✨</p>
+	    </div>
+	    <h3 class="title is-3" id="card-product-description">Newest lists</h3>
+	    <a class="button is-link is-outlined" href="{% url 'questions_list' %}?filter=all">Go</a>
+	  </div>
+        </div>
       </div>
 
       <div class="column">
-        <p class="title is-4 has-text-center">
-	  Answer a list of questions
-        </p>
-	<p class="is-5 has-text-left">1️⃣ Select a list.</p>
-	<p class="is-5 has-text-left">2️⃣ Answer it's fun questions.</p>
-	<p class="is-5 has-text-left">3️⃣ See and compare results.</p>
-	<p class="is-5 has-text-left">4️⃣ Share with everybody!</p>
+        <div class="card">
+	  <div class="card-content has-text-centered">
+	    <div class="">
+	      <p class="title is-1">🐣</p>
+	    </div>
+	    <h3 class="title is-3" id="card-product-description">Create a list</h3>
+	    <a class="button is-link is-outlined" href="{% url 'create_list' %}">Go</a>
+	  </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+	  <div class="card-content has-text-centered">
+	    <div class="">
+	      <p class="title is-1">📈</p>
+	    </div>
+	    <h3 class="title is-3" id="card-product-description">Your stats</h3>
+	    <a class="button is-link is-outlined" href="{% url 'stats' user %}">Go</a>
+	  </div>
+        </div>
       </div>
 
 
     </div> <!-- columns -->
+  </section>
+{% else %}
 
-  </div> <!-- hero body-->
-</section>
+  <!-- Not users yet-->
+  <!-- 3 cards -->
+  <section class="">
+
+    <div class="columns">
+
+      <div class="column">
+        <div class="card">
+	  <div class="card-content">
+	    <div class="has-text-centered">
+	      <p class="title is-1">🤯😁🤣</p>
+	    </div>
+	    <h3 class="title is-3 has-text-centered" id="card-product-description">Answer</h3>
+	    <p class="has-text-centered">
+	      {% trans "Answer fun, hard and cool questions." %}
+	    </p>
+	  </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+	  <div class="card-content">
+	    <div class="has-text-centered">
+	      <p class="title is-1">✏️🧐📐</p>
+	    </div>
+	    <h3 class="title is-3 has-text-centered" id="card-product-description">Create</h3>
+	    <p class="has-text-centered">
+	      {% trans "Create lists of questions with things you've always wondered." %}
+	    </p>
+	  </div>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+	  <div class="card-content">
+	    <div class="has-text-centered">
+	      <p class="title is-1">📤🌎🙏</p>
+	    </div>
+	    <h3 class="title is-3 has-text-centered" id="card-product-description">Share</h3>
+	    <p class="has-text-centered">
+	      {% trans "Share with your friends or anyone you like." %}
+	    </p>
+	  </div>
+        </div>
+      </div>
+
+    </div> <!-- columns -->
+  </section>
+
+  <br>
+  <hr>
+
+  <!--How does it work -->
+  <section class="hero">
+    <div class="hero-body has-text-centered">
+
+      <h3 class="title is-3 has-text-centered" id="card-product-description">How does it work?</h3>
+  
+      <div class="columns">
+
+        <div class="column">
+          <p class="title is-4 has-text-center">
+	    Create a list of questions
+          </p>
+	  <p class="is-5 has-text-left">1️⃣ Pick a cool name for your list.</p>
+	  <p class="is-5 has-text-left">2️⃣ Add fun questions and alternatives to the list.</p>
+	  <p class="is-5 has-text-left">3️⃣ Share with everybody!</p>
+        </div>
+
+        <div class="column">
+          <p class="title is-4 has-text-center">
+	    Answer a list of questions
+          </p>
+	  <p class="is-5 has-text-left">1️⃣ Select a list.</p>
+	  <p class="is-5 has-text-left">2️⃣ Answer it's fun questions.</p>
+	  <p class="is-5 has-text-left">3️⃣ See and compare results.</p>
+	  <p class="is-5 has-text-left">4️⃣ Share with everybody!</p>
+        </div>
+
+
+      </div> <!-- columns -->
+
+    </div> <!-- hero body-->
+  </section>
+{% endif %}
 
 {% endblock main %}
 
 {% block borderless2 %}
-<section class="hero is-primary is-bold is-small">
-  <div class="hero-body has-text-centered">
-    <div class="columns">
+{% if user.is_authenticated %}
+{% else %}
+  <section class="hero is-primary is-bold is-small">
+    <div class="hero-body has-text-centered">
+      <div class="columns">
 
-      <div class="column">
-        <p class="title">Join us</p>
-        <p class="subtitle">Create an account to get full access. It's free</p>
-	<a class="button is-link is-medium" href="{% url 'account_signup' %}">❤️ I would love to</a>
-      </div>
+        <div class="column">
+          <p class="title">Join us</p>
+          <p class="subtitle">Create an account to get full access. It's free</p>
+	  <a class="button is-link is-medium" href="{% url 'account_signup' %}">❤️ I would love to</a>
+        </div>
+  
+      </div> <!-- columns -->
 
-    </div> <!-- columns -->
-
-  </div> <!--hero body-->
-</section>
-
+    </div> <!--hero body-->
+  </section>
+{% endif %}
 {% endblock borderless2 %}
