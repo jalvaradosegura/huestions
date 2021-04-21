@@ -6,34 +6,36 @@
 {% block head_title %}Huestions | Hard Questions | Have fun answering{% endblock %}
 
 {% block borderless %}
-<section class="hero is-link is-bold is-fullheight">
-  <div class="hero-body container">
+  {% if user.is_authenticated %}
+  {% else %}
+    <section class="hero is-link is-bold is-fullheight">
+      <div class="hero-body container">
 
-    <div class="columns">
+        <div class="columns">
 
-      <div class="column">
-          <h2 class="title is-spaced has-text-left is-2">
-	    Hard questions for everyone
-          </h2>
-          <h2 class="subtitle is-3 has-text-left">
-	    Dare to answer the hardest questions that been hunting us for decades. Pizza or burger? Soccer or basketball?
-          </h2>
-	  <a class="button is-success is-medium mr-2 mb-2" href="">👀 Play as guest</a>
-	  <a class="button is-light is-medium is-outlined" href="">🤝 Create an account</a>
-      </div>
+          <div class="column">
+            <h2 class="title is-spaced has-text-left is-2">
+	      Hard questions for everyone
+            </h2>
+            <h2 class="subtitle is-3 has-text-left">
+	      Dare to answer the hardest questions that been hunting us for decades. Pizza or burger? Soccer or basketball?
+            </h2>
+	    <a class="button is-success is-medium mr-2 mb-2" href="">👀 Play as guest</a>
+	    <a class="button is-light is-medium is-outlined" href="">🤝 Create an account</a>
+          </div>
 
 
-      <div class="column has-text-centered">
-	  <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png" width="200" height="200"/>
-	  <p> <small><a href=""><u>Pikachu the Pokemon</u></a> happy as he knows.</small> </p>
-      </div>
+          <div class="column has-text-centered">
+	    <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png" width="200" height="200"/>
+	    <p> <small><a href=""><u>Pikachu the Pokemon</u></a> happy as he knows.</small> </p>
+          </div>
 
-    </div>
+	</div> <!--columns-->
 
-  </div> <!--hero body-->
+      </div> <!--hero body-->
 
-</section>
-
+    </section>
+  {% endif %}
 {% endblock borderless %}
 
 {% block main %}
@@ -131,7 +133,7 @@
       <div class="column">
         <p class="title">Join us</p>
         <p class="subtitle">Create an account to get full access. It's free</p>
-	<button class="button is-link is-medium">❤️ I would love to</button>
+	<a class="button is-link is-medium" href="{% url 'account_signup' %}">❤️ I would love to</a>
       </div>
 
     </div> <!-- columns -->
