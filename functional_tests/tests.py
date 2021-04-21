@@ -52,7 +52,6 @@ class FunctionalTestsBase(LiveServerTestCase):
 class NewVisitorTests(FunctionalTestsBase):
     def setUp(self):
         self.browser = webdriver.Firefox()
-        self.sign_up('javi@email.com', 'super_password_123')
 
     def test_can_visit_home_page(self):
         # Javi heard about a fun page, where you have to answer hard questions
@@ -61,7 +60,7 @@ class NewVisitorTests(FunctionalTestsBase):
 
         # Javi sees a Home Page title
         welcome = self.browser.find_element_by_tag_name('h2').text
-        self.assertEqual(welcome, 'Home Page')
+        self.assertEqual(welcome, 'Hard questions for everyone')
 
 
 class QuestionListsTests(FunctionalTestsBase):
