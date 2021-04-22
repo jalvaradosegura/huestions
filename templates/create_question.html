@@ -177,20 +177,25 @@
 
       </form>
 
-      <div class="field is-grouped mt-2">
+      <nav class="level mt-2">
+        <div class="level">
 
-        <div class="control level-item">
-          <input form="form1" class="button is-success" type="submit" id="create_question_and_add_another_button" name="create_and_add_another" value="{% trans "Create & add another" %}">
-        </div>
+          <div class="level-item mr-2">
+	    <input form="form1" class="button is-success" type="submit" id="create_question_and_add_another_button" name="create_and_add_another" value="{% trans "Create & add another" %}">
+          </div>
 
-        <div class="control level-item">
-          <input form="form1" class="button is-success" type="submit" id="create_question_and_publish" name="create_and_publish" value="{% trans "Create & publish the list" %}">
-        </div>
+	  <div class="level-item mr-2">
+	    <input form="form1" class="button is-success" type="submit" id="create_question_and_publish" name="create_and_publish" value="{% trans "Create & publish the list" %}">
+          </div>
 
-        <div class="control level-item">
-          <input form="form1" class="button is-success" type="submit" id="complete_button" name="create_and_go_back" value="{% trans "Create & go back" %}">
-        </div>
-      </div>
+	  <div class="level-item">
+	    <input form="form1" class="button is-success" type="submit" id="complete_button" name="create_and_go_back" value="{% trans "Create & go back" %}">
+          </div>
+
+	</div> <!--div level-->
+      </nav>
+
+      
 
     </div> <!--content-->
   </div> <!--card content-->

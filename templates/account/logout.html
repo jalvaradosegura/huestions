@@ -6,16 +6,23 @@
 
 {% block main %}
 
-<h2 class="title is-2">{% trans "Sign Out" %} 😢</h2>
+<div class="card">
+  <div class="card-content">
+    <div class="content">
 
-<p>{% trans "Are you sure you want to sign out" %}?</p>
+      <h2 class="title is-2">😢 {% trans "Sign Out" %}</h2>
 
-<form method="post" action="{% url 'account_logout' %}">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button class="button is-danger" type="submit">{% trans "Sign Out" %}</button>
-</form>
+      <p>{% trans "Are you sure you want to sign out" %}?</p>
+
+      <form method="post" action="{% url 'account_logout' %}">{% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button class="button is-danger" type="submit">{% trans "Sign Out" %}</button>
+      </form>
+
+    </div> <!--content-->
+  </div> <!--card content-->
+</div> <!--card-->
 
 {% endblock main %}
