@@ -17,176 +17,184 @@
   </ul>
 </nav>
 
-<form enctype="multipart/form-data" id="form1" action="" method="post">{% csrf_token %}
+<div class="card">
+  <div class="card-content">
+    <div class="content">
 
-  <div class="field">
-    <div class="control">
-      {% if question_form.non_field_errors %}
-	{% for error in question_form.non_field_errors %}
-	  <p class="help is-danger">{{ error }}</p>
-	{% endfor %}
-      {% endif %}
-    </div>
-  </div>
+      <form enctype="multipart/form-data" id="form1" action="" method="post">{% csrf_token %}
 
-  <div class="field">
-    <div class="control">
-      {% if question_form.title.errors or question_form.non_field_errors %}
-        {% render_field question_form.title class+="input is-danger" placeholder=question_form.title.label %}
-	{% for error in question_form.title.errors %}
-	  <p class="help is-danger">{{ error }}</p>
-	{% endfor %}
-      {% else %}
-        {% render_field question_form.title class+="input" placeholder=question_form.title.label %}
-	<p class="help">{{ question_form.title.help_text }}</p>
-      {% endif %}
-    </div>
-  </div>
+        <div class="field">
+          <div class="control">
+            {% if question_form.non_field_errors %}
+	      {% for error in question_form.non_field_errors %}
+	        <p class="help is-danger">{{ error }}</p>
+	      {% endfor %}
+            {% endif %}
+          </div>
+        </div>
 
-  <div class="field is-horizontal">
-    <div class="field-body">
+        <div class="field">
+          <div class="control">
+            {% if question_form.title.errors or question_form.non_field_errors %}
+              {% render_field question_form.title class+="input is-danger" placeholder=question_form.title.label %}
+	      {% for error in question_form.title.errors %}
+	        <p class="help is-danger">{{ error }}</p>
+	      {% endfor %}
+            {% else %}
+              {% render_field question_form.title class+="input" placeholder=question_form.title.label %}
+	      <p class="help">{{ question_form.title.help_text }}</p>
+            {% endif %}
+          </div>
+        </div>
 
-      <div class="field">
-        <div class="control">
-          {% if alternatives_form.alternative_1.errors %}
-            {% render_field alternatives_form.alternative_1 class+="input is-danger" placeholder=alternatives_form.alternative_1.label %}
-	    {% for error in alternatives_form.alternative_1.errors %}
-	      <p class="help is-danger">{{ error }}</p>
-	    {% endfor %}
-          {% else %}
-            {% render_field alternatives_form.alternative_1 class+="input" placeholder=alternatives_form.alternative_1.label %}
-	    <p class="help">{{ alternatives_form.alternative_1.help_text }}</p>
-          {% endif %}
+        <div class="field is-horizontal">
+          <div class="field-body">
+      
+            <div class="field">
+              <div class="control">
+                {% if alternatives_form.alternative_1.errors %}
+                  {% render_field alternatives_form.alternative_1 class+="input is-danger" placeholder=alternatives_form.alternative_1.label %}
+	          {% for error in alternatives_form.alternative_1.errors %}
+	            <p class="help is-danger">{{ error }}</p>
+	          {% endfor %}
+                {% else %}
+                  {% render_field alternatives_form.alternative_1 class+="input" placeholder=alternatives_form.alternative_1.label %}
+	          <p class="help">{{ alternatives_form.alternative_1.help_text }}</p>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                {% if alternatives_form.image_1.errors %}
+	          <div id="file-js-1" class="file has-name">
+                    <label class="file-label">
+	              {% render_field alternatives_form.image_1 class+="file-input is-danger" %}
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+		          {% trans "Choose a picture for Alternative 1" %}
+                        </span>
+                      </span>
+                      <span class="file-name">
+	                {% trans "No file uploaded" %}
+                      </span>
+                    </label>
+                  </div>
+	          {% for error in alternatives_form.image_1.errors %}
+	            <p class="help is-danger">{{ error }}</p>
+	          {% endfor %}
+                {% else %}
+	          <div id="file-js-1" class="file has-name">
+                    <label class="file-label">
+	              {% render_field alternatives_form.image_1 class+="file-input" %}
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+		          {% trans "Choose a picture for Alternative 1" %}
+                        </span>
+                      </span>
+                      <span class="file-name">
+	                {% trans "No file uploaded" %}
+                      </span>
+                    </label>
+                  </div>
+	          <p class="help">{{ alternatives_form.image_1.help_text }}</p>
+                {% endif %}
+              </div>
+            </div>
+
+          </div> <!--field is-body -->
+        </div> <!--field is-horizontal -->
+
+        <div class="field is-horizontal">
+          <div class="field-body">
+
+            <div class="field">
+              <div class="control">
+                {% if alternatives_form.alternative_2.errors %}
+                  {% render_field alternatives_form.alternative_2 class+="input is-danger" placeholder=alternatives_form.alternative_2.label %}
+	          {% for error in alternatives_form.alternative_2.errors %}
+	            <p class="help is-danger">{{ error }}</p>
+	          {% endfor %}
+                {% else %}
+                  {% render_field alternatives_form.alternative_2 class+="input" placeholder=alternatives_form.alternative_2.label %}
+	          <p class="help">{{ alternatives_form.alternative_2.help_text }}</p>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="field">
+              <div class="control">
+                {% if alternatives_form.image_2.errors %}
+	          <div id="file-js-2" class="file has-name">
+                    <label class="file-label">
+	              {% render_field alternatives_form.image_2 class+="file-input is-danger" %}
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+		          {% trans "Choose a picture for Alternative 2" %}
+                        </span>
+                      </span>
+                      <span class="file-name">
+	                {% trans "No file uploaded" %}
+                      </span>
+                    </label>
+                  </div>
+	          {% for error in alternatives_form.image_2.errors %}
+	            <p class="help is-danger">{{ error }}</p>
+	          {% endfor %}
+                {% else %}
+	          <div id="file-js-2" class="file has-name">
+                    <label class="file-label">
+	              {% render_field alternatives_form.image_2 class+="file-input" %}
+                      <span class="file-cta">
+                        <span class="file-icon">
+                          <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+		          {% trans "Choose a picture for Alternative 2" %}
+                        </span>
+                      </span>
+                      <span class="file-name">
+	                {% trans "No file uploaded" %}
+                      </span>
+                    </label>
+                  </div>
+	          <p class="help">{{ alternatives_form.image_2.help_text }}</p>
+                {% endif %}
+              </div>
+            </div>
+
+          </div> <!--field is-body -->
+        </div> <!--field is-horizontal -->
+
+      </form>
+
+      <div class="field is-grouped mt-2">
+
+        <div class="control level-item">
+          <input form="form1" class="button is-success" type="submit" id="create_question_and_add_another_button" name="create_and_add_another" value="{% trans "Create & add another" %}">
+        </div>
+
+        <div class="control level-item">
+          <input form="form1" class="button is-success" type="submit" id="create_question_and_publish" name="create_and_publish" value="{% trans "Create & publish the list" %}">
+        </div>
+
+        <div class="control level-item">
+          <input form="form1" class="button is-success" type="submit" id="complete_button" name="create_and_go_back" value="{% trans "Create & go back" %}">
         </div>
       </div>
 
-      <div class="field">
-        <div class="control">
-          {% if alternatives_form.image_1.errors %}
-	    <div id="file-js-1" class="file has-name">
-              <label class="file-label">
-	        {% render_field alternatives_form.image_1 class+="file-input is-danger" %}
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-		    {% trans "Choose a picture for Alternative 1" %}
-                  </span>
-                </span>
-                <span class="file-name">
-	          {% trans "No file uploaded" %}
-                </span>
-              </label>
-            </div>
-	    {% for error in alternatives_form.image_1.errors %}
-	      <p class="help is-danger">{{ error }}</p>
-	    {% endfor %}
-          {% else %}
-	    <div id="file-js-1" class="file has-name">
-              <label class="file-label">
-	        {% render_field alternatives_form.image_1 class+="file-input" %}
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-		    {% trans "Choose a picture for Alternative 1" %}
-                  </span>
-                </span>
-                <span class="file-name">
-	          {% trans "No file uploaded" %}
-                </span>
-              </label>
-            </div>
-	    <p class="help">{{ alternatives_form.image_1.help_text }}</p>
-          {% endif %}
-        </div>
-      </div>
-
-    </div> <!--field is-body -->
-  </div> <!--field is-horizontal -->
-
-  <div class="field is-horizontal">
-    <div class="field-body">
-
-      <div class="field">
-        <div class="control">
-          {% if alternatives_form.alternative_2.errors %}
-            {% render_field alternatives_form.alternative_2 class+="input is-danger" placeholder=alternatives_form.alternative_2.label %}
-	    {% for error in alternatives_form.alternative_2.errors %}
-	      <p class="help is-danger">{{ error }}</p>
-	    {% endfor %}
-          {% else %}
-            {% render_field alternatives_form.alternative_2 class+="input" placeholder=alternatives_form.alternative_2.label %}
-	    <p class="help">{{ alternatives_form.alternative_2.help_text }}</p>
-          {% endif %}
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="control">
-          {% if alternatives_form.image_2.errors %}
-	    <div id="file-js-2" class="file has-name">
-              <label class="file-label">
-	        {% render_field alternatives_form.image_2 class+="file-input is-danger" %}
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-		    {% trans "Choose a picture for Alternative 2" %}
-                  </span>
-                </span>
-                <span class="file-name">
-	          {% trans "No file uploaded" %}
-                </span>
-              </label>
-            </div>
-	    {% for error in alternatives_form.image_2.errors %}
-	      <p class="help is-danger">{{ error }}</p>
-	    {% endfor %}
-          {% else %}
-	    <div id="file-js-2" class="file has-name">
-              <label class="file-label">
-	        {% render_field alternatives_form.image_2 class+="file-input" %}
-                <span class="file-cta">
-                  <span class="file-icon">
-                    <i class="fas fa-upload"></i>
-                  </span>
-                  <span class="file-label">
-		    {% trans "Choose a picture for Alternative 2" %}
-                  </span>
-                </span>
-                <span class="file-name">
-	          {% trans "No file uploaded" %}
-                </span>
-              </label>
-            </div>
-	    <p class="help">{{ alternatives_form.image_2.help_text }}</p>
-          {% endif %}
-        </div>
-      </div>
-
-    </div> <!--field is-body -->
-  </div> <!--field is-horizontal -->
-
-</form>
-
-<div class="field is-grouped mt-2">
-
-  <div class="control">
-    <input form="form1" class="button is-success" type="submit" id="create_question_and_add_another_button" name="create_and_add_another" value="{% trans "Create & add another" %}">
-  </div>
-
-  <div class="control">
-    <input form="form1" class="button is-success" type="submit" id="create_question_and_publish" name="create_and_publish" value="{% trans "Create & publish the list" %}">
-  </div>
-
-  <div class="control">
-    <input form="form1" class="button is-success" type="submit" id="complete_button" name="create_and_go_back" value="{% trans "Create & go back" %}">
-  </div>
-</div>
+    </div> <!--content-->
+  </div> <!--card content-->
+</div> <!--card-->
 
 {% endblock main %}
 

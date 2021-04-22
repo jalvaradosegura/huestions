@@ -15,20 +15,21 @@
 
           <div class="column">
             <h2 class="title is-spaced has-text-left is-2">
-	      {% trans "Hard questions for everyone" %}
+	      {% trans "Lists of Hard Questions!" %}
             </h2>
             <h2 class="subtitle is-3 has-text-left">
-	      {% trans "Dare to answer the hardest questions that been hunting us for decades. Pizza or burger? Soccer or basketball?" %}
+	      {% trans "Pizza or Burger? Super strength or Super speed? Dogs or Cats?" %}
             </h2>
 	    <a class="button is-success is-medium mr-2 mb-2" href="">👀 {% trans "Play as guest" %}</a>
-	    <a class="button is-light is-medium is-outlined" href="">🤝 {% trans "Create an account" %}</a>
-	    <p><small>{% trans "I know how cool Huestions is" %}. <a href="{% url 'account_login' %}"><u>{% trans "I want to login" %}</u></a>.</small></p>
+	    <a class="button is-light is-medium is-outlined" href="{% url 'account_signup' %}">🤝 {% trans "Create an account" %}</a>
+	    <p><small>{% trans "Yes, yes, Huestions is awesome" %}. <a href="{% url 'account_login' %}">Let me <u>{% trans "login" %}</u></a>.</small></p>
           </div>
 
 
           <div class="column has-text-centered">
-	    <img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c325.png" width="200" height="200"/>
-	    <p> <small><a href=""><u>Pikachu the Pokemon</u></a> happy as he knows.</small> </p>
+	    <img src="{% static 'images/huesty.png' %}" width="280" height="280"/>
+	    <p> <small>I would <a href="{% url 'account_signup' %}"><u>take the advice</u></a>.</small> </p>
+	    <p> <small>(How is the sign held up? 🤔)</small> </p>
           </div>
 
 	</div> <!--columns-->
@@ -178,7 +179,7 @@
 
         <div class="column">
           <p class="title is-4 has-text-center">
-	    {% trans "Create a list of questions" %}
+	    {% trans "Create a list" %}
           </p>
 	  <p class="is-5 has-text-left">1️⃣ {% trans "Pick a cool name for your list" %}.</p>
 	  <p class="is-5 has-text-left">2️⃣ {% trans "Add fun questions and alternatives to the list" %}.</p>
@@ -187,7 +188,7 @@
 
         <div class="column">
           <p class="title is-4 has-text-center">
-	    {% trans "Answer a list of questions" %}
+	    {% trans "Answer a list" %}
           </p>
 	  <p class="is-5 has-text-left">1️⃣ {% trans "Select a list" %}.</p>
 	  <p class="is-5 has-text-left">2️⃣ {% trans "Answer it's fun questions" %}.</p>
@@ -213,8 +214,8 @@
 
         <div class="column">
 	  <p class="title">{% trans "Join us" %}</p>
-	  <p class="subtitle">{% trans "Create an account to enjoy every question and list. It's free" %}</p>
-	  <a class="button is-link is-medium" href="{% url 'account_signup' %}">❤️ {% trans "I would love to" %}</a>
+	  <p class="subtitle">{% trans "We would love to have you as a member. It's free." %}</p>
+	  <a class="button is-link is-medium" href="{% url 'account_signup' %}">❤️ {% trans "Oki" %}</a>
         </div>
   
       </div> <!-- columns -->

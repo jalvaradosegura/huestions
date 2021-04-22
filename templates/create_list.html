@@ -8,38 +8,46 @@
 
 {% block main %}
 
-<h2 class="title is-2">{% trans "Create a list" %}</h2>
-<form action="" method="post">{% csrf_token %}
+<div class="card">
+  <div class="card-content">
+    <div class="content">
 
-  <div class="field">
-    <div class="control">
-      {% if form.title.errors %}
-        {% render_field form.title class+="input is-danger" placeholder=form.title.label %}
-	{% for error in form.title.errors %}
-	  <p class="help is-danger">{{ error }}</p>
-	{% endfor %}
-      {% else %}
-        {% render_field form.title class+="input" placeholder=form.title.label %}
-	<p class="help">{{ form.title.help_text }}</p>
-      {% endif %}
-    </div>
-  </div>
+      <h2 class="title is-2">{% trans "Create a list" %}</h2>
+      <form action="" method="post">{% csrf_token %}
 
-  <div class="field">
-    <div class="control">
-      {% if form.tags.errors %}
-        {% render_field form.tags class+="input is-danger" placeholder=form.tags.label %}
-	{% for error in form.tags.errors %}
-	  <p class="help is-danger">{{ error }}</p>
-	{% endfor %}
-      {% else %}
-        {% render_field form.tags class+="input" placeholder=form.tags.label %}
-	<p class="help">{{ form.tags.help_text }}</p>
-      {% endif %}
-    </div>
-  </div>
+        <div class="field">
+          <div class="control">
+            {% if form.title.errors %}
+              {% render_field form.title class+="input is-danger" placeholder=form.title.label %}
+	      {% for error in form.title.errors %}
+	        <p class="help is-danger">{{ error }}</p>
+	      {% endfor %}
+            {% else %}
+              {% render_field form.title class+="input" placeholder=form.title.label %}
+	      <p class="help">{{ form.title.help_text }}</p>
+            {% endif %}
+          </div>
+        </div>
 
-  <button class="button is-success" type="submit" id="create_list_button">{% trans "Create" %}</button>
-</form>
+        <div class="field">
+          <div class="control">
+            {% if form.tags.errors %}
+              {% render_field form.tags class+="input is-danger" placeholder=form.tags.label %}
+	      {% for error in form.tags.errors %}
+	        <p class="help is-danger">{{ error }}</p>
+	      {% endfor %}
+            {% else %}
+              {% render_field form.tags class+="input" placeholder=form.tags.label %}
+	      <p class="help">{{ form.tags.help_text }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <button class="button is-success" type="submit" id="create_list_button">{% trans "Create" %}</button>
+      </form>
+
+    </div> <!--content-->
+  </div> <!--card content-->
+</div> <!--card-->
 
 {% endblock main %}
