@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 19:55-0400\n"
-"PO-Revision-Date: 2021-04-22 23:56+0000\n"
+"POT-Creation-Date: 2021-04-22 22:21-0400\n"
+"PO-Revision-Date: 2021-04-23 02:25+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -364,6 +364,18 @@ msgstr "Registrarse"
 msgid "Already have an account"
 msgstr "Ya tienes una cuenta"
 
+#: templates/account/signup.html:79
+#, python-format
+#| msgid ""
+#| "I acknowledge that I have read and agree to the <a href=\"%(url)s\" "
+#| "target=\"_blank\">Terms and Conditions</a>"
+msgid ""
+"By registering, you agree to our <a href=\"%(terms_urls)s\" "
+"target=\"_blank\">Terms and Conditions</a>"
+msgstr ""
+"Al registrarte, aceptas los <a href=\"%(terms_urls)s "
+"target=\"_blank\">Términos y Condiciones</a>"
+
 #: templates/account/verified_email_required.html:6
 msgid "Verify Your E-mail Address"
 msgstr "Confirma dirección de correo"
@@ -648,7 +660,6 @@ msgid "See and compare results"
 msgstr "Ve y compara resultados"
 
 #: templates/home.html:203
-#| msgid "We would love to have you. It's free."
 msgid "We would love to have you"
 msgstr "Nos encantaría tenerte"
 
@@ -848,14 +859,6 @@ msgstr "Preguntas respondidas"
 #~ "Necesitarás <a href=\"%(signup)s\">crear una cuenta</a> para acceder a toda "
 #~ "esta diversión. Recuerda también leer <a href=\"%(terms)s\">nuestros "
 #~ "términos</a>, al usar la página aceptas los términos del servicio."
-
-#, python-format
-#~ msgid ""
-#~ "I acknowledge that I have read and agree to the <a href=\"%(url)s\" "
-#~ "target=\"_blank\">Terms and Conditions</a>"
-#~ msgstr ""
-#~ "Reconozco que he leído y acepto los <a href=\"%(url)s\" "
-#~ "target=\"_blank\">Términos y Condiciones</a>"
 
 #~ msgid "Characters Artist"
 #~ msgstr "Artista de personajes"

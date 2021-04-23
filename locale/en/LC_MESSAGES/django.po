@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 19:55-0400\n"
+"POT-Creation-Date: 2021-04-22 22:21-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -323,6 +323,13 @@ msgstr ""
 
 #: templates/account/signup.html:70
 msgid "Already have an account"
+msgstr ""
+
+#: templates/account/signup.html:79
+#, python-format
+msgid ""
+"By registering, you agree to our <a href=\"%(terms_urls)s\" target=\"_blank"
+"\">Terms and Conditions</a>"
 msgstr ""
 
 #: templates/account/verified_email_required.html:6

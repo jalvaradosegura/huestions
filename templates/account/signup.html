@@ -75,7 +75,8 @@
 
 <br>
 <div class="has-text-centered">
-  <small class="">By registering, you agree to our <a href="{% url 'terms_and_conditions' %}" target="_blank">Terms and Conditions</a>.</small>
+  {% url 'terms_and_conditions' as terms_urls %}
+  <small class="">{% blocktrans %}By registering, you agree to our <a href="{{ terms_urls }}" target="_blank">Terms and Conditions</a>{% endblocktrans %}.</small>
 </div>
 
 
