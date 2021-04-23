@@ -1,17 +1,13 @@
 import datetime
-import json
-import os
 
-from allauth.account.decorators import verified_email_required
-from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, Q
 from django.shortcuts import redirect, render, reverse
 from django.utils import timezone
-from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
-import requests
 
 from core.constants import (
     AMOUNT_OF_DAYS_FOR_POPULARITY,
@@ -31,7 +27,6 @@ from .forms import CompleteListForm, CreateQuestionListForm, EditListForm
 from .models import QuestionList
 
 
-@method_decorator(verified_email_required, name='dispatch')
 class QuestionsListView(ListView):
     template_name = 'lists.html'
     paginate_by = AMOUNT_OF_LISTS_PER_PAGE
@@ -61,8 +56,7 @@ class QuestionsListView(ListView):
             )
 
 
-@method_decorator(verified_email_required, name='dispatch')
-class ListResultsView(DetailView):
+class ListResultsView(LoginRequiredMixin, DetailView):
     template_name = 'list_results.html'
 
     def get_queryset(self):
@@ -122,7 +116,7 @@ class ListResultsView(DetailView):
         return context
 
 
-@verified_email_required
+@login_required
 def create_list(request):
     if request.method == 'POST':
         form = CreateQuestionListForm(request.POST, owner=request.user)
@@ -141,8 +135,8 @@ def create_list(request):
     return render(request, 'create_list.html', {'form': form, })
 
 
-@method_decorator(verified_email_required, name='dispatch')
 class EditListView(
+    LoginRequiredMixin,
     CustomUserPassesTestMixin,
     SuccessMessageMixin,
     UpdateView,
@@ -194,8 +188,7 @@ class EditListView(
             return self.form_invalid(form)
 
 
-@method_decorator(verified_email_required, name='dispatch')
-class DeleteListView(CustomUserPassesTestMixin, DeleteView):
+class DeleteListView(LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView):
     model = QuestionList
     template_name = 'delete_list.html'
 
@@ -210,7 +203,6 @@ class DeleteListView(CustomUserPassesTestMixin, DeleteView):
         return response
 
 
-@method_decorator(verified_email_required, name='dispatch')
 class SearchListsView(ListView):
     context_object_name = 'lists'
     template_name = 'search_results.html'
