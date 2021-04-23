@@ -124,21 +124,10 @@ class ListResultsView(DetailView):
 
 @verified_email_required
 def create_list(request):
-    captcha_public_key = settings.CAPTCHA_PUBLIC_KEY
-
     if request.method == 'POST':
         form = CreateQuestionListForm(request.POST, owner=request.user)
 
-        captcha_token = request.POST.get('g-recaptcha-response')
-        captcha_url = 'https://www.google.com/recaptcha/api/siteverify'
-        captcha_secret = settings.CAPTCHA_SECRET_KEY
-        captcha_data = {'secret': captcha_secret, 'response': captcha_token}
-        captcha_server_response = requests.post(
-            url=captcha_url, data=captcha_data
-        )
-        captcha_json = json.loads(captcha_server_response.text)
-
-        if form.is_valid() and captcha_json['success']:
+        if form.is_valid():
             question_list = form.save(commit=False)
             question_list.save()
             form.save_m2m()  # django-taggit
@@ -146,10 +135,10 @@ def create_list(request):
                 request, messages.SUCCESS, LIST_CREATED_SUCCESSFULLY
             )
             return redirect('add_question', question_list.slug)
-        return render(request, 'create_list.html', {'form': form, 'captcha_key': captcha_public_key})
+        return render(request, 'create_list.html', {'form': form, })
 
     form = CreateQuestionListForm(owner=request.user)
-    return render(request, 'create_list.html', {'form': form, 'captcha_key': captcha_public_key})
+    return render(request, 'create_list.html', {'form': form, })
 
 
 @method_decorator(verified_email_required, name='dispatch')

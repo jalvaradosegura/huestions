@@ -1,3 +1,4 @@
+from captcha.fields import ReCaptchaField
 from django import forms
 from django.core.validators import MinLengthValidator, RegexValidator
 from django.utils.translation import gettext_lazy as _
@@ -20,6 +21,7 @@ class CreateQuestionListForm(forms.ModelForm):
             MinLengthValidator(5),
         ],
     )
+    captcha = ReCaptchaField()
 
     class Meta:
         model = QuestionList

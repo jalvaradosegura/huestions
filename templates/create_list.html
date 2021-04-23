@@ -43,7 +43,16 @@
           </div>
         </div>
 
-	<div class="g-recaptcha mb-2" data-sitekey="{{ captcha_key }}"></div>
+	<div class="field">
+          <div class="control">
+	    {{ form.captcha }}
+	    {% if form.captcha.errors %}
+	      {% for error in form.captcha.errors %}
+	        <p class="help is-danger">{{ error }}</p>
+	      {% endfor %}
+	    {% endif %}
+          </div>
+        </div>
 
         <button class="button is-success" type="submit" id="create_list_button">{% trans "Create" %}</button>
       </form>
@@ -54,6 +63,3 @@
 
 {% endblock main %}
 
-{% block bootstrap_js_loaded %}
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-{% endblock bootstrap_js_loaded %}

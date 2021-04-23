@@ -21,5 +21,6 @@ INTERNAL_IPS = [
 STORE_IN_BUCKET = False
 
 # Google Captcha
-CAPTCHA_PUBLIC_KEY = '6LeltbUaAAAAAHcbapp6ewFAbso1sSi19DdVWl8x'
-CAPTCHA_SECRET_KEY = '6LeltbUaAAAAAGDTzDw_IYvlhqO_1wqzTT0rFNim'
+RECAPTCHA_PUBLIC_KEY = '6LeltbUaAAAAAHcbapp6ewFAbso1sSi19DdVWl8x'
+RECAPTCHA_PRIVATE_KEY = '6LeltbUaAAAAAGDTzDw_IYvlhqO_1wqzTT0rFNim'
+# SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

@@ -48,15 +48,12 @@
 
       <div class="field">
         <div class="control">
-          {% if form.check.errors %}
-            {% render_field form.check class+="checkbox is-danger" placeholder=form.check.label %}
-	    {% for error in form.check.errors %}
+	  {{ form.captcha }}
+	  {% if form.captcha.errors %}
+	    {% for error in form.captcha.errors %}
 	      <p class="help is-danger">{{ error }}</p>
 	    {% endfor %}
-          {% else %}
-            {% render_field form.check class+="checkbox"%}
-	    {{ form.check.label_tag }}
-          {% endif %}
+	  {% endif %}
         </div>
       </div>
 
