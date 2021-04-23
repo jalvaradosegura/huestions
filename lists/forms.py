@@ -22,7 +22,7 @@ class CreateQuestionListForm(forms.ModelForm):
             MinLengthValidator(5),
         ],
     )
-    if not settings.DEBUG:
+    if not settings.DEBUG and not settings.USED_FOR_TESTING:
         captcha = ReCaptchaField()
 
     class Meta:

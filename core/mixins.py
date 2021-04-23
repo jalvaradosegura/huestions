@@ -38,18 +38,6 @@ class TestViewsMixin(LoginUserMixin):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
 
-    def test_user_havent_verified_its_account_yet(self):
-        email_address = EmailAddress.objects.get(email=self.user.email)
-        email_address.verified = False
-        email_address.save()
-
-        response = self.client.get(self.base_url)
-
-        self.assertEqual(response.status_code, HTTPStatus.OK)
-        self.assertTemplateUsed(
-            response, 'account/verified_email_required.html'
-        )
-
 
 class CustomUserPassesTestMixin(UserPassesTestMixin):
     def test_func(self):

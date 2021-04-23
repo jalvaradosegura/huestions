@@ -1,7 +1,8 @@
 from http import HTTPStatus
 
+from django.conf import settings
 from django.contrib.messages import get_messages
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import resolve, reverse
 
 from core.constants import (
@@ -25,9 +26,8 @@ from ..views import (
 )
 
 
-class QuestionsListViewTests(TestViewsMixin, TestCase):
+class QuestionsListViewTests(TestCase):
     def setUp(self):
-        self.create_login_and_verify_user()
         self.base_url = reverse('questions_list')
 
     def test_question_list_url_resolves_to_view(self):
@@ -343,9 +343,8 @@ class DeleteListViewTests(TestViewsMixin, TestCase):
         )
 
 
-class SearchListsViewTests(TestViewsMixin, TestCase):
+class SearchListsViewTests(TestCase):
     def setUp(self):
-        self.create_login_and_verify_user()
         self.base_url = reverse('search_lists')
 
     def test_view_get(self):
