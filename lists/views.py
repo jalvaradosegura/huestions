@@ -1,6 +1,9 @@
 import datetime
+import json
+import os
 
 from allauth.account.decorators import verified_email_required
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, Q
@@ -8,6 +11,7 @@ from django.shortcuts import redirect, render, reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import DeleteView, DetailView, ListView, UpdateView
+import requests
 
 from core.constants import (
     AMOUNT_OF_DAYS_FOR_POPULARITY,
@@ -120,10 +124,21 @@ class ListResultsView(DetailView):
 
 @verified_email_required
 def create_list(request):
+    captcha_public_key = settings.CAPTCHA_PUBLIC_KEY
+
     if request.method == 'POST':
         form = CreateQuestionListForm(request.POST, owner=request.user)
 
-        if form.is_valid():
+        captcha_token = request.POST.get('g-recaptcha-response')
+        captcha_url = 'https://www.google.com/recaptcha/api/siteverify'
+        captcha_secret = settings.CAPTCHA_SECRET_KEY
+        captcha_data = {'secret': captcha_secret, 'response': captcha_token}
+        captcha_server_response = requests.post(
+            url=captcha_url, data=captcha_data
+        )
+        captcha_json = json.loads(captcha_server_response.text)
+
+        if form.is_valid() and captcha_json['success']:
             question_list = form.save(commit=False)
             question_list.save()
             form.save_m2m()  # django-taggit
@@ -131,10 +146,10 @@ def create_list(request):
                 request, messages.SUCCESS, LIST_CREATED_SUCCESSFULLY
             )
             return redirect('add_question', question_list.slug)
-        return render(request, 'create_list.html', {'form': form})
+        return render(request, 'create_list.html', {'form': form, 'captcha_key': captcha_public_key})
 
     form = CreateQuestionListForm(owner=request.user)
-    return render(request, 'create_list.html', {'form': form})
+    return render(request, 'create_list.html', {'form': form, 'captcha_key': captcha_public_key})
 
 
 @method_decorator(verified_email_required, name='dispatch')

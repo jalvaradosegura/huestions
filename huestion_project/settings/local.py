@@ -19,3 +19,7 @@ INTERNAL_IPS = [
 
 # When uploading files, where to store them
 STORE_IN_BUCKET = False
+
+# Google Captcha
+CAPTCHA_PUBLIC_KEY = '6LeltbUaAAAAAHcbapp6ewFAbso1sSi19DdVWl8x'
+CAPTCHA_SECRET_KEY = '6LeltbUaAAAAAGDTzDw_IYvlhqO_1wqzTT0rFNim'

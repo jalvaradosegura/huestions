@@ -43,6 +43,8 @@
           </div>
         </div>
 
+	<div class="g-recaptcha mb-2" data-sitekey="{{ captcha_key }}"></div>
+
         <button class="button is-success" type="submit" id="create_list_button">{% trans "Create" %}</button>
       </form>
 
@@ -51,3 +53,7 @@
 </div> <!--card-->
 
 {% endblock main %}
+
+{% block bootstrap_js_loaded %}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{% endblock bootstrap_js_loaded %}
