@@ -10,5 +10,5 @@ class ContactForm(forms.Form):
     message = forms.CharField(
         widget=forms.Textarea, required=True, label=_('Message')
     )
-    if not settings.DEBUG:
+    if not settings.DEBUG and not settings.USED_FOR_TESTING:
         captcha = ReCaptchaField()
