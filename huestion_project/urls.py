@@ -19,6 +19,7 @@ urlpatterns = [
     path('', include('questions.urls')),
     path('', include('core.urls')),
     path('users/', include('users.urls')),
+    path('demo/', include('demo.urls')),
     path('accounts/', include('allauth.urls')),
     path('rosetta/', include('rosetta.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
