@@ -1,4 +1,6 @@
+from captcha.fields import ReCaptchaField
 from django import forms
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 
 
@@ -8,3 +10,5 @@ class ContactForm(forms.Form):
     message = forms.CharField(
         widget=forms.Textarea, required=True, label=_('Message')
     )
+    if not settings.DEBUG:
+        captcha = ReCaptchaField()
