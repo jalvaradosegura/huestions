@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-21 18:33-0400\n"
+"POT-Creation-Date: 2021-04-22 19:55-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -245,12 +245,12 @@ msgstr ""
 msgid "Don't have an account yet"
 msgstr ""
 
-#: templates/account/logout.html:5 templates/account/logout.html:9
-#: templates/account/logout.html:18
+#: templates/account/logout.html:5 templates/account/logout.html:13
+#: templates/account/logout.html:21
 msgid "Sign Out"
 msgstr ""
 
-#: templates/account/logout.html:11
+#: templates/account/logout.html:15
 msgid "Are you sure you want to sign out"
 msgstr ""
 
@@ -351,12 +351,12 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: templates/create_list.html:11 templates/footer.html:70
-#: templates/home.html:94 templates/navbar.html:53
+#: templates/create_list.html:15 templates/footer.html:70
+#: templates/home.html:95 templates/home.html:169 templates/navbar.html:53
 msgid "Create a list"
 msgstr ""
 
-#: templates/create_list.html:42 templates/home.html:143
+#: templates/create_list.html:46 templates/home.html:131
 msgid "Create"
 msgstr ""
 
@@ -364,28 +364,28 @@ msgstr ""
 msgid "Create a question"
 msgstr ""
 
-#: templates/create_question.html:74 templates/create_question.html:94
+#: templates/create_question.html:78 templates/create_question.html:98
 msgid "Choose a picture for Alternative 1"
 msgstr ""
 
-#: templates/create_question.html:78 templates/create_question.html:98
-#: templates/create_question.html:142 templates/create_question.html:162
+#: templates/create_question.html:82 templates/create_question.html:102
+#: templates/create_question.html:146 templates/create_question.html:166
 msgid "No file uploaded"
 msgstr ""
 
-#: templates/create_question.html:138 templates/create_question.html:158
+#: templates/create_question.html:142 templates/create_question.html:162
 msgid "Choose a picture for Alternative 2"
 msgstr ""
 
-#: templates/create_question.html:179
+#: templates/create_question.html:184
 msgid "Create & add another"
 msgstr ""
 
-#: templates/create_question.html:183
+#: templates/create_question.html:188
 msgid "Create & publish the list"
 msgstr ""
 
-#: templates/create_question.html:187
+#: templates/create_question.html:192
 msgid "Create & go back"
 msgstr ""
 
@@ -488,13 +488,11 @@ msgid ""
 msgstr ""
 
 #: templates/home.html:18
-msgid "Hard questions for everyone"
+msgid "Lists of Hard Questions!"
 msgstr ""
 
 #: templates/home.html:21
-msgid ""
-"Dare to answer the hardest questions that been hunting us for decades. Pizza "
-"or burger? Soccer or basketball?"
+msgid "Pizza or Burger? Super strength or Super speed? Dogs or Cats?"
 msgstr ""
 
 #: templates/home.html:23
@@ -506,105 +504,108 @@ msgid "Create an account"
 msgstr ""
 
 #: templates/home.html:25
-msgid "I know how cool Huestions is"
+msgid "Yes, yes, Huestions is awesome"
 msgstr ""
 
 #: templates/home.html:25
-msgid "I want to login"
+msgid "Let me <u>login"
 msgstr ""
 
-#: templates/home.html:51
-msgid "Lists of the month"
+#: templates/home.html:32
+#, python-format
+msgid "I would <a href=\"%(signup_url)s\"><u>take the advice</u></a>"
 msgstr ""
 
-#: templates/home.html:54
-msgid "Most voted lists in the last few days"
+#: templates/home.html:33
+msgid "How is the sign held up?"
+msgstr ""
+
+#: templates/home.html:53
+msgid "Lists of the moment"
 msgstr ""
 
 #: templates/home.html:56
-msgid "Take me there"
+msgid "Most voted lists in the last few days"
 msgstr ""
 
-#: templates/home.html:82
-msgid "Newest lists"
+#: templates/home.html:58
+msgid "Let's go"
 msgstr ""
 
-#: templates/home.html:83 templates/home.html:95 templates/home.html:107
-#: templates/lists.html:45 templates/search_results.html:38
-#: templates/user_lists.html:44
+#: templates/home.html:83
+msgid "The newest lists"
+msgstr ""
+
+#: templates/home.html:84 templates/home.html:96 templates/lists.html:45
+#: templates/search_results.html:38 templates/user_lists.html:44
 msgid "Go"
 msgstr ""
 
-#: templates/home.html:106 templates/navbar.html:63 templates/user_stats.html:9
-msgid "Your stats"
-msgstr ""
-
-#: templates/home.html:129
+#: templates/home.html:117
 msgid "Answer"
 msgstr ""
 
-#: templates/home.html:131
-msgid "Answer fun, hard and cool questions."
+#: templates/home.html:119
+msgid ""
+"We believe it is important to have fun on a daily basis. We suggest you do "
+"it here, answering lists of cool questions."
+msgstr ""
+
+#: templates/home.html:133
+msgid ""
+"Create that list of questions that you know will be a hit with your friends."
 msgstr ""
 
 #: templates/home.html:145
-msgid "Create lists of questions with things you've always wondered."
-msgstr ""
-
-#: templates/home.html:157
 msgid "Share"
 msgstr ""
 
-#: templates/home.html:159
-msgid "Share with your friends or anyone you like."
+#: templates/home.html:147
+msgid "Share the lists! Send it to that person"
 msgstr ""
 
-#: templates/home.html:175
+#: templates/home.html:163
 msgid "How does it work?"
 msgstr ""
 
-#: templates/home.html:181
-msgid "Create a list of questions"
-msgstr ""
-
-#: templates/home.html:183
+#: templates/home.html:171
 msgid "Pick a cool name for your list"
 msgstr ""
 
-#: templates/home.html:184
+#: templates/home.html:172
 msgid "Add fun questions and alternatives to the list"
 msgstr ""
 
-#: templates/home.html:185 templates/home.html:195
+#: templates/home.html:173 templates/home.html:183
 msgid "Share with everybody"
 msgstr ""
 
-#: templates/home.html:190
-msgid "Answer a list of questions"
+#: templates/home.html:178
+msgid "Answer a list"
 msgstr ""
 
-#: templates/home.html:192
+#: templates/home.html:180
 msgid "Select a list"
 msgstr ""
 
-#: templates/home.html:193
+#: templates/home.html:181
 msgid "Answer it's fun questions"
 msgstr ""
 
-#: templates/home.html:194
+#: templates/home.html:182
 msgid "See and compare results"
 msgstr ""
 
-#: templates/home.html:215
-msgid "Join us"
+#: templates/home.html:203
+msgid "We would love to have you"
 msgstr ""
 
-#: templates/home.html:216
-msgid "Create an account to get full access. It's free"
+#: templates/home.html:204
+msgid "Join us. It's free."
 msgstr ""
 
-#: templates/home.html:217
-msgid "I would love to"
+#: templates/home.html:205
+msgid "Yes"
 msgstr ""
 
 #: templates/list_results.html:26
@@ -665,6 +666,10 @@ msgstr ""
 
 #: templates/navbar.html:56
 msgid "More"
+msgstr ""
+
+#: templates/navbar.html:63 templates/user_stats.html:9
+msgid "Your stats"
 msgstr ""
 
 #: templates/navbar.html:76

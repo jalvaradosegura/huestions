@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-21 18:33-0400\n"
-"PO-Revision-Date: 2021-04-21 22:44+0000\n"
+"POT-Creation-Date: 2021-04-22 19:55-0400\n"
+"PO-Revision-Date: 2021-04-22 23:56+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -276,12 +276,12 @@ msgstr "Olvidaste la contraseña"
 msgid "Don't have an account yet"
 msgstr "Todavía no tienes cuenta"
 
-#: templates/account/logout.html:5 templates/account/logout.html:9
-#: templates/account/logout.html:18
+#: templates/account/logout.html:5 templates/account/logout.html:13
+#: templates/account/logout.html:21
 msgid "Sign Out"
 msgstr "Cerrar sesión"
 
-#: templates/account/logout.html:11
+#: templates/account/logout.html:15
 msgid "Are you sure you want to sign out"
 msgstr "Realmente quieres cerrar sesión"
 
@@ -394,41 +394,41 @@ msgstr "Contáctanos"
 msgid "Send"
 msgstr "Enviar"
 
-#: templates/create_list.html:11 templates/footer.html:70
-#: templates/home.html:94 templates/navbar.html:53
+#: templates/create_list.html:15 templates/footer.html:70
+#: templates/home.html:95 templates/home.html:169 templates/navbar.html:53
 msgid "Create a list"
-msgstr "Crear una lista"
+msgstr "Crea una lista"
 
-#: templates/create_list.html:42 templates/home.html:143
+#: templates/create_list.html:46 templates/home.html:131
 msgid "Create"
-msgstr "Crear"
+msgstr "Crea"
 
 #: templates/create_question.html:16
 msgid "Create a question"
 msgstr "Crea una pregunta"
 
-#: templates/create_question.html:74 templates/create_question.html:94
+#: templates/create_question.html:78 templates/create_question.html:98
 msgid "Choose a picture for Alternative 1"
 msgstr "Elige una foto para la Alternativa 1"
 
-#: templates/create_question.html:78 templates/create_question.html:98
-#: templates/create_question.html:142 templates/create_question.html:162
+#: templates/create_question.html:82 templates/create_question.html:102
+#: templates/create_question.html:146 templates/create_question.html:166
 msgid "No file uploaded"
 msgstr "No hay ningún archivo"
 
-#: templates/create_question.html:138 templates/create_question.html:158
+#: templates/create_question.html:142 templates/create_question.html:162
 msgid "Choose a picture for Alternative 2"
 msgstr "Elige una foto para la Alternativa 2"
 
-#: templates/create_question.html:179
+#: templates/create_question.html:184
 msgid "Create & add another"
 msgstr "Crear y agregrar otra"
 
-#: templates/create_question.html:183
+#: templates/create_question.html:188
 msgid "Create & publish the list"
 msgstr "Crear y publicar lista"
 
-#: templates/create_question.html:187
+#: templates/create_question.html:192
 msgid "Create & go back"
 msgstr "Crear y volver"
 
@@ -535,134 +535,130 @@ msgid ""
 msgstr "Al comienzo, elegir a Sloth en vez de Red Panda, afectó su amistad..."
 
 #: templates/home.html:18
-msgid "Hard questions for everyone"
-msgstr "Preguntas difíciles para todos"
+msgid "Lists of Hard Questions!"
+msgstr "Listas de Preguntas Difíciles"
 
 #: templates/home.html:21
-msgid ""
-"Dare to answer the hardest questions that been hunting us for decades. Pizza"
-" or burger? Soccer or basketball?"
+msgid "Pizza or Burger? Super strength or Super speed? Dogs or Cats?"
 msgstr ""
-"Atrévete a responder las preguntas más difíciles que nos hemos cuestionado "
-"siempre. ¿Pizza o hamburguesa? ¿Fútbol o Basketball?"
+"¿Pizza o Hamburguesa? ¿Super-fuerza o Super-velocidad? ¿Perros o Gatos?"
 
 #: templates/home.html:23
 msgid "Play as guest"
 msgstr "Jugar como invitado"
 
 #: templates/home.html:24
-#| msgid "Already have an account"
 msgid "Create an account"
 msgstr "Crear una cuenta"
 
 #: templates/home.html:25
-msgid "I know how cool Huestions is"
-msgstr "Sé lo genial que es Huestions"
+msgid "Yes, yes, Huestions is awesome"
+msgstr "Sí, sí, Huestions es increíble"
 
 #: templates/home.html:25
-msgid "I want to login"
-msgstr "Quiero iniciar sesión"
+msgid "Let me <u>login"
+msgstr "Déjenme <u>iniciar sesión"
 
-#: templates/home.html:51
-msgid "Lists of the month"
-msgstr "Listas del mes"
+#: templates/home.html:32
+#, python-format
+msgid "I would <a href=\"%(signup_url)s\"><u>take the advice</u></a>"
+msgstr "Yo <a href=\"%(signup_url)s\"><u>tomaría el consejo</u></a>"
 
-#: templates/home.html:54
-#| msgid "Votes in the last few days"
+#: templates/home.html:33
+msgid "How is the sign held up?"
+msgstr "¿Cómo se sostiene el letrero?"
+
+#: templates/home.html:53
+msgid "Lists of the moment"
+msgstr "Listas del momento"
+
+#: templates/home.html:56
 msgid "Most voted lists in the last few days"
 msgstr "Listas más votadas en los últimos días"
 
-#: templates/home.html:56
-msgid "Take me there"
-msgstr "Llévenme ahí"
+#: templates/home.html:58
+msgid "Let's go"
+msgstr "Voy"
 
-#: templates/home.html:82
-msgid "Newest lists"
-msgstr "Listas más nuevas"
+#: templates/home.html:83
+msgid "The newest lists"
+msgstr "Las listas más nuevas"
 
-#: templates/home.html:83 templates/home.html:95 templates/home.html:107
-#: templates/lists.html:45 templates/search_results.html:38
-#: templates/user_lists.html:44
+#: templates/home.html:84 templates/home.html:96 templates/lists.html:45
+#: templates/search_results.html:38 templates/user_lists.html:44
 msgid "Go"
 msgstr "Ir"
 
-#: templates/home.html:106 templates/navbar.html:63
-#: templates/user_stats.html:9
-msgid "Your stats"
-msgstr "Tus estadísticas"
-
-#: templates/home.html:129
+#: templates/home.html:117
 msgid "Answer"
-msgstr "Responder"
+msgstr "Responde"
 
-#: templates/home.html:131
-msgid "Answer fun, hard and cool questions."
-msgstr "Responde preguntas divertidas, difíciles y geniales."
+#: templates/home.html:119
+msgid ""
+"We believe it is important to have fun on a daily basis. We suggest you do "
+"it here, answering lists of cool questions."
+msgstr ""
+"Creemos que es importante divertirse a diario. Te sugerimos hacerlo aquí, "
+"respondiendo listas de preguntas simpáticas."
+
+#: templates/home.html:133
+msgid ""
+"Create that list of questions that you know will be a hit with your friends."
+msgstr ""
+"Crea esa lista de preguntas que sabes que será un éxito entre tus amistades."
 
 #: templates/home.html:145
-msgid "Create lists of questions with things you've always wondered."
-msgstr "Crea listas de preguntas con cosas que siempre te has preguntado."
-
-#: templates/home.html:157
-#| msgid "Share list"
 msgid "Share"
-msgstr "Compartir"
+msgstr "Comparte"
 
-#: templates/home.html:159
-msgid "Share with your friends or anyone you like."
-msgstr "Comparte con tus amigos o con quien quieras."
+#: templates/home.html:147
+msgid "Share the lists! Send it to that person"
+msgstr "Comparte las listas! Envíasela a esa persona"
 
-#: templates/home.html:175
+#: templates/home.html:163
 msgid "How does it work?"
 msgstr "¿Cómo funciona?"
 
-#: templates/home.html:181
-#| msgid "Create a question"
-msgid "Create a list of questions"
-msgstr "Crea una lista de preguntas"
-
-#: templates/home.html:183
+#: templates/home.html:171
 msgid "Pick a cool name for your list"
 msgstr "Elige un nombre genial para tu lista"
 
-#: templates/home.html:184
+#: templates/home.html:172
 msgid "Add fun questions and alternatives to the list"
 msgstr "Agrega preguntas y alternativas divertidas a la lista"
 
-#: templates/home.html:185 templates/home.html:195
+#: templates/home.html:173 templates/home.html:183
 msgid "Share with everybody"
 msgstr "Comparte con todos"
 
-#: templates/home.html:190
-#| msgid "Answer fun, hard and cool questions."
-msgid "Answer a list of questions"
-msgstr "Responde una lista de preguntas"
+#: templates/home.html:178
+msgid "Answer a list"
+msgstr "Responde una lista"
 
-#: templates/home.html:192
-#| msgid "Create a list"
+#: templates/home.html:180
 msgid "Select a list"
 msgstr "Selecciona una lista"
 
-#: templates/home.html:193
-#| msgid "Answer fun, hard and cool questions."
+#: templates/home.html:181
 msgid "Answer it's fun questions"
 msgstr "Responde sus preguntas divertidas"
 
-#: templates/home.html:194
+#: templates/home.html:182
 msgid "See and compare results"
 msgstr "Ve y compara resultados"
 
-#: templates/home.html:215
-msgid "Join us"
-msgstr "Únetenos"
+#: templates/home.html:203
+#| msgid "We would love to have you. It's free."
+msgid "We would love to have you"
+msgstr "Nos encantaría tenerte"
 
-#: templates/home.html:216
-msgid "Create an account to get full access. It's free"
-msgstr "Crea una cuenta para tener acceso total. Es gratis"
+#: templates/home.html:204
+msgid "Join us. It's free."
+msgstr "Únetenos . Es gratis."
 
-#: templates/home.html:217
-msgid "I would love to"
-msgstr "Me encantaría"
+#: templates/home.html:205
+msgid "Yes"
+msgstr "Sí"
 
 #: templates/list_results.html:26
 msgid "Results"
@@ -723,6 +719,10 @@ msgstr "Hola"
 #: templates/navbar.html:56
 msgid "More"
 msgstr "Más"
+
+#: templates/navbar.html:63 templates/user_stats.html:9
+msgid "Your stats"
+msgstr "Tus estadísticas"
 
 #: templates/navbar.html:76
 msgid "Log out"
@@ -795,6 +795,43 @@ msgstr "Listas publicadas"
 #: templates/user_stats.html:27
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
+
+#~ msgid "Join us"
+#~ msgstr "Únetenos"
+
+#~ msgid "Share with your friends or anyone you like."
+#~ msgstr "Comparte con tus amigos o con quien quieras."
+
+#~ msgid "Answer fun, hard and cool questions."
+#~ msgstr "Responde preguntas divertidas, difíciles y geniales."
+
+#~ msgid "login"
+#~ msgstr "iniciar sesión"
+
+#~ msgid "Hard questions for everyone"
+#~ msgstr "Preguntas difíciles para todos"
+
+#~ msgid ""
+#~ "Dare to answer the hardest questions that been hunting us for decades. Pizza"
+#~ " or burger? Soccer or basketball?"
+#~ msgstr ""
+#~ "Atrévete a responder las preguntas más difíciles que nos hemos cuestionado "
+#~ "siempre. ¿Pizza o hamburguesa? ¿Fútbol o Basketball?"
+
+#~ msgid "I know how cool Huestions is"
+#~ msgstr "Sé lo genial que es Huestions"
+
+#~ msgid "I want to login"
+#~ msgstr "Quiero iniciar sesión"
+
+#~ msgid "Take me there"
+#~ msgstr "Llévenme ahí"
+
+#~ msgid "Create an account to get full access. It's free"
+#~ msgstr "Crea una cuenta para tener acceso total. Es gratis"
+
+#~ msgid "I would love to"
+#~ msgstr "Me encantaría"
 
 #~ msgid "Welcome to"
 #~ msgstr "Bienvenido a"

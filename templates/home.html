@@ -22,14 +22,15 @@
             </h2>
 	    <a class="button is-success is-medium mr-2 mb-2" href="">👀 {% trans "Play as guest" %}</a>
 	    <a class="button is-light is-medium is-outlined" href="{% url 'account_signup' %}">🤝 {% trans "Create an account" %}</a>
-	    <p><small>{% trans "Yes, yes, Huestions is awesome" %}. <a href="{% url 'account_login' %}">Let me <u>{% trans "login" %}</u></a>.</small></p>
+	    <p><small>{% trans "Yes, yes, Huestions is awesome" %}. <a href="{% url 'account_login' %}">{% trans "Let me <u>login" %}</u></a>.</small></p>
           </div>
 
 
           <div class="column has-text-centered">
 	    <img src="{% static 'images/huesty.png' %}" width="280" height="280"/>
-	    <p> <small>I would <a href="{% url 'account_signup' %}"><u>take the advice</u></a>.</small> </p>
-	    <p> <small>(How is the sign held up? 🤔)</small> </p>
+            {% url 'account_signup' as signup_url %}
+	    <p> <small>{% blocktrans %}I would <a href="{{ signup_url }}"><u>take the advice</u></a>{% endblocktrans %}.</small> </p>
+	    <p> <small>({% trans "How is the sign held up?" %} 🤔)</small> </p>
           </div>
 
 	</div> <!--columns-->
@@ -77,9 +78,9 @@
         <div class="card">
 	  <div class="card-content has-text-centered">
 	    <div class="">
-	      <p class="title is-1">✨</p>
+	      <p class="title is-1">🐣</p>
 	    </div>
-	    <h3 class="title is-3" id="card-product-description">{% trans "Newest lists" %}</h3>
+	    <h3 class="title is-3" id="card-product-description">{% trans "The newest lists" %}</h3>
 	    <a class="button is-link is-outlined" href="{% url 'questions_list' %}?filter=all">{% trans "Go" %}</a>
 	  </div>
         </div>
@@ -89,26 +90,13 @@
         <div class="card">
 	  <div class="card-content has-text-centered">
 	    <div class="">
-	      <p class="title is-1">🐣</p>
+	      <p class="title is-1">✨</p>
 	    </div>
 	    <h3 class="title is-3" id="card-product-description">{% trans "Create a list" %}</h3>
 	    <a class="button is-link is-outlined" href="{% url 'create_list' %}">{% trans "Go" %}</a>
 	  </div>
         </div>
       </div>
-
-      <div class="column">
-        <div class="card">
-	  <div class="card-content has-text-centered">
-	    <div class="">
-	      <p class="title is-1">📈</p>
-	    </div>
-	    <h3 class="title is-3" id="card-product-description">{% trans "Your stats" %}</h3>
-	    <a class="button is-link is-outlined" href="{% url 'stats' user %}">{% trans "Go" %}</a>
-	  </div>
-        </div>
-      </div>
-
 
     </div> <!-- columns -->
   </section>
@@ -127,8 +115,8 @@
 	      <p class="title is-1">🤯😁🤣</p>
 	    </div>
 	    <h3 class="title is-3 has-text-centered" id="card-product-description">{% trans "Answer" %}</h3>
-	    <p class="has-text-centered">
-	      {% trans "Answer fun, hard and cool questions." %}
+	    <p class="has-text-left">
+	      {% trans "We believe it is important to have fun on a daily basis. We suggest you do it here, answering lists of cool questions." %}
 	    </p>
 	  </div>
         </div>
@@ -141,8 +129,8 @@
 	      <p class="title is-1">🦄✏️🌈</p>
 	    </div>
 	    <h3 class="title is-3 has-text-centered" id="card-product-description">{% trans "Create" %}</h3>
-	    <p class="has-text-centered">
-	      {% trans "Create lists of questions with things you've always wondered." %}
+	    <p class="has-text-left">
+	      {% trans "Create that list of questions that you know will be a hit with your friends." %}
 	    </p>
 	  </div>
         </div>
@@ -155,8 +143,8 @@
 	      <p class="title is-1">📤🌎🙏</p>
 	    </div>
 	    <h3 class="title is-3 has-text-centered" id="card-product-description">{% trans "Share" %}</h3>
-	    <p class="has-text-centered">
-	      {% trans "Share with your friends or anyone you like." %}
+	    <p class="has-text-left">
+	      {% trans "Share the lists! Send it to that person" %} 😏
 	    </p>
 	  </div>
         </div>
@@ -212,9 +200,9 @@
       <div class="columns">
 
         <div class="column">
-	  <p class="title">{% trans "Join us" %}</p>
-	  <p class="subtitle">{% trans "We would love to have you as a member. It's free." %}</p>
-	  <a class="button is-link is-medium" href="{% url 'account_signup' %}">❤️ {% trans "Oki" %}</a>
+	  <p class="title">{% trans "We would love to have you" %}</p>
+	  <p class="subtitle">{% trans "Join us. It's free." %}</p>
+	  <a class="button is-link is-medium" href="{% url 'account_signup' %}">❤️ {% trans "Yes" %}</a>
         </div>
   
       </div> <!-- columns -->
