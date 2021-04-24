@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from django.conf import settings
@@ -71,10 +70,16 @@ COMPLETE_PATH_TO_TEST_IMGS_FOLDER = os.path.join(
 
 # === Commands ===
 # delete_test_images_folder
-COMMAND_ERROR_MESSAGE = (
+COMMAND_TEST_FOLDER_ERROR_MESSAGE = (
     'Path does not exist: %s' % COMPLETE_PATH_TO_TEST_IMGS_FOLDER
 )
-COMMAND_HELP_TEXT = 'Delete the folder used by tests to store images'
-COMMAND_SUCCESS_MESSAGE = (
+COMMAND_TEST_FOLDER_HELP_TEXT = (
+    'Delete the folder used by tests to store images'
+)
+COMMAND_TEST_FOLDER_SUCCESS_MESSAGE = (
     'Path was deleted: %s' % COMPLETE_PATH_TO_TEST_IMGS_FOLDER
 )
+
+
+# === Images - Demo List ===
+DEMO_IMAGES_PATH = settings.BASE_DIR / 'static/images/demo'

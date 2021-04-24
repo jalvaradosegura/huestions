@@ -6,7 +6,7 @@ from django.core.management.base import CommandError
 from django.test import TestCase
 
 from core.constants import (
-    COMMAND_SUCCESS_MESSAGE,
+    COMMAND_TEST_FOLDER_SUCCESS_MESSAGE,
     COMPLETE_PATH_TO_TEST_IMGS_FOLDER,
 )
 
@@ -24,4 +24,4 @@ class DeleteTestImagesFolderCommandTests(TestCase):
         self.folder_path.mkdir(parents=True, exist_ok=True)
         out = io.StringIO()
         call_command('delete_test_images_folder', stdout=out)
-        self.assertIn(COMMAND_SUCCESS_MESSAGE, out.getvalue())
+        self.assertIn(COMMAND_TEST_FOLDER_SUCCESS_MESSAGE, out.getvalue())

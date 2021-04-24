@@ -10,6 +10,7 @@ from core.constants import (
     DONT_TRY_WEIRD_STUFF,
 )
 from core.mixins import TestViewsMixin
+from demo.factories import DemoListFactory
 from lists.models import QuestionList
 from users.factories import UserFactory
 from votes.models import Vote
@@ -32,6 +33,9 @@ from ..views import (
 
 class HomePageViewTests(TestCase):
     base_url = reverse('home')
+
+    def setUp(self):
+        DemoListFactory()
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve(self.base_url)
