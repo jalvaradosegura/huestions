@@ -20,7 +20,7 @@
             <h2 class="subtitle is-3 has-text-left">
 	      {% trans "Pizza or Burger? Super strength or Super speed? Dogs or Cats?" %}
             </h2>
-	    <a class="button is-success is-medium mr-2 mb-2" href="{% url 'demo_home' %}">👀 {% trans "Play as guest" %}</a>
+	    <a class="button is-success is-medium mr-2 mb-2" href="{% url 'answer_demo_1' demo_list.id %}">👀 {% trans "Play as guest" %}</a>
 	    <a class="button is-light is-medium is-outlined" href="{% url 'account_signup' %}">🤝 {% trans "Create an account" %}</a>
 	    <p><small>{% trans "Yes, yes, Huestions is awesome" %}. <a href="{% url 'account_login' %}">{% trans "Let me <u>login" %}</u></a>.</small></p>
           </div>

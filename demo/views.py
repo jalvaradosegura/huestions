@@ -5,22 +5,6 @@ from django.views.generic.base import TemplateView
 from .models import DemoList
 
 
-class DemoHomeView(TemplateView):
-    template_name = 'demo/home.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        food_list = DemoList.objects.get(title='Demo food list')
-        sport_list = DemoList.objects.get(title='Demo sports list')
-        movie_list = DemoList.objects.get(title='Demo movies & tv series list')
-        context['food_list'] = food_list
-        context['sport_list'] = sport_list
-        context['movie_list'] = movie_list
-
-        return context
-
-
 class AnswerDemoView1(DetailView):
     template_name = 'demo/answer_1.html'
     model = DemoList

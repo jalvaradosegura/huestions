@@ -4,11 +4,6 @@ from . import views
 
 urlpatterns = [
     path(
-        route='',
-        view=views.DemoHomeView.as_view(),
-        name='demo_home',
-    ),
-    path(
         route='lists/<int:pk>/question-1/',
         view=views.AnswerDemoView1.as_view(),
         name='answer_demo_1',

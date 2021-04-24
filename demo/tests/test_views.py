@@ -6,27 +6,7 @@ from ..views import (
     AnswerDemoView1,
     AnswerDemoView2,
     AnswerDemoView3,
-    DemoHomeView,
 )
-
-
-class DemoHomeViewTests(TestCase):
-    base_url = reverse('demo_home')
-
-    def setUp(self):
-        DemoList.objects.create(title='Demo food list')
-        DemoList.objects.create(title='Demo sports list')
-        DemoList.objects.create(title='Demo movies & tv series list')
-
-    def test_question_list_url_resolves_to_view(self):
-        found = resolve(self.base_url)
-
-        self.assertEqual(found.func.__name__, DemoHomeView.as_view().__name__)
-
-    def test_returns_correct_html(self):
-        response = self.client.get(self.base_url)
-
-        self.assertTemplateUsed(response, DemoHomeView.template_name)
 
 
 class AnswerDemo1ViewTests(TestCase):

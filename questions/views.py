@@ -15,6 +15,7 @@ from core.constants import (
 )
 from core.mixins import CustomUserPassesTestMixin
 from core.utils import redirect_and_check_if_list_was_shared
+from demo.models import DemoList
 from lists.forms import CompleteListForm
 from lists.models import QuestionList
 from votes.models import Vote
@@ -24,7 +25,10 @@ from .models import Alternative, Question
 
 
 def home(request):
-    return render(request, 'home.html')
+    context = {
+        'demo_list': DemoList.objects.first()
+    }
+    return render(request, 'home.html', context)
 
 
 class AnswerQuestionView(LoginRequiredMixin, DetailView):
