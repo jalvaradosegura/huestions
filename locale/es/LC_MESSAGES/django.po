@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-24 12:40-0400\n"
-"PO-Revision-Date: 2021-04-24 16:41+0000\n"
+"PO-Revision-Date: 2021-04-24 16:46+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -689,7 +689,7 @@ msgstr "Nos encantaría tenerte"
 
 #: templates/home.html:205
 msgid "Join us. It's free."
-msgstr "Únetenos . Es gratis."
+msgstr "Únetenos. Es gratis."
 
 #: templates/home.html:206
 msgid "Yes"
