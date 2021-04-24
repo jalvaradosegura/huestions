@@ -40,19 +40,13 @@ class AnswerDemoView1(DetailView):
     def post(self, request, *args, **kwargs):
         demo_list = DemoList.objects.get(id=self.kwargs.get('pk'))
 
-        if (
-            'alternative_1' in request.POST
-            or 'vote_1' in request.POST
-        ):
+        if 'alternative_1' in request.POST or 'vote_1' in request.POST:
             alternative = demo_list.questions.all()[0].alternatives.all()[0]
             alternative.votes += 1
             alternative.save()
             return redirect('answer_demo_2', demo_list.id)
 
-        if (
-            'alternative_2' in request.POST
-            or 'vote_2' in request.POST
-        ):
+        if 'alternative_2' in request.POST or 'vote_2' in request.POST:
             alternative = demo_list.questions.all()[0].alternatives.all()[1]
             alternative.votes += 1
             alternative.save()
@@ -86,19 +80,13 @@ class AnswerDemoView2(DetailView):
     def post(self, request, *args, **kwargs):
         demo_list = DemoList.objects.get(id=self.kwargs.get('pk'))
 
-        if (
-            'alternative_1' in request.POST
-            or 'vote_1' in request.POST
-        ):
+        if 'alternative_1' in request.POST or 'vote_1' in request.POST:
             alternative = demo_list.questions.all()[1].alternatives.all()[0]
             alternative.votes += 1
             alternative.save()
             return redirect('answer_demo_3', demo_list.id)
 
-        if (
-            'alternative_2' in request.POST
-            or 'vote_2' in request.POST
-        ):
+        if 'alternative_2' in request.POST or 'vote_2' in request.POST:
             alternative = demo_list.questions.all()[1].alternatives.all()[1]
             alternative.votes += 1
             alternative.save()
@@ -132,19 +120,13 @@ class AnswerDemoView3(DetailView):
     def post(self, request, *args, **kwargs):
         demo_list = DemoList.objects.get(id=self.kwargs.get('pk'))
 
-        if (
-            'alternative_1' in request.POST
-            or 'vote_1' in request.POST
-        ):
+        if 'alternative_1' in request.POST or 'vote_1' in request.POST:
             alternative = demo_list.questions.all()[2].alternatives.all()[0]
             alternative.votes += 1
             alternative.save()
             return redirect('demo_results', demo_list.id)
 
-        if (
-            'alternative_2' in request.POST
-            or 'vote_2' in request.POST
-        ):
+        if 'alternative_2' in request.POST or 'vote_2' in request.POST:
             alternative = demo_list.questions.all()[2].alternatives.all()[1]
             alternative.votes += 1
             alternative.save()
@@ -185,16 +167,40 @@ class DemoResults(TemplateView):
         image_5 = alternative_5.image
         image_6 = alternative_6.image
 
-        q1_divide_by = (alternative_1.votes + alternative_2.votes) if (alternative_1.votes + alternative_2.votes) != 0 else 1
-        q2_divide_by = (alternative_3.votes + alternative_4.votes) if alternative_3.votes + alternative_4.votes != 0 else 1
-        q3_divide_by = (alternative_5.votes + alternative_6.votes) if alternative_5.votes + alternative_6.votes != 0 else 1
+        q1_divide_by = (
+            (alternative_1.votes + alternative_2.votes)
+            if (alternative_1.votes + alternative_2.votes) != 0
+            else 1
+        )
+        q2_divide_by = (
+            (alternative_3.votes + alternative_4.votes)
+            if alternative_3.votes + alternative_4.votes != 0
+            else 1
+        )
+        q3_divide_by = (
+            (alternative_5.votes + alternative_6.votes)
+            if alternative_5.votes + alternative_6.votes != 0
+            else 1
+        )
 
-        votes_percentage_1 = float("{:.2f}".format(alternative_1.votes * 100 / q1_divide_by))
-        votes_percentage_2 = float("{:.2f}".format(alternative_2.votes * 100 / q1_divide_by))
-        votes_percentage_3 = float("{:.2f}".format(alternative_3.votes * 100 / q2_divide_by))
-        votes_percentage_4 = float("{:.2f}".format(alternative_4.votes * 100 / q2_divide_by))
-        votes_percentage_5 = float("{:.2f}".format(alternative_5.votes * 100 / q3_divide_by))
-        votes_percentage_6 = float("{:.2f}".format(alternative_6.votes * 100 / q3_divide_by))
+        votes_percentage_1 = float(
+            "{:.2f}".format(alternative_1.votes * 100 / q1_divide_by)
+        )
+        votes_percentage_2 = float(
+            "{:.2f}".format(alternative_2.votes * 100 / q1_divide_by)
+        )
+        votes_percentage_3 = float(
+            "{:.2f}".format(alternative_3.votes * 100 / q2_divide_by)
+        )
+        votes_percentage_4 = float(
+            "{:.2f}".format(alternative_4.votes * 100 / q2_divide_by)
+        )
+        votes_percentage_5 = float(
+            "{:.2f}".format(alternative_5.votes * 100 / q3_divide_by)
+        )
+        votes_percentage_6 = float(
+            "{:.2f}".format(alternative_6.votes * 100 / q3_divide_by)
+        )
 
         context['question_1'] = question_1
         context['question_2'] = question_2

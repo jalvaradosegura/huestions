@@ -1,8 +1,8 @@
-from io import BytesIO
 import os
+from io import BytesIO
 
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.files.storage import default_storage as storage
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from PIL import Image, ImageFilter
 
 

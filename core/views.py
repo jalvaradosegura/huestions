@@ -40,7 +40,7 @@ class ContactView(View):
                     subject,
                     message,
                     os.getenv('DEFAULT_FROM_EMAIL'),
-                    [os.getenv('CONTACT_FORM_RECEIVER')]
+                    [os.getenv('CONTACT_FORM_RECEIVER')],
                 )
             except BadHeaderError:
                 messages.error(self.request, INVALID_HEADER_ON_EMAIL)

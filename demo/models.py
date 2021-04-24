@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from core.constants import DEFAULT_IMAGE_NAME
 from questions.utils import (
     reshape_img_to_square_with_blurry_bg,
-    reshape_img_to_square_with_blurry_bg_gcp
+    reshape_img_to_square_with_blurry_bg_gcp,
 )
 
 

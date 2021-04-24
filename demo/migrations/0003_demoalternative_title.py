@@ -13,6 +13,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='demoalternative',
             name='title',
-            field=models.CharField(default='', max_length=100, verbose_name='title'),
+            field=models.CharField(
+                default='', max_length=100, verbose_name='title'
+            ),
         ),
     ]

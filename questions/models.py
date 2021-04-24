@@ -12,7 +12,7 @@ from lists.models import QuestionList
 
 from .utils import (
     reshape_img_to_square_with_blurry_bg,
-    reshape_img_to_square_with_blurry_bg_gcp
+    reshape_img_to_square_with_blurry_bg_gcp,
 )
 
 

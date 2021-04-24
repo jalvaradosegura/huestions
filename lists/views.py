@@ -129,10 +129,22 @@ def create_list(request):
                 request, messages.SUCCESS, LIST_CREATED_SUCCESSFULLY
             )
             return redirect('add_question', question_list.slug)
-        return render(request, 'create_list.html', {'form': form, })
+        return render(
+            request,
+            'create_list.html',
+            {
+                'form': form,
+            },
+        )
 
     form = CreateQuestionListForm(owner=request.user)
-    return render(request, 'create_list.html', {'form': form, })
+    return render(
+        request,
+        'create_list.html',
+        {
+            'form': form,
+        },
+    )
 
 
 class EditListView(
@@ -188,7 +200,9 @@ class EditListView(
             return self.form_invalid(form)
 
 
-class DeleteListView(LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView):
+class DeleteListView(
+    LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView
+):
     model = QuestionList
     template_name = 'delete_list.html'
 

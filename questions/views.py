@@ -184,7 +184,9 @@ class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):
         return render(request, self.template_name, context)
 
 
-class EditQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView):
+class EditQuestionView(
+    LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView
+):
     model = Question
     template_name = 'edit_question.html'
     pk_url_kwarg = 'question_id'
@@ -233,7 +235,9 @@ class EditQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, UpdateView
             )
 
 
-class DeleteQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView):
+class DeleteQuestionView(
+    LoginRequiredMixin, CustomUserPassesTestMixin, DeleteView
+):
     model = Question
     pk_url_kwarg = 'id'
 

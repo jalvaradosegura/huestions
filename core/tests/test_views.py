@@ -12,10 +12,10 @@ from ..views import (
     AboutView,
     ContactSuccessView,
     ContactView,
+    TermsAndConditionsView,
     handler403,
     handler404,
     handler500,
-    TermsAndConditionsView,
 )
 
 

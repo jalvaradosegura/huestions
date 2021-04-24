@@ -1,13 +1,13 @@
 from django.test import TestCase
 from django.urls import resolve, reverse
 
+from ..models import DemoList
 from ..views import (
     AnswerDemoView1,
     AnswerDemoView2,
     AnswerDemoView3,
-    DemoHomeView
+    DemoHomeView,
 )
-from ..models import DemoList
 
 
 class DemoHomeViewTests(TestCase):
@@ -21,9 +21,7 @@ class DemoHomeViewTests(TestCase):
     def test_question_list_url_resolves_to_view(self):
         found = resolve(self.base_url)
 
-        self.assertEqual(
-            found.func.__name__, DemoHomeView.as_view().__name__
-        )
+        self.assertEqual(found.func.__name__, DemoHomeView.as_view().__name__)
 
     def test_returns_correct_html(self):
         response = self.client.get(self.base_url)
