@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 22:21-0400\n"
-"PO-Revision-Date: 2021-04-23 02:25+0000\n"
+"POT-Creation-Date: 2021-04-23 20:18-0400\n"
+"PO-Revision-Date: 2021-04-24 00:18+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -112,31 +112,31 @@ msgstr "Se encontró un header inválido"
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
-#: core/forms.py:6
+#: core/forms.py:8
 msgid "Your email"
 msgstr "Tu email"
 
-#: core/forms.py:7
+#: core/forms.py:9
 msgid "Subject"
 msgstr "Asunto"
 
-#: core/forms.py:9
+#: core/forms.py:11
 msgid "Message"
 msgstr "Mensaje"
 
-#: core/models.py:24
+#: core/models.py:24 demo/models.py:13 demo/models.py:20 demo/models.py:31
 msgid "title"
 msgstr "título"
 
-#: huestion_project/settings/base.py:154
+#: huestion_project/settings/base.py:158
 msgid "English"
 msgstr "Inglés"
 
-#: huestion_project/settings/base.py:155
+#: huestion_project/settings/base.py:159
 msgid "Spanish"
 msgstr "Español"
 
-#: lists/forms.py:16 questions/forms.py:48
+#: lists/forms.py:18 questions/forms.py:48
 msgid "Title"
 msgstr "Título"
 
@@ -264,7 +264,7 @@ msgstr ""
 "href=\"%(email_url)s\"> emitir un nuevo correo de confirmación."
 
 #: templates/account/login.html:7 templates/account/login.html:15
-#: templates/account/login.html:50 templates/navbar.html:87
+#: templates/account/login.html:50 templates/navbar.html:83
 msgid "Log In"
 msgstr "Iniciar sesión"
 
@@ -346,7 +346,7 @@ msgstr ""
 "fue usado. Por favor solicitar <a href=\"%(passwd_reset_url)s\"> nuevo "
 "reseteo de contraseña"
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:69
+#: templates/account/password_reset_from_key.html:46 templates/navbar.html:65
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -356,19 +356,16 @@ msgid "Your password is now changed."
 msgstr "Tu contraseña ha sido cambiada."
 
 #: templates/account/signup.html:7 templates/account/signup.html:16
-#: templates/account/signup.html:66 templates/navbar.html:85
+#: templates/account/signup.html:63 templates/navbar.html:81
 msgid "Sign Up"
 msgstr "Registrarse"
 
-#: templates/account/signup.html:70
+#: templates/account/signup.html:67
 msgid "Already have an account"
 msgstr "Ya tienes una cuenta"
 
-#: templates/account/signup.html:79
+#: templates/account/signup.html:76
 #, python-format
-#| msgid ""
-#| "I acknowledge that I have read and agree to the <a href=\"%(url)s\" "
-#| "target=\"_blank\">Terms and Conditions</a>"
 msgid ""
 "By registering, you agree to our <a href=\"%(terms_urls)s\" "
 "target=\"_blank\">Terms and Conditions</a>"
@@ -402,16 +399,16 @@ msgstr ""
 msgid "Contact Us"
 msgstr "Contáctanos"
 
-#: templates/contact.html:57
+#: templates/contact.html:67
 msgid "Send"
 msgstr "Enviar"
 
 #: templates/create_list.html:15 templates/footer.html:70
-#: templates/home.html:95 templates/home.html:169 templates/navbar.html:53
+#: templates/home.html:95 templates/home.html:169 templates/navbar.html:49
 msgid "Create a list"
 msgstr "Crea una lista"
 
-#: templates/create_list.html:46 templates/home.html:131
+#: templates/create_list.html:57 templates/home.html:131
 msgid "Create"
 msgstr "Crea"
 
@@ -456,7 +453,30 @@ msgstr "Volver"
 msgid "Delete"
 msgstr "Borrar"
 
-#: templates/edit_list.html:13 templates/navbar.html:54
+#: templates/demo/home.html:22
+msgid "Food"
+msgstr "Comida"
+
+#: templates/demo/home.html:23 templates/demo/home.html:35
+#: templates/demo/home.html:47 templates/home.html:84 templates/home.html:96
+#: templates/lists.html:45 templates/search_results.html:38
+#: templates/user_lists.html:44
+msgid "Go"
+msgstr "Ir"
+
+#: templates/demo/home.html:34
+msgid "Sports"
+msgstr "Deportes"
+
+#: templates/demo/home.html:46
+msgid "Movies, TV series"
+msgstr "Películas y series"
+
+#: templates/demo/results.html:17
+msgid "Demo list results"
+msgstr "Resultados de la lista demo"
+
+#: templates/edit_list.html:13 templates/navbar.html:50
 msgid "Your Lists"
 msgstr "Tus listas"
 
@@ -517,7 +537,7 @@ msgid "Have fun"
 msgstr "Diviértete"
 
 #: templates/footer.html:69 templates/list_results.html:13
-#: templates/lists.html:10 templates/navbar.html:23
+#: templates/lists.html:10 templates/navbar.html:22
 msgid "Lists"
 msgstr "Listas"
 
@@ -595,11 +615,6 @@ msgstr "Voy"
 #: templates/home.html:83
 msgid "The newest lists"
 msgstr "Las listas más nuevas"
-
-#: templates/home.html:84 templates/home.html:96 templates/lists.html:45
-#: templates/search_results.html:38 templates/user_lists.html:44
-msgid "Go"
-msgstr "Ir"
 
 #: templates/home.html:117
 msgid "Answer"
@@ -715,27 +730,27 @@ msgstr "Copiado al portapapeles"
 msgid "Copy list link"
 msgstr "Copiar link de la lista"
 
-#: templates/navbar.html:22 templates/navbar.html:45
+#: templates/navbar.html:21
 msgid "Home"
 msgstr "Inicio"
 
-#: templates/navbar.html:30 templates/navbar.html:37
+#: templates/navbar.html:29 templates/navbar.html:36
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/navbar.html:52
+#: templates/navbar.html:48
 msgid "Hi"
 msgstr "Hola"
 
-#: templates/navbar.html:56
+#: templates/navbar.html:52
 msgid "More"
 msgstr "Más"
 
-#: templates/navbar.html:63 templates/user_stats.html:9
+#: templates/navbar.html:59 templates/user_stats.html:9
 msgid "Your stats"
 msgstr "Tus estadísticas"
 
-#: templates/navbar.html:76
+#: templates/navbar.html:72
 msgid "Log out"
 msgstr "Cerrar sesión"
 

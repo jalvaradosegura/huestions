@@ -8,22 +8,13 @@
 
 {% block main %}
 
-<nav class="breadcrumb" aria-label="breadcrumbs">
-  <ul>
-    <li><a href="{% url 'questions_list' %}">{% trans "Lists" %}</a></li>
-    <li class="is-active"><a href="#" aria-current="page">{{ questionlist.title }}</a></li>
-  </ul>
-</nav>
-
-{% url 'answer_list' questionlist.slug user as list_url %}
-{% with domain_url=request.get_host %}
 <!-- Main container -->
 <nav class="level">
 
   <!-- Left side -->
   <div class="level-left">
     <div class="level-item">
-      <h2 class="title is-2">{% trans "Results" %}</h2>
+      <h2 class="title is-2">{% trans "Demo list results" %}</h2>
     </div>
   </div>
 
@@ -33,8 +24,6 @@
   </div> <!-- right -->
 
 </nav>
-
-{% endwith %}
 
 <div class="columns">
 {% localize off %}

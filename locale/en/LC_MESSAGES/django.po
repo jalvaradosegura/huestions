@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-22 22:21-0400\n"
+"POT-Creation-Date: 2021-04-23 20:18-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,31 +105,31 @@ msgstr ""
 msgid "Picture must have a size under 2 MB."
 msgstr ""
 
-#: core/forms.py:6
+#: core/forms.py:8
 msgid "Your email"
 msgstr ""
 
-#: core/forms.py:7
+#: core/forms.py:9
 msgid "Subject"
 msgstr ""
 
-#: core/forms.py:9
+#: core/forms.py:11
 msgid "Message"
 msgstr ""
 
-#: core/models.py:24
+#: core/models.py:24 demo/models.py:13 demo/models.py:20 demo/models.py:31
 msgid "title"
 msgstr ""
 
-#: huestion_project/settings/base.py:154
+#: huestion_project/settings/base.py:158
 msgid "English"
 msgstr ""
 
-#: huestion_project/settings/base.py:155
+#: huestion_project/settings/base.py:159
 msgid "Spanish"
 msgstr ""
 
-#: lists/forms.py:16 questions/forms.py:48
+#: lists/forms.py:18 questions/forms.py:48
 msgid "Title"
 msgstr ""
 
@@ -233,7 +233,7 @@ msgid ""
 msgstr ""
 
 #: templates/account/login.html:7 templates/account/login.html:15
-#: templates/account/login.html:50 templates/navbar.html:87
+#: templates/account/login.html:50 templates/navbar.html:83
 msgid "Log In"
 msgstr ""
 
@@ -307,7 +307,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:69
+#: templates/account/password_reset_from_key.html:46 templates/navbar.html:65
 msgid "Change password"
 msgstr ""
 
@@ -317,15 +317,15 @@ msgid "Your password is now changed."
 msgstr ""
 
 #: templates/account/signup.html:7 templates/account/signup.html:16
-#: templates/account/signup.html:66 templates/navbar.html:85
+#: templates/account/signup.html:63 templates/navbar.html:81
 msgid "Sign Up"
 msgstr ""
 
-#: templates/account/signup.html:70
+#: templates/account/signup.html:67
 msgid "Already have an account"
 msgstr ""
 
-#: templates/account/signup.html:79
+#: templates/account/signup.html:76
 #, python-format
 msgid ""
 "By registering, you agree to our <a href=\"%(terms_urls)s\" target=\"_blank"
@@ -354,16 +354,16 @@ msgstr ""
 msgid "Contact Us"
 msgstr ""
 
-#: templates/contact.html:57
+#: templates/contact.html:67
 msgid "Send"
 msgstr ""
 
 #: templates/create_list.html:15 templates/footer.html:70
-#: templates/home.html:95 templates/home.html:169 templates/navbar.html:53
+#: templates/home.html:95 templates/home.html:169 templates/navbar.html:49
 msgid "Create a list"
 msgstr ""
 
-#: templates/create_list.html:46 templates/home.html:131
+#: templates/create_list.html:57 templates/home.html:131
 msgid "Create"
 msgstr ""
 
@@ -408,7 +408,30 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: templates/edit_list.html:13 templates/navbar.html:54
+#: templates/demo/home.html:22
+msgid "Food"
+msgstr ""
+
+#: templates/demo/home.html:23 templates/demo/home.html:35
+#: templates/demo/home.html:47 templates/home.html:84 templates/home.html:96
+#: templates/lists.html:45 templates/search_results.html:38
+#: templates/user_lists.html:44
+msgid "Go"
+msgstr ""
+
+#: templates/demo/home.html:34
+msgid "Sports"
+msgstr ""
+
+#: templates/demo/home.html:46
+msgid "Movies, TV series"
+msgstr ""
+
+#: templates/demo/results.html:17
+msgid "Demo list results"
+msgstr ""
+
+#: templates/edit_list.html:13 templates/navbar.html:50
 msgid "Your Lists"
 msgstr ""
 
@@ -469,7 +492,7 @@ msgid "Have fun"
 msgstr ""
 
 #: templates/footer.html:69 templates/list_results.html:13
-#: templates/lists.html:10 templates/navbar.html:23
+#: templates/lists.html:10 templates/navbar.html:22
 msgid "Lists"
 msgstr ""
 
@@ -541,11 +564,6 @@ msgstr ""
 
 #: templates/home.html:83
 msgid "The newest lists"
-msgstr ""
-
-#: templates/home.html:84 templates/home.html:96 templates/lists.html:45
-#: templates/search_results.html:38 templates/user_lists.html:44
-msgid "Go"
 msgstr ""
 
 #: templates/home.html:117
@@ -659,27 +677,27 @@ msgstr ""
 msgid "Copy list link"
 msgstr ""
 
-#: templates/navbar.html:22 templates/navbar.html:45
+#: templates/navbar.html:21
 msgid "Home"
 msgstr ""
 
-#: templates/navbar.html:30 templates/navbar.html:37
+#: templates/navbar.html:29 templates/navbar.html:36
 msgid "Search"
 msgstr ""
 
-#: templates/navbar.html:52
+#: templates/navbar.html:48
 msgid "Hi"
 msgstr ""
 
-#: templates/navbar.html:56
+#: templates/navbar.html:52
 msgid "More"
 msgstr ""
 
-#: templates/navbar.html:63 templates/user_stats.html:9
+#: templates/navbar.html:59 templates/user_stats.html:9
 msgid "Your stats"
 msgstr ""
 
-#: templates/navbar.html:76
+#: templates/navbar.html:72
 msgid "Log out"
 msgstr ""
 
