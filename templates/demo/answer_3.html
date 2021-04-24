@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load l10n %}
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block head_title %}Answer - {{ questionlist.title }}{% endblock %}
+
+
+{% block main %}
+
+  <!-- Main container -->
+  <nav class="level">
+
+    <!-- Left side -->
+    <div class="level-left">
+      <div class="level-item">
+	<h2 class="title is-2">{{ questionlist.title }}</h2>
+      </div>
+    </div> <!-- left -->
+
+  </nav>
+
+  <progress class="progress is-primary" value="100" max="100"></progress>
+  <div class="has-text-right">
+    <h4 class="title is-4">🏁<h4>
+  </div>
+
+  <h3 class="title is-3">{{ question.title }}</h3>
+  <form id="form1" action="" method="post">{% csrf_token %}
+    <input id="" type="hidden" name="alternative_1" value="">
+  </form>
+  <form id="form2" action="" method="post">{% csrf_token %}
+    <input id="" type="hidden" name="alternative_2" value="">
+  </form>
+
+  <div class="columns">
+
+    <div class="column is-6">
+      <div class="card">
+
+        <header class="card-header">
+          <p class="card-header-title is-centered">{{ alternative_1 }}</p>
+        </header>
+
+        <div class="card-content">
+  
+          <div class="columns is-flex is-centered">
+            <figure class="image">
+	      <img class="is-rounded" src="{{ alternative_1.image.url }}" alt="Placeholder image">
+            </figure>
+          </div>
+      
+        </div> <!-- card content-->
+  
+        <footer class="card-footer">
+          <button id="" form="form1" class="card-footer-item button is-success is-large" name="vote1">Vote</button>
+        </footer>
+    
+      </div> <!-- card -->
+    </div> <!-- column-->
+
+    <div class="column is-6">
+      <div class="card">
+
+        <header class="card-header">
+          <p class="card-header-title is-centered">{{ alternative_2 }}</p>
+        </header>
+
+        <div class="card-content">
+  
+          <div class="columns is-flex is-centered">
+            <figure class="image">
+	      <img class="is-rounded" src="{{ alternative_2.image.url }}" alt="Placeholder image">
+            </figure>
+          </div>
+      
+        </div> <!-- card content-->
+  
+        <footer class="card-footer">
+          <button id="" form="form2" class="card-footer-item button is-success is-large" name="vote2">Vote</button>
+        </footer>
+    
+      </div> <!-- card -->
+    </div> <!-- column-->
+
+
+  </div> <!-- columns -->
+
+{% endblock main %}
+
+{% block bootstrap_js_loaded %}
+  <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>
+{% endblock bootstrap_js_loaded %}

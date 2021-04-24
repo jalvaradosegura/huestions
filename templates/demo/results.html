@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+
+{% block head_title %}Results - {{ questionlist.title }}{% endblock %}
+
+{% block main %}
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="{% url 'questions_list' %}">{% trans "Lists" %}</a></li>
+    <li class="is-active"><a href="#" aria-current="page">{{ questionlist.title }}</a></li>
+  </ul>
+</nav>
+
+{% url 'answer_list' questionlist.slug user as list_url %}
+{% with domain_url=request.get_host %}
+<!-- Main container -->
+<nav class="level">
+
+  <!-- Left side -->
+  <div class="level-left">
+    <div class="level-item">
+      <h2 class="title is-2">{% trans "Results" %}</h2>
+    </div>
+  </div>
+
+  <!-- Right side -->
+  <div class="level-right">
+    {% include "social_media_icons_group.html" %}
+  </div> <!-- right -->
+
+</nav>
+
+{% endwith %}
+
+<div class="columns">
+{% localize off %}
+
+
+<!-- card 1 -->
+<div class="column">
+<div class="card">
+
+  <header class="card-header">
+    <p class="card-header-title">
+      {{ question_1 }}
+    </p>
+  </header>
+
+  <div class="card-content">
+
+    <div class="media">
+      <div class="media-left">
+	<figure class="image is-96x96">
+	  <img class="is-rounded" src="{{ image_1.url }}" alt="Placeholder image">
+	</figure>
+      </div>
+      <div class="media-content">
+	{{ alternative_1 }} &middot {{ votes_percentage_1 }}%
+	<progress class="progress is-primary" value="{{ votes_percentage_1 }}" max="100">15%</progress>
+      </div>
+    </div>
+
+    <div class="media">
+      <div class="media-left">
+	<figure class="image is-96x96">
+	  <img class="is-rounded" src="{{ image_2.url }}" alt="Placeholder image">
+	</figure>
+      </div>
+      <div class="media-content">
+	{{ alternative_2 }} &middot {{ votes_percentage_2 }}%
+	<progress class="progress is-primary" value="{{ votes_percentage_2 }}" max="100">15%</progress>
+      </div>
+    </div>
+
+
+  </div> <!-- card content -->
+
+</div>  <!-- card -->
+</div>  <!-- column -->
+
+
+<!-- card 2 -->
+<div class="column">
+<div class="card">
+
+  <header class="card-header">
+    <p class="card-header-title">
+      {{ question_2 }}
+    </p>
+  </header>
+
+  <div class="card-content">
+
+    <div class="media">
+      <div class="media-left">
+	<figure class="image is-96x96">
+	  <img class="is-rounded" src="{{ image_3.url }}" alt="Placeholder image">
+	</figure>
+      </div>
+      <div class="media-content">
+	{{ alternative_3 }} &middot {{ votes_percentage_3 }}%
+	<progress class="progress is-primary" value="{{ votes_percentage_3 }}" max="100">15%</progress>
+      </div>
+    </div>
+
+    <div class="media">
+      <div class="media-left">
+	<figure class="image is-96x96">
+	  <img class="is-rounded" src="{{ image_4.url }}" alt="Placeholder image">
+	</figure>
+      </div>
+      <div class="media-content">
+	{{ alternative_4 }} &middot {{ votes_percentage_4 }}%
+	<progress class="progress is-primary" value="{{ votes_percentage_4 }}" max="100">15%</progress>
+      </div>
+    </div>
+
+
+  </div> <!-- card content -->
+
+</div>  <!-- card -->
+</div>  <!-- column -->
+
+
+<!-- card 3 -->
+<div class="column">
+<div class="card">
+
+  <header class="card-header">
+    <p class="card-header-title">
+      {{ question_3 }}
+    </p>
+  </header>
+
+  <div class="card-content">
+
+    <div class="media">
+      <div class="media-left">
+	<figure class="image is-96x96">
+	  <img class="is-rounded" src="{{ image_5.url }}" alt="Placeholder image">
+	</figure>
+      </div>
+      <div class="media-content">
+	{{ alternative_5 }} &middot {{ votes_percentage_5 }}%
+	<progress class="progress is-primary" value="{{ votes_percentage_5 }}" max="100">15%</progress>
+      </div>
+    </div>
+
+    <div class="media">
+      <div class="media-left">
+	<figure class="image is-96x96">
+	  <img class="is-rounded" src="{{ image_6.url }}" alt="Placeholder image">
+	</figure>
+      </div>
+      <div class="media-content">
+	{{ alternative_6 }} &middot {{ votes_percentage_6 }}%
+	<progress class="progress is-primary" value="{{ votes_percentage_6 }}" max="100">15%</progress>
+      </div>
+    </div>
+
+
+  </div> <!-- card content -->
+
+</div>  <!-- card -->
+</div>  <!-- column -->
+
+</div>  <!-- columns -->
+
+{% endlocalize %}
+{% endblock %}
