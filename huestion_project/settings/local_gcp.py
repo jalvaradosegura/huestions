@@ -52,3 +52,11 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = True
+
+# Google Captcha
+RECAPTCHA_PUBLIC_KEY = '6LeltbUaAAAAAHcbapp6ewFAbso1sSi19DdVWl8x'
+RECAPTCHA_PRIVATE_KEY = '6LeltbUaAAAAAGDTzDw_IYvlhqO_1wqzTT0rFNim'
+# SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+# Tests related
+USED_FOR_TESTING = True

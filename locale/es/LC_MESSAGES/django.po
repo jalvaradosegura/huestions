@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-23 20:18-0400\n"
-"PO-Revision-Date: 2021-04-24 00:18+0000\n"
+"POT-Creation-Date: 2021-04-24 12:40-0400\n"
+"PO-Revision-Date: 2021-04-24 16:41+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -404,11 +404,11 @@ msgid "Send"
 msgstr "Enviar"
 
 #: templates/create_list.html:15 templates/footer.html:70
-#: templates/home.html:95 templates/home.html:169 templates/navbar.html:49
+#: templates/home.html:96 templates/home.html:170 templates/navbar.html:49
 msgid "Create a list"
 msgstr "Crea una lista"
 
-#: templates/create_list.html:57 templates/home.html:131
+#: templates/create_list.html:57 templates/home.html:132
 msgid "Create"
 msgstr "Crea"
 
@@ -453,12 +453,17 @@ msgstr "Volver"
 msgid "Delete"
 msgstr "Borrar"
 
+#: templates/demo/home.html:12
+#| msgid "Pick a cool name for your list"
+msgid "Pick a category for the demo list"
+msgstr "Selecciona una categoría para la lista demo"
+
 #: templates/demo/home.html:22
 msgid "Food"
 msgstr "Comida"
 
 #: templates/demo/home.html:23 templates/demo/home.html:35
-#: templates/demo/home.html:47 templates/home.html:84 templates/home.html:96
+#: templates/demo/home.html:47 templates/home.html:85 templates/home.html:97
 #: templates/lists.html:45 templates/search_results.html:38
 #: templates/user_lists.html:44
 msgid "Go"
@@ -612,15 +617,19 @@ msgstr "Listas más votadas en los últimos días"
 msgid "Let's go"
 msgstr "Voy"
 
-#: templates/home.html:83
+#: templates/home.html:64
+msgid "Thanks for being part of this"
+msgstr "Gracias por ser parte de esto"
+
+#: templates/home.html:84
 msgid "The newest lists"
 msgstr "Las listas más nuevas"
 
-#: templates/home.html:117
+#: templates/home.html:118
 msgid "Answer"
 msgstr "Responde"
 
-#: templates/home.html:119
+#: templates/home.html:120
 msgid ""
 "We believe it is important to have fun on a daily basis. We suggest you do "
 "it here, answering lists of cool questions."
@@ -628,61 +637,61 @@ msgstr ""
 "Creemos que es importante divertirse a diario. Te sugerimos hacerlo aquí, "
 "respondiendo listas de preguntas simpáticas."
 
-#: templates/home.html:133
+#: templates/home.html:134
 msgid ""
 "Create that list of questions that you know will be a hit with your friends."
 msgstr ""
 "Crea esa lista de preguntas que sabes que será un éxito entre tus amistades."
 
-#: templates/home.html:145
+#: templates/home.html:146
 msgid "Share"
 msgstr "Comparte"
 
-#: templates/home.html:147
+#: templates/home.html:148
 msgid "Share the lists! Send it to that person"
 msgstr "Comparte las listas! Envíasela a esa persona"
 
-#: templates/home.html:163
+#: templates/home.html:164
 msgid "How does it work?"
 msgstr "¿Cómo funciona?"
 
-#: templates/home.html:171
+#: templates/home.html:172
 msgid "Pick a cool name for your list"
 msgstr "Elige un nombre genial para tu lista"
 
-#: templates/home.html:172
+#: templates/home.html:173
 msgid "Add fun questions and alternatives to the list"
 msgstr "Agrega preguntas y alternativas divertidas a la lista"
 
-#: templates/home.html:173 templates/home.html:183
+#: templates/home.html:174 templates/home.html:184
 msgid "Share with everybody"
 msgstr "Comparte con todos"
 
-#: templates/home.html:178
+#: templates/home.html:179
 msgid "Answer a list"
 msgstr "Responde una lista"
 
-#: templates/home.html:180
+#: templates/home.html:181
 msgid "Select a list"
 msgstr "Selecciona una lista"
 
-#: templates/home.html:181
+#: templates/home.html:182
 msgid "Answer it's fun questions"
 msgstr "Responde sus preguntas divertidas"
 
-#: templates/home.html:182
+#: templates/home.html:183
 msgid "See and compare results"
 msgstr "Ve y compara resultados"
 
-#: templates/home.html:203
+#: templates/home.html:204
 msgid "We would love to have you"
 msgstr "Nos encantaría tenerte"
 
-#: templates/home.html:204
+#: templates/home.html:205
 msgid "Join us. It's free."
 msgstr "Únetenos . Es gratis."
 
-#: templates/home.html:205
+#: templates/home.html:206
 msgid "Yes"
 msgstr "Sí"
 
