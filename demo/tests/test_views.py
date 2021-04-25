@@ -2,11 +2,7 @@ from django.test import TestCase
 from django.urls import resolve, reverse
 
 from ..models import DemoList
-from ..views import (
-    AnswerDemoView1,
-    AnswerDemoView2,
-    AnswerDemoView3,
-)
+from ..views import AnswerDemoView1, AnswerDemoView2, AnswerDemoView3
 
 
 class AnswerDemo1ViewTests(TestCase):

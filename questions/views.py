@@ -25,9 +25,7 @@ from .models import Alternative, Question
 
 
 def home(request):
-    context = {
-        'demo_list': DemoList.objects.first()
-    }
+    context = {'demo_list': DemoList.objects.first()}
     return render(request, 'home.html', context)
 
 

@@ -3,7 +3,7 @@ from django.test import TestCase
 from ..factories import (
     DemoAlternativeFactory,
     DemoListFactory,
-    DemoQuestionFactory
+    DemoQuestionFactory,
 )
 from ..models import DemoAlternative, DemoQuestion
 
