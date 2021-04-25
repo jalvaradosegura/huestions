@@ -79,7 +79,22 @@ COMMAND_TEST_FOLDER_HELP_TEXT = (
 COMMAND_TEST_FOLDER_SUCCESS_MESSAGE = (
     'Path was deleted: %s' % COMPLETE_PATH_TO_TEST_IMGS_FOLDER
 )
-
+# create_demo_list
+COMMAND_CREATE_DEMO_HELP_TEXT = (
+    'Create a demo list with 3 questions and 2 answers per question'
+)
+COMMAND_CREATE_DEMO_ERROR_MESSAGE = (
+    'One of the images for the alternatives does not exist'
+)
+COMMAND_CREATE_DEMO_SUCCESS_MESSAGE = (
+    'Demo List created'
+)
+IMAGE_1_NAME = 'demo_coca_cola.jpeg'
+IMAGE_2_NAME = 'demo_pepsi.jpeg'
+IMAGE_3_NAME = 'demo_burger.jpeg'
+IMAGE_4_NAME = 'demo_pizza.jpeg'
+IMAGE_5_NAME = 'demo_cutlery.jpeg'
+IMAGE_6_NAME = 'demo_bare_hands.jpeg'
 
 # === Images - Demo List ===
 DEMO_IMAGES_PATH = settings.BASE_DIR / 'static/images/demo'

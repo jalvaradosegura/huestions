@@ -1,7 +1,11 @@
 import io
+from unittest.mock import patch
 
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase
+
+from core.constants import COMMAND_CREATE_DEMO_SUCCESS_MESSAGE
 
 from ..models import DemoList
 
@@ -20,3 +24,9 @@ class CreateDemoListsCommand(TestCase):
         self.assertEqual(demo_q1.alternatives.count(), 2)
         self.assertEqual(demo_q2.alternatives.count(), 2)
         self.assertEqual(demo_q3.alternatives.count(), 2)
+        self.assertIn(COMMAND_CREATE_DEMO_SUCCESS_MESSAGE, out.getvalue())
+
+    @patch('demo.management.commands.create_demo_list.IMAGE_1_NAME', 'wrong')
+    def test_command_fail(self):
+        with self.assertRaises(CommandError):
+            call_command('create_demo_list')
