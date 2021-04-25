@@ -49,7 +49,7 @@ start_cloud_sql-proxy:
 	./cloud_sql_proxy -instances="testing-h-for-the-first-time:southamerica-east1:h-instance"=tcp:5432
 
 static-to-prd:
-	gsutil rsync -R static_prd/ gs://my-h-static-bucket/static
+	gsutil rsync -R static_prd/ gs://my-h-static-bucket-v3/static
 
 collect-static:
 	python manage.py collectstatic --settings=huestion_project.settings.local

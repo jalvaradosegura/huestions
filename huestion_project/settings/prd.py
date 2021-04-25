@@ -26,7 +26,7 @@ if os.getenv('GAE_APPLICATION', None):
         }
     }
 
-STATIC_URL = 'https://storage.googleapis.com/my-h-static-bucket/static/'
+STATIC_URL = 'https://storage.googleapis.com/my-h-static-bucket-v3/static/'
 
 # Credential generated in API & Services
 # for media store in the bucket
