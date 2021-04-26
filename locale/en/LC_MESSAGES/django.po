@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 12:40-0400\n"
+"POT-Creation-Date: 2021-04-26 10:36-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,90 +18,90 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/constants.py:16
+#: core/constants.py:15
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 
-#: core/constants.py:19
+#: core/constants.py:18
 msgid "The list you are trying to see is incomplete"
 msgstr ""
 
-#: core/constants.py:21
+#: core/constants.py:20
 msgid "List was created successfully"
 msgstr ""
 
-#: core/constants.py:22
+#: core/constants.py:21
 msgid "List was edited successfully"
 msgstr ""
 
-#: core/constants.py:23
+#: core/constants.py:22
 msgid "List was deleted successfully"
 msgstr ""
 
-#: core/constants.py:24
+#: core/constants.py:23
 msgid "List was published successfully"
 msgstr ""
 
-#: core/constants.py:25
+#: core/constants.py:24
 msgid "The list reached the limit of questions"
 msgstr ""
 
-#: core/constants.py:26
+#: core/constants.py:25
 msgid "Question was created successfully"
 msgstr ""
 
-#: core/constants.py:27
+#: core/constants.py:26
 msgid "Question was edited successfully"
 msgstr ""
 
-#: core/constants.py:28
+#: core/constants.py:27
 msgid "Question was deleted successfully"
 msgstr ""
 
-#: core/constants.py:30
+#: core/constants.py:29
 msgid "You already answered all the questions for this list"
 msgstr ""
 
-#: core/constants.py:33
+#: core/constants.py:32
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 
-#: core/constants.py:36
+#: core/constants.py:35
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so "
 "you won't be able to see that person answers. Tell the user to answer all "
 "the questions"
 msgstr ""
 
-#: core/constants.py:40
+#: core/constants.py:39
 msgid "Please do not try to do weird stuff with the site"
 msgstr ""
 
-#: core/constants.py:44
+#: core/constants.py:43
 msgid "Do not use special chars."
 msgstr ""
 
-#: core/constants.py:46
+#: core/constants.py:45
 msgid "File too large. Size should not exceed 2 MB."
 msgstr ""
 
-#: core/constants.py:49
+#: core/constants.py:48
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 
-#: core/constants.py:54
+#: core/constants.py:53
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:56
+#: core/constants.py:55
 msgid "100 characters max. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:57
+#: core/constants.py:56
 msgid "Invalid header found."
 msgstr ""
 
-#: core/constants.py:59
+#: core/constants.py:58
 msgid "Picture must have a size under 2 MB."
 msgstr ""
 
@@ -233,7 +233,8 @@ msgid ""
 msgstr ""
 
 #: templates/account/login.html:7 templates/account/login.html:15
-#: templates/account/login.html:50 templates/navbar.html:83
+#: templates/account/login.html:50
+#: templates/answer_question_not_authenticated.html:57 templates/navbar.html:83
 msgid "Log In"
 msgstr ""
 
@@ -317,7 +318,8 @@ msgid "Your password is now changed."
 msgstr ""
 
 #: templates/account/signup.html:7 templates/account/signup.html:16
-#: templates/account/signup.html:63 templates/navbar.html:81
+#: templates/account/signup.html:63
+#: templates/answer_question_not_authenticated.html:56 templates/navbar.html:81
 msgid "Sign Up"
 msgstr ""
 
@@ -348,6 +350,42 @@ msgid ""
 "We have sent an e-mail to you for\n"
 "verification. Please click on the link inside this e-mail. Please\n"
 "contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: templates/answer_question_not_authenticated.html:47
+msgid "You are <b>seeing this</b> message because you are <b>not logged in</b>"
+msgstr ""
+
+#: templates/answer_question_not_authenticated.html:50
+#, python-format
+msgid ""
+"<a href=\"%(account_signup)s\">Create an account</a> (it will take you like "
+"10 seconds, unless you are robot 🤖) or <a href=\"%(account_login)s\">log in</"
+"a> to get access to all the features."
+msgstr ""
+
+#: templates/answer_question_not_authenticated.html:51
+msgid "By using an account you get to"
+msgstr ""
+
+#: templates/answer_question_not_authenticated.html:52
+msgid "Vote in every list"
+msgstr ""
+
+#: templates/answer_question_not_authenticated.html:53
+msgid "Create lists."
+msgstr ""
+
+#: templates/answer_question_not_authenticated.html:54
+msgid "See the results of lists and see what your friends have voted"
+msgstr ""
+
+#: templates/answer_question_not_authenticated.html:55
+msgid "This is and much more"
+msgstr ""
+
+#: templates/answer_question_not_authenticated.html:58
+msgid "Play a demo list"
 msgstr ""
 
 #: templates/contact.html:10
@@ -406,29 +444,6 @@ msgstr ""
 
 #: templates/delete_list.html:14 templates/user_lists.html:47
 msgid "Delete"
-msgstr ""
-
-#: templates/demo/home.html:12
-msgid "Pick a category for the demo list"
-msgstr ""
-
-#: templates/demo/home.html:22
-msgid "Food"
-msgstr ""
-
-#: templates/demo/home.html:23 templates/demo/home.html:35
-#: templates/demo/home.html:47 templates/home.html:85 templates/home.html:97
-#: templates/lists.html:45 templates/search_results.html:38
-#: templates/user_lists.html:44
-msgid "Go"
-msgstr ""
-
-#: templates/demo/home.html:34
-msgid "Sports"
-msgstr ""
-
-#: templates/demo/home.html:46
-msgid "Movies, TV series"
 msgstr ""
 
 #: templates/demo/results.html:17
@@ -572,6 +587,11 @@ msgstr ""
 
 #: templates/home.html:84
 msgid "The newest lists"
+msgstr ""
+
+#: templates/home.html:85 templates/home.html:97 templates/lists.html:45
+#: templates/search_results.html:38 templates/user_lists.html:44
+msgid "Go"
 msgstr ""
 
 #: templates/home.html:118

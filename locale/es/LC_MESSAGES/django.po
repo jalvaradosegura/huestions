@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-24 12:40-0400\n"
-"PO-Revision-Date: 2021-04-24 16:46+0000\n"
+"POT-Creation-Date: 2021-04-26 10:36-0400\n"
+"PO-Revision-Date: 2021-04-26 14:36+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,57 +19,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.5\n"
 
-#: core/constants.py:16
+#: core/constants.py:15
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 "La lista necesita al menos 1 pregunta con 2 alternativas para estar completa"
 
-#: core/constants.py:19
+#: core/constants.py:18
 msgid "The list you are trying to see is incomplete"
 msgstr "La lista que estás intentado acceder está incompleta"
 
-#: core/constants.py:21
+#: core/constants.py:20
 msgid "List was created successfully"
 msgstr "Lista creada con éxito"
 
-#: core/constants.py:22
+#: core/constants.py:21
 msgid "List was edited successfully"
 msgstr "Lista editada con éxito"
 
-#: core/constants.py:23
+#: core/constants.py:22
 msgid "List was deleted successfully"
 msgstr "Lista eliminada con éxito"
 
-#: core/constants.py:24
+#: core/constants.py:23
 msgid "List was published successfully"
 msgstr "Lista publicada con éxito"
 
-#: core/constants.py:25
+#: core/constants.py:24
 msgid "The list reached the limit of questions"
 msgstr "La lista alcanzó el límite de preguntas"
 
-#: core/constants.py:26
+#: core/constants.py:25
 msgid "Question was created successfully"
 msgstr "Pregunta creada con éxito"
 
-#: core/constants.py:27
+#: core/constants.py:26
 msgid "Question was edited successfully"
 msgstr "Pregunta editada con éxito"
 
-#: core/constants.py:28
+#: core/constants.py:27
 msgid "Question was deleted successfully"
 msgstr "Pregunta eliminada con éxito"
 
-#: core/constants.py:30
+#: core/constants.py:29
 msgid "You already answered all the questions for this list"
 msgstr "Ya respondiste todas las preguntas de esta lista"
 
-#: core/constants.py:33
+#: core/constants.py:32
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 "Debes responder todas las preguntas de la lista antes de ver los resultados"
 
-#: core/constants.py:36
+#: core/constants.py:35
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so"
 " you won't be able to see that person answers. Tell the user to answer all "
@@ -79,36 +79,36 @@ msgstr ""
 " por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
 "todas las preguntas"
 
-#: core/constants.py:40
+#: core/constants.py:39
 msgid "Please do not try to do weird stuff with the site"
 msgstr "Por favor no intentes hacer cosas extrañas en la página"
 
-#: core/constants.py:44
+#: core/constants.py:43
 msgid "Do not use special chars."
 msgstr "No uses caracteres especiales."
 
-#: core/constants.py:46
+#: core/constants.py:45
 msgid "File too large. Size should not exceed 2 MB."
 msgstr "Archivo demasiado grande. El tamaño no debe exceder de 2 MB."
 
-#: core/constants.py:49
+#: core/constants.py:48
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 "Extensión de archivo no válida. Extensiones permitidas: .jpg, .jpeg, .png."
 
-#: core/constants.py:54
+#: core/constants.py:53
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr "100 caracteres máximo y 5 mínimo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:56
+#: core/constants.py:55
 msgid "100 characters max. Also don't use special chars."
 msgstr "100 caracteres máximo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:57
+#: core/constants.py:56
 msgid "Invalid header found."
 msgstr "Se encontró un header inválido"
 
-#: core/constants.py:59
+#: core/constants.py:58
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
@@ -264,7 +264,9 @@ msgstr ""
 "href=\"%(email_url)s\"> emitir un nuevo correo de confirmación."
 
 #: templates/account/login.html:7 templates/account/login.html:15
-#: templates/account/login.html:50 templates/navbar.html:83
+#: templates/account/login.html:50
+#: templates/answer_question_not_authenticated.html:57
+#: templates/navbar.html:83
 msgid "Log In"
 msgstr "Iniciar sesión"
 
@@ -356,7 +358,9 @@ msgid "Your password is now changed."
 msgstr "Tu contraseña ha sido cambiada."
 
 #: templates/account/signup.html:7 templates/account/signup.html:16
-#: templates/account/signup.html:63 templates/navbar.html:81
+#: templates/account/signup.html:63
+#: templates/answer_question_not_authenticated.html:56
+#: templates/navbar.html:81
 msgid "Sign Up"
 msgstr "Registrarse"
 
@@ -394,6 +398,51 @@ msgid ""
 msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
+
+#: templates/answer_question_not_authenticated.html:47
+msgid ""
+"You are <b>seeing this</b> message because you are <b>not logged in</b>"
+msgstr "Estás <b>viendo este mensaje</b> porque <b>no has iniciado sesión</b>"
+
+#: templates/answer_question_not_authenticated.html:50
+#, python-format
+#| msgid ""
+#| "<a href=\"%(account_signup)s\">Create an account</a> (it will take you like "
+#| "10 seconds, unless you are robot 🤖) or <a href=\"%(account_login)s\">Log "
+#| "In</a> to get access to all the features."
+msgid ""
+"<a href=\"%(account_signup)s\">Create an account</a> (it will take you like "
+"10 seconds, unless you are robot 🤖) or <a href=\"%(account_login)s\">log "
+"in</a> to get access to all the features."
+msgstr ""
+"<a href=\"%(account_signup)s\">Crea una cuenta</a> (te tomará como 10 "
+"segundos, a menos que seas un robot 🤖) o <a "
+"href=\"%(account_login)s\">inicia sesión</a> para acceder a todas las "
+"funcionalidades."
+
+#: templates/answer_question_not_authenticated.html:51
+msgid "By using an account you get to"
+msgstr "Al usar una cuenta puedes"
+
+#: templates/answer_question_not_authenticated.html:52
+msgid "Vote in every list"
+msgstr "Votar en todas las listas"
+
+#: templates/answer_question_not_authenticated.html:53
+msgid "Create lists."
+msgstr "Crear listas."
+
+#: templates/answer_question_not_authenticated.html:54
+msgid "See the results of lists and see what your friends have voted"
+msgstr "Ver los resultados de las listas y ver qué han votado tus amigos"
+
+#: templates/answer_question_not_authenticated.html:55
+msgid "This is and much more"
+msgstr "Esto y mucho más"
+
+#: templates/answer_question_not_authenticated.html:58
+msgid "Play a demo list"
+msgstr "Juega una lista demo"
 
 #: templates/contact.html:10
 msgid "Contact Us"
@@ -452,30 +501,6 @@ msgstr "Volver"
 #: templates/delete_list.html:14 templates/user_lists.html:47
 msgid "Delete"
 msgstr "Borrar"
-
-#: templates/demo/home.html:12
-#| msgid "Pick a cool name for your list"
-msgid "Pick a category for the demo list"
-msgstr "Selecciona una categoría para la lista demo"
-
-#: templates/demo/home.html:22
-msgid "Food"
-msgstr "Comida"
-
-#: templates/demo/home.html:23 templates/demo/home.html:35
-#: templates/demo/home.html:47 templates/home.html:85 templates/home.html:97
-#: templates/lists.html:45 templates/search_results.html:38
-#: templates/user_lists.html:44
-msgid "Go"
-msgstr "Ir"
-
-#: templates/demo/home.html:34
-msgid "Sports"
-msgstr "Deportes"
-
-#: templates/demo/home.html:46
-msgid "Movies, TV series"
-msgstr "Películas y series"
 
 #: templates/demo/results.html:17
 msgid "Demo list results"
@@ -624,6 +649,11 @@ msgstr "Gracias por ser parte de esto"
 #: templates/home.html:84
 msgid "The newest lists"
 msgstr "Las listas más nuevas"
+
+#: templates/home.html:85 templates/home.html:97 templates/lists.html:45
+#: templates/search_results.html:38 templates/user_lists.html:44
+msgid "Go"
+msgstr "Ir"
 
 #: templates/home.html:118
 msgid "Answer"
@@ -830,6 +860,18 @@ msgstr "Listas publicadas"
 #: templates/user_stats.html:27
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
+
+#~ msgid "Pick a category for the demo list"
+#~ msgstr "Selecciona una categoría para la lista demo"
+
+#~ msgid "Food"
+#~ msgstr "Comida"
+
+#~ msgid "Sports"
+#~ msgstr "Deportes"
+
+#~ msgid "Movies, TV series"
+#~ msgstr "Películas y series"
 
 #~ msgid "Join us"
 #~ msgstr "Únetenos"

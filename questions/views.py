@@ -29,8 +29,9 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-class AnswerQuestionView(LoginRequiredMixin, DetailView):
+class AnswerQuestionView(DetailView):
     template_name = 'answer_question.html'
+    template_name_not_auth = 'answer_question_not_authenticated.html'
 
     def get_queryset(self):
         return QuestionList.objects.all().prefetch_related(
@@ -41,18 +42,27 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
         self.object = self.get_object()
 
         if self.object.active:
-            if (
-                self.object.get_amount_of_unanswered_questions(request.user)
-                > 0
-            ):
-                context = self.get_context_data(object=self.object)
-                return self.render_to_response(context)
+            if request.user.is_authenticated:
+                if (
+                    self.object.get_amount_of_unanswered_questions(request.user)
+                    > 0
+                ):
+                    context = self.get_context_data(object=self.object)
+                    return self.render_to_response(context)
 
-            messages.info(request, ALREADY_ANSWERED_ALL_THE_QUESTIONS)
-            username = self.kwargs.get('username')
-            return redirect_and_check_if_list_was_shared(
-                kwargs, 'list_results', self.object, username
-            )
+                messages.info(request, ALREADY_ANSWERED_ALL_THE_QUESTIONS)
+                username = self.kwargs.get('username')
+                return redirect_and_check_if_list_was_shared(
+                    kwargs, 'list_results', self.object, username
+                )
+            else:
+                context = {
+                    'questionlist': self.object,
+                    'question': self.object.questions.first(),
+                    'percentage': 1 / self.object.questions.count() * 100,
+                    'demo_list': DemoList.objects.first()
+                }
+                return render(request, self.template_name_not_auth, context)
 
         messages.warning(request, ATTEMPT_TO_SEE_AN_INCOMPLETE_LIST_MESSAGE)
         return redirect('questions_list')
@@ -78,54 +88,54 @@ class AnswerQuestionView(LoginRequiredMixin, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            target_list = QuestionList.objects.get(slug=self.kwargs.get('slug'))
+            target_question = target_list.get_unanswered_questions(
+                self.request.user
+            )[0]
+            username = self.kwargs.get('username')
 
-        target_list = QuestionList.objects.get(slug=self.kwargs.get('slug'))
-        target_question = target_list.get_unanswered_questions(
-            self.request.user
-        )[0]
-        username = self.kwargs.get('username')
+            try:
+                selected_alternative = (
+                    Alternative.objects.all()
+                    .select_related('question__child_of')
+                    .get(id=request.POST['alternatives'])
+                )
+            except Alternative.DoesNotExist:
+                messages.error(self.request, DONT_TRY_WEIRD_STUFF)
+                return redirect_and_check_if_list_was_shared(
+                    kwargs, 'answer_list', target_list, username
+                )
 
-        try:
-            selected_alternative = (
-                Alternative.objects.all()
-                .select_related('question__child_of')
-                .get(id=request.POST['alternatives'])
-            )
-        except Alternative.DoesNotExist:
-            messages.error(self.request, DONT_TRY_WEIRD_STUFF)
+            question_list = selected_alternative.question.child_of
+
+            if not target_question.alternatives.filter(
+                id__in=[selected_alternative.id]
+            ).exists():
+                messages.error(self.request, DONT_TRY_WEIRD_STUFF)
+                return redirect_and_check_if_list_was_shared(
+                    kwargs, 'answer_list', target_list, username
+                )
+
+            if not selected_alternative.question.has_the_user_already_voted(
+                self.request.user
+            ):
+                selected_alternative.vote_for_this_alternative(self.request.user)
+                Vote.objects.create(
+                    user=self.request.user,
+                    list=question_list,
+                    question=selected_alternative.question,
+                    alternative=selected_alternative,
+                )
+
+            if question_list.get_amount_of_unanswered_questions(request.user) == 0:
+                return redirect_and_check_if_list_was_shared(
+                    kwargs, 'list_results', target_list, username
+                )
+
             return redirect_and_check_if_list_was_shared(
                 kwargs, 'answer_list', target_list, username
             )
-
-        question_list = selected_alternative.question.child_of
-
-        if not target_question.alternatives.filter(
-            id__in=[selected_alternative.id]
-        ).exists():
-            messages.error(self.request, DONT_TRY_WEIRD_STUFF)
-            return redirect_and_check_if_list_was_shared(
-                kwargs, 'answer_list', target_list, username
-            )
-
-        if not selected_alternative.question.has_the_user_already_voted(
-            self.request.user
-        ):
-            selected_alternative.vote_for_this_alternative(self.request.user)
-            Vote.objects.create(
-                user=self.request.user,
-                list=question_list,
-                question=selected_alternative.question,
-                alternative=selected_alternative,
-            )
-
-        if question_list.get_amount_of_unanswered_questions(request.user) == 0:
-            return redirect_and_check_if_list_was_shared(
-                kwargs, 'list_results', target_list, username
-            )
-
-        return redirect_and_check_if_list_was_shared(
-            kwargs, 'answer_list', target_list, username
-        )
 
 
 class AddQuestionView(LoginRequiredMixin, CustomUserPassesTestMixin, View):

@@ -1,5 +1,7 @@
 from http import HTTPStatus
 
+from allauth.account.models import EmailAddress
+from django.contrib.auth import get_user_model
 from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import resolve, reverse
@@ -81,7 +83,32 @@ class LogoutPageTests(TestViewsMixin, TestCase):
         pass
 
 
-class AnswerQuestionViewTests(TestViewsMixin, TestCase):
+class AnswerQuestionViewGetTests(TestCase):
+    def setUp(self):
+        some_list = QuestionListFactory(active=True)
+        question_1 = QuestionFactory(child_of=some_list)
+        question_2 = QuestionFactory(child_of=some_list)
+        AlternativeFactory(question=question_1)
+        AlternativeFactory(question=question_2)
+        self.base_url = reverse('answer_list', args=[some_list.slug])
+
+    def test_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(
+            found.func.__name__, AnswerQuestionView.as_view().__name__
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(self.base_url)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(
+            response, AnswerQuestionView.template_name_not_auth
+        )
+
+
+class AnswerQuestionViewTests(TestCase):
     def setUp(self):
         self.create_login_and_verify_user()
         self.question_list = QuestionListFactory(
@@ -113,6 +140,12 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, AnswerQuestionView.template_name)
+
+    def test_user_not_logged_in(self):
+        self.client.logout()
+        response = self.client.get(self.base_url)
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
 
     def test_pagination_works(self):
         QuestionFactory(title='some question', child_of=self.question_list)
@@ -381,6 +414,18 @@ class AnswerQuestionViewTests(TestViewsMixin, TestCase):
             reverse('answer_list', args=[question_list.slug, another_user]),
         )
         self.assertEqual(message, DONT_TRY_WEIRD_STUFF)
+
+    def create_login_and_verify_user(self, email='javi@email.com'):
+        username = email.split('@')[0]
+        self.user = get_user_model().objects.create_user(
+            email=email, username=username, password='password123'
+        )
+
+        EmailAddress.objects.create(
+            user=self.user, email=self.user.email, verified=True
+        )
+
+        self.client.login(email=email, password='password123')
 
 
 class AddQuestionViewTests(TestViewsMixin, TestCase):
