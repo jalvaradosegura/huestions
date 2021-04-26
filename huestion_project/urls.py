@@ -10,7 +10,7 @@ from core import views as error_views
 from lists.models import QuestionList
 
 info_dict = {
-    'queryset': QuestionList.objects.all(),
+    'queryset': QuestionList.objects.filter(active=True),
 }
 
 urlpatterns = [
