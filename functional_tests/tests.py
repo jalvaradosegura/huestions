@@ -2,6 +2,7 @@ import time
 
 from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
+from django.core.management import call_command
 from django.test import LiveServerTestCase
 from django.urls import reverse
 from selenium import webdriver
@@ -36,8 +37,6 @@ class FunctionalTestsBase(LiveServerTestCase):
         email_input.send_keys(email)
         password_input = self.browser.find_element_by_id('id_password1')
         password_input.send_keys(password)
-        check_input = self.browser.find_element_by_id('id_check')
-        check_input.click()
 
         # She press the signup button
         time.sleep(3)
@@ -51,16 +50,19 @@ class FunctionalTestsBase(LiveServerTestCase):
 
 class NewVisitorTests(FunctionalTestsBase):
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        profile = webdriver.FirefoxProfile()
+        profile.set_preference('intl.accept_languages', 'en')
+        self.browser = webdriver.Firefox(firefox_profile=profile)
 
     def test_can_visit_home_page(self):
         # Javi heard about a fun page, where you have to answer hard questions
         # She visits it
+        call_command('create_demo_list')
         self.browser.get(f'{self.live_server_url}/')
 
         # Javi sees a Home Page title
         welcome = self.browser.find_element_by_tag_name('h2').text
-        self.assertEqual(welcome, 'Hard questions for everyone')
+        self.assertEqual(welcome, 'Lists of Hard Questions!')
 
 
 class QuestionListsTests(FunctionalTestsBase):

@@ -15,6 +15,7 @@ unit-tests:
 	python manage.py test users --settings=huestion_project.settings.local
 	python manage.py test votes --settings=huestion_project.settings.local
 	python manage.py test core --settings=huestion_project.settings.local
+	python manage.py test demo --settings=huestion_project.settings.local
 	
 functional-tests:
 	python manage.py test functional_tests --settings=huestion_project.settings.local
