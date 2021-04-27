@@ -44,7 +44,9 @@ class AnswerQuestionView(DetailView):
         if self.object.active:
             if request.user.is_authenticated:
                 if (
-                    self.object.get_amount_of_unanswered_questions(request.user)
+                    self.object.get_amount_of_unanswered_questions(
+                        request.user
+                    )
                     > 0
                 ):
                     context = self.get_context_data(object=self.object)
@@ -60,7 +62,7 @@ class AnswerQuestionView(DetailView):
                     'questionlist': self.object,
                     'question': self.object.questions.first(),
                     'percentage': 1 / self.object.questions.count() * 100,
-                    'demo_list': DemoList.objects.first()
+                    'demo_list': DemoList.objects.first(),
                 }
                 return render(request, self.template_name_not_auth, context)
 
@@ -89,7 +91,9 @@ class AnswerQuestionView(DetailView):
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            target_list = QuestionList.objects.get(slug=self.kwargs.get('slug'))
+            target_list = QuestionList.objects.get(
+                slug=self.kwargs.get('slug')
+            )
             target_question = target_list.get_unanswered_questions(
                 self.request.user
             )[0]
@@ -120,7 +124,9 @@ class AnswerQuestionView(DetailView):
             if not selected_alternative.question.has_the_user_already_voted(
                 self.request.user
             ):
-                selected_alternative.vote_for_this_alternative(self.request.user)
+                selected_alternative.vote_for_this_alternative(
+                    self.request.user
+                )
                 Vote.objects.create(
                     user=self.request.user,
                     list=question_list,
@@ -128,7 +134,10 @@ class AnswerQuestionView(DetailView):
                     alternative=selected_alternative,
                 )
 
-            if question_list.get_amount_of_unanswered_questions(request.user) == 0:
+            if (
+                question_list.get_amount_of_unanswered_questions(request.user)
+                == 0
+            ):
                 return redirect_and_check_if_list_was_shared(
                     kwargs, 'list_results', target_list, username
                 )

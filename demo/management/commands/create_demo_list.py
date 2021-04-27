@@ -69,6 +69,6 @@ class Command(BaseCommand):
         except FileNotFoundError:
             raise CommandError(COMMAND_CREATE_DEMO_ERROR_MESSAGE)
 
-        self.stdout.write(self.style.SUCCESS(
-            COMMAND_CREATE_DEMO_SUCCESS_MESSAGE)
+        self.stdout.write(
+            self.style.SUCCESS(COMMAND_CREATE_DEMO_SUCCESS_MESSAGE)
         )

@@ -1,8 +1,10 @@
+import io
 from http import HTTPStatus
 
 from allauth.account.models import EmailAddress
 from django.contrib.auth import get_user_model
 from django.contrib.messages import get_messages
+from django.core.management import call_command
 from django.test import TestCase
 from django.urls import resolve, reverse
 
@@ -85,6 +87,8 @@ class LogoutPageTests(TestViewsMixin, TestCase):
 
 class AnswerQuestionViewGetTests(TestCase):
     def setUp(self):
+        out = io.StringIO()
+        call_command('create_demo_list', stdout=out)
         some_list = QuestionListFactory(active=True)
         question_1 = QuestionFactory(child_of=some_list)
         question_2 = QuestionFactory(child_of=some_list)
@@ -142,6 +146,7 @@ class AnswerQuestionViewTests(TestCase):
         self.assertTemplateUsed(response, AnswerQuestionView.template_name)
 
     def test_user_not_logged_in(self):
+        call_command('create_demo_list')
         self.client.logout()
         response = self.client.get(self.base_url)
 

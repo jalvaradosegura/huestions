@@ -86,9 +86,7 @@ COMMAND_CREATE_DEMO_HELP_TEXT = (
 COMMAND_CREATE_DEMO_ERROR_MESSAGE = (
     'One of the images for the alternatives does not exist'
 )
-COMMAND_CREATE_DEMO_SUCCESS_MESSAGE = (
-    'Demo List created'
-)
+COMMAND_CREATE_DEMO_SUCCESS_MESSAGE = 'Demo List created'
 IMAGE_1_NAME = 'demo_coca_cola.jpeg'
 IMAGE_2_NAME = 'demo_pepsi.jpeg'
 IMAGE_3_NAME = 'demo_burger.jpeg'
