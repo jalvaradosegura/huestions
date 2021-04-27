@@ -1,0 +1,7 @@
+{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name %}<h3>Hello from {{ site_name }} 👋</h3>{% endblocktrans %}
+
+{% block content %}{% endblock %}
+
+<p>{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thanks for using {{ site_name }} ❤️</p>
+<p>- {{ site_domain }} team 🦥 -</p>{% endblocktrans %}
+{% endautoescape %}

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-27 17:07-0400\n"
-"PO-Revision-Date: 2021-04-27 21:08+0000\n"
+"POT-Creation-Date: 2021-04-27 19:44-0400\n"
+"PO-Revision-Date: 2021-04-27 23:44+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -186,6 +186,23 @@ msgstr ""
 msgid "I like sloths."
 msgstr "Me gustan los perezosos."
 
+#: templates/account/email/base_message.html:1
+#, python-format
+msgid "<h3>Hello from %(site_name)s 👋</h3>"
+msgstr "<h3>Hola, te saluda %(site_name)s! 👋</h3>"
+
+#: templates/account/email/base_message.html:5
+#, python-format
+#| msgid ""
+#| "Thanks for using %(site_name)s ❤️</p>\n"
+#| "<p>%(site_domain)s team 🦥</p>"
+msgid ""
+"Thanks for using %(site_name)s ❤️</p>\n"
+"<p>- %(site_domain)s team 🦥 -</p>"
+msgstr ""
+"Gracias por usar %(site_name)s ❤️</p>\n"
+"<p>- El equipo de %(site_domain)s 🦥 -</p>"
+
 #: templates/account/email/base_message.txt:1
 #, python-format
 msgid "Hello from %(site_name)s!"
@@ -210,6 +227,23 @@ msgstr ""
 "Has recibido este correo porque el usuario %(user_display)s ha indicado este correo para registrar su cuenta en %(site_domain)s.\n"
 "\n"
 "Para confirmar que esto es correcto, ir a %(activate_url)s"
+
+#: templates/account/email/password_reset_key_message.html:4
+msgid ""
+"<p>You're receiving this e-mail because you or someone else has requested a password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the link below to reset your password.</p>"
+msgstr ""
+"<p>Te llegó este correo electrónico porque tú u otra persona ha solicitado una contraseña para su cuenta de usuario.\n"
+"Puedes ignorar esto con tranquilidad si no solicitaste un restablecimiento de contraseña. Haz clic en el enlace de abajo para restablecer tu contraseña.</p>"
+
+#: templates/account/email/password_reset_key_message.html:7
+msgid "Let's reset the password!"
+msgstr "Vamos a restablecer la contraseña!"
+
+#: templates/account/email/password_reset_key_message.html:9
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
+msgstr "Por si olvidaste tu usuario, tu usuario es %(username)s."
 
 #: templates/account/email_confirm.html:6
 #: templates/account/email_confirm.html:10

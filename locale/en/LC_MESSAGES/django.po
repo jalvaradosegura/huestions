@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-27 17:07-0400\n"
+"POT-Creation-Date: 2021-04-27 19:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -172,6 +172,18 @@ msgstr ""
 msgid "I like sloths."
 msgstr ""
 
+#: templates/account/email/base_message.html:1
+#, python-format
+msgid "<h3>Hello from %(site_name)s 👋</h3>"
+msgstr ""
+
+#: templates/account/email/base_message.html:5
+#, python-format
+msgid ""
+"Thanks for using %(site_name)s ❤️</p>\n"
+"<p>- %(site_domain)s team 🦥 -</p>"
+msgstr ""
+
 #: templates/account/email/base_message.txt:1
 #, python-format
 msgid "Hello from %(site_name)s!"
@@ -191,6 +203,23 @@ msgid ""
 "mail address to register an account on %(site_domain)s.\n"
 "\n"
 "To confirm this is correct, go to %(activate_url)s"
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.html:4
+msgid ""
+"<p>You're receiving this e-mail because you or someone else has requested a "
+"password for your user account.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password.</p>"
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.html:7
+msgid "Let's reset the password!"
+msgstr ""
+
+#: templates/account/email/password_reset_key_message.html:9
+#, python-format
+msgid "In case you forgot, your username is %(username)s."
 msgstr ""
 
 #: templates/account/email_confirm.html:6
