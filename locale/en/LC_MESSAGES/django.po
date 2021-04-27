@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 23:19-0400\n"
+"POT-Creation-Date: 2021-04-26 23:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -166,6 +166,10 @@ msgid ""
 "I have always wonder with certain tv series, movies, anime, which character "
 "people think is stronger or cooler? Or simply, similar questions with food, "
 "brands or sports.  That's where the idea came."
+msgstr ""
+
+#: templates/about.html:15
+msgid "I like sloths."
 msgstr ""
 
 #: templates/account/email/base_message.txt:1

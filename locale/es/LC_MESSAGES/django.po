@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 23:19-0400\n"
-"PO-Revision-Date: 2021-04-27 03:19+0000\n"
+"POT-Creation-Date: 2021-04-26 23:25-0400\n"
+"PO-Revision-Date: 2021-04-27 03:26+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -181,6 +181,10 @@ msgstr ""
 "Siempre me he preguntado con ciertas series de televisión, películas, anime,"
 " ¿qué personaje cree la gente que es más fuerte o más genial? O simplemente,"
 " preguntas similares con comida, marcas o deportes. De ahí surgió la idea."
+
+#: templates/about.html:15
+msgid "I like sloths."
+msgstr "Me gustan los perezosos."
 
 #: templates/account/email/base_message.txt:1
 #, python-format
