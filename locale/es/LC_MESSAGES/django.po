@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 23:25-0400\n"
-"PO-Revision-Date: 2021-04-27 03:26+0000\n"
+"POT-Creation-Date: 2021-04-27 17:07-0400\n"
+"PO-Revision-Date: 2021-04-27 21:08+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -343,14 +343,13 @@ msgstr "Registrarse"
 msgid "Already have an account"
 msgstr "Ya tienes una cuenta"
 
-#: templates/account/signup.html:76
-#, python-format
-msgid ""
-"By registering, you agree to our <a href=\"%(terms_urls)s\" "
-"target=\"_blank\">Terms and Conditions</a>"
-msgstr ""
-"Al registrarte, aceptas los <a href=\"%(terms_urls)s "
-"target=\"_blank\">Términos y Condiciones</a>"
+#: templates/account/signup.html:75
+msgid "By registering, you agree to our"
+msgstr "Al registrarte, aceptas los"
+
+#: templates/account/signup.html:75
+msgid "Terms and Conditions"
+msgstr "Términos y Condiciones"
 
 #: templates/account/verified_email_required.html:6
 msgid "Verify Your E-mail Address"
@@ -832,6 +831,14 @@ msgstr "Listas publicadas"
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
 
+#, python-format
+#~ msgid ""
+#~ "By registering, you agree to our <a href=\"%(terms_urls)s\" "
+#~ "target=\"_blank\">Terms and Conditions</a>"
+#~ msgstr ""
+#~ "Al registrarte, aceptas los <a href=\"href=\"%(terms_urls)s\" "
+#~ "target=\"_blank\">Términos y Condiciones</a>"
+
 #~ msgid "I've always made a lot of questions to myself."
 #~ msgstr "Siempre me hecho muchas preguntas."
 
@@ -951,9 +958,6 @@ msgstr "Preguntas respondidas"
 
 #~ msgid "Share on WhatsApp"
 #~ msgstr "Compartir en WhatsApp"
-
-#~ msgid "Terms and Conditions"
-#~ msgstr "Términos y Condiciones"
 
 #~ msgid "About us"
 #~ msgstr "Acerca de nosotros"
