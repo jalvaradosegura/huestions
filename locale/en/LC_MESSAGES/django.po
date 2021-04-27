@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-26 10:36-0400\n"
+"POT-Creation-Date: 2021-04-26 23:19-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,42 +150,22 @@ msgid "About of"
 msgstr ""
 
 #: templates/about.html:12
-msgid "I've always made a lot of questions to myself."
+msgid ""
+"<b><u>H</u></b>ard Q<b><u>uestions</u></b>. Mixing both words, is how "
+"Huestions was born."
 msgstr ""
 
 #: templates/about.html:13
 msgid ""
-"Every time I finished a TV show, I wondered which character is the favorite "
-"one for the viewers? If you have to pick between the first and last season "
-"which one do you choose? If you could save a character between 2 that you "
-"like a lot, which one do you save?"
+"The goal is pretty simple: make funny lists of questions, share these lists "
+"and see what your friends and the world answer."
 msgstr ""
 
 #: templates/about.html:14
 msgid ""
-"Sometimes I wonder, if you have to choose a food to eat for the rest of your "
-"life (and you can only eat that), which one do you pick? and if your "
-"alternatives are this or that, which one do you pick?"
-msgstr ""
-
-#: templates/about.html:15
-msgid ""
-"After watching a superhero movie...which superpower would people prefer to "
-"have? super strength, super speed, invisibility and so on."
-msgstr ""
-
-#: templates/about.html:16
-msgid ""
-"Also, I’ve always thought that it would be fun to see what people would "
-"answer to weird or deep questions. What would my friends answer to this or "
-"that?"
-msgstr ""
-
-#: templates/about.html:17
-msgid ""
-"That’s how Huestions was born. A place where you can see the answer to this "
-"questions and you can share them with your friends, with your family or with "
-"anyone and see what they answer to the questions you've always wonder."
+"I have always wonder with certain tv series, movies, anime, which character "
+"people think is stronger or cooler? Or simply, similar questions with food, "
+"brands or sports.  That's where the idea came."
 msgstr ""
 
 #: templates/account/email/base_message.txt:1
