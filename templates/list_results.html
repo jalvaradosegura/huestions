@@ -81,9 +81,9 @@
             </div>
 
             <footer class="card-footer">
-	      <p class="card-footer-item">{% trans "Your vote" %}: {{ user_alternative }}</p>
+	      <p class="card-footer-item"><span class="title is-3">✓</span>{% trans "Your vote" %}: {{ user_alternative }}</p>
 	      {% if shared_user %}
-	        <p class="card-footer-item">{% blocktrans %}{{ shared_user }}'s vote{% endblocktrans %}: {{ i.2 }}</p>
+	        <p class="card-footer-item"><span class="title is-3">✓</span>{% blocktrans %}{{ shared_user }}'s vote{% endblocktrans %}: {{ i.2 }}</p>
 	      {% endif %}
 
             </footer>
