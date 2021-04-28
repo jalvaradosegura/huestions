@@ -41,7 +41,7 @@
 	      {% with domain_url=request.get_host %}
 		<button data-toggle="tooltip" onclick="copyToClipboard('{{ request.scheme }}://{{ domain_url }}{{ list_url }}')" title="{% trans "Copied to clipboard" %}!" class="card-footer-item button is-light">{% trans "Copy list link" %}</button>
 	      {% endwith %}
-	      <a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="card-footer-item button is-success">{% trans "Go" %}!</a>
+	      <a id="button_to_select" href="{{ question_list.get_absolute_url }}" class="card-footer-item button is-success">{% trans "Play" %}!</a>
 	    {% else %}
 	      <a href="{% url 'edit_list' question_list.slug %}" class="card-footer-item button is-light" id="edit_{{ forloop.counter0 }}">{% trans "Edit" %}</a>
 	      <a href="{% url 'delete_list' question_list.slug %}" class="card-footer-item button is-danger" id="delete_{{ forloop.counter0 }}">{% trans "Delete" %}</a>
