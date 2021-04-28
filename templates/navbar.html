@@ -18,8 +18,13 @@
     {% with url_name=request.resolver_match.url_name %}
 
     <div class="navbar-start">
+      <!--item-->
       <a class="navbar-item {% if url_name == 'home' %}is-active{% endif %}" href="{% url 'home' %}">{% trans "Home" %}</a>
+
+      <!--item-->
       <a class="navbar-item {% if url_name == 'questions_list' %}is-active{% endif %}" href="{% url 'questions_list' %}">{% trans "Lists" %}</a>
+
+      <!--item-->
       <div class="navbar-item">
 
 	<form class="" action="{% url 'search_lists' %}">
@@ -45,9 +50,27 @@
     <div class="navbar-end">
       
       {% if user.is_authenticated %}
+      	<!--item-->
 	<div class="navbar-item">{% trans "Hi" %} {{ user }}👋</div>
+
+	<!--item-->
         <a class="navbar-item {% if url_name == 'create_list' %}is-active{% endif %}" href="{% url 'create_list' %}">{% trans "Create a list" %}</a>
-        <a class="navbar-item {% if url_name == 'lists' %}is-active{% endif %}" href="{% url 'lists' user.username %}">{% trans "Your Lists" %}</a>
+
+	<!--item-->
+        <div class="navbar-item has-dropdown is-hoverable">
+	  <a class="navbar-link">{% trans "Your Lists" %}</a>
+
+          <div class="navbar-dropdown is-right">
+            <a class="navbar-item {% if url_name == 'lists' %}is-active{% endif %}" href="{% url 'lists' user.username %}">
+	      {% trans "Created" %}
+	    </a>
+            <a class="navbar-item {% if url_name == 'user_played_lists' %}is-active{% endif %}" href="{% url 'user_played_lists' user.username %}">
+	      {% trans "Played" %}
+	    </a>
+          </div>
+        </div> <!--dropdown-->
+
+	<!--item-->
         <div class="navbar-item has-dropdown is-hoverable">
 	  <a class="navbar-link">{% trans "More" %}</a>
 
@@ -75,6 +98,7 @@
         </div> <!--dropdown-->
 
       {% else %}
+      	<!--item-->
         <div class="navbar-item">
           <div class="buttons">
             <a class="button is-primary" href="{% url 'account_signup' %}">

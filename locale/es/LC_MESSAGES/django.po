@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-27 19:44-0400\n"
-"PO-Revision-Date: 2021-04-27 23:44+0000\n"
+"POT-Creation-Date: 2021-04-28 11:02-0400\n"
+"PO-Revision-Date: 2021-04-28 15:04+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -193,9 +193,6 @@ msgstr "<h3>Hola, te saluda %(site_name)s! 👋</h3>"
 
 #: templates/account/email/base_message.html:5
 #, python-format
-#| msgid ""
-#| "Thanks for using %(site_name)s ❤️</p>\n"
-#| "<p>%(site_domain)s team 🦥</p>"
 msgid ""
 "Thanks for using %(site_name)s ❤️</p>\n"
 "<p>- %(site_domain)s team 🦥 -</p>"
@@ -275,7 +272,7 @@ msgstr ""
 #: templates/account/login.html:7 templates/account/login.html:15
 #: templates/account/login.html:50
 #: templates/answer_question_not_authenticated.html:57
-#: templates/navbar.html:83
+#: templates/navbar.html:107
 msgid "Log In"
 msgstr "Iniciar sesión"
 
@@ -357,7 +354,7 @@ msgstr ""
 "fue usado. Por favor solicitar <a href=\"%(passwd_reset_url)s\"> nuevo "
 "reseteo de contraseña"
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:65
+#: templates/account/password_reset_from_key.html:46 templates/navbar.html:88
 msgid "Change password"
 msgstr "Cambiar contraseña"
 
@@ -369,7 +366,7 @@ msgstr "Tu contraseña ha sido cambiada."
 #: templates/account/signup.html:7 templates/account/signup.html:16
 #: templates/account/signup.html:63
 #: templates/answer_question_not_authenticated.html:56
-#: templates/navbar.html:81
+#: templates/navbar.html:105
 msgid "Sign Up"
 msgstr "Registrarse"
 
@@ -457,7 +454,7 @@ msgid "Send"
 msgstr "Enviar"
 
 #: templates/create_list.html:15 templates/footer.html:70
-#: templates/home.html:96 templates/home.html:170 templates/navbar.html:49
+#: templates/home.html:96 templates/home.html:170 templates/navbar.html:57
 msgid "Create a list"
 msgstr "Crea una lista"
 
@@ -510,7 +507,7 @@ msgstr "Borrar"
 msgid "Demo list results"
 msgstr "Resultados de la lista demo"
 
-#: templates/edit_list.html:13 templates/navbar.html:50
+#: templates/edit_list.html:13 templates/navbar.html:61
 msgid "Your Lists"
 msgstr "Tus listas"
 
@@ -555,8 +552,8 @@ msgid "Artist"
 msgstr "Artista"
 
 #: templates/footer.html:45
-msgid "Logo Artist"
-msgstr "Artista del logo"
+msgid "Graphic Designer"
+msgstr "Diseñadora Gráfica"
 
 #: templates/footer.html:58
 msgid "Contact"
@@ -571,7 +568,7 @@ msgid "Have fun"
 msgstr "Diviértete"
 
 #: templates/footer.html:69 templates/list_results.html:13
-#: templates/lists.html:10 templates/navbar.html:22
+#: templates/lists.html:10 templates/navbar.html:25
 msgid "Lists"
 msgstr "Listas"
 
@@ -654,8 +651,7 @@ msgstr "Gracias por ser parte de esto"
 msgid "The newest lists"
 msgstr "Las listas más nuevas"
 
-#: templates/home.html:85 templates/home.html:97 templates/lists.html:45
-#: templates/search_results.html:38 templates/user_lists.html:44
+#: templates/home.html:85 templates/home.html:97
 msgid "Go"
 msgstr "Ir"
 
@@ -751,7 +747,7 @@ msgid "All lists"
 msgstr "Todas las listas"
 
 #: templates/lists.html:30 templates/search_results.html:25
-#: templates/user_lists.html:31
+#: templates/user_lists.html:31 templates/user_played_lists.html:23
 msgid "Created:"
 msgstr "Creada"
 
@@ -765,35 +761,49 @@ msgstr "Votos en los últimos días"
 
 #: templates/lists.html:43 templates/search_results.html:35
 #: templates/social_media_icons_group.html:12 templates/user_lists.html:42
+#: templates/user_played_lists.html:33
 msgid "Copied to clipboard"
 msgstr "Copiado al portapapeles"
 
 #: templates/lists.html:43 templates/search_results.html:35
-#: templates/user_lists.html:42
+#: templates/user_lists.html:42 templates/user_played_lists.html:33
 msgid "Copy list link"
 msgstr "Copiar link de la lista"
 
-#: templates/navbar.html:21
+#: templates/lists.html:45 templates/search_results.html:38
+#: templates/user_lists.html:44 templates/user_played_lists.html:35
+msgid "Play"
+msgstr "Jugar"
+
+#: templates/navbar.html:22
 msgid "Home"
 msgstr "Inicio"
 
-#: templates/navbar.html:29 templates/navbar.html:36
+#: templates/navbar.html:34 templates/navbar.html:41
 msgid "Search"
 msgstr "Buscar"
 
-#: templates/navbar.html:48
+#: templates/navbar.html:54
 msgid "Hi"
 msgstr "Hola"
 
-#: templates/navbar.html:52
+#: templates/navbar.html:65
+msgid "Created"
+msgstr "Creadas"
+
+#: templates/navbar.html:68
+msgid "Played"
+msgstr "Jugadas"
+
+#: templates/navbar.html:75
 msgid "More"
 msgstr "Más"
 
-#: templates/navbar.html:59 templates/user_stats.html:9
+#: templates/navbar.html:82 templates/user_stats.html:9
 msgid "Your stats"
 msgstr "Tus estadísticas"
 
-#: templates/navbar.html:72
+#: templates/navbar.html:95
 msgid "Log out"
 msgstr "Cerrar sesión"
 
@@ -833,9 +843,10 @@ msgstr "Encontró"
 msgid "result"
 msgstr "resultado"
 
-#: templates/user_lists.html:10
-msgid "Your lists"
-msgstr "Tus listas"
+#: templates/user_lists.html:6 templates/user_lists.html:10
+#| msgid "Create lists."
+msgid "Created lists"
+msgstr "Listas creadas"
 
 #: templates/user_lists.html:14
 msgid "All your lists"
@@ -853,6 +864,11 @@ msgstr "No publicadas"
 msgid "Edit"
 msgstr "Editar"
 
+#: templates/user_played_lists.html:6 templates/user_played_lists.html:10
+#| msgid "Popular lists"
+msgid "Played lists"
+msgstr "Listas jugadas"
+
 #: templates/user_stats.html:15
 msgid "Lists created"
 msgstr "Listas creadas"
@@ -864,6 +880,12 @@ msgstr "Listas publicadas"
 #: templates/user_stats.html:27
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
+
+#~ msgid "Logo Artist"
+#~ msgstr "Artista del logo"
+
+#~ msgid "Your lists"
+#~ msgstr "Tus listas"
 
 #, python-format
 #~ msgid ""
@@ -1002,9 +1024,6 @@ msgstr "Preguntas respondidas"
 #, python-format
 #~ msgid "Found %(lists_found)s result%(lists_found|pluralize)s"
 #~ msgstr "Encontró %(lists_found)s result%(lists_found|pluralize)s"
-
-#~ msgid "Created"
-#~ msgstr "Creada"
 
 #~ msgid "Go back to the list"
 #~ msgstr "Volver a lista"

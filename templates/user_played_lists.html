@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block head_title %}{% trans "Played lists" %}{% endblock %}
+
+{% block main %}
+
+  <h2 class="title is-2">🎮 {% trans "Played lists" %}</h2>
+
+  {% for question_list in object_list %}
+    {% if forloop.first %}<div class="columns">{% endif %}
+      <div class="column is-6">
+        <div class="card">
+
+	  <header class="card-header">
+	    <p class="card-header-title">{{ question_list.list }}</p>
+	  </header>
+
+	  <div class="card-content">
+	    <div class="content">
+	      <p class="subtitle is-6">{% trans "Created:" %} {{ question_list.list.created|date:"M d, Y" }}</p>
+	      {% for tag in question_list.list.tags.all %}
+	        <span class="tag">#{{ tag }}</span>
+	      {% endfor %}
+	    </div>
+	  </div>
+
+	  <footer class="card-footer">
+	    {% url 'answer_list' question_list.list.slug user as list_url %}
+	    {% with domain_url=request.get_host %}
+	      <button data-toggle="tooltip" onclick="copyToClipboard('{{ request.scheme }}://{{ domain_url }}{{ list_url }}')" title="{% trans "Copied to clipboard" %}!" class="card-footer-item button is-light">{% trans "Copy list link" %}</button>
+	    {% endwith %}
+	    <a id="button_to_select" href="{{ question_list.list.get_absolute_url }}" class="card-footer-item button is-success">{% trans "Play" %}!</a>
+	  </footer>
+
+        </div>  <!-- card -->
+      </div>  <!-- col is-6 -->
+      {% if forloop.counter|divisibleby:2 %}</div><div class="columns">{% endif %}
+      {% if forloop.last %}</div>{% endif %}
+  {% endfor %}
+
+  {% include "paginator.html" %}
+
+{% endblock main %}
+
+{% block bootstrap_js_loaded %}
+  <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>
+{% endblock bootstrap_js_loaded %}

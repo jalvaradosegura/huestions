@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-27 19:44-0400\n"
+"POT-Creation-Date: 2021-04-28 11:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -247,7 +247,8 @@ msgstr ""
 
 #: templates/account/login.html:7 templates/account/login.html:15
 #: templates/account/login.html:50
-#: templates/answer_question_not_authenticated.html:57 templates/navbar.html:83
+#: templates/answer_question_not_authenticated.html:57
+#: templates/navbar.html:107
 msgid "Log In"
 msgstr ""
 
@@ -321,7 +322,7 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:65
+#: templates/account/password_reset_from_key.html:46 templates/navbar.html:88
 msgid "Change password"
 msgstr ""
 
@@ -332,7 +333,8 @@ msgstr ""
 
 #: templates/account/signup.html:7 templates/account/signup.html:16
 #: templates/account/signup.html:63
-#: templates/answer_question_not_authenticated.html:56 templates/navbar.html:81
+#: templates/answer_question_not_authenticated.html:56
+#: templates/navbar.html:105
 msgid "Sign Up"
 msgstr ""
 
@@ -411,7 +413,7 @@ msgid "Send"
 msgstr ""
 
 #: templates/create_list.html:15 templates/footer.html:70
-#: templates/home.html:96 templates/home.html:170 templates/navbar.html:49
+#: templates/home.html:96 templates/home.html:170 templates/navbar.html:57
 msgid "Create a list"
 msgstr ""
 
@@ -464,7 +466,7 @@ msgstr ""
 msgid "Demo list results"
 msgstr ""
 
-#: templates/edit_list.html:13 templates/navbar.html:50
+#: templates/edit_list.html:13 templates/navbar.html:61
 msgid "Your Lists"
 msgstr ""
 
@@ -509,7 +511,7 @@ msgid "Artist"
 msgstr ""
 
 #: templates/footer.html:45
-msgid "Logo Artist"
+msgid "Graphic Designer"
 msgstr ""
 
 #: templates/footer.html:58
@@ -525,7 +527,7 @@ msgid "Have fun"
 msgstr ""
 
 #: templates/footer.html:69 templates/list_results.html:13
-#: templates/lists.html:10 templates/navbar.html:22
+#: templates/lists.html:10 templates/navbar.html:25
 msgid "Lists"
 msgstr ""
 
@@ -603,8 +605,7 @@ msgstr ""
 msgid "The newest lists"
 msgstr ""
 
-#: templates/home.html:85 templates/home.html:97 templates/lists.html:45
-#: templates/search_results.html:38 templates/user_lists.html:44
+#: templates/home.html:85 templates/home.html:97
 msgid "Go"
 msgstr ""
 
@@ -697,7 +698,7 @@ msgid "All lists"
 msgstr ""
 
 #: templates/lists.html:30 templates/search_results.html:25
-#: templates/user_lists.html:31
+#: templates/user_lists.html:31 templates/user_played_lists.html:23
 msgid "Created:"
 msgstr ""
 
@@ -711,35 +712,49 @@ msgstr ""
 
 #: templates/lists.html:43 templates/search_results.html:35
 #: templates/social_media_icons_group.html:12 templates/user_lists.html:42
+#: templates/user_played_lists.html:33
 msgid "Copied to clipboard"
 msgstr ""
 
 #: templates/lists.html:43 templates/search_results.html:35
-#: templates/user_lists.html:42
+#: templates/user_lists.html:42 templates/user_played_lists.html:33
 msgid "Copy list link"
 msgstr ""
 
-#: templates/navbar.html:21
+#: templates/lists.html:45 templates/search_results.html:38
+#: templates/user_lists.html:44 templates/user_played_lists.html:35
+msgid "Play"
+msgstr ""
+
+#: templates/navbar.html:22
 msgid "Home"
 msgstr ""
 
-#: templates/navbar.html:29 templates/navbar.html:36
+#: templates/navbar.html:34 templates/navbar.html:41
 msgid "Search"
 msgstr ""
 
-#: templates/navbar.html:48
+#: templates/navbar.html:54
 msgid "Hi"
 msgstr ""
 
-#: templates/navbar.html:52
+#: templates/navbar.html:65
+msgid "Created"
+msgstr ""
+
+#: templates/navbar.html:68
+msgid "Played"
+msgstr ""
+
+#: templates/navbar.html:75
 msgid "More"
 msgstr ""
 
-#: templates/navbar.html:59 templates/user_stats.html:9
+#: templates/navbar.html:82 templates/user_stats.html:9
 msgid "Your stats"
 msgstr ""
 
-#: templates/navbar.html:72
+#: templates/navbar.html:95
 msgid "Log out"
 msgstr ""
 
@@ -779,8 +794,8 @@ msgstr ""
 msgid "result"
 msgstr ""
 
-#: templates/user_lists.html:10
-msgid "Your lists"
+#: templates/user_lists.html:6 templates/user_lists.html:10
+msgid "Created lists"
 msgstr ""
 
 #: templates/user_lists.html:14
@@ -797,6 +812,10 @@ msgstr ""
 
 #: templates/user_lists.html:46
 msgid "Edit"
+msgstr ""
+
+#: templates/user_played_lists.html:6 templates/user_played_lists.html:10
+msgid "Played lists"
 msgstr ""
 
 #: templates/user_stats.html:15

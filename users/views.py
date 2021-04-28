@@ -7,6 +7,7 @@ from django.views.generic import ListView, View
 from core.constants import AMOUNT_OF_LISTS_PER_PAGE
 from core.mixins import CustomUserPassesTestMixin
 from questions.models import QuestionList
+from votes.models import Vote
 
 
 class UserListsView(LoginRequiredMixin, CustomUserPassesTestMixin, ListView):
@@ -60,3 +61,17 @@ class UserStatsView(LoginRequiredMixin, UserPassesTestMixin, View):
         if username == self.request.user.username:
             return True
         return False
+
+
+class UserPlayedListsView(
+    LoginRequiredMixin, CustomUserPassesTestMixin, ListView
+):
+    template_name = 'user_played_lists.html'
+    paginate_by = AMOUNT_OF_LISTS_PER_PAGE
+
+    def get_queryset(self):
+        username = self.kwargs['username']
+        user_id = get_user_model().objects.get(username=username).id
+        return Vote.objects.filter(
+            user=user_id
+        ).filter(~Q(list=None)).select_related('list').prefetch_related('list__tags').order_by('-list__id').distinct('list')

@@ -8,7 +8,7 @@ from lists.factories import QuestionListFactory
 from questions.factories import AlternativeFactory
 
 from ..factories import UserFactory
-from ..views import UserListsView, UserStatsView
+from ..views import UserListsView, UserStatsView, UserPlayedListsView
 
 
 class UserListsViewTests(TestViewsMixin, TestCase):
@@ -121,3 +121,21 @@ class UserStatsViewTests(TestViewsMixin, TestCase):
         response = self.client.get(reverse('stats', args=[user.username]))
 
         self.assertEqual(response.status_code, HTTPStatus.FORBIDDEN)
+
+
+class UserPlayedListsViewTests(TestViewsMixin, TestCase):
+    def setUp(self):
+        self.create_login_and_verify_user()
+        self.base_url = reverse('user_played_lists', args=[self.user.username])
+
+    def test_question_list_url_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(
+            found.func.__name__, UserPlayedListsView.as_view().__name__
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(self.base_url)
+
+        self.assertTemplateUsed(response, 'user_played_lists.html')
