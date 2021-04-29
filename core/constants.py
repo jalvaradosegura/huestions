@@ -90,9 +90,9 @@ COMMAND_CREATE_DEMO_SUCCESS_MESSAGE = 'Demo List created'
 IMAGE_1_NAME = 'demo_coca_cola.jpeg'
 IMAGE_2_NAME = 'demo_pepsi.jpeg'
 IMAGE_3_NAME = 'demo_burger.jpeg'
-IMAGE_4_NAME = 'demo_pizza.jpeg'
-IMAGE_5_NAME = 'demo_cutlery.jpeg'
-IMAGE_6_NAME = 'demo_bare_hands.jpeg'
+IMAGE_4_NAME = 'demo_salad.jpeg'
+IMAGE_5_NAME = 'demo_tiger.jpeg'
+IMAGE_6_NAME = 'demo_lion.jpeg'
 
 # === Images - Demo List ===
 DEMO_IMAGES_PATH = settings.BASE_DIR / 'static/images/demo'

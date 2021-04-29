@@ -40,34 +40,33 @@ class Command(BaseCommand):
 
             demo_q2 = DemoQuestionFactory(
                 title=(
-                    'You have to eat one of these for the rest of your life, '
-                    'which one?'
+                    'You have to eat one of these for the rest of your life'
                 ),
                 child_of=demo_list,
             )
             demo_a1 = DemoAlternativeFactory(title='Burger', question=demo_q2)
             demo_a1.image = 'alternative_pics/demo/' + IMAGE_3_NAME
             demo_a1.save()
-            demo_a2 = DemoAlternativeFactory(title='Pizza', question=demo_q2)
+            demo_a2 = DemoAlternativeFactory(title='Salad', question=demo_q2)
             demo_a2.image = 'alternative_pics/demo/' + IMAGE_4_NAME
             demo_a2.save()
 
             demo_q3 = DemoQuestionFactory(
-                title='How do you prefer to eat a burger?', child_of=demo_list
+                title='Choose your favorite', child_of=demo_list
             )
             demo_a1 = DemoAlternativeFactory(
-                title='With cutlery', question=demo_q3
+                title='Tiger', question=demo_q3
             )
             demo_a1.image = 'alternative_pics/demo/' + IMAGE_5_NAME
             demo_a1.save()
             demo_a2 = DemoAlternativeFactory(
-                title='With your bare hands', question=demo_q3
+                title='Lion', question=demo_q3
             )
             demo_a2.image = 'alternative_pics/demo/' + IMAGE_6_NAME
             demo_a2.save()
 
-        except FileNotFoundError:
-            raise CommandError(COMMAND_CREATE_DEMO_ERROR_MESSAGE)
+        except FileNotFoundError as e:
+            raise CommandError(e + '\n' + COMMAND_CREATE_DEMO_ERROR_MESSAGE)
 
         self.stdout.write(
             self.style.SUCCESS(COMMAND_CREATE_DEMO_SUCCESS_MESSAGE)
