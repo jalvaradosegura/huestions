@@ -14,15 +14,12 @@ info_dict = {
 }
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('lists.urls')),
     path('', include('questions.urls')),
     path('', include('core.urls')),
     path('users/', include('users.urls')),
     path('demo/', include('demo.urls')),
     path('accounts/', include('allauth.urls')),
-    path('rosetta/', include('rosetta.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
     path(
         'sitemap.xml',
         sitemap,
@@ -40,3 +37,10 @@ if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )
+    urlpatterns += [
+        path('admin/', admin.site.urls),
+        path('rosetta/', include('rosetta.urls')),
+        path('__debug__/', include(debug_toolbar.urls)),
+    ]
+else:
+    path('zendo-phi-phi-island-admin/', admin.site.urls),
