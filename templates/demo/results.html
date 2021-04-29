@@ -160,4 +160,29 @@
 </div>  <!-- columns -->
 
 {% endlocalize %}
+  {% if user.is_authenticated %}
+    <article class="message">
+      <div class="message-body">
+    <p>❤️ {% trans "<b>Thanks</b> for being registered, <b>you are the best</b>" %}.</p>
+    <p>🥰 {% trans "We would love you even more if you can help us sharing the site and spreading the word" %}.</p>
+    <p>🦥 -{% trans "Huestions team" %}-</p>
+      </div>
+    </article>
+  {% else %}
+    <article class="message">
+      <div class="message-body">
+        <p>{% trans "You are <b>seeing this</b> message because you are <b>not logged in</b>" %}.</p>
+        {% url 'account_signup' as account_signup %}
+        {% url 'account_login' as account_login %}
+        <p>{% blocktrans %}<a href="{{ account_signup }}">Create an account</a> (it will take you like 10 seconds, unless you are robot 🤖) or <a href="{{ account_login }}">log in</a> to get access to all the features.{% endblocktrans %}</p>
+        <p>{% trans "By using an account you get to" %}:</p>
+        <p>✓ {% trans "Vote in every list" %}.</p>
+        <p>✓ {% trans "Create lists." %}</p>
+        <p>✓ {% trans "See the results of lists and see what your friends have voted" %}.</p>
+        <p class="mb-2">✓ {% trans "This is and much more" %}.</p>
+        <a class="button is-success mb-1" href="{% url 'account_signup' %}">🤝 {% trans "Sign Up" %}</a>
+        <a class="button is-success is-outlined mb-1" href="{% url 'account_login' %}">😁 {% trans "Log In" %}</a>
+      </div>
+    </article>
+  {% endif %}
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-28 11:02-0400\n"
+"POT-Creation-Date: 2021-04-28 23:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -248,7 +248,7 @@ msgstr ""
 #: templates/account/login.html:7 templates/account/login.html:15
 #: templates/account/login.html:50
 #: templates/answer_question_not_authenticated.html:57
-#: templates/navbar.html:107
+#: templates/demo/results.html:184 templates/navbar.html:107
 msgid "Log In"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr ""
 #: templates/account/signup.html:7 templates/account/signup.html:16
 #: templates/account/signup.html:63
 #: templates/answer_question_not_authenticated.html:56
-#: templates/navbar.html:105
+#: templates/demo/results.html:183 templates/navbar.html:105
 msgid "Sign Up"
 msgstr ""
 
@@ -369,10 +369,12 @@ msgid ""
 msgstr ""
 
 #: templates/answer_question_not_authenticated.html:47
+#: templates/demo/results.html:174
 msgid "You are <b>seeing this</b> message because you are <b>not logged in</b>"
 msgstr ""
 
 #: templates/answer_question_not_authenticated.html:50
+#: templates/demo/results.html:177
 #, python-format
 msgid ""
 "<a href=\"%(account_signup)s\">Create an account</a> (it will take you like "
@@ -381,22 +383,27 @@ msgid ""
 msgstr ""
 
 #: templates/answer_question_not_authenticated.html:51
+#: templates/demo/results.html:178
 msgid "By using an account you get to"
 msgstr ""
 
 #: templates/answer_question_not_authenticated.html:52
+#: templates/demo/results.html:179
 msgid "Vote in every list"
 msgstr ""
 
 #: templates/answer_question_not_authenticated.html:53
+#: templates/demo/results.html:180
 msgid "Create lists."
 msgstr ""
 
 #: templates/answer_question_not_authenticated.html:54
+#: templates/demo/results.html:181
 msgid "See the results of lists and see what your friends have voted"
 msgstr ""
 
 #: templates/answer_question_not_authenticated.html:55
+#: templates/demo/results.html:182
 msgid "This is and much more"
 msgstr ""
 
@@ -462,8 +469,26 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+#: templates/demo/results.html:7
+msgid "Results - Demo List"
+msgstr ""
+
 #: templates/demo/results.html:17
 msgid "Demo list results"
+msgstr ""
+
+#: templates/demo/results.html:166
+msgid "<b>Thanks</b> for being registered, <b>you are the best</b>"
+msgstr ""
+
+#: templates/demo/results.html:167
+msgid ""
+"We would love you even more if you can help us sharing the site and "
+"spreading the word"
+msgstr ""
+
+#: templates/demo/results.html:168
+msgid "Huestions team"
 msgstr ""
 
 #: templates/edit_list.html:13 templates/navbar.html:61
@@ -707,7 +732,7 @@ msgid "by"
 msgstr ""
 
 #: templates/lists.html:32
-msgid "Votes in the last few days"
+msgid "Recent votes"
 msgstr ""
 
 #: templates/lists.html:43 templates/search_results.html:35

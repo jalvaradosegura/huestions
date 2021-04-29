@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-28 11:02-0400\n"
-"PO-Revision-Date: 2021-04-28 15:04+0000\n"
+"POT-Creation-Date: 2021-04-28 23:34-0400\n"
+"PO-Revision-Date: 2021-04-29 03:36+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -272,7 +272,7 @@ msgstr ""
 #: templates/account/login.html:7 templates/account/login.html:15
 #: templates/account/login.html:50
 #: templates/answer_question_not_authenticated.html:57
-#: templates/navbar.html:107
+#: templates/demo/results.html:184 templates/navbar.html:107
 msgid "Log In"
 msgstr "Iniciar sesión"
 
@@ -366,7 +366,7 @@ msgstr "Tu contraseña ha sido cambiada."
 #: templates/account/signup.html:7 templates/account/signup.html:16
 #: templates/account/signup.html:63
 #: templates/answer_question_not_authenticated.html:56
-#: templates/navbar.html:105
+#: templates/demo/results.html:183 templates/navbar.html:105
 msgid "Sign Up"
 msgstr "Registrarse"
 
@@ -405,11 +405,13 @@ msgstr ""
 "de los próximos minutos."
 
 #: templates/answer_question_not_authenticated.html:47
+#: templates/demo/results.html:174
 msgid ""
 "You are <b>seeing this</b> message because you are <b>not logged in</b>"
 msgstr "Estás <b>viendo este mensaje</b> porque <b>no has iniciado sesión</b>"
 
 #: templates/answer_question_not_authenticated.html:50
+#: templates/demo/results.html:177
 #, python-format
 msgid ""
 "<a href=\"%(account_signup)s\">Create an account</a> (it will take you like "
@@ -422,22 +424,27 @@ msgstr ""
 "funcionalidades."
 
 #: templates/answer_question_not_authenticated.html:51
+#: templates/demo/results.html:178
 msgid "By using an account you get to"
 msgstr "Al usar una cuenta puedes"
 
 #: templates/answer_question_not_authenticated.html:52
+#: templates/demo/results.html:179
 msgid "Vote in every list"
 msgstr "Votar en todas las listas"
 
 #: templates/answer_question_not_authenticated.html:53
+#: templates/demo/results.html:180
 msgid "Create lists."
 msgstr "Crear listas."
 
 #: templates/answer_question_not_authenticated.html:54
+#: templates/demo/results.html:181
 msgid "See the results of lists and see what your friends have voted"
 msgstr "Ver los resultados de las listas y ver qué han votado tus amigos"
 
 #: templates/answer_question_not_authenticated.html:55
+#: templates/demo/results.html:182
 msgid "This is and much more"
 msgstr "Esto y mucho más"
 
@@ -503,9 +510,30 @@ msgstr "Volver"
 msgid "Delete"
 msgstr "Borrar"
 
+#: templates/demo/results.html:7
+msgid "Results - Demo List"
+msgstr "Resultados - Lista Demo"
+
 #: templates/demo/results.html:17
 msgid "Demo list results"
 msgstr "Resultados de la lista demo"
+
+#: templates/demo/results.html:166
+msgid "<b>Thanks</b> for being registered, <b>you are the best</b>"
+msgstr "<b>Gracias</b> por ser parte, <b>eres increíble</b>"
+
+#: templates/demo/results.html:167
+msgid ""
+"We would love you even more if you can help us sharing the site and "
+"spreading the word"
+msgstr ""
+"Te amaríamos más si pudieses ayudarnos compartiendo el sitio y pasando la "
+"voz"
+
+#: templates/demo/results.html:168
+#| msgid "Questions Answered"
+msgid "Huestions team"
+msgstr "El equipo de Huestions"
 
 #: templates/edit_list.html:13 templates/navbar.html:61
 msgid "Your Lists"
@@ -756,8 +784,8 @@ msgid "by"
 msgstr "por"
 
 #: templates/lists.html:32
-msgid "Votes in the last few days"
-msgstr "Votos en los últimos días"
+msgid "Recent votes"
+msgstr "Votos recientes"
 
 #: templates/lists.html:43 templates/search_results.html:35
 #: templates/social_media_icons_group.html:12 templates/user_lists.html:42
@@ -844,7 +872,6 @@ msgid "result"
 msgstr "resultado"
 
 #: templates/user_lists.html:6 templates/user_lists.html:10
-#| msgid "Create lists."
 msgid "Created lists"
 msgstr "Listas creadas"
 
@@ -865,7 +892,6 @@ msgid "Edit"
 msgstr "Editar"
 
 #: templates/user_played_lists.html:6 templates/user_played_lists.html:10
-#| msgid "Popular lists"
 msgid "Played lists"
 msgstr "Listas jugadas"
 
@@ -880,6 +906,9 @@ msgstr "Listas publicadas"
 #: templates/user_stats.html:27
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
+
+#~ msgid "Votes in the last few days"
+#~ msgstr "Votos en los últimos días"
 
 #~ msgid "Logo Artist"
 #~ msgstr "Artista del logo"
