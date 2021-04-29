@@ -43,4 +43,6 @@ if settings.DEBUG:
         path('__debug__/', include(debug_toolbar.urls)),
     ]
 else:
-    path('zendo-phi-phi-island-admin/', admin.site.urls),
+    urlpatterns += [
+        path('zendo-phi-phi-island-admin/', admin.site.urls),
+    ]
