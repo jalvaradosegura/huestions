@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load i18n %}
 
-{% block head_title %}Cool 403 view{% endblock %}
+{% block head_title %}{% trans "Cool 403 view" %}{% endblock %}
 
 {% block borderless %}
   <div>
@@ -13,5 +14,5 @@
 {% endblock borderless %}
 
 {% block main %}
-  <h2 class="title is-2 is-italic">"There are millions of ways trying to see this link, but only one actually works...and it's not this one."</h2>
+  <h2 class="title is-2 is-italic">{% trans "There are millions of ways trying to see this link, but only one actually works and it's not this one" %}.</h2>
 {% endblock main %}

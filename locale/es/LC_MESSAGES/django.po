@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 17:13-0400\n"
-"PO-Revision-Date: 2021-04-29 21:13+0000\n"
+"POT-Creation-Date: 2021-04-29 17:32-0400\n"
+"PO-Revision-Date: 2021-04-29 21:36+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -573,6 +573,45 @@ msgstr "Máximo de 20 preguntas"
 #: templates/edit_list.html:72
 msgid "Add a question"
 msgstr "Agregar una pregunta"
+
+#: templates/errors/403.html:6
+msgid "Cool 403 view"
+msgstr "Vista 403 increíble"
+
+#: templates/errors/403.html:17
+msgid ""
+"There are millions of ways trying to see this link, but only one actually "
+"works and it's not this one"
+msgstr ""
+"Hay millones de maneras de intentar ver este link, pero solo una realmente "
+"funciona y no es esta"
+
+#: templates/errors/404.html:6
+msgid "Cool 404 view"
+msgstr "Vista 404 increíble"
+
+#: templates/errors/404.html:17
+msgid ""
+"This link may have existed at some point in time or it may be an error in "
+"the matrix"
+msgstr ""
+"El link pudo haber existido en algún punto en el tiempo o quizás es un error"
+" en la matrix"
+
+#: templates/errors/500.html:6
+msgid "Cool 500 view"
+msgstr "Vista 500 increíble"
+
+#: templates/errors/500.html:17
+msgid ""
+"There was an internal error. Please try again later. That's all we know"
+msgstr ""
+"Hubo un error interno. Por favor intenta más tarde. Es todo lo que sabemos"
+
+#: templates/errors/contact_us.html:4
+#, python-format
+msgid "<p>You can always <a href=\"%(contact_url)s\">contact us</a></p>"
+msgstr "<p>Siempre puedes <a href=\"%(contact_url)s\">contactarnos</a></p>"
 
 #: templates/flash_messages.html:7
 msgid "Success"
