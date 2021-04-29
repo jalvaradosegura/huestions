@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-28 23:34-0400\n"
+"POT-Creation-Date: 2021-04-29 17:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,90 +18,90 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core/constants.py:15
+#: core/constants.py:16
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 
-#: core/constants.py:18
+#: core/constants.py:19
 msgid "The list you are trying to see is incomplete"
 msgstr ""
 
-#: core/constants.py:20
+#: core/constants.py:21
 msgid "List was created successfully"
 msgstr ""
 
-#: core/constants.py:21
+#: core/constants.py:22
 msgid "List was edited successfully"
 msgstr ""
 
-#: core/constants.py:22
+#: core/constants.py:23
 msgid "List was deleted successfully"
 msgstr ""
 
-#: core/constants.py:23
+#: core/constants.py:24
 msgid "List was published successfully"
 msgstr ""
 
-#: core/constants.py:24
+#: core/constants.py:25
 msgid "The list reached the limit of questions"
 msgstr ""
 
-#: core/constants.py:25
+#: core/constants.py:26
 msgid "Question was created successfully"
 msgstr ""
 
-#: core/constants.py:26
+#: core/constants.py:27
 msgid "Question was edited successfully"
 msgstr ""
 
-#: core/constants.py:27
+#: core/constants.py:28
 msgid "Question was deleted successfully"
 msgstr ""
 
-#: core/constants.py:29
+#: core/constants.py:30
 msgid "You already answered all the questions for this list"
 msgstr ""
 
-#: core/constants.py:32
+#: core/constants.py:33
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 
-#: core/constants.py:35
+#: core/constants.py:36
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so "
 "you won't be able to see that person answers. Tell the user to answer all "
 "the questions"
 msgstr ""
 
-#: core/constants.py:39
+#: core/constants.py:40
 msgid "Please do not try to do weird stuff with the site"
 msgstr ""
 
-#: core/constants.py:43
+#: core/constants.py:44
 msgid "Do not use special chars."
 msgstr ""
 
-#: core/constants.py:45
+#: core/constants.py:46
 msgid "File too large. Size should not exceed 2 MB."
 msgstr ""
 
-#: core/constants.py:48
+#: core/constants.py:49
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 
-#: core/constants.py:53
+#: core/constants.py:54
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:55
+#: core/constants.py:56
 msgid "100 characters max. Also don't use special chars."
 msgstr ""
 
-#: core/constants.py:56
+#: core/constants.py:57
 msgid "Invalid header found."
 msgstr ""
 
-#: core/constants.py:58
+#: core/constants.py:59
 msgid "Picture must have a size under 2 MB."
 msgstr ""
 
@@ -129,19 +129,19 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: lists/forms.py:18 questions/forms.py:48
+#: lists/forms.py:19 questions/forms.py:45
 msgid "Title"
 msgstr ""
 
-#: questions/forms.py:28
+#: questions/forms.py:25
 msgid "Alternatives"
 msgstr ""
 
-#: questions/forms.py:90
+#: questions/forms.py:79
 msgid "Alternative 1"
 msgstr ""
 
-#: questions/forms.py:103
+#: questions/forms.py:92
 msgid "Alternative 2"
 msgstr ""
 
@@ -366,6 +366,14 @@ msgid ""
 "We have sent an e-mail to you for\n"
 "verification. Please click on the link inside this e-mail. Please\n"
 "contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: templates/answer_question.html:72
+#: templates/answer_question_not_authenticated.html:89
+#: templates/demo/answer_1.html:58 templates/demo/answer_1.html:82
+#: templates/demo/answer_2.html:58 templates/demo/answer_2.html:82
+#: templates/demo/answer_3.html:58 templates/demo/answer_3.html:82
+msgid "Vote"
 msgstr ""
 
 #: templates/answer_question_not_authenticated.html:47

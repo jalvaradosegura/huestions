@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-28 23:34-0400\n"
-"PO-Revision-Date: 2021-04-29 03:36+0000\n"
+"POT-Creation-Date: 2021-04-29 17:13-0400\n"
+"PO-Revision-Date: 2021-04-29 21:13+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,57 +19,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.5\n"
 
-#: core/constants.py:15
+#: core/constants.py:16
 msgid "The list needs at least 1 question with 2 alternatives to be completed"
 msgstr ""
 "La lista necesita al menos 1 pregunta con 2 alternativas para estar completa"
 
-#: core/constants.py:18
+#: core/constants.py:19
 msgid "The list you are trying to see is incomplete"
 msgstr "La lista que estás intentado acceder está incompleta"
 
-#: core/constants.py:20
+#: core/constants.py:21
 msgid "List was created successfully"
 msgstr "Lista creada con éxito"
 
-#: core/constants.py:21
+#: core/constants.py:22
 msgid "List was edited successfully"
 msgstr "Lista editada con éxito"
 
-#: core/constants.py:22
+#: core/constants.py:23
 msgid "List was deleted successfully"
 msgstr "Lista eliminada con éxito"
 
-#: core/constants.py:23
+#: core/constants.py:24
 msgid "List was published successfully"
 msgstr "Lista publicada con éxito"
 
-#: core/constants.py:24
+#: core/constants.py:25
 msgid "The list reached the limit of questions"
 msgstr "La lista alcanzó el límite de preguntas"
 
-#: core/constants.py:25
+#: core/constants.py:26
 msgid "Question was created successfully"
 msgstr "Pregunta creada con éxito"
 
-#: core/constants.py:26
+#: core/constants.py:27
 msgid "Question was edited successfully"
 msgstr "Pregunta editada con éxito"
 
-#: core/constants.py:27
+#: core/constants.py:28
 msgid "Question was deleted successfully"
 msgstr "Pregunta eliminada con éxito"
 
-#: core/constants.py:29
+#: core/constants.py:30
 msgid "You already answered all the questions for this list"
 msgstr "Ya respondiste todas las preguntas de esta lista"
 
-#: core/constants.py:32
+#: core/constants.py:33
 msgid "You must answer all the list questions before seeing its results"
 msgstr ""
 "Debes responder todas las preguntas de la lista antes de ver los resultados"
 
-#: core/constants.py:35
+#: core/constants.py:36
 msgid ""
 "The user that shared this list with you haven't answer all its questions, so"
 " you won't be able to see that person answers. Tell the user to answer all "
@@ -79,36 +79,36 @@ msgstr ""
 " por lo que no podrás ver las respuestas de esa persona. Dile que responsa "
 "todas las preguntas"
 
-#: core/constants.py:39
+#: core/constants.py:40
 msgid "Please do not try to do weird stuff with the site"
 msgstr "Por favor no intentes hacer cosas extrañas en la página"
 
-#: core/constants.py:43
+#: core/constants.py:44
 msgid "Do not use special chars."
 msgstr "No uses caracteres especiales."
 
-#: core/constants.py:45
+#: core/constants.py:46
 msgid "File too large. Size should not exceed 2 MB."
 msgstr "Archivo demasiado grande. El tamaño no debe exceder de 2 MB."
 
-#: core/constants.py:48
+#: core/constants.py:49
 msgid "File extension not valid. Allowed extensions: .jpg, .jpeg, .png."
 msgstr ""
 "Extensión de archivo no válida. Extensiones permitidas: .jpg, .jpeg, .png."
 
-#: core/constants.py:53
+#: core/constants.py:54
 msgid "100 characters max and 5 min. Also don't use special chars."
 msgstr "100 caracteres máximo y 5 mínimo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:55
+#: core/constants.py:56
 msgid "100 characters max. Also don't use special chars."
 msgstr "100 caracteres máximo. Tampoco uses caracteres especiales."
 
-#: core/constants.py:56
+#: core/constants.py:57
 msgid "Invalid header found."
 msgstr "Se encontró un header inválido"
 
-#: core/constants.py:58
+#: core/constants.py:59
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
@@ -136,19 +136,19 @@ msgstr "Inglés"
 msgid "Spanish"
 msgstr "Español"
 
-#: lists/forms.py:18 questions/forms.py:48
+#: lists/forms.py:19 questions/forms.py:45
 msgid "Title"
 msgstr "Título"
 
-#: questions/forms.py:28
+#: questions/forms.py:25
 msgid "Alternatives"
 msgstr "Alternativas"
 
-#: questions/forms.py:90
+#: questions/forms.py:79
 msgid "Alternative 1"
 msgstr "Alternativa 1"
 
-#: questions/forms.py:103
+#: questions/forms.py:92
 msgid "Alternative 2"
 msgstr "Alternativa 2"
 
@@ -404,6 +404,14 @@ msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
 
+#: templates/answer_question.html:72
+#: templates/answer_question_not_authenticated.html:89
+#: templates/demo/answer_1.html:58 templates/demo/answer_1.html:82
+#: templates/demo/answer_2.html:58 templates/demo/answer_2.html:82
+#: templates/demo/answer_3.html:58 templates/demo/answer_3.html:82
+msgid "Vote"
+msgstr "Votar"
+
 #: templates/answer_question_not_authenticated.html:47
 #: templates/demo/results.html:174
 msgid ""
@@ -531,7 +539,6 @@ msgstr ""
 "voz"
 
 #: templates/demo/results.html:168
-#| msgid "Questions Answered"
 msgid "Huestions team"
 msgstr "El equipo de Huestions"
 
