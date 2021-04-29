@@ -79,7 +79,7 @@ class AddAlternativesForm(forms.Form):
         label=_('Alternative 1'),
         help_text=MAX_AND_SPECIAL_CHARS,
         validators=[
-            RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
+            RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MaxLengthValidator(limit_value=100),
         ],
     )
@@ -92,7 +92,7 @@ class AddAlternativesForm(forms.Form):
         label=_('Alternative 2'),
         help_text=MAX_AND_SPECIAL_CHARS,
         validators=[
-            RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
+            RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MaxLengthValidator(limit_value=100),
         ],
     )

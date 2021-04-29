@@ -248,6 +248,23 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
         self.assertEqual(last_alternative.question.__str__(), 'Is this hard?')
         self.assertEqual(Alternative.objects.all().count(), 2)
 
+    def test_add_alternatives_with_form_having_question_marks(self):
+        form = AddAlternativesForm(
+            data={
+                'alternative_1': '?yes it is?',
+                'alternative_2': 'acción',
+            }
+        )
+
+        if form.is_valid():
+            form.save(question=self.question)
+        firt_alternative = Alternative.objects.first()
+        last_alternative = Alternative.objects.last()
+
+        self.assertEqual(firt_alternative.__str__(), '?yes it is?')
+        self.assertEqual(last_alternative.__str__(), 'Acción')
+        self.assertEqual(Alternative.objects.all().count(), 2)
+
     def test_alternatives_all_in_lower_case(self):
         self.create_login_and_verify_user()
         form = AddAlternativesForm(
