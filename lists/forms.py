@@ -5,6 +5,7 @@ from django.core.validators import MinLengthValidator, RegexValidator
 from django.utils.translation import gettext_lazy as _
 
 from core.constants import (
+    HUESTIONS_REGEX,
     LIST_COMPLETION_ERROR_MESSAGE,
     MAX_AND_MIN_LENGTH,
     SPECIAL_CHARS_ERROR,
@@ -18,7 +19,7 @@ class CreateQuestionListForm(forms.ModelForm):
         label=_('Title'),
         help_text=MAX_AND_MIN_LENGTH,
         validators=[
-            RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
+            RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MinLengthValidator(5),
         ],
     )

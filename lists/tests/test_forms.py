@@ -55,6 +55,27 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
 
         self.assertEqual(question_list.__str__(), 'Super List')
 
+    def test_create_question_lists_with_form_that_have_question_mark(self):
+        self.create_login_and_verify_user()
+
+        form = CreateQuestionListForm(
+            data={'title': 'Listo para la acción?', 'tags': 'fun, yay'},
+            owner=self.user,
+        )
+        form.save()
+        question_list_1 = QuestionList.objects.last()
+        form = CreateQuestionListForm(
+            data={'title': 'Listo para la acción?', 'tags': 'fun, yay'},
+            owner=self.user,
+        )
+        form.save()
+        question_list_2 = QuestionList.objects.last()
+
+        self.assertEqual(question_list_1.__str__(), 'Listo para la acción?')
+        self.assertEqual(question_list_1.slug, 'listo-para-la-accion')
+        self.assertEqual(question_list_2.__str__(), 'Listo para la acción?')
+        self.assertEqual(question_list_2.slug, 'listo-para-la-accion-1')
+
     def test_create_two_question_lists(self):
         self.create_login_and_verify_user()
 
