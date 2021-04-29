@@ -302,7 +302,7 @@ class UserProfileTests(FunctionalTestsBase):
 
         # There is a message welcoming her to her lists
         title = self.browser.find_element_by_tag_name('h2').text
-        self.assertIn('Your lists', title)
+        self.assertIn('✨ Created lists', title)
 
         # She tries to edit one of the lists
         self.browser.find_element_by_id('edit_0').click()
