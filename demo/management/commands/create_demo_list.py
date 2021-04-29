@@ -65,8 +65,8 @@ class Command(BaseCommand):
             demo_a2.image = 'alternative_pics/demo/' + IMAGE_6_NAME
             demo_a2.save()
 
-        except FileNotFoundError as e:
-            raise CommandError(e + '\n' + COMMAND_CREATE_DEMO_ERROR_MESSAGE)
+        except FileNotFoundError:
+            raise CommandError(COMMAND_CREATE_DEMO_ERROR_MESSAGE)
 
         self.stdout.write(
             self.style.SUCCESS(COMMAND_CREATE_DEMO_SUCCESS_MESSAGE)
