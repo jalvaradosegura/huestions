@@ -1,8 +1,4 @@
-from io import BytesIO
-
 from django import forms
-from django.core.files.base import ContentFile
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.validators import (
     MaxLengthValidator,
     MinLengthValidator,
@@ -11,7 +7,9 @@ from django.core.validators import (
 from django.utils.translation import gettext_lazy as _
 
 from core.constants import (
+    AMOUNT_OF_QUESTIONS_PER_LIST,
     FILE_TOO_LARGE_HELPER,
+    HUESTIONS_REGEX,
     LIST_REACHED_MAXIMUM_OF_QUESTION,
     MAX_AND_MIN_LENGTH,
     MAX_AND_SPECIAL_CHARS,
@@ -19,7 +17,6 @@ from core.constants import (
 )
 
 from .models import Alternative, Question
-from .utils import reshape_img_to_square_with_blurry_bg
 from .validators import file_extension_validator, file_size_validator
 
 
@@ -48,11 +45,11 @@ class CreateQuestionForm(forms.ModelForm):
         label=_('Title'),
         help_text=MAX_AND_MIN_LENGTH,
         validators=[
-            RegexValidator(r'^[0-9a-zA-Z\\? ]*$', SPECIAL_CHARS_ERROR),
+            RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MinLengthValidator(5),
         ],
     )
-    questions_amount_limit = 20
+    questions_amount_limit = AMOUNT_OF_QUESTIONS_PER_LIST
 
     class Meta:
         model = Question
@@ -66,14 +63,6 @@ class CreateQuestionForm(forms.ModelForm):
         self.instance.child_of = self.question_list
         question = super(CreateQuestionForm, self).save(*args, **kwargs)
         return question
-
-    def clean_title(self):
-        title = self.cleaned_data['title']
-
-        title_question_marks_removed = title.replace('?', '')
-        title_question_mark_appended = title_question_marks_removed + '?'
-
-        return title_question_mark_appended
 
     def clean(self):
         if self.question_list.questions.count() >= self.questions_amount_limit:

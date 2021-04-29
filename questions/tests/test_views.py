@@ -628,7 +628,7 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
         response = self.client.post(
             self.base_url,
             data={
-                'title': 'edited',
+                'title': 'edited??',
                 'alternative_1': 'edited',
                 'alternative_2': 'edited',
             },
@@ -641,7 +641,7 @@ class EditQuestionViewTests(TestViewsMixin, TestCase):
             id=self.alternative_2.id
         )
 
-        self.assertEqual(edited_question.title, 'edited?')
+        self.assertEqual(edited_question.title, 'edited??')
         self.assertEqual(edited_alternative_1.title, 'Edited')
         self.assertEqual(edited_alternative_2.title, 'Edited')
         self.assertEqual(
