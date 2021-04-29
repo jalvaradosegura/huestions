@@ -242,6 +242,7 @@ class AnswerQuestionViewTests(TestCase):
                 'list_slug': question_list.slug,
             },
         )
+        vote = Vote.objects.last()
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
@@ -249,6 +250,7 @@ class AnswerQuestionViewTests(TestCase):
             reverse('list_results', args=[question_list.slug]),
         )
         self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
+        self.assertEqual(vote.shared_by, None)
 
     def test_post_success_with_invitation_go_to_results(self):
         user = UserFactory()
@@ -298,6 +300,7 @@ class AnswerQuestionViewTests(TestCase):
                 'list_slug': question_list.slug,
             },
         )
+        vote = Vote.objects.last()
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(
@@ -305,6 +308,7 @@ class AnswerQuestionViewTests(TestCase):
             reverse('answer_list', args=[question_list.slug, user]),
         )
         self.assertEqual(Vote.objects.last().list.__str__(), 'post list')
+        self.assertEqual(vote.shared_by, user.username)
 
     def test_post_fail_try_to_vote_for_an_external_alternative(self):
         question_list = QuestionListFactory(title='post list', owner=self.user)

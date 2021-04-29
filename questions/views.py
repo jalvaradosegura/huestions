@@ -132,6 +132,7 @@ class AnswerQuestionView(DetailView):
                     list=question_list,
                     question=selected_alternative.question,
                     alternative=selected_alternative,
+                    shared_by=self.kwargs.get('username'),
                 )
 
             if (

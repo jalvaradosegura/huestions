@@ -24,6 +24,9 @@ class Vote(TimeStampedModel):
     alternative = models.ForeignKey(
         Alternative, on_delete=models.SET_NULL, null=True, related_name='votes'
     )
+    shared_by = models.CharField(
+        max_length=100, default='', blank=True, null=True
+    )
 
     def __str__(self):
         return f'{self.user} vote'
