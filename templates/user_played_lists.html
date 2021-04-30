@@ -8,6 +8,7 @@
 {% block main %}
 
   <h2 class="title is-2">🎮 {% trans "Played lists" %}</h2>
+  <h3 class="subtitle">{% trans "You have answered at least one question of each of these lists" %}</h3>
 
   {% for question_list in object_list %}
     {% if forloop.first %}<div class="columns">{% endif %}

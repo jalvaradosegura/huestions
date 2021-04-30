@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 17:13-0400\n"
+"POT-Creation-Date: 2021-04-30 17:39-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -489,7 +489,7 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
-#: templates/delete_list.html:14 templates/user_lists.html:47
+#: templates/delete_list.html:14 templates/user_lists.html:48
 msgid "Delete"
 msgstr ""
 
@@ -778,40 +778,44 @@ msgstr ""
 msgid "%(shared_user)s's vote"
 msgstr ""
 
-#: templates/lists.html:14
-msgid "Popular lists"
+#: templates/lists.html:11
+msgid "Contributions from around the world"
 msgstr ""
 
 #: templates/lists.html:15
+msgid "Popular lists"
+msgstr ""
+
+#: templates/lists.html:16
 msgid "All lists"
 msgstr ""
 
-#: templates/lists.html:30 templates/search_results.html:25
-#: templates/user_lists.html:31 templates/user_played_lists.html:23
+#: templates/lists.html:31 templates/search_results.html:25
+#: templates/user_lists.html:32 templates/user_played_lists.html:24
 msgid "Created:"
 msgstr ""
 
-#: templates/lists.html:30 templates/search_results.html:25
+#: templates/lists.html:31 templates/search_results.html:25
 msgid "by"
 msgstr ""
 
-#: templates/lists.html:32
+#: templates/lists.html:33
 msgid "Recent votes"
 msgstr ""
 
-#: templates/lists.html:43 templates/search_results.html:35
-#: templates/social_media_icons_group.html:12 templates/user_lists.html:42
-#: templates/user_played_lists.html:33
+#: templates/lists.html:44 templates/search_results.html:35
+#: templates/social_media_icons_group.html:12 templates/user_lists.html:43
+#: templates/user_played_lists.html:34
 msgid "Copied to clipboard"
 msgstr ""
 
-#: templates/lists.html:43 templates/search_results.html:35
-#: templates/user_lists.html:42 templates/user_played_lists.html:33
+#: templates/lists.html:44 templates/search_results.html:35
+#: templates/user_lists.html:43 templates/user_played_lists.html:34
 msgid "Copy list link"
 msgstr ""
 
-#: templates/lists.html:45 templates/search_results.html:38
-#: templates/user_lists.html:44 templates/user_played_lists.html:35
+#: templates/lists.html:46 templates/search_results.html:38
+#: templates/user_lists.html:45 templates/user_played_lists.html:36
 msgid "Play"
 msgstr ""
 
@@ -887,24 +891,32 @@ msgstr ""
 msgid "Created lists"
 msgstr ""
 
-#: templates/user_lists.html:14
-msgid "All your lists"
+#: templates/user_lists.html:11
+msgid "The results of your imagination"
 msgstr ""
 
 #: templates/user_lists.html:15
-msgid "Published"
+msgid "All your lists"
 msgstr ""
 
 #: templates/user_lists.html:16
+msgid "Published"
+msgstr ""
+
+#: templates/user_lists.html:17
 msgid "Unpublished"
 msgstr ""
 
-#: templates/user_lists.html:46
+#: templates/user_lists.html:47
 msgid "Edit"
 msgstr ""
 
 #: templates/user_played_lists.html:6 templates/user_played_lists.html:10
 msgid "Played lists"
+msgstr ""
+
+#: templates/user_played_lists.html:11
+msgid "You have answered at least one question of each of these lists"
 msgstr ""
 
 #: templates/user_stats.html:15
