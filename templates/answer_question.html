@@ -79,17 +79,18 @@
             <div class="columns is-flex is-centered">
 
 	      <button id="my-modal-button-{{ forloop.counter }}" class="button is-small">
-                <span class="icon is-small">
+                <span class="icon is-small has-text-info">
                   <i class="fas fa-info-circle"></i>
                 </span>
               </button>
-	      <p id="my-modal-image-text-{{ forloop.counter }}" hidden>This is comming from the image</p>
 
               <figure class="image">
                 {% if forloop.first %}
                   <img class="is-rounded" src="{{ form.img_1_url }}" alt="Placeholder image">
+	          <p id="my-modal-image-text-1" hidden>{{ form.attribution_1 }}</p>
                 {% else %}
                   <img class="is-rounded" src="{{ form.img_2_url }}" alt="Placeholder image">
+	          <p id="my-modal-image-text-2" hidden>{{ form.attribution_2 }}</p>
                 {% endif %}
               </figure>
             </div>

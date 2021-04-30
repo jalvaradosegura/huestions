@@ -111,6 +111,21 @@
           </div> <!--field is-body -->
         </div> <!--field is-horizontal -->
 
+	<!-- attribution 1 -->
+	<div class="field">
+          <div class="control">
+            {% if alternatives_form.attribution_1.errors or alternatives_form.non_field_errors %}
+              {% render_field alternatives_form.attribution_1 class+="input is-danger" placeholder=alternatives_form.attribution_1.label %}
+	      {% for error in alternatives_form.attribution_1.errors %}
+	        <p class="help is-danger">{{ error }}</p>
+	      {% endfor %}
+            {% else %}
+              {% render_field alternatives_form.attribution_1 class="textarea is-small" placeholder=alternatives_form.attribution_1.label %}
+	      <p class="help">{{ alternatives_form.attribution_1.help_text }}</p>
+            {% endif %}
+          </div>
+        </div>
+
         <div class="field is-horizontal">
           <div class="field-body">
 
@@ -174,6 +189,21 @@
 
           </div> <!--field is-body -->
         </div> <!--field is-horizontal -->
+
+	<!-- attribution 2 -->
+	<div class="field">
+          <div class="control">
+            {% if alternatives_form.attribution_2.errors or alternatives_form.non_field_errors %}
+              {% render_field alternatives_form.attribution_2 class+="input is-danger" placeholder=alternatives_form.attribution_2.label %}
+	      {% for error in alternatives_form.attribution_2.errors %}
+	        <p class="help is-danger">{{ error }}</p>
+	      {% endfor %}
+            {% else %}
+              {% render_field alternatives_form.attribution_2 class="textarea is-small" placeholder=alternatives_form.attribution_2.label %}
+	      <p class="help">{{ alternatives_form.attribution_2.help_text }}</p>
+            {% endif %}
+          </div>
+        </div>
 
       </form>
 

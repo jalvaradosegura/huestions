@@ -5,6 +5,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
 from core.constants import DEFAULT_IMAGE_NAME
 from core.models import TitleAndTimeStampedModel
@@ -75,6 +76,13 @@ class Alternative(TitleAndTimeStampedModel):
     )
     image = models.ImageField(
         default=DEFAULT_IMAGE_NAME, upload_to='alternative_pics'
+    )
+    attribution = models.CharField(
+        verbose_name=_('credit for the image'),
+        max_length=200,
+        default='',
+        null=True,
+        blank=True
     )
 
     def save(self, *args, **kwargs):

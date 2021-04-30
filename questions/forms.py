@@ -39,6 +39,9 @@ class AnswerQuestionForm(forms.Form):
         self.img_1_url = alternative_1.image.url
         self.img_2_url = alternative_2.image.url
 
+        self.attribution_1 = alternative_1.attribution
+        self.attribution_2 = alternative_2.attribution
+
 
 class CreateQuestionForm(forms.ModelForm):
     title = forms.CharField(
@@ -83,6 +86,16 @@ class AddAlternativesForm(forms.Form):
             MaxLengthValidator(limit_value=100),
         ],
     )
+    attribution_1 = forms.CharField(
+        label=_('Credit for the image'),
+        widget=forms.Textarea,
+        help_text=MAX_AND_SPECIAL_CHARS,
+        validators=[
+            RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
+            MaxLengthValidator(limit_value=200),
+        ],
+        required=False,
+    )
     image_2 = forms.ImageField(
         required=False,
         validators=[file_size_validator],
@@ -95,6 +108,16 @@ class AddAlternativesForm(forms.Form):
             RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MaxLengthValidator(limit_value=100),
         ],
+    )
+    attribution_2 = forms.CharField(
+        label=_('Credit for the image 1'),
+        widget=forms.Textarea,
+        help_text=MAX_AND_SPECIAL_CHARS,
+        validators=[
+            RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
+            MaxLengthValidator(limit_value=200),
+        ],
+        required=False,
     )
 
     def __init__(self, *args, **kwargs):
@@ -119,11 +142,13 @@ class AddAlternativesForm(forms.Form):
                     title=cleaned_data.get('alternative_1'),
                     image=cleaned_data.get('image_1'),
                     question=question,
+                    attribution=cleaned_data.get('attribution_1'),
                 )
             else:
                 alternative_1 = Alternative.objects.create(
                     title=cleaned_data.get('alternative_1'),
                     question=question,
+                    attribution=cleaned_data.get('attribution_1'),
                 )
 
             if cleaned_data.get('image_2'):
@@ -131,11 +156,13 @@ class AddAlternativesForm(forms.Form):
                     title=cleaned_data.get('alternative_2'),
                     image=cleaned_data.get('image_2'),
                     question=question,
+                    attribution=cleaned_data.get('attribution_2'),
                 )
             else:
                 alternative_2 = Alternative.objects.create(
                     title=cleaned_data.get('alternative_2'),
                     question=question,
+                    attribution=cleaned_data.get('attribution_2'),
                 )
 
     def clean_alternative_1(self):
