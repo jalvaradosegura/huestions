@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from django.shortcuts import redirect, render, reverse
 from django.template.response import TemplateResponse
 from django.views.generic import DeleteView, DetailView, UpdateView, View
@@ -275,3 +276,17 @@ class DeleteQuestionView(
 
 class ImagesCreditView(TemplateView):
     template_name = 'images_credit.html'
+
+    def get(self, request, *args, **kwargs):
+        self.question_list = QuestionList.objects.prefetch_related(
+            'questions__alternatives'
+        ).get(slug=self.kwargs.get('slug'))
+
+        if self.question_list.active:
+            return super().get(request, *args, **kwargs)
+        raise Http404('The list either does not exist or is not published yet')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['question_list'] = self.question_list
+        return context

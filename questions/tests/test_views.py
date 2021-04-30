@@ -698,8 +698,8 @@ class DeleteQuestionViewTests(TestViewsMixin, TestCase):
 
 class ImagesCreditViewTests(TestCase):
     def setUp(self):
-        question_list = QuestionListFactory()
-        self.base_url = reverse('images_credit', args=[question_list.id])
+        question_list = QuestionListFactory(active=True)
+        self.base_url = reverse('images_credit', args=[question_list.slug])
 
     def test_url_resolves_to_view(self):
         found = resolve(self.base_url)
@@ -712,3 +712,13 @@ class ImagesCreditViewTests(TestCase):
         response = self.client.get(self.base_url)
 
         self.assertTemplateUsed(response, ImagesCreditView.template_name)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+    def test_list_not_actived(self):
+        question_list = QuestionListFactory()
+        url = reverse('images_credit', args=[question_list.slug])
+
+        response = self.client.get(url)
+
+        self.assertTemplateUsed(response, 'errors/404.html')
+        self.assertEqual(response.status_code, HTTPStatus.NOT_FOUND)
