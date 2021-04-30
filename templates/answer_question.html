@@ -40,15 +40,24 @@
 
   <h3 class="title is-3">{{ question.title }}</h3>
 
-  <button id="my-modal-button-1" class="button is-link">Modal</button>
   <div id="my-modal-1" class="modal">
     <div class="modal-background"></div>
     <div class="modal-content">
       <div class="section my-modal-wrap">
-	Hello World
+	<p id="modal-text-1">Hello World<p>
       </div>
     </div>
     <button id="my-modal-close-1" class="modal-close is-large" aria-label="close"></button>
+  </div>
+
+  <div id="my-modal-2" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="section my-modal-wrap">
+	<p id="modal-text-2">Hello World<p>
+      </div>
+    </div>
+    <button id="my-modal-close-2" class="modal-close is-large" aria-label="close"></button>
   </div>
 
   {% for choice in form.fields.alternatives.choices %}
@@ -68,6 +77,14 @@
 	  <div class="card-content">
 
             <div class="columns is-flex is-centered">
+
+	      <button id="my-modal-button-{{ forloop.counter }}" class="button is-small">
+                <span class="icon is-small">
+                  <i class="fas fa-info-circle"></i>
+                </span>
+              </button>
+	      <p id="my-modal-image-text-{{ forloop.counter }}" hidden>This is comming from the image</p>
+
               <figure class="image">
                 {% if forloop.first %}
                   <img class="is-rounded" src="{{ form.img_1_url }}" alt="Placeholder image">
