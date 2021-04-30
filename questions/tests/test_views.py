@@ -31,6 +31,7 @@ from ..views import (
     AnswerQuestionView,
     DeleteQuestionView,
     EditQuestionView,
+    ImagesCreditView,
     home,
 )
 
@@ -693,3 +694,21 @@ class DeleteQuestionViewTests(TestViewsMixin, TestCase):
             response['Location'],
             reverse('edit_list', kwargs={'slug': self.question_list.slug}),
         )
+
+
+class ImagesCreditViewTests(TestCase):
+    def setUp(self):
+        question_list = QuestionListFactory()
+        self.base_url = reverse('images_credit', args=[question_list.id])
+
+    def test_url_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(
+            found.func.__name__, ImagesCreditView.as_view().__name__
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(self.base_url)
+
+        self.assertTemplateUsed(response, ImagesCreditView.template_name)

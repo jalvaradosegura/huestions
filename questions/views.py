@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render, reverse
 from django.template.response import TemplateResponse
 from django.views.generic import DeleteView, DetailView, UpdateView, View
+from django.views.generic.base import TemplateView
 
 from core.constants import (
     ALREADY_ANSWERED_ALL_THE_QUESTIONS,
@@ -270,3 +271,7 @@ class DeleteQuestionView(
         response = super().delete(request, *args, **kwargs)
         messages.success(self.request, QUESTION_DELETED_SUCCESSFULLY)
         return response
+
+
+class ImagesCreditView(TemplateView):
+    template_name = 'images_credit.html'
