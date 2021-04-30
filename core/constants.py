@@ -55,6 +55,9 @@ MAX_AND_MIN_LENGTH = _(
 )
 MAX_AND_SPECIAL_CHARS = _("100 characters max. Also don't use special chars.")
 INVALID_HEADER_ON_EMAIL = _('Invalid header found.')
+MAX_AND_SPECIAL_CHARS_ATTRIBUTIONS = _(
+    "200 characters max."
+)
 # Note: related to MAX_IMAGE_SIZE
 FILE_TOO_LARGE_HELPER = _('Picture must have a size under 2 MB.')
 

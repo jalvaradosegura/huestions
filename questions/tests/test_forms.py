@@ -265,6 +265,28 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
         self.assertEqual(last_alternative.__str__(), 'Acción')
         self.assertEqual(Alternative.objects.all().count(), 2)
 
+
+    def test_add_alternatives_and_attributions_with_form(self):
+        form = AddAlternativesForm(
+            data={
+                'alternative_1': '?yes it is?',
+                'alternative_2': 'acción',
+                'attribution_1': 'some credit',
+                'attribution_2': 'another credit',
+            }
+        )
+
+        if form.is_valid():
+            form.save(question=self.question)
+        firt_alternative = Alternative.objects.first()
+        last_alternative = Alternative.objects.last()
+
+        self.assertEqual(firt_alternative.__str__(), '?yes it is?')
+        self.assertEqual(firt_alternative.attribution, 'some credit')
+        self.assertEqual(last_alternative.__str__(), 'Acción')
+        self.assertEqual(last_alternative.attribution, 'another credit')
+        self.assertEqual(Alternative.objects.all().count(), 2)
+
     def test_alternatives_all_in_lower_case(self):
         self.create_login_and_verify_user()
         form = AddAlternativesForm(

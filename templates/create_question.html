@@ -115,7 +115,7 @@
 	<div class="field">
           <div class="control">
             {% if alternatives_form.attribution_1.errors or alternatives_form.non_field_errors %}
-              {% render_field alternatives_form.attribution_1 class+="input is-danger" placeholder=alternatives_form.attribution_1.label %}
+              {% render_field alternatives_form.attribution_1 class="textarea is-danger" placeholder=alternatives_form.attribution_1.label %}
 	      {% for error in alternatives_form.attribution_1.errors %}
 	        <p class="help is-danger">{{ error }}</p>
 	      {% endfor %}
@@ -194,7 +194,7 @@
 	<div class="field">
           <div class="control">
             {% if alternatives_form.attribution_2.errors or alternatives_form.non_field_errors %}
-              {% render_field alternatives_form.attribution_2 class+="input is-danger" placeholder=alternatives_form.attribution_2.label %}
+              {% render_field alternatives_form.attribution_2 class="textarea is-danger" placeholder=alternatives_form.attribution_2.label %}
 	      {% for error in alternatives_form.attribution_2.errors %}
 	        <p class="help is-danger">{{ error }}</p>
 	      {% endfor %}
