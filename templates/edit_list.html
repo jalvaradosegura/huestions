@@ -68,7 +68,7 @@
 <hr>
 
 <h3 class="title is-3">{% trans "Current questions" %}</h3>
-<h3 class="subtitle">({% trans "Maximum of 20 questions" %})</h3>
+<h3 class="subtitle">({% blocktrans %}Maximum of {{ questions_per_list }} questions{% endblocktrans %})</h3>
 <a class="button is-success mb-3" href="{% url 'add_question' questionlist.slug %}" id="add_question">{% trans "Add a question" %}</a>
 
 {% for question in sorted_questions %}

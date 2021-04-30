@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 16:38-0400\n"
-"PO-Revision-Date: 2021-04-30 20:39+0000\n"
+"POT-Creation-Date: 2021-04-30 17:13-0400\n"
+"PO-Revision-Date: 2021-04-30 21:14+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -583,8 +583,10 @@ msgid "Current questions"
 msgstr "Preguntas actuales"
 
 #: templates/edit_list.html:71
-msgid "Maximum of 20 questions"
-msgstr "Máximo de 20 preguntas"
+#, python-format
+#| msgid "Maximum of 20 questions"
+msgid "Maximum of %(questions_per_list)s questions"
+msgstr "Máximo de %(questions_per_list)s preguntas"
 
 #: templates/edit_list.html:72
 msgid "Add a question"

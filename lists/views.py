@@ -12,6 +12,7 @@ from django.views.generic import DeleteView, DetailView, ListView, UpdateView
 from core.constants import (
     AMOUNT_OF_DAYS_FOR_POPULARITY,
     AMOUNT_OF_LISTS_PER_PAGE,
+    AMOUNT_OF_QUESTIONS_PER_LIST,
     LIST_CREATED_SUCCESSFULLY,
     LIST_DELETED_SUCCESSFULLY,
     LIST_EDITED_SUCCESSFULLY,
@@ -171,6 +172,7 @@ class EditListView(
         context['complete_list_form'] = CompleteListForm(
             question_list=self.object
         )
+        context['questions_per_list'] = AMOUNT_OF_QUESTIONS_PER_LIST
 
         return context
 
