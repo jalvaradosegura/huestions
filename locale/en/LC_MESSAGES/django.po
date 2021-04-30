@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 02:05-0400\n"
+"POT-Creation-Date: 2021-04-30 16:38-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -613,15 +613,15 @@ msgstr ""
 msgid "Lists"
 msgstr ""
 
-#: templates/hidden_red_panda.html:12
+#: templates/hidden_red_panda.html:6 templates/hidden_red_panda.html:12
 msgid "Red Panda Story"
 msgstr ""
 
-#: templates/hidden_red_panda.html:22
+#: templates/hidden_red_panda.html:23
 msgid "Nice, you just found a hidden link!"
 msgstr ""
 
-#: templates/hidden_red_panda.html:23
+#: templates/hidden_red_panda.html:24
 msgid ""
 "We wanted a cute main character. So we were between a Sloth and a Red Panda. "
 "After a few tries of making them both, we decided for the Sloth. But we "
@@ -629,9 +629,15 @@ msgid ""
 "can."
 msgstr ""
 
-#: templates/hidden_red_panda.html:24
+#: templates/hidden_red_panda.html:25
 msgid ""
 "At first, picking Sloth instead of Red Panda, affected their friendship..."
+msgstr ""
+
+#: templates/hidden_red_panda.html:32
+msgid ""
+"Nowadays, their friendship is back. They go out to drink together and all "
+"that stuff."
 msgstr ""
 
 #: templates/home.html:18

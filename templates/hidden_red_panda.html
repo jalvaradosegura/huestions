@@ -3,13 +3,14 @@
 {% load static %}
 {% load i18n %}
 
-{% block head_title %}Red Panda Story{% endblock %}
+{% block head_title %}{% trans "Red Panda Story" %}{% endblock %}
 
 {% block main %}
 
 <div class="content">
 
   <h1 class="title is-1">{% trans "Red Panda Story" %}</h1>
+
   <div class="columns">
 
     <div class="column is-4">
@@ -23,7 +24,20 @@
       <p class="has-text-justified">{% trans "We wanted a cute main character. So we were between a Sloth and a Red Panda. After a few tries of making them both, we decided for the Sloth. But we didn't want leave Red Panda out, so we including him as well every time we can." %}</p>
       <p class="has-text-justified">{% trans "At first, picking Sloth instead of Red Panda, affected their friendship..." %}</p>
     </div>
-  </div>
+  </div><!--columns-->
+
+  <div class="columns">
+
+    <div class="column is-8">
+      <p class="has-text-justified">{% trans "Nowadays, their friendship is back. They go out to drink together and all that stuff." %} 🐼🦥</p>
+    </div>
+
+    <div class="column is-4">
+      <figure class="image">
+        <img src="{% static 'images/manga2.png' %}">
+      </figure>
+    </div>
+  </div><!--columns-->
 
 </div>
 

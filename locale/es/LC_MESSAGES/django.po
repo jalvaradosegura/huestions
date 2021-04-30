@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 02:05-0400\n"
-"PO-Revision-Date: 2021-04-30 06:06+0000\n"
+"POT-Creation-Date: 2021-04-30 16:38-0400\n"
+"PO-Revision-Date: 2021-04-30 20:39+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -662,15 +662,15 @@ msgstr "Diviértete"
 msgid "Lists"
 msgstr "Listas"
 
-#: templates/hidden_red_panda.html:12
+#: templates/hidden_red_panda.html:6 templates/hidden_red_panda.html:12
 msgid "Red Panda Story"
 msgstr "Historia del Red Panda"
 
-#: templates/hidden_red_panda.html:22
+#: templates/hidden_red_panda.html:23
 msgid "Nice, you just found a hidden link!"
 msgstr "Bien, acabas de encontrar un link oculto!"
 
-#: templates/hidden_red_panda.html:23
+#: templates/hidden_red_panda.html:24
 msgid ""
 "We wanted a cute main character. So we were between a Sloth and a Red Panda."
 " After a few tries of making them both, we decided for the Sloth. But we "
@@ -682,10 +682,17 @@ msgstr ""
 " por Sloth. Pero no queríamos dejar a Red Panda, por lo que lo incluímos "
 "cada vez que podemos."
 
-#: templates/hidden_red_panda.html:24
+#: templates/hidden_red_panda.html:25
 msgid ""
 "At first, picking Sloth instead of Red Panda, affected their friendship..."
 msgstr "Al comienzo, elegir a Sloth en vez de Red Panda, afectó su amistad..."
+
+#: templates/hidden_red_panda.html:32
+msgid ""
+"Nowadays, their friendship is back. They go out to drink together and all "
+"that stuff."
+msgstr ""
+"Hoy en día, su amistad volvió. Salen a beber juntos y todas esas cosas."
 
 #: templates/home.html:18
 msgid "Lists of Hard Questions!"
