@@ -40,6 +40,17 @@
 
   <h3 class="title is-3">{{ question.title }}</h3>
 
+  <button id="my-modal-button-1" class="button is-link">Modal</button>
+  <div id="my-modal-1" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="section my-modal-wrap">
+	Hello World
+      </div>
+    </div>
+    <button id="my-modal-close-1" class="modal-close is-large" aria-label="close"></button>
+  </div>
+
   {% for choice in form.fields.alternatives.choices %}
     {% if forloop.first %}<div class="columns">{% endif %}
       <div class="column is-6">
@@ -84,4 +95,5 @@
 
 {% block bootstrap_js_loaded %}
   <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/my_custom_modals.js' %}" type="text/javascript"></script>
 {% endblock bootstrap_js_loaded %}
