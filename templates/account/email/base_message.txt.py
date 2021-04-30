@@ -1,0 +1,7 @@
+BBBB BBBBBBBBBBBBBB BBB gettext(u'Hello from %(site_name)s!') SSSSS SSSS SSSSSSSSSSSSSS
+
+BBBBB BBBBBBBBBBBBBBB
+
+ gettext(u'Thank you for using %(site_name)s!\n%(site_domain)s') SSSSS SSS SSS SSSSS SSSSSSSSSSSSSS
+SSSSSSSSSSSSSSS
+BBBBBBBBBBBBB
