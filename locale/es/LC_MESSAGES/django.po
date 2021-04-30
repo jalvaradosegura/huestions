@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-29 17:32-0400\n"
-"PO-Revision-Date: 2021-04-29 21:36+0000\n"
+"POT-Creation-Date: 2021-04-30 02:05-0400\n"
+"PO-Revision-Date: 2021-04-30 06:06+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -109,6 +109,10 @@ msgid "Invalid header found."
 msgstr "Se encontró un header inválido"
 
 #: core/constants.py:59
+msgid "200 characters max."
+msgstr "200 caracteres máximo"
+
+#: core/constants.py:62
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
@@ -136,21 +140,33 @@ msgstr "Inglés"
 msgid "Spanish"
 msgstr "Español"
 
-#: lists/forms.py:19 questions/forms.py:45
+#: lists/forms.py:19 questions/forms.py:49
 msgid "Title"
 msgstr "Título"
 
-#: questions/forms.py:25
+#: questions/forms.py:26
 msgid "Alternatives"
 msgstr "Alternativas"
 
-#: questions/forms.py:79
+#: questions/forms.py:83
 msgid "Alternative 1"
 msgstr "Alternativa 1"
 
-#: questions/forms.py:92
+#: questions/forms.py:91
+msgid "(Optional) Credit for the image 1"
+msgstr "(Opcional) Crédito para la imagen 1"
+
+#: questions/forms.py:105
 msgid "Alternative 2"
 msgstr "Alternativa 2"
+
+#: questions/forms.py:113
+msgid "(Optional) Credit for the image 2"
+msgstr "(Opcional) Crédito para la imagen 2"
+
+#: questions/models.py:81
+msgid "credit for the image"
+msgstr "crédito para la imagen"
 
 #: templates/about.html:11 templates/footer.html:57
 msgid "About of"
@@ -404,7 +420,7 @@ msgstr ""
 "Te hemos enviado un correo. Por favor contáctanos  si no lo recibes dentro "
 "de los próximos minutos."
 
-#: templates/answer_question.html:72
+#: templates/answer_question.html:101
 #: templates/answer_question_not_authenticated.html:89
 #: templates/demo/answer_1.html:58 templates/demo/answer_1.html:82
 #: templates/demo/answer_2.html:58 templates/demo/answer_2.html:82
@@ -486,23 +502,23 @@ msgid "Choose a picture for Alternative 1"
 msgstr "Elige una foto para la Alternativa 1"
 
 #: templates/create_question.html:82 templates/create_question.html:102
-#: templates/create_question.html:146 templates/create_question.html:166
+#: templates/create_question.html:161 templates/create_question.html:181
 msgid "No file uploaded"
 msgstr "No hay ningún archivo"
 
-#: templates/create_question.html:142 templates/create_question.html:162
+#: templates/create_question.html:157 templates/create_question.html:177
 msgid "Choose a picture for Alternative 2"
 msgstr "Elige una foto para la Alternativa 2"
 
-#: templates/create_question.html:184
+#: templates/create_question.html:214
 msgid "Create & add another"
 msgstr "Crear y agregrar otra"
 
-#: templates/create_question.html:188
+#: templates/create_question.html:218
 msgid "Create & publish the list"
 msgstr "Crear y publicar lista"
 
-#: templates/create_question.html:192
+#: templates/create_question.html:222
 msgid "Create & go back"
 msgstr "Crear y volver"
 
@@ -803,11 +819,11 @@ msgstr "Sí"
 msgid "Results"
 msgstr "Resultados"
 
-#: templates/list_results.html:84
+#: templates/list_results.html:85
 msgid "Your vote"
 msgstr "Tu voto"
 
-#: templates/list_results.html:86
+#: templates/list_results.html:87
 #, python-format
 msgid "%(shared_user)s's vote"
 msgstr "Voto de %(shared_user)s"

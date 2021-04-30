@@ -81,14 +81,14 @@ class AddAlternativesForm(forms.Form):
     )
     alternative_1 = forms.CharField(
         label=_('Alternative 1'),
-        help_text=MAX_AND_SPECIAL_CHARS_ATTRIBUTIONS,
+        help_text=MAX_AND_SPECIAL_CHARS,
         validators=[
             RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MaxLengthValidator(limit_value=100),
         ],
     )
     attribution_1 = forms.CharField(
-        label=_('(Optional) Credit for the image'),
+        label=_('(Optional) Credit for the image 1'),
         widget=forms.Textarea,
         help_text=MAX_AND_SPECIAL_CHARS_ATTRIBUTIONS,
         validators=[
@@ -110,9 +110,9 @@ class AddAlternativesForm(forms.Form):
         ],
     )
     attribution_2 = forms.CharField(
-        label=_('(Optional) Credit for the image 1'),
+        label=_('(Optional) Credit for the image 2'),
         widget=forms.Textarea,
-        help_text=MAX_AND_SPECIAL_CHARS,
+        help_text=MAX_AND_SPECIAL_CHARS_ATTRIBUTIONS,
         validators=[
             MaxLengthValidator(limit_value=200),
         ],
