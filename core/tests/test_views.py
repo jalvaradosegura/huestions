@@ -23,7 +23,7 @@ class TermsAndConditionsViewTests(TestCase):
     def setUp(self):
         self.base_url = reverse('terms_and_conditions')
 
-    def test_question_list_url_resolves_to_view(self):
+    def test_url_resolves_to_view(self):
         found = resolve(self.base_url)
 
         self.assertEqual(
@@ -40,7 +40,7 @@ class AboutViewTests(TestCase):
     def setUp(self):
         self.base_url = reverse('about')
 
-    def test_question_list_url_resolves_to_view(self):
+    def test_url_resolves_to_view(self):
         found = resolve(self.base_url)
 
         self.assertEqual(found.func.__name__, AboutView.as_view().__name__)
@@ -55,7 +55,7 @@ class ContactViewTests(TestCase):
     def setUp(self):
         self.base_url = reverse('contact')
 
-    def test_question_list_url_resolves_to_view(self):
+    def test_url_resolves_to_view(self):
         found = resolve(self.base_url)
 
         self.assertEqual(found.func.__name__, ContactView.as_view().__name__)
@@ -115,7 +115,7 @@ class ContactSuccessViewTests(TestCase):
     def setUp(self):
         self.base_url = reverse('contact_success')
 
-    def test_question_list_url_resolves_to_view(self):
+    def test_url_resolves_to_view(self):
         found = resolve(self.base_url)
 
         self.assertEqual(
