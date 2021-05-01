@@ -17,7 +17,7 @@
       <li class="{% if request.GET.filter == 'unpublished' %}is-active{% endif %}"><a href="{% url 'lists' user %}?filter=unpublished">{% trans "Unpublished" %}</a></li>
     </ul>
   </div>
-  
+
   {% for question_list in object_list %}
     {% if forloop.first %}<div class="columns">{% endif %}
       <div class="column is-6">
@@ -55,7 +55,7 @@
       {% if forloop.last %}</div>{% endif %}
   {% endfor %}
 
-  {% include "paginator.html" %}
+  {% include "snippets/paginator.html" %}
 
 {% endblock main %}
 

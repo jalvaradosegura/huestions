@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 13:50-0400\n"
+"POT-Creation-Date: 2021-05-01 19:51-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -161,7 +161,7 @@ msgstr ""
 msgid "credit for the image"
 msgstr ""
 
-#: templates/about.html:11 templates/footer.html:58
+#: templates/about.html:11 templates/snippets/footer.html:58
 msgid "About of"
 msgstr ""
 
@@ -264,7 +264,7 @@ msgstr ""
 #: templates/account/login.html:7 templates/account/login.html:15
 #: templates/account/login.html:50
 #: templates/answer_question_not_authenticated.html:57
-#: templates/demo/results.html:184 templates/navbar.html:107
+#: templates/demo/results.html:184 templates/snippets/navbar.html:107
 msgid "Log In"
 msgstr ""
 
@@ -338,7 +338,8 @@ msgid ""
 "a>."
 msgstr ""
 
-#: templates/account/password_reset_from_key.html:46 templates/navbar.html:88
+#: templates/account/password_reset_from_key.html:46
+#: templates/snippets/navbar.html:88
 msgid "Change password"
 msgstr ""
 
@@ -350,7 +351,7 @@ msgstr ""
 #: templates/account/signup.html:7 templates/account/signup.html:16
 #: templates/account/signup.html:63
 #: templates/answer_question_not_authenticated.html:56
-#: templates/demo/results.html:183 templates/navbar.html:105
+#: templates/demo/results.html:183 templates/snippets/navbar.html:105
 msgid "Sign Up"
 msgstr ""
 
@@ -384,8 +385,8 @@ msgid ""
 "contact us if you do not receive it within a few minutes."
 msgstr ""
 
-#: templates/answer_question.html:101
-#: templates/answer_question_not_authenticated.html:89
+#: templates/answer_question.html:83
+#: templates/answer_question_not_authenticated.html:100
 #: templates/demo/answer_1.html:58 templates/demo/answer_1.html:82
 #: templates/demo/answer_2.html:58 templates/demo/answer_2.html:82
 #: templates/demo/answer_3.html:58 templates/demo/answer_3.html:82
@@ -447,17 +448,6 @@ msgstr ""
 msgid "Success! Thank you for your message"
 msgstr ""
 
-#: templates/cookie_banner.html:6
-#, python-format
-msgid ""
-"We use cookies to ensure you get the best experience on our website. <a href="
-"\"%(terms_url)s\">Take a look</a>."
-msgstr ""
-
-#: templates/cookie_banner.html:9
-msgid "Gotcha!"
-msgstr ""
-
 #: templates/cookies_policy.html:12
 msgid "Last updated"
 msgstr ""
@@ -477,8 +467,8 @@ msgid ""
 "cookies message or not. That's all. Have fun"
 msgstr ""
 
-#: templates/create_list.html:15 templates/footer.html:71
-#: templates/home.html:96 templates/home.html:170 templates/navbar.html:57
+#: templates/create_list.html:15 templates/home.html:96 templates/home.html:170
+#: templates/snippets/footer.html:71 templates/snippets/navbar.html:57
 msgid "Create a list"
 msgstr ""
 
@@ -549,7 +539,7 @@ msgstr ""
 msgid "Huestions team"
 msgstr ""
 
-#: templates/edit_list.html:13 templates/navbar.html:61
+#: templates/edit_list.html:13 templates/snippets/navbar.html:61
 msgid "Your Lists"
 msgstr ""
 
@@ -613,39 +603,6 @@ msgstr ""
 #: templates/errors/contact_us.html:4
 #, python-format
 msgid "<p>You can always <a href=\"%(contact_url)s\">contact us</a></p>"
-msgstr ""
-
-#: templates/flash_messages.html:7
-msgid "Success"
-msgstr ""
-
-#: templates/flash_messages.html:7
-msgid "Warning"
-msgstr ""
-
-#: templates/footer.html:36
-msgid "Artist"
-msgstr ""
-
-#: templates/footer.html:46
-msgid "Graphic Designer"
-msgstr ""
-
-#: templates/footer.html:59
-msgid "Contact"
-msgstr ""
-
-#: templates/footer.html:60
-msgid "Terms"
-msgstr ""
-
-#: templates/footer.html:68
-msgid "Have fun"
-msgstr ""
-
-#: templates/footer.html:70 templates/list_results.html:13
-#: templates/lists.html:10 templates/navbar.html:25
-msgid "Lists"
 msgstr ""
 
 #: templates/hidden_red_panda.html:6 templates/hidden_red_panda.html:12
@@ -815,6 +772,11 @@ msgstr ""
 msgid "No attribution required or not supplied"
 msgstr ""
 
+#: templates/list_results.html:13 templates/lists.html:10
+#: templates/snippets/footer.html:70 templates/snippets/navbar.html:25
+msgid "Lists"
+msgstr ""
+
 #: templates/list_results.html:26
 msgid "Results"
 msgstr ""
@@ -854,8 +816,8 @@ msgid "Recent votes"
 msgstr ""
 
 #: templates/lists.html:44 templates/search_results.html:35
-#: templates/social_media_icons_group.html:12 templates/user_lists.html:43
-#: templates/user_played_lists.html:34
+#: templates/snippets/social_media_icons_group.html:12
+#: templates/user_lists.html:43 templates/user_played_lists.html:34
 msgid "Copied to clipboard"
 msgstr ""
 
@@ -869,62 +831,6 @@ msgstr ""
 msgid "Play"
 msgstr ""
 
-#: templates/navbar.html:22
-msgid "Home"
-msgstr ""
-
-#: templates/navbar.html:34 templates/navbar.html:41
-msgid "Search"
-msgstr ""
-
-#: templates/navbar.html:54
-msgid "Hi"
-msgstr ""
-
-#: templates/navbar.html:65
-msgid "Created"
-msgstr ""
-
-#: templates/navbar.html:68
-msgid "Played"
-msgstr ""
-
-#: templates/navbar.html:75
-msgid "More"
-msgstr ""
-
-#: templates/navbar.html:82 templates/user_stats.html:9
-msgid "Your stats"
-msgstr ""
-
-#: templates/navbar.html:95
-msgid "Log out"
-msgstr ""
-
-#: templates/paginator.html:11 templates/paginator.html:32
-#: templates/paginator.html:53 templates/paginator.html:74
-#: templates/paginator.html:95
-msgid "Previous"
-msgstr ""
-
-#: templates/paginator.html:14 templates/paginator.html:35
-#: templates/paginator.html:56 templates/paginator.html:77
-#: templates/paginator.html:98
-msgid "Next"
-msgstr ""
-
-#: templates/paginator.html:18 templates/paginator.html:39
-#: templates/paginator.html:60 templates/paginator.html:81
-#: templates/paginator.html:102
-msgid "First"
-msgstr ""
-
-#: templates/paginator.html:28 templates/paginator.html:49
-#: templates/paginator.html:70 templates/paginator.html:91
-#: templates/paginator.html:112
-msgid "Last"
-msgstr ""
-
 #: templates/search_results.html:10
 msgid "Search Results for"
 msgstr ""
@@ -935,6 +841,105 @@ msgstr ""
 
 #: templates/search_results.html:12
 msgid "result"
+msgstr ""
+
+#: templates/snippets/cookie_banner.html:6
+#, python-format
+msgid ""
+"We use cookies to ensure you get the best experience on our website. <a href="
+"\"%(terms_url)s\">Take a look</a>."
+msgstr ""
+
+#: templates/snippets/cookie_banner.html:9
+msgid "Gotcha!"
+msgstr ""
+
+#: templates/snippets/flash_messages.html:7
+msgid "Success"
+msgstr ""
+
+#: templates/snippets/flash_messages.html:7
+msgid "Warning"
+msgstr ""
+
+#: templates/snippets/footer.html:36
+msgid "Artist"
+msgstr ""
+
+#: templates/snippets/footer.html:46
+msgid "Graphic Designer"
+msgstr ""
+
+#: templates/snippets/footer.html:59
+msgid "Contact"
+msgstr ""
+
+#: templates/snippets/footer.html:60
+msgid "Terms"
+msgstr ""
+
+#: templates/snippets/footer.html:68
+msgid "Have fun"
+msgstr ""
+
+#: templates/snippets/navbar.html:22
+msgid "Home"
+msgstr ""
+
+#: templates/snippets/navbar.html:34 templates/snippets/navbar.html:41
+msgid "Search"
+msgstr ""
+
+#: templates/snippets/navbar.html:54
+msgid "Hi"
+msgstr ""
+
+#: templates/snippets/navbar.html:65
+msgid "Created"
+msgstr ""
+
+#: templates/snippets/navbar.html:68
+msgid "Played"
+msgstr ""
+
+#: templates/snippets/navbar.html:75
+msgid "More"
+msgstr ""
+
+#: templates/snippets/navbar.html:82 templates/user_stats.html:9
+msgid "Your stats"
+msgstr ""
+
+#: templates/snippets/navbar.html:95
+msgid "Log out"
+msgstr ""
+
+#: templates/snippets/paginator.html:11 templates/snippets/paginator.html:32
+#: templates/snippets/paginator.html:53 templates/snippets/paginator.html:74
+#: templates/snippets/paginator.html:95
+msgid "Previous"
+msgstr ""
+
+#: templates/snippets/paginator.html:14 templates/snippets/paginator.html:35
+#: templates/snippets/paginator.html:56 templates/snippets/paginator.html:77
+#: templates/snippets/paginator.html:98
+msgid "Next"
+msgstr ""
+
+#: templates/snippets/paginator.html:18 templates/snippets/paginator.html:39
+#: templates/snippets/paginator.html:60 templates/snippets/paginator.html:81
+#: templates/snippets/paginator.html:102
+msgid "First"
+msgstr ""
+
+#: templates/snippets/paginator.html:28 templates/snippets/paginator.html:49
+#: templates/snippets/paginator.html:70 templates/snippets/paginator.html:91
+#: templates/snippets/paginator.html:112
+msgid "Last"
+msgstr ""
+
+#: templates/snippets/social_media_icons_group.html:7
+msgid "Share on"
 msgstr ""
 
 #: templates/user_lists.html:6 templates/user_lists.html:10

@@ -24,7 +24,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-  
+
     gtag('config', 'G-D601P1ZWZK');
   </script>
 
@@ -37,13 +37,13 @@
 </head>
 <body>
 
-  {% include "navbar.html" %}
+  {% include "snippets/navbar.html" %}
 
   {% block borderless %}
   {% endblock borderless %}
 
   <div id="main_block" class="section container">
-    {% include "flash_messages.html" %}
+    {% include "snippets/flash_messages.html" %}
     {% block main %}
     {% endblock main %}
   </div>
@@ -51,7 +51,7 @@
   {% block borderless2 %}
   {% endblock borderless2 %}
 
-  {% include "cookie_banner.html" %}
+  {% include "snippets/cookie_banner.html" %}
 
   <!-- Bootstrap -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -66,6 +66,6 @@
   {% block bootstrap_js_loaded %}
   {% endblock bootstrap_js_loaded %}
 
-  {% include "footer.html" %}
+  {% include "snippets/footer.html" %}
 </body>
 </html>
