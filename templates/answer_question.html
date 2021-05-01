@@ -40,25 +40,7 @@
 
   <h3 class="title is-3">{{ question.title }}</h3>
 
-  <div id="my-modal-1" class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-      <div class="section my-modal-wrap">
-	<p id="modal-text-1">Hello World<p>
-      </div>
-    </div>
-    <button id="my-modal-close-1" class="modal-close is-large" aria-label="close"></button>
-  </div>
-
-  <div id="my-modal-2" class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-      <div class="section my-modal-wrap">
-	<p id="modal-text-2">Hello World<p>
-      </div>
-    </div>
-    <button id="my-modal-close-2" class="modal-close is-large" aria-label="close"></button>
-  </div>
+  {% include "snippets/modal_1_2.html" %}
 
   {% for choice in form.fields.alternatives.choices %}
     {% if forloop.first %}<div class="columns">{% endif %}

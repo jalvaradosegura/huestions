@@ -61,6 +61,8 @@
 
   <h3 class="title is-3">{{ question.title }}</h3>
 
+  {% include "snippets/modal_1_2.html" %}
+
   {% for choice in question.alternatives.all %}
     {% if forloop.first %}<div class="columns">{% endif %}
       <div class="column is-6">
@@ -74,11 +76,20 @@
 	  <div class="card-content">
 
             <div class="columns is-flex is-centered">
+
+	      <button id="my-modal-button-{{ forloop.counter }}" class="button is-small is-ghost">
+                <span class="icon is-small has-text-info">
+                  <i class="fas fa-info-circle"></i>
+                </span>
+              </button>
+
               <figure class="image">
                 {% if forloop.first %}
                   <img class="is-rounded" src="{{ choice.image.url }}" alt="Placeholder image">
+	          <p id="my-modal-image-text-1" hidden>{{ form.attribution_1 }}</p>
                 {% else %}
                   <img class="is-rounded" src="{{ choice.image.url }}" alt="Placeholder image">
+	          <p id="my-modal-image-text-2" hidden>{{ form.attribution_2 }}</p>
                 {% endif %}
               </figure>
             </div>
@@ -101,4 +112,5 @@
 
 {% block bootstrap_js_loaded %}
   <script src="{% static 'js/copy_to_clipboard.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/my_custom_modals.js' %}" type="text/javascript"></script>
 {% endblock bootstrap_js_loaded %}
