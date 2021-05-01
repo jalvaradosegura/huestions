@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<div class="cookie-container">
+  <p class="cookie-p">
+    {% url 'cookies_policy' as terms_url %}
+    {% blocktrans %}We use cookies to ensure you get the best experience on our website. <a href="{{ terms_url }}">Take a look</a>.{% endblocktrans %}
+  </p>
+  <button class="button  is-success cookie-btn">
+    🍪 {% trans "Gotcha!" %}
+  </button>
+</div>

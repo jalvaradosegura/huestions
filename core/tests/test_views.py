@@ -12,6 +12,8 @@ from ..views import (
     AboutView,
     ContactSuccessView,
     ContactView,
+    CookiePolicyView,
+    HiddenRedPandaView,
     TermsAndConditionsView,
     handler403,
     handler404,
@@ -200,8 +202,36 @@ class Error404ViewTests(TestCase):
 
 
 class HiddenRedPandaViewTests(TestCase):
+    def setUp(self):
+        self.base_url = reverse('hidden_red_panda')
+
+    def test_url_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(
+            found.func.__name__, HiddenRedPandaView.as_view().__name__
+        )
+
     def test_returns_correct_html(self):
-        response = self.client.get(reverse('hidden_red_panda'))
+        response = self.client.get(self.base_url)
 
         self.assertTemplateUsed(response, 'hidden_red_panda.html')
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+
+
+class CookiePolicyViewTests(TestCase):
+    def setUp(self):
+        self.base_url = reverse('cookies_policy')
+
+    def test_url_resolves_to_view(self):
+        found = resolve(self.base_url)
+
+        self.assertEqual(
+            found.func.__name__, CookiePolicyView.as_view().__name__
+        )
+
+    def test_returns_correct_html(self):
+        response = self.client.get(self.base_url)
+
+        self.assertTemplateUsed(response, 'cookies_policy.html')
         self.assertEqual(response.status_code, HTTPStatus.OK)

@@ -79,3 +79,7 @@ class Error500View(TemplateView):
 
 class HiddenRedPandaView(TemplateView):
     template_name = 'hidden_red_panda.html'
+
+
+class CookiePolicyView(TemplateView):
+    template_name = 'cookies_policy.html'

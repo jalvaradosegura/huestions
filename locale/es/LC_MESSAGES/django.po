@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 17:39-0400\n"
-"PO-Revision-Date: 2021-04-30 21:40+0000\n"
+"POT-Creation-Date: 2021-05-01 01:03-0400\n"
+"PO-Revision-Date: 2021-05-01 05:04+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -484,6 +484,39 @@ msgstr "Contáctanos"
 msgid "Send"
 msgstr "Enviar"
 
+#: templates/contact_success.html:9
+msgid "Success! Thank you for your message"
+msgstr "Éxito! Gracias por el mensaje"
+
+#: templates/cookie_banner.html:6
+#, python-format
+msgid ""
+"We use cookies to ensure you get the best experience on our website. <a "
+"href=\"%(terms_url)s\">Take a look</a>."
+msgstr ""
+"Usamos cookies para asegurar una mejor experiencia es nuestra página. <a "
+"href=\"%(terms_url)s\">Echa un vistazo</a>."
+
+#: templates/cookie_banner.html:9
+msgid "Gotcha!"
+msgstr "Oki"
+
+#: templates/cookies_policy.html:12
+#| msgid "Lists created"
+msgid "Last updated"
+msgstr "Última vez actualizado"
+
+#: templates/cookies_policy.html:13
+msgid "We only use Google Analytics"
+msgstr "Solo usamos Google Analytics"
+
+#: templates/cookies_policy.html:14
+msgid ""
+"We have no proof but no doubts, that almost every site you visit, use it too"
+msgstr ""
+"No tenemos pruebas pero tampoco dudas, de que casi todos los sitios que "
+"visitas, lo usan también"
+
 #: templates/create_list.html:15 templates/footer.html:70
 #: templates/home.html:96 templates/home.html:170 templates/navbar.html:57
 msgid "Create a list"
@@ -823,6 +856,24 @@ msgstr "Únetenos. Es gratis."
 msgid "Yes"
 msgstr "Sí"
 
+#: templates/images_credit.html:18
+#| msgid "Huestions team"
+msgid "Question"
+msgstr "Pregunta"
+
+#: templates/images_credit.html:22 templates/images_credit.html:24
+#| msgid "Alternatives"
+msgid "Alternative"
+msgstr "Alternativa"
+
+#: templates/images_credit.html:22
+msgid "Image credit"
+msgstr "Crédito de la imagen"
+
+#: templates/images_credit.html:24
+msgid "No attribution required or not supplied"
+msgstr "No requiere crédito o no se entregó"
+
 #: templates/list_results.html:26
 msgid "Results"
 msgstr "Resultados"
@@ -974,7 +1025,6 @@ msgid "Played lists"
 msgstr "Listas jugadas"
 
 #: templates/user_played_lists.html:11
-#| msgid "You already answered all the questions for this list"
 msgid "You have answered at least one question of each of these lists"
 msgstr "Has respondido al menos una pregunta de cada una de estas listas"
 

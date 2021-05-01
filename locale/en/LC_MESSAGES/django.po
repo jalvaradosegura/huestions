@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 17:39-0400\n"
+"POT-Creation-Date: 2021-05-01 01:03-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -443,6 +443,34 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
+#: templates/contact_success.html:9
+msgid "Success! Thank you for your message"
+msgstr ""
+
+#: templates/cookie_banner.html:6
+#, python-format
+msgid ""
+"We use cookies to ensure you get the best experience on our website. <a href="
+"\"%(terms_url)s\">Take a look</a>."
+msgstr ""
+
+#: templates/cookie_banner.html:9
+msgid "Gotcha!"
+msgstr ""
+
+#: templates/cookies_policy.html:12
+msgid "Last updated"
+msgstr ""
+
+#: templates/cookies_policy.html:13
+msgid "We only use Google Analytics"
+msgstr ""
+
+#: templates/cookies_policy.html:14
+msgid ""
+"We have no proof but no doubts, that almost every site you visit, use it too"
+msgstr ""
+
 #: templates/create_list.html:15 templates/footer.html:70
 #: templates/home.html:96 templates/home.html:170 templates/navbar.html:57
 msgid "Create a list"
@@ -763,6 +791,22 @@ msgstr ""
 
 #: templates/home.html:206
 msgid "Yes"
+msgstr ""
+
+#: templates/images_credit.html:18
+msgid "Question"
+msgstr ""
+
+#: templates/images_credit.html:22 templates/images_credit.html:24
+msgid "Alternative"
+msgstr ""
+
+#: templates/images_credit.html:22
+msgid "Image credit"
+msgstr ""
+
+#: templates/images_credit.html:24
+msgid "No attribution required or not supplied"
 msgstr ""
 
 #: templates/list_results.html:26

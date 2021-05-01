@@ -43,4 +43,9 @@ urlpatterns = [
         view=views.HiddenRedPandaView.as_view(),
         name='hidden_red_panda',
     ),
+    path(
+        route='cookies-policy/',
+        view=views.CookiePolicyView.as_view(),
+        name='cookies_policy',
+    ),
 ]
