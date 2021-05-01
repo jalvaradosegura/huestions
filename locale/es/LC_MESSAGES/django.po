@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 01:03-0400\n"
-"PO-Revision-Date: 2021-05-01 05:04+0000\n"
+"POT-Creation-Date: 2021-05-01 13:50-0400\n"
+"PO-Revision-Date: 2021-05-01 17:52+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -168,7 +168,7 @@ msgstr "(Opcional) Crédito para la imagen 2"
 msgid "credit for the image"
 msgstr "crédito para la imagen"
 
-#: templates/about.html:11 templates/footer.html:57
+#: templates/about.html:11 templates/footer.html:58
 msgid "About of"
 msgstr "Acerca de"
 
@@ -502,7 +502,6 @@ msgid "Gotcha!"
 msgstr "Oki"
 
 #: templates/cookies_policy.html:12
-#| msgid "Lists created"
 msgid "Last updated"
 msgstr "Última vez actualizado"
 
@@ -517,7 +516,15 @@ msgstr ""
 "No tenemos pruebas pero tampoco dudas, de que casi todos los sitios que "
 "visitas, lo usan también"
 
-#: templates/create_list.html:15 templates/footer.html:70
+#: templates/cookies_policy.html:15
+msgid ""
+"Oh! And of course, we use a cookie to know if we have to show you the "
+"cookies message or not. That's all. Have fun"
+msgstr ""
+"Oh! Y obviamente, usamos una cookie para saber si tenemos que mostrarte el "
+"mensaje de cookies o no. Eso es todo. Diviértete"
+
+#: templates/create_list.html:15 templates/footer.html:71
 #: templates/home.html:96 templates/home.html:170 templates/navbar.html:57
 msgid "Create a list"
 msgstr "Crea una lista"
@@ -671,27 +678,27 @@ msgstr "Éxito"
 msgid "Warning"
 msgstr "Precaución"
 
-#: templates/footer.html:35
+#: templates/footer.html:36
 msgid "Artist"
 msgstr "Artista"
 
-#: templates/footer.html:45
+#: templates/footer.html:46
 msgid "Graphic Designer"
 msgstr "Diseñadora Gráfica"
 
-#: templates/footer.html:58
+#: templates/footer.html:59
 msgid "Contact"
 msgstr "Contacto"
 
-#: templates/footer.html:59
+#: templates/footer.html:60
 msgid "Terms"
 msgstr "Términos"
 
-#: templates/footer.html:67
+#: templates/footer.html:68
 msgid "Have fun"
 msgstr "Diviértete"
 
-#: templates/footer.html:69 templates/list_results.html:13
+#: templates/footer.html:70 templates/list_results.html:13
 #: templates/lists.html:10 templates/navbar.html:25
 msgid "Lists"
 msgstr "Listas"
@@ -857,12 +864,10 @@ msgid "Yes"
 msgstr "Sí"
 
 #: templates/images_credit.html:18
-#| msgid "Huestions team"
 msgid "Question"
 msgstr "Pregunta"
 
 #: templates/images_credit.html:22 templates/images_credit.html:24
-#| msgid "Alternatives"
 msgid "Alternative"
 msgstr "Alternativa"
 
