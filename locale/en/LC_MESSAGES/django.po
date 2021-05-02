@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 19:51-0400\n"
+"POT-Creation-Date: 2021-05-01 20:16-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -464,7 +464,7 @@ msgstr ""
 #: templates/cookies_policy.html:15
 msgid ""
 "Oh! And of course, we use a cookie to know if we have to show you the "
-"cookies message or not. That's all. Have fun"
+"cookies message. That's all. Have fun"
 msgstr ""
 
 #: templates/create_list.html:15 templates/home.html:96 templates/home.html:170

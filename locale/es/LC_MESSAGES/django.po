@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 19:51-0400\n"
-"PO-Revision-Date: 2021-05-01 23:51+0000\n"
+"POT-Creation-Date: 2021-05-01 20:16-0400\n"
+"PO-Revision-Date: 2021-05-02 00:16+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -505,12 +505,15 @@ msgstr ""
 "visitas, lo usan también"
 
 #: templates/cookies_policy.html:15
+#| msgid ""
+#| "Oh! And of course, we use a cookie to know if we have to show you the "
+#| "cookies message or not. That's all. Have fun"
 msgid ""
 "Oh! And of course, we use a cookie to know if we have to show you the "
-"cookies message or not. That's all. Have fun"
+"cookies message. That's all. Have fun"
 msgstr ""
-"Oh! Y obviamente, usamos una cookie para saber si tenemos que mostrarte el "
-"mensaje de cookies o no. Eso es todo. Diviértete"
+"Oh! Y obviamente, usamos una cookie para saber si te tenemos que mostrar el "
+"mensaje de cookies. Eso es todo. Diviértete"
 
 #: templates/create_list.html:15 templates/home.html:96
 #: templates/home.html:170 templates/snippets/footer.html:71
@@ -1004,7 +1007,6 @@ msgid "Last"
 msgstr "Última"
 
 #: templates/snippets/social_media_icons_group.html:7
-#| msgid "Share"
 msgid "Share on"
 msgstr "Comparte en"
 
