@@ -82,7 +82,7 @@ class Alternative(TitleAndTimeStampedModel):
         max_length=200,
         default='',
         null=True,
-        blank=True
+        blank=True,
     )
 
     def save(self, *args, **kwargs):

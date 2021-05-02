@@ -19,13 +19,14 @@
 
   <div class="field">
     <div class="control">
+      <label for="id_title" >{% render_field form.title.label %}</label>
       {% if form.title.errors %}
-        {% render_field form.title class+="input is-danger" placeholder=form.title.label %}
+        {% render_field form.title class+="input is-danger" %}
 	{% for error in form.title.errors %}
 	  <p class="help is-danger">{{ error }}</p>
 	{% endfor %}
       {% else %}
-        {% render_field form.title class+="input" placeholder=form.title.label %}
+        {% render_field form.title class+="input" %}
 	<p class="help">{{ form.title.help_text }}</p>
       {% endif %}
     </div>
@@ -33,13 +34,14 @@
 
   <div class="field">
     <div class="control">
+      <label for="id_title" >{% render_field alternatives_form.alternative_1.label %}</label>
       {% if alternatives_form.alternative_1.errors %}
-        {% render_field alternatives_form.alternative_1 class+="input is-danger" placeholder=alternatives_form.alternative_1.label %}
+        {% render_field alternatives_form.alternative_1 class+="input is-danger" %}
 	{% for error in alternatives_form.alternative_1.errors %}
 	  <p class="help is-danger">{{ error }}</p>
 	{% endfor %}
       {% else %}
-        {% render_field alternatives_form.alternative_1 class+="input" placeholder=alternatives_form.alternative_1.label %}
+        {% render_field alternatives_form.alternative_1 class+="input" %}
 	<p class="help">{{ alternatives_form.alternative_1.help_text }}</p>
       {% endif %}
     </div>
@@ -47,13 +49,14 @@
 
   <div class="field">
     <div class="control">
+      <label for="id_title" >{% render_field alternatives_form.alternative_2.label %}</label>
       {% if alternatives_form.alternative_2.errors %}
-        {% render_field alternatives_form.alternative_2 class+="input is-danger" placeholder=alternatives_form.alternative_2.label %}
+        {% render_field alternatives_form.alternative_2 class+="input is-danger" %}
 	{% for error in alternatives_form.alternative_2.errors %}
 	  <p class="help is-danger">{{ error }}</p>
 	{% endfor %}
       {% else %}
-        {% render_field alternatives_form.alternative_2 class+="input" placeholder=alternatives_form.alternative_2.label %}
+        {% render_field alternatives_form.alternative_2 class+="input" %}
 	<p class="help">{{ alternatives_form.alternative_2.help_text }}</p>
       {% endif %}
     </div>

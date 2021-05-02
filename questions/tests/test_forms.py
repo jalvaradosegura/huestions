@@ -265,7 +265,6 @@ class AddAlternativesFormTests(LoginUserMixin, TestCase):
         self.assertEqual(last_alternative.__str__(), 'Acción')
         self.assertEqual(Alternative.objects.all().count(), 2)
 
-
     def test_add_alternatives_and_attributions_with_form(self):
         form = AddAlternativesForm(
             data={

@@ -72,6 +72,11 @@ class UserPlayedListsView(
     def get_queryset(self):
         username = self.kwargs['username']
         user_id = get_user_model().objects.get(username=username).id
-        return Vote.objects.filter(
-            user=user_id
-        ).filter(~Q(list=None)).select_related('list').prefetch_related('list__tags').order_by('-list__id').distinct('list')
+        return (
+            Vote.objects.filter(user=user_id)
+            .filter(~Q(list=None))
+            .select_related('list')
+            .prefetch_related('list__tags')
+            .order_by('-list__id')
+            .distinct('list')
+        )

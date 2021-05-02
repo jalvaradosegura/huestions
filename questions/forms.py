@@ -46,12 +46,15 @@ class AnswerQuestionForm(forms.Form):
 
 class CreateQuestionForm(forms.ModelForm):
     title = forms.CharField(
-        label=_('Title'),
+        label=_('Question'),
         help_text=MAX_AND_MIN_LENGTH,
         validators=[
             RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MinLengthValidator(5),
         ],
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Which food do you like the most?')}
+        ),
     )
     questions_amount_limit = AMOUNT_OF_QUESTIONS_PER_LIST
 
@@ -75,6 +78,7 @@ class CreateQuestionForm(forms.ModelForm):
 
 class AddAlternativesForm(forms.Form):
     image_1 = forms.ImageField(
+        label=_('(Optional) Image 1'),
         required=False,
         validators=[file_size_validator, file_extension_validator],
         help_text=FILE_TOO_LARGE_HELPER,
@@ -86,10 +90,17 @@ class AddAlternativesForm(forms.Form):
             RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MaxLengthValidator(limit_value=100),
         ],
+        widget=forms.TextInput(attrs={'placeholder': _('Pizza')}),
     )
     attribution_1 = forms.CharField(
         label=_('(Optional) Credit for the image 1'),
-        widget=forms.Textarea,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': _(
+                    'Owner, website, url, transformations applied'
+                )
+            }
+        ),
         help_text=MAX_AND_SPECIAL_CHARS_ATTRIBUTIONS,
         validators=[
             MaxLengthValidator(limit_value=200),
@@ -97,6 +108,7 @@ class AddAlternativesForm(forms.Form):
         required=False,
     )
     image_2 = forms.ImageField(
+        label=_('(Optional) Image 2'),
         required=False,
         validators=[file_size_validator],
         help_text=FILE_TOO_LARGE_HELPER,
@@ -108,10 +120,17 @@ class AddAlternativesForm(forms.Form):
             RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MaxLengthValidator(limit_value=100),
         ],
+        widget=forms.TextInput(attrs={'placeholder': _('Burger')}),
     )
     attribution_2 = forms.CharField(
         label=_('(Optional) Credit for the image 2'),
-        widget=forms.Textarea,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': _(
+                    'Owner, website, url, transformations applied'
+                )
+            }
+        ),
         help_text=MAX_AND_SPECIAL_CHARS_ATTRIBUTIONS,
         validators=[
             MaxLengthValidator(limit_value=200),

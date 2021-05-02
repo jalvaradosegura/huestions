@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-01 20:16-0400\n"
+"POT-Creation-Date: 2021-05-02 19:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,27 +133,59 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: lists/forms.py:19 questions/forms.py:49
-msgid "Title"
+#: lists/forms.py:19 lists/forms.py:65
+msgid "List name"
+msgstr ""
+
+#: lists/forms.py:25
+msgid "Impossible questions for food lovers"
 msgstr ""
 
 #: questions/forms.py:26
 msgid "Alternatives"
 msgstr ""
 
-#: questions/forms.py:83
+#: questions/forms.py:49 templates/images_credit.html:18
+msgid "Question"
+msgstr ""
+
+#: questions/forms.py:55
+msgid "Which food do you like the most?"
+msgstr ""
+
+#: questions/forms.py:79
+msgid "(Optional) Image 1"
+msgstr ""
+
+#: questions/forms.py:85
 msgid "Alternative 1"
 msgstr ""
 
 #: questions/forms.py:91
+msgid "Pizza"
+msgstr ""
+
+#: questions/forms.py:94
 msgid "(Optional) Credit for the image 1"
 msgstr ""
 
-#: questions/forms.py:105
+#: questions/forms.py:95 questions/forms.py:119
+msgid "Owner, website, url, transformations applied"
+msgstr ""
+
+#: questions/forms.py:103
+msgid "(Optional) Image 2"
+msgstr ""
+
+#: questions/forms.py:109
 msgid "Alternative 2"
 msgstr ""
 
-#: questions/forms.py:113
+#: questions/forms.py:115
+msgid "Burger"
+msgstr ""
+
+#: questions/forms.py:118
 msgid "(Optional) Credit for the image 2"
 msgstr ""
 
@@ -472,7 +504,7 @@ msgstr ""
 msgid "Create a list"
 msgstr ""
 
-#: templates/create_list.html:57 templates/home.html:132
+#: templates/create_list.html:59 templates/home.html:132
 msgid "Create"
 msgstr ""
 
@@ -480,28 +512,28 @@ msgstr ""
 msgid "Create a question"
 msgstr ""
 
-#: templates/create_question.html:78 templates/create_question.html:98
+#: templates/create_question.html:81 templates/create_question.html:101
 msgid "Choose a picture for Alternative 1"
 msgstr ""
 
-#: templates/create_question.html:82 templates/create_question.html:102
-#: templates/create_question.html:161 templates/create_question.html:181
+#: templates/create_question.html:85 templates/create_question.html:105
+#: templates/create_question.html:167 templates/create_question.html:187
 msgid "No file uploaded"
 msgstr ""
 
-#: templates/create_question.html:157 templates/create_question.html:177
+#: templates/create_question.html:163 templates/create_question.html:183
 msgid "Choose a picture for Alternative 2"
 msgstr ""
 
-#: templates/create_question.html:214
+#: templates/create_question.html:221
 msgid "Create & add another"
 msgstr ""
 
-#: templates/create_question.html:218
+#: templates/create_question.html:225
 msgid "Create & publish the list"
 msgstr ""
 
-#: templates/create_question.html:222
+#: templates/create_question.html:229
 msgid "Create & go back"
 msgstr ""
 
@@ -543,32 +575,32 @@ msgstr ""
 msgid "Your Lists"
 msgstr ""
 
-#: templates/edit_list.html:57 templates/edit_question.html:63
+#: templates/edit_list.html:59 templates/edit_question.html:66
 msgid "Apply changes"
 msgstr ""
 
-#: templates/edit_list.html:61
+#: templates/edit_list.html:63
 msgid "Publish list"
 msgstr ""
 
-#: templates/edit_list.html:65
+#: templates/edit_list.html:67
 msgid "Note"
 msgstr ""
 
-#: templates/edit_list.html:65
+#: templates/edit_list.html:67
 msgid "once published you can neither edit nor delete the list."
 msgstr ""
 
-#: templates/edit_list.html:70
+#: templates/edit_list.html:72
 msgid "Current questions"
 msgstr ""
 
-#: templates/edit_list.html:71
+#: templates/edit_list.html:73
 #, python-format
 msgid "Maximum of %(questions_per_list)s questions"
 msgstr ""
 
-#: templates/edit_list.html:72
+#: templates/edit_list.html:74
 msgid "Add a question"
 msgstr ""
 
@@ -754,10 +786,6 @@ msgstr ""
 
 #: templates/home.html:206
 msgid "Yes"
-msgstr ""
-
-#: templates/images_credit.html:18
-msgid "Question"
 msgstr ""
 
 #: templates/images_credit.html:22 templates/images_credit.html:24

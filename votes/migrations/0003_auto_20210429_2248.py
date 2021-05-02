@@ -13,6 +13,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='vote',
             name='shared_by',
-            field=models.CharField(blank=True, default='', max_length=100, null=True),
+            field=models.CharField(
+                blank=True, default='', max_length=100, null=True
+            ),
         ),
     ]

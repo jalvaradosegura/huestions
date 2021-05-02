@@ -16,12 +16,15 @@ from .models import QuestionList
 
 class CreateQuestionListForm(forms.ModelForm):
     title = forms.CharField(
-        label=_('Title'),
+        label=_('List name'),
         help_text=MAX_AND_MIN_LENGTH,
         validators=[
             RegexValidator(HUESTIONS_REGEX, SPECIAL_CHARS_ERROR),
             MinLengthValidator(5),
         ],
+        widget=forms.TextInput(
+            attrs={'placeholder': _('Impossible questions for food lovers')}
+        ),
     )
     if not settings.DEBUG and not settings.USED_FOR_TESTING:
         captcha = ReCaptchaField()
@@ -61,11 +64,15 @@ class CompleteListForm(forms.Form):
 
 class EditListForm(forms.ModelForm):
     title = forms.CharField(
+        label=_('List name'),
         help_text=MAX_AND_MIN_LENGTH,
         validators=[
             RegexValidator(r'^[0-9a-zA-Z ]*$', SPECIAL_CHARS_ERROR),
             MinLengthValidator(5),
         ],
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Impossible questions for food lovers'}
+        ),
     )
 
     class Meta:

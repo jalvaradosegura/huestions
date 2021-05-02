@@ -13,11 +13,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='alternative',
             name='attribution',
-            field=models.CharField(blank=True, default='', max_length=200, null=True, verbose_name='credit for the image'),
+            field=models.CharField(
+                blank=True,
+                default='',
+                max_length=200,
+                null=True,
+                verbose_name='credit for the image',
+            ),
         ),
         migrations.AlterField(
             model_name='alternative',
             name='image',
-            field=models.ImageField(default='default_alternative.png', upload_to='alternative_pics'),
+            field=models.ImageField(
+                default='default_alternative.png', upload_to='alternative_pics'
+            ),
         ),
     ]

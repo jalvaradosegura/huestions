@@ -54,14 +54,10 @@ class Command(BaseCommand):
             demo_q3 = DemoQuestionFactory(
                 title='Choose your favorite', child_of=demo_list
             )
-            demo_a1 = DemoAlternativeFactory(
-                title='Tiger', question=demo_q3
-            )
+            demo_a1 = DemoAlternativeFactory(title='Tiger', question=demo_q3)
             demo_a1.image = 'alternative_pics/demo/' + IMAGE_5_NAME
             demo_a1.save()
-            demo_a2 = DemoAlternativeFactory(
-                title='Lion', question=demo_q3
-            )
+            demo_a2 = DemoAlternativeFactory(title='Lion', question=demo_q3)
             demo_a2.image = 'alternative_pics/demo/' + IMAGE_6_NAME
             demo_a2.save()
 

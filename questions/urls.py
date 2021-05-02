@@ -7,7 +7,7 @@ urlpatterns = [
     path(
         route='lists/<slug:slug>/images-credit/',
         view=views.ImagesCreditView.as_view(),
-        name='images_credit'
+        name='images_credit',
     ),
     path(
         route='lists/<slug:slug>/',

@@ -8,7 +8,7 @@ from lists.factories import QuestionListFactory
 from questions.factories import AlternativeFactory
 
 from ..factories import UserFactory
-from ..views import UserListsView, UserStatsView, UserPlayedListsView
+from ..views import UserListsView, UserPlayedListsView, UserStatsView
 
 
 class UserListsViewTests(TestViewsMixin, TestCase):
