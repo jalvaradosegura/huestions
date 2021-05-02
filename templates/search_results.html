@@ -12,7 +12,7 @@
     <h4 class="title is-4">{% trans "Found" %} {{ lists_found }} {% trans "result" %}{{ lists_found|pluralize }}</h4>
 
     {% for question_list in lists %}
-    {% if forloop.first %}<div class="columns">{% endif %}
+      {% if forloop.first %}<div class="columns">{% endif %}
       <div class="column is-6">
         <div class="card fancy_card">
 
@@ -42,11 +42,9 @@
       </div>  <!-- col is-6 -->
       {% if forloop.counter|divisibleby:2 %}</div><div class="columns">{% endif %}
       {% if forloop.last %}</div>{% endif %}
-  {% endfor %}
+    {% endfor %}
 
-    {% if lists_found > 0 %}
-      {% include "snippets/paginator.html" %}
-    {% endif %}
+    {% include "snippets/paginator.html" %}
   {% endwith %}
 
 {% endblock main %}
