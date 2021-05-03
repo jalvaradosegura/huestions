@@ -74,43 +74,43 @@
 <a class="button is-success mb-3" href="{% url 'add_question' questionlist.slug %}" id="add_question">{% trans "Add a question" %}</a>
 
 {% for question in sorted_questions %}
-    {% if forloop.first %}<div class="columns">{% endif %}
-      <div class="column is-6">
+  {% if forloop.first %}<div class="columns">{% endif %}
+  <div class="column is-6">
 
-	<form id="form3" method="post" action="{% url 'delete_question' questionlist.slug question.id %}">{% csrf_token %}</form>
-        <div class="card">
+    <form id="form3-{{ forloop.counter }}" method="post" action="{% url 'delete_question' questionlist.slug question.id %}">{% csrf_token %}</form>
+    <div class="card">
 
-	  <header class="card-header">
-	    <p class="card-header-title" id="question_{{ forloop.counter0 }}_title">{{ forloop.counter }}) {{ question }}</p>
-	  </header>
+      <header class="card-header">
+	<p class="card-header-title" id="question_{{ forloop.counter0 }}_title">{{ forloop.counter }}) {{ question }}</p>
+      </header>
 
-	  <div class="card-content">
+      <div class="card-content">
 
-	    <div class="media">
-	      {% for alternative in question.alternatives.all %}
-              <div class="media-left">
-                <figure class="image is-48x48">
-		  <img class="is-rounded" src="{{ alternative.image.url }}" alt="Placeholder image">
-                </figure>
-              </div>
-              <div class="media-content">
-		<p class="title is-4">{{ alternative }}</p>
-		<p class="subtitle is-6">Alternative {{ forloop.counter }}</p>
-              </div>
-	      {% endfor %}
-            </div>
+	<div class="media">
+	  {% for alternative in question.alternatives.all %}
+	  <div class="media-left">
+	    <figure class="image is-48x48">
+	      <img class="is-rounded" src="{{ alternative.image.url }}" alt="Placeholder image">
+	    </figure>
+	  </div>
+	  <div class="media-content">
+	    <p class="title is-4">{{ alternative }}</p>
+	    <p class="subtitle is-6">Alternative {{ forloop.counter }}</p>
+	  </div>
+	  {% endfor %}
+	</div>
 
-	  </div> <!-- card-content -->
+      </div> <!-- card-content -->
 
-	  <footer class="card-footer">
-	    <a href="{{ question.get_absolute_url }}" class="card-footer-item button is-light" id="edit_question_{{ forloop.counter0 }}">Edit</a>
-	    <button form="form3" class="card-footer-item button is-danger" id="delete_{{ forloop.counter0 }}">Delete</button>
-	  </footer>
+      <footer class="card-footer">
+	<a href="{{ question.get_absolute_url }}" class="card-footer-item button is-light" id="edit_question_{{ forloop.counter0 }}">Edit</a>
+	<button form="form3-{{ forloop.counter }}" class="card-footer-item button is-danger" id="delete_{{ forloop.counter0 }}">Delete</button>
+      </footer>
 
-        </div>  <!-- card -->
-      </div>  <!-- col is-6 -->
-      {% if forloop.counter|divisibleby:2 %}</div><div class="columns">{% endif %}
-      {% if forloop.last %}</div>{% endif %}
-  {% endfor %}
+    </div>  <!-- card -->
+  </div>  <!-- col is-6 -->
+  {% if forloop.counter|divisibleby:2 %}</div><div class="columns">{% endif %}
+  {% if forloop.last %}</div>{% endif %}
+{% endfor %}
 
 {% endblock main %}
