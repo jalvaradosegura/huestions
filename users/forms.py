@@ -1,4 +1,4 @@
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm, ResetPasswordForm
 from captcha.fields import ReCaptchaField
 from django.conf import settings
 
@@ -8,3 +8,10 @@ class MyCustomSignupForm(SignupForm):
         captcha = ReCaptchaField()
 
         field_order = ['email', 'password1', 'captcha']
+
+
+class MyCustomResetPasswordForm(ResetPasswordForm):
+    if not settings.DEBUG and not settings.USED_FOR_TESTING:
+        captcha = ReCaptchaField()
+
+        field_order = ['email', 'captcha']
