@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 19:42-0400\n"
+"POT-Creation-Date: 2021-05-04 09:39-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,11 +101,11 @@ msgstr ""
 msgid "Invalid header found."
 msgstr ""
 
-#: core/constants.py:59
+#: core/constants.py:58
 msgid "200 characters max."
 msgstr ""
 
-#: core/constants.py:62
+#: core/constants.py:60
 msgid "Picture must have a size under 2 MB."
 msgstr ""
 
@@ -125,19 +125,19 @@ msgstr ""
 msgid "title"
 msgstr ""
 
-#: huestion_project/settings/base.py:158
+#: huestion_project/settings/base.py:161
 msgid "English"
 msgstr ""
 
-#: huestion_project/settings/base.py:159
+#: huestion_project/settings/base.py:162
 msgid "Spanish"
 msgstr ""
 
-#: lists/forms.py:19 lists/forms.py:65
+#: lists/forms.py:19 lists/forms.py:67
 msgid "List name"
 msgstr ""
 
-#: lists/forms.py:25
+#: lists/forms.py:26
 msgid "Impossible questions for food lovers"
 msgstr ""
 
@@ -149,48 +149,52 @@ msgstr ""
 msgid "Question"
 msgstr ""
 
-#: questions/forms.py:55
+#: questions/forms.py:56
 msgid "Which food do you like the most?"
 msgstr ""
 
-#: questions/forms.py:79
+#: questions/forms.py:81
 msgid "(Optional) Image 1"
 msgstr ""
 
-#: questions/forms.py:85
+#: questions/forms.py:87
 msgid "Alternative 1"
 msgstr ""
 
-#: questions/forms.py:91
+#: questions/forms.py:93
 msgid "Pizza"
 msgstr ""
 
-#: questions/forms.py:94
+#: questions/forms.py:96
 msgid "(Optional) Credit for the image 1"
 msgstr ""
 
-#: questions/forms.py:95 questions/forms.py:119
+#: questions/forms.py:100 questions/forms.py:130
 msgid "Owner, website, url, transformations applied"
 msgstr ""
 
-#: questions/forms.py:103
+#: questions/forms.py:111
 msgid "(Optional) Image 2"
 msgstr ""
 
-#: questions/forms.py:109
+#: questions/forms.py:117
 msgid "Alternative 2"
 msgstr ""
 
-#: questions/forms.py:115
+#: questions/forms.py:123
 msgid "Burger"
 msgstr ""
 
-#: questions/forms.py:118
+#: questions/forms.py:126
 msgid "(Optional) Credit for the image 2"
 msgstr ""
 
 #: questions/models.py:81
 msgid "credit for the image"
+msgstr ""
+
+#: templates/about.html:5
+msgid "About page"
 msgstr ""
 
 #: templates/about.html:11 templates/snippets/footer.html:58
@@ -344,11 +348,11 @@ msgid ""
 "an e-mail allowing you to reset it."
 msgstr ""
 
-#: templates/account/password_reset.html:35
+#: templates/account/password_reset.html:46
 msgid "Reset My Password"
 msgstr ""
 
-#: templates/account/password_reset.html:38
+#: templates/account/password_reset.html:49
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
 
@@ -575,7 +579,7 @@ msgstr ""
 msgid "Your Lists"
 msgstr ""
 
-#: templates/edit_list.html:59 templates/edit_question.html:66
+#: templates/edit_list.html:59 templates/edit_question.html:70
 msgid "Apply changes"
 msgstr ""
 
@@ -835,10 +839,6 @@ msgstr ""
 msgid "Created:"
 msgstr ""
 
-#: templates/lists.html:31 templates/search_results.html:25
-msgid "by"
-msgstr ""
-
 #: templates/lists.html:33
 msgid "Recent votes"
 msgstr ""
@@ -857,6 +857,11 @@ msgstr ""
 #: templates/lists.html:46 templates/search_results.html:38
 #: templates/user_lists.html:45 templates/user_played_lists.html:36
 msgid "Play"
+msgstr ""
+
+#: templates/search_results.html:6
+#, python-format
+msgid "Search results for %(query)s"
 msgstr ""
 
 #: templates/search_results.html:10

@@ -28,7 +28,7 @@
 
 	  <div class="card-content">
 	    <div class="content">
-	      <p class="subtitle is-6">{% trans "Created:" %} {{ question_list.created|date:"M d, Y" }} &middot {% trans "by" %} {{ question_list.owner }}</p>
+	      <p class="subtitle is-6">{% trans "Created:" %} {{ question_list.created|date:"M d, Y" }}</p>
 	      {% if request.GET.filter != 'all' %}
 	        <p class="subtitle is-6">{% trans "Recent votes" %}: <span class="tag is-info"><b>{{ question_list.votes_amount }}</b></span></p>
 	      {% endif %}

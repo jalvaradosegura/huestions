@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block head_title %}Search results for {{ query }}{% endblock %}
+{% block head_title %}{% blocktrans %}Search results for {{ query }}{% endblocktrans %}{% endblock %}
 
 {% block main %}
 
@@ -22,7 +22,7 @@
 
 	  <div class="card-content">
 	    <div class="content">
-	      <p class="subtitle is-6">{% trans "Created:" %} {{ question_list.created|date:"M d, Y" }} &middot {% trans "by" %} {{ question_list.owner }}</p>
+	      <p class="subtitle is-6">{% trans "Created:" %} {{ question_list.created|date:"M d, Y" }}</p>
 	      {% for tag in question_list.tags.all %}
 	        <span class="tag">#{{ tag }}</span>
 	      {% endfor %}

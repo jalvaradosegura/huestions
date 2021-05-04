@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-02 19:42-0400\n"
-"PO-Revision-Date: 2021-05-02 23:42+0000\n"
+"POT-Creation-Date: 2021-05-04 09:39-0400\n"
+"PO-Revision-Date: 2021-05-04 13:40+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -108,11 +108,11 @@ msgstr "100 caracteres máximo. Tampoco uses caracteres especiales."
 msgid "Invalid header found."
 msgstr "Se encontró un header inválido"
 
-#: core/constants.py:59
+#: core/constants.py:58
 msgid "200 characters max."
 msgstr "200 caracteres máximo"
 
-#: core/constants.py:62
+#: core/constants.py:60
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
@@ -132,19 +132,19 @@ msgstr "Mensaje"
 msgid "title"
 msgstr "título"
 
-#: huestion_project/settings/base.py:158
+#: huestion_project/settings/base.py:161
 msgid "English"
 msgstr "Inglés"
 
-#: huestion_project/settings/base.py:159
+#: huestion_project/settings/base.py:162
 msgid "Spanish"
 msgstr "Español"
 
-#: lists/forms.py:19 lists/forms.py:65
+#: lists/forms.py:19 lists/forms.py:67
 msgid "List name"
 msgstr "Nombre de la lista"
 
-#: lists/forms.py:25
+#: lists/forms.py:26
 msgid "Impossible questions for food lovers"
 msgstr "Preguntas imposibles para amantes de la comida"
 
@@ -156,49 +156,53 @@ msgstr "Alternativas"
 msgid "Question"
 msgstr "Pregunta"
 
-#: questions/forms.py:55
+#: questions/forms.py:56
 msgid "Which food do you like the most?"
 msgstr "Cuál comida te gusta más?"
 
-#: questions/forms.py:79
+#: questions/forms.py:81
 msgid "(Optional) Image 1"
 msgstr "(Opcional) Imagen 1"
 
-#: questions/forms.py:85
+#: questions/forms.py:87
 msgid "Alternative 1"
 msgstr "Alternativa 1"
 
-#: questions/forms.py:91
+#: questions/forms.py:93
 msgid "Pizza"
 msgstr "Pizza"
 
-#: questions/forms.py:94
+#: questions/forms.py:96
 msgid "(Optional) Credit for the image 1"
 msgstr "(Opcional) Crédito para la imagen 1"
 
-#: questions/forms.py:95 questions/forms.py:119
+#: questions/forms.py:100 questions/forms.py:130
 msgid "Owner, website, url, transformations applied"
 msgstr "Dueño, página web, url, transformaciones aplicadas"
 
-#: questions/forms.py:103
+#: questions/forms.py:111
 msgid "(Optional) Image 2"
 msgstr "(Opcional) Imagen 2"
 
-#: questions/forms.py:109
+#: questions/forms.py:117
 msgid "Alternative 2"
 msgstr "Alternativa 2"
 
-#: questions/forms.py:115
+#: questions/forms.py:123
 msgid "Burger"
 msgstr "Hamburguesa"
 
-#: questions/forms.py:118
+#: questions/forms.py:126
 msgid "(Optional) Credit for the image 2"
 msgstr "(Opcional) Crédito para la imagen 2"
 
 #: questions/models.py:81
 msgid "credit for the image"
 msgstr "crédito para la imagen"
+
+#: templates/about.html:5
+msgid "About page"
+msgstr "Acerca De"
 
 #: templates/about.html:11 templates/snippets/footer.html:58
 msgid "About of"
@@ -370,11 +374,11 @@ msgstr ""
 "Olvidaste tu contraseña? Ingresa tu dirección de correo a continuación y "
 "nosotros te enviaremos un correo para restablecerla."
 
-#: templates/account/password_reset.html:35
+#: templates/account/password_reset.html:46
 msgid "Reset My Password"
 msgstr "Restablecer mi contraseña"
 
-#: templates/account/password_reset.html:38
+#: templates/account/password_reset.html:49
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
 "Por favor contáctanos si tienes algún problema restableciendo tu contraseña."
@@ -623,7 +627,7 @@ msgstr "El equipo de Huestions"
 msgid "Your Lists"
 msgstr "Tus listas"
 
-#: templates/edit_list.html:59 templates/edit_question.html:66
+#: templates/edit_list.html:59 templates/edit_question.html:70
 msgid "Apply changes"
 msgstr "Aplicar cambios"
 
@@ -898,10 +902,6 @@ msgstr "Todas las listas"
 msgid "Created:"
 msgstr "Creada"
 
-#: templates/lists.html:31 templates/search_results.html:25
-msgid "by"
-msgstr "por"
-
 #: templates/lists.html:33
 msgid "Recent votes"
 msgstr "Votos recientes"
@@ -921,6 +921,12 @@ msgstr "Copiar link de la lista"
 #: templates/user_lists.html:45 templates/user_played_lists.html:36
 msgid "Play"
 msgstr "Jugar"
+
+#: templates/search_results.html:6
+#, python-format
+#| msgid "Search Results for"
+msgid "Search results for %(query)s"
+msgstr "Resultados para %(query)s"
 
 #: templates/search_results.html:10
 msgid "Search Results for"
@@ -1078,6 +1084,9 @@ msgstr "Listas publicadas"
 #: templates/user_stats.html:27
 msgid "Questions Answered"
 msgstr "Preguntas respondidas"
+
+#~ msgid "by"
+#~ msgstr "por"
 
 #~ msgid "Title"
 #~ msgstr "Título"
