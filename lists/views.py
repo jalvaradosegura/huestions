@@ -231,6 +231,7 @@ class SearchListsView(ListView):
             QuestionList.activated_lists.filter(
                 Q(title__icontains=self.q) | Q(tags__name__icontains=self.q)
             )
+            .filter(private=False)
             .order_by('-id')
             .prefetch_related('tags')
             .select_related('owner')

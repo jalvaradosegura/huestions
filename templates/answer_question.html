@@ -19,7 +19,7 @@
       <!-- Left side -->
       <div class="level-left">
         <div class="level-item">
-          <h4 class="title is-4">{{ questionlist.title }}</h2>
+	  <h4 class="title is-4">{% if questionlist.private %}🔒{% endif %}{{ questionlist.title }}</h4>
         </div>
       </div> <!-- left -->
 

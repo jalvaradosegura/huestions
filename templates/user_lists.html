@@ -24,7 +24,7 @@
         <div class="card fancy_card">
 
 	  <header class="card-header">
-	    <p class="card-header-title">{{ question_list }}</p>
+	    <p class="card-header-title">{% if question_list.private %}🔒{% endif %}{{ question_list }}</p>
 	  </header>
 
 	  <div class="card-content">

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-04 09:39-0400\n"
-"PO-Revision-Date: 2021-05-04 13:40+0000\n"
+"POT-Creation-Date: 2021-05-04 11:47-0400\n"
+"PO-Revision-Date: 2021-05-04 15:49+0000\n"
 "Last-Translator: b'  <admin@email.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -116,6 +116,10 @@ msgstr "200 caracteres máximo"
 msgid "Picture must have a size under 2 MB."
 msgstr "La foto debe tener un tamaño inferior o igual a 2 MB."
 
+#: core/constants.py:61
+msgid "Only users with the link will see this list"
+msgstr "Solo las personas con el link podrán ver la lista"
+
 #: core/forms.py:8
 msgid "Your email"
 msgstr "Tu email"
@@ -140,13 +144,17 @@ msgstr "Inglés"
 msgid "Spanish"
 msgstr "Español"
 
-#: lists/forms.py:19 lists/forms.py:67
+#: lists/forms.py:20 lists/forms.py:73
 msgid "List name"
 msgstr "Nombre de la lista"
 
-#: lists/forms.py:26
+#: lists/forms.py:27
 msgid "Impossible questions for food lovers"
 msgstr "Preguntas imposibles para amantes de la comida"
+
+#: lists/forms.py:31 lists/forms.py:84
+msgid "Private"
+msgstr "Privada"
 
 #: questions/forms.py:26
 msgid "Alternatives"
@@ -554,7 +562,7 @@ msgstr ""
 msgid "Create a list"
 msgstr "Crea una lista"
 
-#: templates/create_list.html:59 templates/home.html:132
+#: templates/create_list.html:75 templates/home.html:132
 msgid "Create"
 msgstr "Crea"
 
@@ -627,32 +635,32 @@ msgstr "El equipo de Huestions"
 msgid "Your Lists"
 msgstr "Tus listas"
 
-#: templates/edit_list.html:59 templates/edit_question.html:70
+#: templates/edit_list.html:75 templates/edit_question.html:70
 msgid "Apply changes"
 msgstr "Aplicar cambios"
 
-#: templates/edit_list.html:63
+#: templates/edit_list.html:79
 msgid "Publish list"
 msgstr "Publicar lista"
 
-#: templates/edit_list.html:67
+#: templates/edit_list.html:83
 msgid "Note"
 msgstr "Nota"
 
-#: templates/edit_list.html:67
+#: templates/edit_list.html:83
 msgid "once published you can neither edit nor delete the list."
 msgstr "Una vez publicada no puedes editar ni borrar la lista"
 
-#: templates/edit_list.html:72
+#: templates/edit_list.html:88
 msgid "Current questions"
 msgstr "Preguntas actuales"
 
-#: templates/edit_list.html:73
+#: templates/edit_list.html:89
 #, python-format
 msgid "Maximum of %(questions_per_list)s questions"
 msgstr "Máximo de %(questions_per_list)s preguntas"
 
-#: templates/edit_list.html:74
+#: templates/edit_list.html:90
 msgid "Add a question"
 msgstr "Agregar una pregunta"
 
@@ -924,7 +932,6 @@ msgstr "Jugar"
 
 #: templates/search_results.html:6
 #, python-format
-#| msgid "Search Results for"
 msgid "Search results for %(query)s"
 msgstr "Resultados para %(query)s"
 
