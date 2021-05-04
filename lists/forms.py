@@ -8,6 +8,7 @@ from core.constants import (
     HUESTIONS_REGEX,
     LIST_COMPLETION_ERROR_MESSAGE,
     MAX_AND_MIN_LENGTH,
+    PRIVATE_FIELD_HELPER,
     SPECIAL_CHARS_ERROR,
 )
 
@@ -26,12 +27,17 @@ class CreateQuestionListForm(forms.ModelForm):
             attrs={'placeholder': _('Impossible questions for food lovers')}
         ),
     )
+    private = forms.BooleanField(
+        label=_('Private'),
+        help_text=PRIVATE_FIELD_HELPER,
+        required=False,
+    )
     if not settings.DEBUG and not settings.USED_FOR_TESTING:
         captcha = ReCaptchaField()
 
     class Meta:
         model = QuestionList
-        fields = ['title', 'tags']
+        fields = ['title', 'tags', 'private']
 
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner')
@@ -74,10 +80,15 @@ class EditListForm(forms.ModelForm):
             attrs={'placeholder': 'Impossible questions for food lovers'}
         ),
     )
+    private = forms.BooleanField(
+        label=_('Private'),
+        help_text=PRIVATE_FIELD_HELPER,
+        required=False,
+    )
 
     class Meta:
         model = QuestionList
-        fields = ['title', 'tags']
+        fields = ['title', 'tags', 'private']
 
     def save(self, *args, **kwargs):
         self.instance.slug = self.instance._generate_unique_slug_if_needed()

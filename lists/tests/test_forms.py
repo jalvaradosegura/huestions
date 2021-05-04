@@ -54,6 +54,20 @@ class CreateQuestionListFormTests(LoginUserMixin, TestCase):
         question_list = QuestionList.objects.last()
 
         self.assertEqual(question_list.__str__(), 'Super List')
+        self.assertFalse(question_list.private)
+
+    def test_create_private_question_list_with_form(self):
+        self.create_login_and_verify_user()
+
+        form = CreateQuestionListForm(
+            data={'title': 'Super List', 'tags': 'fun, yay', 'private': True},
+            owner=self.user,
+        )
+        form.save()
+        question_list = QuestionList.objects.last()
+
+        self.assertEqual(question_list.__str__(), 'Super List')
+        self.assertTrue(question_list.private)
 
     def test_create_question_lists_with_form_that_have_question_mark(self):
         self.create_login_and_verify_user()
@@ -150,6 +164,23 @@ class EditListFormTests(TestCase):
 
         self.assertEqual(question_list.__str__(), 'Is this working')
         self.assertEqual(question_list.slug, 'is-this-working')
+        self.assertFalse(question_list.private)
+        self.assertEqual(QuestionList.objects.all().count(), 1)
+
+    def test_create_private_list_with_form(self):
+        form = EditListForm(
+            data={
+                'title': 'Is this working',
+                'tags': 'cool, yay',
+                'private': True
+            }
+        )
+        form.save()
+        question_list = QuestionList.objects.last()
+
+        self.assertEqual(question_list.__str__(), 'Is this working')
+        self.assertEqual(question_list.slug, 'is-this-working')
+        self.assertTrue(question_list.private)
         self.assertEqual(QuestionList.objects.all().count(), 1)
 
     def test_edit_list_with_special_chars_on_title(self):

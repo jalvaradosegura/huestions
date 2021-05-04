@@ -37,7 +37,7 @@ class QuestionsListView(ListView):
 
         if filter_by == 'all':
             return (
-                QuestionList.activated_lists.all()
+                QuestionList.activated_lists.filter(private=False)
                 .order_by('-id')
                 .select_related('owner')
                 .prefetch_related('tags')
@@ -50,6 +50,7 @@ class QuestionsListView(ListView):
                 QuestionList.objects.filter(
                     votes__created__gte=date_to_compare_against
                 )
+                .filter(private=False)
                 .annotate(votes_amount=Count('id'))
                 .order_by('-votes_amount')
                 .select_related('owner')

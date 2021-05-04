@@ -47,6 +47,22 @@
 
 	<div class="field">
           <div class="control">
+            {% if form.private.errors %}
+              {% render_field form.private class+="is-danger" placeholder=form.private.label %}
+	      {% for error in form.private.errors %}
+	        <label for="id_private" >{% render_field form.private.label %}</label>
+	        <p class="help is-danger">{{ error }}</p>
+	      {% endfor %}
+            {% else %}
+              {% render_field form.private placeholder=form.private.label %}
+	      <label for="id_private" >{% render_field form.private.label %}</label>
+	      <p class="help">{{ form.private.help_text }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+	<div class="field">
+          <div class="control">
 	    {{ form.captcha }}
 	    {% if form.captcha.errors %}
 	      {% for error in form.captcha.errors %}

@@ -58,6 +58,7 @@ INVALID_HEADER_ON_EMAIL = _('Invalid header found.')
 MAX_AND_SPECIAL_CHARS_ATTRIBUTIONS = _("200 characters max.")
 # Note: related to MAX_IMAGE_SIZE
 FILE_TOO_LARGE_HELPER = _('Picture must have a size under 2 MB.')
+PRIVATE_FIELD_HELPER = _('Only users with the link may see the list')
 
 # Regex validator
 HUESTIONS_REGEX = r'^[\w\s\\?]*$'

@@ -19,6 +19,7 @@ class QuestionList(TitleAndTimeStampedModel):
         related_name='lists',
     )
     active = models.BooleanField(default=False)
+    private = models.BooleanField(default=False, null=True, blank=True)
     tags = TaggableManager()
 
     objects = models.Manager()
