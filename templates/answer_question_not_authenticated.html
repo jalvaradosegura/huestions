@@ -53,8 +53,8 @@
       <p>✓ {% trans "Create lists." %}</p>
       <p>✓ {% trans "See the results of lists and see what your friends have voted" %}.</p>
       <p class="mb-2">✓ {% trans "This is and much more" %}.</p>
-      <a class="button is-success mb-1" href="{% url 'account_signup' %}">🤝 {% trans "Sign Up" %}</a>
-      <a class="button is-success is-outlined mb-1" href="{% url 'account_login' %}">😁 {% trans "Log In" %}</a>
+      <a class="button is-success mb-1" href="{% url 'account_signup' %}?next={{ request.get_full_path }}">🤝 {% trans "Sign Up" %}</a>
+      <a class="button is-success is-outlined mb-1" href="{% url 'account_login' %}?next={{ request.get_full_path }}">😁 {% trans "Log In" %}</a>
       <a class="button is-ghost mb-1" href="{% url 'answer_demo_1' demo_list.id %}">{% trans "Play a demo list" %}</a>
     </div>
   </article>
