@@ -1,3 +1,5 @@
+import os
+
 import debug_toolbar
 from django.conf import settings
 from django.conf.urls.static import static
@@ -44,5 +46,5 @@ if settings.DEBUG:
     ]
 else:
     urlpatterns += [
-        path('zendo-phi-phi-island-admin/', admin.site.urls),
+        path(os.getenv('ADMIN_URL', 'admin/'), admin.site.urls),
     ]
