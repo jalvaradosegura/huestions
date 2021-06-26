@@ -62,6 +62,10 @@ check-deploy:
 deploy-appengine:
 	gcloud app deploy --version v1
 
+set-up-local-environment:
+	python manage.py migrate --settings=huestion_project.settings.local
+	python manage.py create_demo_list --settings=huestion_project.settings.local
+
 help:
 	@echo "==Commands==="
 	@echo "run"
@@ -94,6 +98,8 @@ help:
 	@echo "    Collect Django static files"
 	@echo "static-to-prd"
 	@echo "    Upload static prd folder to GCP Bucket"
+	@echo "set-up-local-environment"
+	@echo "    Set up the necessary stuff to make the project work in a new local environment"
 	@echo ""
 	@echo "==Reminders==="
 	@echo "How to use black in this project"
