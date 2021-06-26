@@ -32,10 +32,10 @@ class Command(BaseCommand):
             demo_a1 = DemoAlternativeFactory(
                 title='Coca Cola', question=demo_q1
             )
-            demo_a1.image = 'alternative_pics/demo/' + IMAGE_1_NAME
+            demo_a1.image = IMAGE_1_NAME
             demo_a1.save()
             demo_a2 = DemoAlternativeFactory(title='Pepsi', question=demo_q1)
-            demo_a2.image = 'alternative_pics/demo/' + IMAGE_2_NAME
+            demo_a2.image = IMAGE_2_NAME
             demo_a2.save()
 
             demo_q2 = DemoQuestionFactory(
@@ -45,20 +45,20 @@ class Command(BaseCommand):
                 child_of=demo_list,
             )
             demo_a1 = DemoAlternativeFactory(title='Burger', question=demo_q2)
-            demo_a1.image = 'alternative_pics/demo/' + IMAGE_3_NAME
+            demo_a1.image = IMAGE_3_NAME
             demo_a1.save()
             demo_a2 = DemoAlternativeFactory(title='Salad', question=demo_q2)
-            demo_a2.image = 'alternative_pics/demo/' + IMAGE_4_NAME
+            demo_a2.image = IMAGE_4_NAME
             demo_a2.save()
 
             demo_q3 = DemoQuestionFactory(
                 title='Choose your favorite', child_of=demo_list
             )
             demo_a1 = DemoAlternativeFactory(title='Tiger', question=demo_q3)
-            demo_a1.image = 'alternative_pics/demo/' + IMAGE_5_NAME
+            demo_a1.image = IMAGE_5_NAME
             demo_a1.save()
             demo_a2 = DemoAlternativeFactory(title='Lion', question=demo_q3)
-            demo_a2.image = 'alternative_pics/demo/' + IMAGE_6_NAME
+            demo_a2.image = IMAGE_6_NAME
             demo_a2.save()
 
         except FileNotFoundError:

@@ -88,12 +88,12 @@ COMMAND_CREATE_DEMO_ERROR_MESSAGE = (
     'One of the images for the alternatives does not exist'
 )
 COMMAND_CREATE_DEMO_SUCCESS_MESSAGE = 'Demo List created'
-IMAGE_1_NAME = 'demo_coca_cola.jpeg'
-IMAGE_2_NAME = 'demo_pepsi.jpeg'
-IMAGE_3_NAME = 'demo_burger.jpeg'
-IMAGE_4_NAME = 'demo_salad.jpeg'
-IMAGE_5_NAME = 'demo_tiger.jpeg'
-IMAGE_6_NAME = 'demo_lion.jpeg'
+IMAGE_1_NAME = DEFAULT_IMAGE_NAME
+IMAGE_2_NAME = DEFAULT_IMAGE_NAME
+IMAGE_3_NAME = DEFAULT_IMAGE_NAME
+IMAGE_4_NAME = DEFAULT_IMAGE_NAME
+IMAGE_5_NAME = DEFAULT_IMAGE_NAME
+IMAGE_6_NAME = DEFAULT_IMAGE_NAME
 
 # === Images - Demo List ===
 DEMO_IMAGES_PATH = settings.BASE_DIR / 'static/images/demo'

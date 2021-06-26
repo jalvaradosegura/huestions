@@ -78,5 +78,5 @@ class UserPlayedListsView(
             .select_related('list')
             .prefetch_related('list__tags')
             .order_by('-list__id')
-            .distinct('list')
+            .distinct()
         )

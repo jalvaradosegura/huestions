@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+from core.constants import DEFAULT_IMAGE_NAME
 from ..factories import (
     DemoAlternativeFactory,
     DemoListFactory,
@@ -51,11 +52,11 @@ class DemoAlternativeFactoryTests(TestCase):
 
     def test_alternative_image(self):
         alternative = DemoAlternativeFactory(title='Hello')
-        alternative.image = 'alternative_pics/coca_cola.jpeg'
+        alternative.image = DEFAULT_IMAGE_NAME
         alternative.save()
 
         last_alternative = DemoAlternative.objects.last()
 
         self.assertEqual(
-            last_alternative.image.name, 'alternative_pics/coca_cola.jpeg'
+            last_alternative.image.name, DEFAULT_IMAGE_NAME
         )
