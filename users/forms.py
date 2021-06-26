@@ -1,4 +1,4 @@
-from allauth.account.forms import SignupForm, ResetPasswordForm
+from allauth.account.forms import ResetPasswordForm, SignupForm
 from captcha.fields import ReCaptchaField
 from django.conf import settings
 

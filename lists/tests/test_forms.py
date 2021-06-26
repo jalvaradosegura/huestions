@@ -172,7 +172,7 @@ class EditListFormTests(TestCase):
             data={
                 'title': 'Is this working',
                 'tags': 'cool, yay',
-                'private': True
+                'private': True,
             }
         )
         form.save()
