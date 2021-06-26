@@ -17,3 +17,5 @@ coverage.xml
 .env
 
 cloud_sql_proxy
+
+.coveralls.yml
