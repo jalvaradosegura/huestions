@@ -3,7 +3,10 @@
 ![Imports](https://img.shields.io/badge/imports-isort-orange?style=for-the-badge)
 [![GitHub license](https://img.shields.io/github/license/jalvaradosegura/huestions?color=blue&style=for-the-badge)](https://github.com/jalvaradosegura/huestions/blob/main/LICENSE)
 
-
+<p align="center">
+<img src="https://raw.githubusercontent.com/jalvaradosegura/huestions/main/static/images/logo_main_naming.png" alt="thanks" width="700" height="183.75">
+</p>
+  
 # Huestions 🦥
 Answer & Create lists of hard questions
 <img src="https://i.imgur.com/eg0OmBU.png" alt="403">
